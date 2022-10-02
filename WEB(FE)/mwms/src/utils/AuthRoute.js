@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 
 const isLogin = () => !!localStorage.getItem("token");
 
@@ -8,9 +8,9 @@ function AuthRoute({ version, component: Component, ...rest }) {
     <Route
     {...rest}
     render={(props) =>
-      isLogin() ? <Component {...props} /> : <Redirect to="/login" />
+      isLogin() ? <Component {...props} /> : <Navigate to="/login" />
     }
-  />
+    />
   )
 }
 

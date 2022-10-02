@@ -11,11 +11,11 @@ function App() {
     <div className="App">
 			<BrowserRouter>
 				<Routes>
-					<Route exact path="/" element={<MainPage />}></Route>
+					<Route path="/" element={<MainPage />}></Route>
 					<Route path="/login" element={<LoginPage />}></Route>
           <Route path="/introduce" element={<ServiceIntroducePage/>}></Route>
           <Route path="/signup" element={<SignupPage/>}></Route>
-          <AuthRoute exact path="/unitmanage" component={UnitManagementPage} />
+          <AuthRoute path="/unitmanage" component={UnitManagementPage} />
 				</Routes>
 			</BrowserRouter>
 		</div>
