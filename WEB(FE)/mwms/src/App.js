@@ -11,11 +11,11 @@ function App() {
     <div className="App">
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<MainPage />}></Route>
-					<Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/introduce" element={<ServiceIntroducePage/>}></Route>
-          <Route path="/signup" element={<SignupPage/>}></Route>
-          <AuthRoute path="/unitmanage" component={UnitManagementPage} />
+					<Route path="/" element={<MainPage />}/>
+					<Route path="/login" element={<LoginPage />}/>
+          <Route path="/introduce" element={<ServiceIntroducePage/>}/>
+          <Route path="/signup" element={<SignupPage/>}/>
+          {/* <AuthRoute path="/unitmanage" component={UnitManagementPage} /> */}
 				</Routes>
 			</BrowserRouter>
 		</div>
