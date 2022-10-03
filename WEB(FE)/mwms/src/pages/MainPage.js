@@ -4,7 +4,6 @@ import Header from "../components/Header"
 function MainPage() {
   return (
     <div>
-      MainPage
       <Header />
     </div>
   )
