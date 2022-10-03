@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Header from "../components/Header";
+import loginButtonList from "../utils/loginButtonList";
 
 function LoginPage() {
   const [id, setId] = useState();
@@ -17,17 +19,20 @@ function LoginPage() {
     setPw(event.currentTarget.value);
   };
 
-  const setLogin = () => {
+  const login = () => {
     localStorage.setItem("token", "123");
     window.location.replace("/");
   };
 
   return (
     <div>
-      <div>loginPage</div>
-      <input type="text" value={id} onChange={onIdHandler}></input>
-      <input type="password" value={pw} onChange={onPasswordHandler}></input>
-      <button onClick={setLogin}>로그인</button>
+      <body>
+        <Header buttonList={loginButtonList}/>
+        <div>loginPage</div>
+        <input type="text" value={id} onChange={onIdHandler}></input>
+        <input type="password" value={pw} onChange={onPasswordHandler}></input>
+        <button onClick={login}>로그인</button>
+      </body>
     </div>
   )
 }

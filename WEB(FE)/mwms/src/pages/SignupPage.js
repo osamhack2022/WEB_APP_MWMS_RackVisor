@@ -1,8 +1,19 @@
-import React from 'react'
+import React from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import logoutButtonList from '../utils/logoutButtonList';
 
 function SignupPage() {
   return (
-    <div>SignupPage</div>
+    <div>
+      <body>
+        <Header buttonList={logoutButtonList}/>
+        <div>
+          signupPage  
+        </div>  
+        <Footer/>
+      </body>
+    </div>
   )
 }
 
