@@ -1,0 +1,15 @@
+{
+  "name": "MWMS_BE",
+  "version": "0.0.1",
+  "description": "MWMS_BE",
+  "main": "app.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.23.2",
+    "sequelize-cli": "^6.5.1"
+  }
+}
