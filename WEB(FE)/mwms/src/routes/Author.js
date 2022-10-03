@@ -9,6 +9,7 @@ function Author() {
       <Routes>
         <Route path = "/" element = {<UnitManagementPage/>}/>
         <Route path = "/header" element = {<Header/>}/>
+        <Route path = "*" element = {<UnitManagementPage />}/>
       </Routes>
     </div>
   )
