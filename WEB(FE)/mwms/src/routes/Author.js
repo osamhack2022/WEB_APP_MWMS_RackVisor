@@ -1,10 +1,16 @@
 import React from 'react'
-import {Routes} from 'react-router-dom';
-
+import { Routes, Route } from 'react-router-dom';
+import UnitManagementPage from '../pages/UnitManagementPage';
+import Header from '../components/Header';
 
 function Author() {
   return (
-    <div>Author</div>
+    <div>
+      <Routes>
+        <Route path = "/" element = {<UnitManagementPage/>}/>
+        <Route path = "/header" element = {<Header/>}/>
+      </Routes>
+    </div>
   )
 }
 
