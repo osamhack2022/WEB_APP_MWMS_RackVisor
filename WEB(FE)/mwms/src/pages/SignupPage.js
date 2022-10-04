@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import logoutButtonList from '../utils/logoutButtonList';
+import loginButtonList from '../utils/loginButtonList';
 
 function SignupPage() {
   return (
     <div>
       <body>
-        <Header buttonList={logoutButtonList}/>
+        <Header buttonList={loginButtonList}/>
         <div>
           signupPage  
         </div>  
