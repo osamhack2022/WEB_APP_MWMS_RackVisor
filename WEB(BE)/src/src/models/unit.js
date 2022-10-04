@@ -1,21 +1,21 @@
-const { sequelize } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
-module.exports = class Unit extends sequelize.Model {
+module.exports = class Unit extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
         id: {
-          type: sequelize.UUID,
+          type: Sequelize.UUID,
           defaltValue: sequelize.UUIDV4,
           primaryKey: true,
         },
         name: {
-          type: sequelize.STRING(10),
+          type: Sequelize.STRING(10),
           allowNull: false,
           unique: true,
         },
         comment: {
-          type: sequelize.STRING(100),
+          type: Sequelize.STRING(100),
           allowNull: true,
         },
       },

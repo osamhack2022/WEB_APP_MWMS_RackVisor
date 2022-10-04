@@ -1,11 +1,12 @@
 const Sequelize = require('sequelize');
+const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config')[env];
 
 const User = require('./user');
 const Unit = require('./unit');
 const Warehouse = require('./warehouse');
 const Rack = require('./rack');
-const Box = rqeuire('./box');
+const Box = require('./box');
 const Stock = require('./stock');
 
 const db = {};

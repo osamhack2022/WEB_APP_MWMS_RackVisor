@@ -1,29 +1,29 @@
-const { sequelize } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
-module.exports = class User extends sequelize.Model {
+module.exports = class User extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
         id: {
-          type: sequelize.UUID,
-          defaltValue: sequelize.UUIDV4,
+          type: Sequelize.UUID,
+          defaltValue: Sequelize.UUIDV4,
           primaryKey: true,
         },
         email: {
-          type: sequelize.STRING(40),
+          type: Sequelize.STRING(40),
           allowNull: false,
           unique: true,
         },
         password: {
-          type: sequelize.STRING(100),
+          type: Sequelize.STRING(100),
           allowNull: false,
         },
         name: {
-          type: sequelize.STRING(10),
+          type: Sequelize.STRING(10),
           allowNull: false,
         },
         rank: {
-          type: sequelize.ENUM(
+          type: Sequelize.ENUM(
             'PV2',
             'PFC',
             'SPC',
@@ -47,7 +47,7 @@ module.exports = class User extends sequelize.Model {
           allowNull: false,
         },
         phoneNumber: {
-          type: sequelize.STRING(20),
+          type: Sequelize.STRING(20),
           allowNull: true,
         },
       },

@@ -16,7 +16,7 @@ export const addUnit = async (req, res, next) => {
   const { name, comment, userId } = req.body;
   const user = await User.findOne({
     where: {
-      id: id,
+      id: userId,
     },
   });
   const unit = await Unit.create({

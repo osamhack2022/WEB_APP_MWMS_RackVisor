@@ -1,25 +1,25 @@
-const { sequelize } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
-module.exports = class Box extends sequelize.Model {
+module.exports = class Box extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
         id: {
-          type: sequelize.UUID,
+          type: Sequelize.UUID,
           defaltValue: sequelize.UUIDV4,
           primaryKey: true,
         },
         locationX: {
-          type: sequelize.INTEGER,
+          type: Sequelize.INTEGER,
         },
         locationY: {
-          type: sequelize.INTEGER,
+          type: Sequelize.INTEGER,
         },
         width: {
-          type: sequelize.INTEGER,
+          type: Sequelize.INTEGER,
         },
         height: {
-          type: sequelize.INTEGER,
+          type: Sequelize.INTEGER,
         },
       },
       {

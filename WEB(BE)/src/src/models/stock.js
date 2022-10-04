@@ -1,33 +1,33 @@
-const { sequelize } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
-module.exports = class User extends sequelize.Model {
+module.exports = class User extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
         id: {
-          type: sequelize.UUID,
+          type: Sequelize.UUID,
           defaltValue: sequelize.UUIDV4,
           primaryKey: true,
         },
         name: {
-          type: sequelize.STRING(10),
+          type: Sequelize.STRING(10),
           allowNull: false,
         },
         type: {
           //todo 타입 정의 필요
-          type: sequelize.ENUM(),
+          type: Sequelize.ENUM('test'),
           allowNull: false,
         },
         barcode: {
-          type: sequelize.STRING(100),
+          type: Sequelize.STRING(100),
           allowNull: true,
         },
         comment: {
-          type: sequelize.STRING(100),
+          type: Sequelize.STRING(100),
           allowNull: true,
         },
         expirationDate: {
-          type: sequelize.DATE,
+          type: Sequelize.DATE,
           allowNull: true,
         },
         //todo stock info 추가 필요

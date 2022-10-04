@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-const { sequelize } = require('sequelize');
+const { sequelize } = require('./src/models');
 const morgan = require('morgan');
 
 //라우터 import
@@ -11,7 +11,7 @@ const app = express();
 app.set('port', process.env.PORT || 8003);
 
 sequelize
-  .sync({ force: flase })
+  .sync({ force: false })
   .then(() => {
     console.log('DB connected');
   })
