@@ -4,6 +4,7 @@ import _ from "lodash";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const originalLayouts = getFromLS("layouts") || {};
+const originalItems = getFromLS("items") || {};
 
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
@@ -15,17 +16,8 @@ export default class AddRemoveLayout extends React.PureComponent {
 
     this.state = {
       layouts: JSON.parse(JSON.stringify(originalLayouts)),
-      items: [].map(function(i, key, list) {
-        return {
-          i: i.toString(),
-          x: i * 2,
-          y: 0,
-          w: 2,
-          h: 2,
-          name: ""
-        };
-      }),
       newCounter: 0,
+      items: (JSON.parse(JSON.stringify(originalLayouts)))['xs']
     };
 
     this.onAddItem = this.onAddItem.bind(this);
@@ -54,7 +46,7 @@ export default class AddRemoveLayout extends React.PureComponent {
     const i = el.i;
     return (
       <div key={i} data-grid={el}>
-        <span className="text">{el.name}</span>
+        <span className="text">{i}</span>
         <span className="remove" style={removeStyle} onClick={this.onRemoveItem.bind(this, i)}>x</span>
         <span className="change" onClick={this.onChangeName.bind(this, i)}>부대명 바꾸기</span>
       </div>
@@ -68,7 +60,7 @@ export default class AddRemoveLayout extends React.PureComponent {
     this.setState({
       // Add a new item. It must have a unique key!
       items: this.state.items.concat({
-        i: "n" + this.state.newCounter,
+        i: name,
         x: (this.state.items.length * 2) % (this.state.cols || 12),
         y: Infinity, // puts it at the bottom
         w: 2,
@@ -88,9 +80,10 @@ export default class AddRemoveLayout extends React.PureComponent {
     });
   }
 
-  onLayoutChange(layout, layouts) {
+  onLayoutChange(layout, layouts, items) {
     saveToLS("layouts", layouts);
-    this.setState({ layouts });
+    this.setState({ layouts: layouts });
+    console.log((JSON.parse(JSON.stringify(getFromLS("layouts"))))['xs']);
   }
 
 
