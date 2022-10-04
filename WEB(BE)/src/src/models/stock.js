@@ -1,7 +1,7 @@
 const { sequelize } = require("sequelize");
 
 module.exports = class User extends sequelize.Model {
-    static init(sequelize){
+    static init(sequelize) {
         super.init({
             id: {
                 type: sequelize.UUID,
@@ -10,7 +10,7 @@ module.exports = class User extends sequelize.Model {
             },
             name: {
                 type: sequelize.STRING(10),
-                allowNull: false,  
+                allowNull: false,
             },
             type: {
                 //todo 타입 정의 필요
@@ -42,7 +42,7 @@ module.exports = class User extends sequelize.Model {
         });
     }
 
-    static associate(db){
+    static associate(db) {
         db.Stock.belongsTo(db.Box);
     }
 };

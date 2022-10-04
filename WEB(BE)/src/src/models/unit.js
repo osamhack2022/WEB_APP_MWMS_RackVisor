@@ -1,7 +1,7 @@
 const { sequelize } = require("sequelize");
 
 module.exports = class Unit extends sequelize.Model {
-    static init(sequelize){
+    static init(sequelize) {
         super.init({
             id: {
                 type: sequelize.UUID,
@@ -29,9 +29,9 @@ module.exports = class Unit extends sequelize.Model {
         });
     }
 
-    static associate(db){
-        db.Unit.belongsToMany(db.User, 
-            {through: 'UserUnit'});
+    static associate(db) {
+        db.Unit.belongsToMany(db.User,
+            { through: 'UserUnit' });
         db.Unit.hasMany(db.Warehouse);
     }
 };

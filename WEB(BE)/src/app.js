@@ -10,18 +10,18 @@ const app = express();
 
 app.set('port', process.env.PORT || 8003);
 
-sequelize.sync({force: flase})
-    .then(()=> {
+sequelize.sync({ force: flase })
+    .then(() => {
         console.log("DB connected");
     })
-    .catch((err)=>{
+    .catch((err) => {
         console.error(err);
     });
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(session({
     resave: false,
     saveUninitialized: false,
@@ -45,6 +45,6 @@ app.use((err, req, res, next) => {
     res.render('error');
 })
 
-app.listen(app.get('port'), ()=> {
+app.listen(app.get('port'), () => {
     console.log('port', app.get('port'), ' connected');
 });
