@@ -1,25 +1,27 @@
 const { User, Unit } = require('../models');
 
 export const getUnits = async (req, res, next) => {
-  const units = await Unit.findall({
-    include: {
-      model: User,
-      as: 'UserUnit',
+  const userId = req.body;
+  const user = await User.findOne({
+    where: {
+      id: id,
     },
-  }).toJSON();
+  });
+  const units = await user.getUnits();
 
   return res.send(units);
 };
 
 export const addUnit = async (req, res, next) => {
-  const { name, comment } = req.body;
-  await Unit.create(
-    {
-      name: name,
-      comment: comment,
+  const { name, comment, userId } = req.body;
+  const user = await User.findOne({
+    where: {
+      id: id,
     },
-    {
-      include: [User],
-    }
-  );
+  });
+  const unit = await Unit.create({
+    name: name,
+    comment: comment,
+  });
+  return await user.addUnit(unit);
 };

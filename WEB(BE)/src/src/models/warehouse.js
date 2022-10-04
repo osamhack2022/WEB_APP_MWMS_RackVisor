@@ -32,7 +32,13 @@ module.exports = class Warehouse extends sequelize.Model {
   }
 
   static associate(db) {
-    db.Warehouse.belongsTo(db.Unit);
-    db.Warehouse.hasMany(db.Structure);
+    db.Warehouse.belongsTo(db.Unit, {
+      foreignKey: 'storedUnit',
+      targetKey: 'id',
+    });
+    db.Warehouse.hasMany(db.Structure, {
+      foreignKey: 'storedWarehouse',
+      targetKey: 'id',
+    });
   }
 };

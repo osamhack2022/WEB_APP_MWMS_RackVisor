@@ -36,7 +36,13 @@ module.exports = class Rack extends sequelize.Model {
   }
 
   static associate(db) {
-    db.Rack.belongsTo(db.Warehouse);
-    db.Rack.hasMany(db.Box);
+    db.Rack.belongsTo(db.Warehouse, {
+      foreignKey: 'storedWarehouse',
+      targetKey: 'id',
+    });
+    db.Rack.hasMany(db.Box, {
+      foreignKey: 'storedRack',
+      targetKey: 'id',
+    });
   }
 };

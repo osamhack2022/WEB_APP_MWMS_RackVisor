@@ -34,6 +34,9 @@ module.exports = class Unit extends sequelize.Model {
 
   static associate(db) {
     db.Unit.belongsToMany(db.User, { through: 'UserUnit' });
-    db.Unit.hasMany(db.Warehouse);
+    db.Unit.hasMany(db.Warehouse, {
+      foreignKey: 'storedUnit',
+      targetKey: 'id',
+    });
   }
 };

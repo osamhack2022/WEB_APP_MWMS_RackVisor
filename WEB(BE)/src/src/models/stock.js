@@ -46,6 +46,9 @@ module.exports = class User extends sequelize.Model {
   }
 
   static associate(db) {
-    db.Stock.belongsTo(db.Box);
+    db.Stock.belongsTo(db.Box, {
+      foreignKey: 'storedBox',
+      targetKey: 'id',
+    });
   }
 };
