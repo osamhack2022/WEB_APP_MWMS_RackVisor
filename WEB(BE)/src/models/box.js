@@ -8,10 +8,16 @@ module.exports = class Box extends sequelize.Model {
                 defaltValue: sequelize.UUIDV4,
                 primaryKey: true,
             },
-            floor: {
+            locationX: {
                 type: sequelize.INTEGER,
             },
-            order: {
+            locationY: {
+                type: sequelize.INTEGER,
+            },
+            width: {
+                type: sequelize.INTEGER,
+            },
+            height: {
                 type: sequelize.INTEGER,
             },
         }, {

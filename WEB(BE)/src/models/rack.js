@@ -14,6 +14,12 @@ module.exports = class Rack extends sequelize.Model {
             locationY: {
                 type: sequelize.INTEGER,
             },
+            width: {
+                type: sequelize.INTEGER,
+            },
+            height: {
+                type: sequelize.INTEGER,
+            },
         }, {
             sequelize,
             timestamps: true,
