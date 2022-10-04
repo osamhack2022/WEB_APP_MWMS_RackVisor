@@ -14,7 +14,7 @@ module.exports = class User extends sequelize.Model {
             },
             type: {
                 //todo 타입 정의 필요
-                type: sequelize.ENUM(),                       //각    
+                type: sequelize.ENUM(),
                 allowNull: false,
             },
             barcode: {
