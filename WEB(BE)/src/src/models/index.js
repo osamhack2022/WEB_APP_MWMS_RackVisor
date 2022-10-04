@@ -1,19 +1,19 @@
-const Sequelize = require("sequelize");
-const config = require("../config/config")[env];
+const Sequelize = require('sequelize');
+const config = require('../config/config')[env];
 
-const User = require("./user");
-const Unit = require("./unit");
-const Warehouse = require("./warehouse");
-const Rack = require("./rack");
-const Box = rqeuire("./box");
-const Stock = require("./stock");
+const User = require('./user');
+const Unit = require('./unit');
+const Warehouse = require('./warehouse');
+const Rack = require('./rack');
+const Box = rqeuire('./box');
+const Stock = require('./stock');
 
 const db = {};
 const sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config,
+  config.database,
+  config.username,
+  config.password,
+  config
 );
 
 db.sequelize = sequelize;
