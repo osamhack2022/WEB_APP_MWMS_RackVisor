@@ -2,7 +2,7 @@ import React from 'react'
 import logoutButtonList from '../utils/logoutButtonList';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import NoCollisionLayout from '../utils/UnitGrid';
+import AddRemoveLayout from '../utils/UnitGrid';
 
 function UnitManagementPage() {
   return (
@@ -12,7 +12,7 @@ function UnitManagementPage() {
         <div>
           UnitManagementPage
         </div>
-        <NoCollisionLayout/>
+        <AddRemoveLayout/>
         <Footer/>
       </body>
     </div>
