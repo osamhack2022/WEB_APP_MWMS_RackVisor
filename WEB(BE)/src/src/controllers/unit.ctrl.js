@@ -1,4 +1,3 @@
-const express = require("express");
 const { User, Unit } = require("../models");
 
 export const getUnits = async (req, res, next) => {
