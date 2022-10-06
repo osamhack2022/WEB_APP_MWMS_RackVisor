@@ -18,6 +18,14 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.ENUM('test'),
           allowNull: false,
         },
+        specipicType: {
+          type: Sequelize.STRING(20),
+          allowNull: false,
+        },
+        amount: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
         barcode: {
           type: Sequelize.STRING(100),
           allowNull: true,
