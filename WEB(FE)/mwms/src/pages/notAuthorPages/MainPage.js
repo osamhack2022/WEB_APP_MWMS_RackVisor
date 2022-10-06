@@ -7,7 +7,7 @@ function MainPage() {
   return (
     <div>
       <body>
-      <Header buttonList={loginButtonList}/>
+      <Header buttonList={loginButtonList} isLogin={false}/>
       <div class="text-center mx-4 my-20 space-y-2" >
         <h1 class="text-black-600 text-5xl font-bold">
           국방물자관리체계<br />

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import logoImg from '../images/logo.png'
 
-function Header({buttonList}) {
+function AuthorHeader() {
+  const [alarm, setAlarm] = useState(false);
+  const buttonList = [{link : "/", name : "홈"}, {link : "/logout", name : "로그아웃"}]
+
   return (
     <div>
       <nav class="p-5 bg-gray-50 rounded border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -16,12 +19,14 @@ function Header({buttonList}) {
           </button>
           <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
             <ul class="flex flex-col mt-4 bg-gray-50 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-bold md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+              <div onClick={() => setAlarm(true)}>알람</div>
+
               {buttonList.map(button => (
                 <li>
                   <Link to={button.link} class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{button.name}</Link>
                 </li>
               ))}
-              {}
+              
             </ul>
           </div>
         </div>
@@ -30,4 +35,4 @@ function Header({buttonList}) {
   )
 }
 
-export default Header
+export default AuthorHeader

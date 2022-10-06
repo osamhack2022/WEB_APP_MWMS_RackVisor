@@ -7,7 +7,7 @@ function ServiceIntroducePage() {
   return (
     <body>
       <div>
-        <Header buttonList={loginButtonList} />
+        <Header buttonList={loginButtonList} isLogin={false}/>
         <div>ServiceIntroducePage</div>
         <Footer />
       </div>

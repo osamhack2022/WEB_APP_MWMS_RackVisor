@@ -3,13 +3,11 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import loginButtonList from "../../utils/loginButtonList";
 
-
 function LoginPage() {
   const [id, setId] = useState();
   const [pw, setPw] = useState();
   
   useEffect(() => {
-    console.log("LoginPage render ...");
     localStorage.setItem("token", "");
   }, []);
 
@@ -22,14 +20,15 @@ function LoginPage() {
   };
 
   const login = () => {
-    localStorage.setItem("token", "123");
+    localStorage.setItem("token", "123"); 
+    //서버와 통신 로직 추가 필요
     window.location.replace("/");
   };
 
   return (
     <div>
       <body>
-        <Header buttonList={loginButtonList}/>
+        <Header buttonList={loginButtonList} isLogin={false}/>
         <div>loginPage</div>
         <div>
           아이디

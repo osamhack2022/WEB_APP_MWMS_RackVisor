@@ -43,7 +43,10 @@ function SignupPage() {
   }
 
   const register = () => {
+    //입력한 값이 valid 한지 확인하는 로직이 필요
+    //서버와 통신하는 부분 - dumy value 가져갈 필요
     alert("회원가입이 되었습니다. 로그인해주세요");
+    window.location.replace("/login");
   };
 
   const cancel = () => {
@@ -58,7 +61,7 @@ function SignupPage() {
   return (
     <div>
       <body>
-        <Header buttonList={loginButtonList}/>
+        <Header buttonList={loginButtonList} isLogin={false}/>
         <div>
           signupPage  
         </div>
