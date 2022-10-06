@@ -4,7 +4,6 @@ import _ from "lodash";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const originalLayouts = getFromLS("layouts") || {};
-const originalItems = getFromLS("items") || {};
 
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
@@ -17,8 +16,20 @@ export default class AddRemoveLayout extends React.PureComponent {
     this.state = {
       layouts: JSON.parse(JSON.stringify(originalLayouts)),
       newCounter: 0,
-      items: (JSON.parse(JSON.stringify(originalLayouts)))['xs']
+      items: []
     };
+    
+    if (JSON.parse(JSON.stringify(originalLayouts))['lg']) {
+      this.state.items = JSON.parse(JSON.stringify(originalLayouts))['lg'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['md']) {
+      this.state.items = JSON.parse(JSON.stringify(originalLayouts))['md'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['sm']) {
+      this.state.items = JSON.parse(JSON.stringify(originalLayouts))['sm'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['xs']) {
+      this.state.items = JSON.parse(JSON.stringify(originalLayouts))['xs'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['xxs']) {
+      this.state.items = JSON.parse(JSON.stringify(originalLayouts))['xxs'];
+    }
 
     this.onAddItem = this.onAddItem.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
@@ -54,22 +65,61 @@ export default class AddRemoveLayout extends React.PureComponent {
   }
 
   onAddItem() {
-    /*eslint no-console: 0*/
     console.log("adding", "n" + this.state.newCounter);
     let name = prompt("부대명을 입력해주세요");
     this.setState({
-      // Add a new item. It must have a unique key!
       items: this.state.items.concat({
         i: name,
         x: (this.state.items.length * 2) % (this.state.cols || 12),
         y: Infinity, // puts it at the bottom
         w: 2,
-        h: 2,
-        name: name
+        h: 6,
+        hover: false
       }),
-      // Increment the counter to ensure key is always unique.
       newCounter: this.state.newCounter + 1
     });
+  }
+
+  onHover(i) {
+    let findIndex = "";
+    if (JSON.parse(JSON.stringify(originalLayouts))['lg']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['lg'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['md']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['md'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['sm']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['sm'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['xs']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['xs'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['xxs']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['xxs'];
+    }
+    findIndex = findIndex.findIndex(element => element.i === i);
+    let copyArray = [...this.state.items];
+    if(findIndex !== -1) {
+      copyArray[findIndex] = {...copyArray[findIndex], hover: true};
+    }
+    this.setState({ items: copyArray });
+  }
+
+  onHoverEnd(i) {
+    let findIndex = "";
+    if (JSON.parse(JSON.stringify(originalLayouts))['lg']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['lg'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['md']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['md'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['sm']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['sm'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['xs']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['xs'];
+    } else if (JSON.parse(JSON.stringify(originalLayouts))['xxs']) {
+      findIndex = JSON.parse(JSON.stringify(originalLayouts))['xxs'];
+    }
+    findIndex = findIndex.findIndex(element => element.i === i);
+    let copyArray = [...this.state.items];
+    if(findIndex !== -1) {
+      copyArray[findIndex] = {...copyArray[findIndex], hover: false};
+    }
+    this.setState({ items: copyArray });
   }
 
   // We're using the cols coming back from this to calculate where to add new items.
@@ -82,10 +132,8 @@ export default class AddRemoveLayout extends React.PureComponent {
 
   onLayoutChange(layout, layouts, items) {
     saveToLS("layouts", layouts);
-    this.setState({ layouts: layouts });
-    console.log((JSON.parse(JSON.stringify(getFromLS("layouts"))))['xs']);
+    this.setState({ layouts: layouts, });
   }
-
 
   onRemoveItem(i) {
     console.log("removing", i);
@@ -93,11 +141,11 @@ export default class AddRemoveLayout extends React.PureComponent {
   }
 
   onChangeName(i) {
-    const findIndex = this.state.items.findIndex(element => element.i === i);
+    const findIndex = this.state.layouts['md'].findIndex(element => element.i === i);
     let copyArray = [...this.state.items];
     let changeName = prompt("부대명 변경할 이름 입력");
-    if(findIndex != -1) {
-      copyArray[findIndex] = {...copyArray[findIndex], name: changeName};
+    if(findIndex !== -1) {
+      copyArray[findIndex] = {...copyArray[findIndex], i: changeName};
     }
     this.setState({ items: copyArray });
   }
@@ -125,7 +173,7 @@ function getFromLS(key) {
   let ls = {};
   if (global.localStorage) {
     try {
-      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+      ls = JSON.parse(global.localStorage.getItem("unitManage")) || {};
     } catch (e) {
       /*Ignore*/
     }
@@ -136,7 +184,7 @@ function getFromLS(key) {
 function saveToLS(key, value) {
   if (global.localStorage) {
     global.localStorage.setItem(
-      "rgl-8",
+      "unitManage",
       JSON.stringify({
         [key]: value
       })

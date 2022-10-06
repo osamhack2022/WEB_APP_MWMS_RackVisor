@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
-import UnitManagementPage from '../pages/UnitManagementPage';
-import Header from '../components/Header';
-import LogoutPage from '../pages/LogoutPage';
+import UnitSelect from '../pages/authorPages/UnitSelect';
+import LogoutPage from '../pages/authorPages/LogoutPage';
+import HouseSelect from '../pages/authorPages/HouseSelect';
+import MaterialManage from '../pages/authorPages/MaterialManage';
+
 
 function Author() {
+  const [unitSelected, setUnitSelected] = useState();
+  const [houseSelected, setHouseSelected] = useState();
+
   return (
     <div>
       <Routes>
-        <Route path = "/" element = {<UnitManagementPage/>}/>
-        <Route path = "/header" element = {<Header/>}/>
+        <Route path = "/" element = {<UnitSelect/>}/>
+        <Route path = "/houseSelect" element = {<HouseSelect/>}/>
+        <Route path = "/houseManage" element = {<MaterialManage/>}/>
+
+
         <Route path = "/logout" element = {<LogoutPage/>}/>
-        <Route path = "*" element = {<UnitManagementPage />}/>
+        <Route path = "*" element = {<UnitSelect />}/>
       </Routes>
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../components/Header';
-import loginButtonList from '../utils/loginButtonList';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import loginButtonList from '../../utils/loginButtonList';
+import Footer from '../../components/Footer';
 
 function ServiceIntroducePage() {
   return (

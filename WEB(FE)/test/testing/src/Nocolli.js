@@ -1,92 +1,80 @@
-import React from "react";
+import { useState } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
+import Tsg from "./Tsg";
+import _ from "lodash";
+const GridLayout = WidthProvider(Responsive);
 
-const ResponsiveReactGridLayout = WidthProvider(Responsive);
-const originalLayouts = getFromLS("layouts") || {};
+const Drag = () => {
+  // layout is an array of objects, see the demo for more complete usage
+  const [layout,setLayout] = useState([
+    { i: "a", x: 0, y: 0, w: 1, h: 1, },
+  ]);
+  const [cnt, setCnt] = useState(0);
+
+  const add = () => {
+    const newLay = [{i : "test", x:0, y:0, w:1, h:1}, ...layout];
+    console.log(newLay);
+    const newName = cnt.toString() + "test";
+    setCnt(cnt + 1);
+    setLayout([{i : newName, x:1, y:1, w:1, h:1}, ...layout]);
+  }
+
+  return (
+    <div>
+      <button onClick={add}>추가</button>
+      <GridLayout
+        className="layout"
+        layout={layout}
+        cols={{ lg: 12, md: 10, sm:6, xs: 4, xxs: 2}}
+        rowHeight={30}
+        onLayoutChange={e=>setLayout(e)}
+        style={{background: "red"}}
+      >
+        {layout.map((init) => (
+          <Tsg key={init.i} style={{background: "grey"}} word={init.i}/>
+        ))}
+      </GridLayout>
+    </div>
+  );
+};
+
+export default Drag;
+
 
 /**
- * This layout demonstrates how to sync multiple responsive layouts to localstorage.
+ * The `react-grid-layout` lib is not swapping items during horizontal dragover
+ * Rather it moves the items into a new row
+ * Since we need a static 3x3 row, let's fix that
  */
-export default class ResponsiveLocalStorageLayout extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const fixLayout = (layout) => {
+  // `y` is calculated by `h` in the layout object, since `h` is 20
+  // first row will be 0, second 20, third 40
+  const maxY = 3
 
-    this.state = {
-      layouts: JSON.parse(JSON.stringify(originalLayouts))
-    };
-  }
+  // when an item goes to a new row, there is an empty column in the maxY row
+  // so here we find which columns exist
+  // tslint:disable-next-line:max-line-length
+  const maxRowXs = layout.map((item) => item.y === maxY ? item.x : null).filter((value) => value !== null)
 
-  static get defaultProps() {
-    return {
-      className: "layout",
-      cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
-      rowHeight: 30
-    };
-  }
+  // xs or cols, we only have 3 cols
+  const xs = [0,1,2,3]
 
-  resetLayout() {
-    this.setState({ layouts: {} });
-  }
+  // find the missing col
+  // tslint:disable-next-line:max-line-length
+  const missingX = xs.find((value) => maxRowXs.every((maxRowX) => maxRowX !== value))
 
-  onLayoutChange(layout, layouts) {
-    console.log(layout);
-    saveToLS("layouts", layouts);
-    this.setState({ layouts });
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={() => this.resetLayout()}>Reset Layout</button>
-        <ResponsiveReactGridLayout
-          className="layout"
-          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-          rowHeight={30}
-          layouts={this.state.layouts}
-          onLayoutChange={(layout, layouts) =>
-            this.onLayoutChange(layout, layouts)
-          }
-        >
-          <div key="1" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
-            <span className="text">1</span>
-          </div>
-          <div key="2" data-grid={{ w: 2, h: 3, x: 2, y: 0, minW: 2, minH: 3 }}>
-            <span className="text">2</span>
-          </div>
-          <div key="3" data-grid={{ w: 2, h: 3, x: 4, y: 0, minW: 2, minH: 3 }}>
-            <span className="text">3</span>
-          </div>
-          <div key="4" data-grid={{ w: 2, h: 3, x: 6, y: 0, minW: 2, minH: 3 }}>
-            <span className="text">4</span>
-          </div>
-          <div key="5" data-grid={{ w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3 }}>
-            <span className="text">5</span>
-          </div>
-        </ResponsiveReactGridLayout>
-      </div>
-    );
-  }
-}
-
-function getFromLS(key) {
-  let ls = {};
-  if (global.localStorage) {
-    try {
-      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
-    } catch (e) {
-      /*Ignore*/
+  // bring the item from the new row into maxY row
+  // and place it in the missing column
+  const fixedLayout = layout.map((item) => {
+    if (item.y > maxY) {
+      const fixedItem = {
+        ...item,
+        y: maxY,
+        x: missingX
+      }
+      return fixedItem
     }
-  }
-  return ls[key];
-}
-
-function saveToLS(key, value) {
-  if (global.localStorage) {
-    global.localStorage.setItem(
-      "rgl-8",
-      JSON.stringify({
-        [key]: value
-      })
-    );
-  }
+    return item
+  })
+  return fixedLayout
 }

@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import ResponsiveLocalStorageLayout from './Nocolli';
+import Drag from './Nocolli';
 
 function App() {
   return (
     <div className="App">
-      <ResponsiveLocalStorageLayout/>
+      <Drag />
     </div>
   );
 }
