@@ -28,7 +28,7 @@ function HouseSelect() {
   }
   
   useEffect(() => {
-    auth.unitSelect("");
+    auth.houseSelect("");
   }, []);
   
   return (
@@ -36,12 +36,14 @@ function HouseSelect() {
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
-        <div> 창고 관리 </div>
-        <div class="grid grid-cols-4 gap-4">
-          {houseList.map((hn) => (
-            <div class = "border" id={hn.name} onClick={onSelectHouse}>{hn.name}</div>
-          ))}
-          <div class = "border" onClick={addHouse}>+ 창고 추가</div>
+        <div class="flex-1">
+          <div> 창고 관리 </div>
+          <div class="grid grid-cols-4 gap-4">
+            {houseList.map((hn) => (
+              <div class = "border" id={hn.name} onClick={onSelectHouse}>{hn.name}</div>
+            ))}
+            <div class = "border" onClick={addHouse}>+ 창고 추가</div>
+          </div>
         </div>
       </div>
       <Footer/>
