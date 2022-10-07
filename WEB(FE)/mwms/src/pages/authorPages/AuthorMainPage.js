@@ -7,6 +7,7 @@ import AuthorHeader from '../../components/AuthorHeader'
 import { AuthorContext } from '../../routes/Author'
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../../routes/AuthContext'
+import Sidebar from '../../components/Sidebar'
 
 function AuthorMainPage() {
   let auth = useAuth();
@@ -22,6 +23,7 @@ function AuthorMainPage() {
   return (
     <div>
       <AuthorHeader/>
+      <Sidebar/>
       <Footer/>
     </div>
   )

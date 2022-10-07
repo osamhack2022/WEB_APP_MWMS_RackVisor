@@ -9,6 +9,7 @@ import BarcodeManage from '../pages/authorPages/BarcodeManage';
 import HistoryFind from '../pages/authorPages/HistoryFind';
 import HouseManage from '../pages/authorPages/HouseManage';
 import StaticsPage from '../pages/authorPages/StaticsPage';
+import CostPage from '../pages/authorPages/CostPage';
 import { ProvideAuth } from './AuthContext';
 
 export const AuthorContext = createContext({
@@ -37,6 +38,8 @@ function Author() {
           <Route path = "/static" element = {<StaticsPage/>}/>
 
           <Route path = "/logout" element = {<LogoutPage/>}/>
+          <Route path = "/cost" element = {<CostPage/>}/>
+
           <Route path = "*" element = {<UnitSelect />}/>
         </Routes>
       </ProvideAuth>

@@ -33,7 +33,7 @@ function UnitSelect() {
     <div>
       <body>
         <AuthorHeader />
-        <Sidebar />
+
         <div> 부대 관리 </div>
         <div class="grid grid-cols-4 gap-4">
           {unitList.map((un) => (
@@ -41,6 +41,7 @@ function UnitSelect() {
           ))}
           <div class = "border" onClick={addUnit}>+ 부대 추가</div>
         </div>
+        
         <Footer/>
       </body>
     </div>
