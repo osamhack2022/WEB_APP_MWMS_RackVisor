@@ -3,9 +3,7 @@ import { createPortal } from 'react-dom';
 import CreateList from '../cabinet/Cabinet';
 
 const SelectBox = ({ setModalShow, visible }) => {
-  const handleOk = () => {
-    console.log('댓글 삭제');
-  };
+
   return createPortal(
     <div style={{visibility: visible}}>
       <button onClick={() => setModalShow("hidden")}>끄기</button>

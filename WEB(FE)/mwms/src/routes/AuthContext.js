@@ -1,9 +1,10 @@
 import { createContext, useContext, useState } from "react";
 
 const authContext = createContext({
-    isAuthenticated: false,
-    login: () => {},
-    logout: () => {}
+  unitSelected : "",
+  unitSelect : () => {},
+  houseSelected : "",
+  houseSelec : () => {}
 });
 
 export function useProvideAuth(){

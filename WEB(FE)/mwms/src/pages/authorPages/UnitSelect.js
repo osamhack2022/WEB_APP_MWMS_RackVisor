@@ -5,6 +5,7 @@ import Footer from '../../components/Footer';
 import { useAuth } from '../../routes/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import AuthorHeader from '../../components/AuthorHeader';
+import Sidebar from '../../components/Sidebar';
 
 function UnitSelect() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ function UnitSelect() {
     <div>
       <body>
         <AuthorHeader />
+        <Sidebar />
         <div> 부대 관리 </div>
         <div class="grid grid-cols-4 gap-4">
           {unitList.map((un) => (

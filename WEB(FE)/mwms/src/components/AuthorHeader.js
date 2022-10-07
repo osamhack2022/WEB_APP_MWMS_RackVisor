@@ -1,11 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import logoImg from '../images/logo.png'
-import ExampleModal from '../utils/modal/ExampleModal';
 import { useAuth } from '../routes/AuthContext';
+import UserModal from '../utils/modal/UserModal';
+import AlarmModal from '../utils/modal/AlarmModal';
+import SettingModal from '../utils/modal/SettingModal';
 
-function AuthorHeader(props) {
+function AuthorHeader() {
   const [alarm, setAlarm] = useState(false);
+  const [user, setUser] = useState(false);
+  const [setting, setSetting] = useState(false);
+
   const buttonList = [{link : "/", name : "홈"}, {link : "/logout", name : "로그아웃"}]
   const name = localStorage.getItem("이름");
   const position = localStorage.getItem("직책");
@@ -33,13 +38,11 @@ function AuthorHeader(props) {
             <ul class="flex flex-col mt-4 bg-gray-50 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-bold md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
               <button onClick={() => setAlarm(true)}>알람</button>
               <span>{position}</span>
-              <button class="border" onClick={() => setAlarm(true)}>{classes} {name}</button>
-              {buttonList.map(button => (
-                <li>
-                  <Link to={button.link} class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{button.name}</Link>
-                </li>
-              ))}
-              {alarm ? <ExampleModal onClose={() => setAlarm(false)}/> : ""}
+              <button class="border" onClick={() => setUser(true)}>{classes} {name}</button>
+              <span onClick={() => setSetting(true)}>환경설정</span>
+              {alarm ? <AlarmModal onClose={() => setAlarm(false)}/> : ""}
+              {user ? <UserModal onClose={() => setUser(false)}/> : ""}
+              {setting ? <SettingModal onClose={() => setSetting(false)}/> : ""}
             </ul>
           </div>
         </div>
