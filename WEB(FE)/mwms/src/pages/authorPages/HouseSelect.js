@@ -2,7 +2,7 @@ import React from 'react'
 
 function HouseSelect() {
   return (
-    <div>HoseSelect</div>
+    <div>HouseSelect</div>
   )
 }
 

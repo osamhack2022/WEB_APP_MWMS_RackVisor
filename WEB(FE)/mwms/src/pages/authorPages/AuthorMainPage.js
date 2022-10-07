@@ -8,6 +8,7 @@ import { AuthorContext } from '../../routes/Author'
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
+import SearchInput from '../../utils/SearchInput'
 
 function AuthorMainPage() {
   let auth = useAuth();
@@ -23,7 +24,9 @@ function AuthorMainPage() {
   return (
     <div>
       <AuthorHeader/>
-      <Sidebar/>
+      <div class="flex">
+        <Sidebar/>
+      </div>
       <Footer/>
     </div>
   )
