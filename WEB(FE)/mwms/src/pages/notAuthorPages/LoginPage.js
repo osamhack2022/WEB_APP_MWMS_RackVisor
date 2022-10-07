@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import loginButtonList from "../../utils/loginButtonList";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [id, setId] = useState();
   const [pw, setPw] = useState();
   
@@ -22,6 +24,11 @@ function LoginPage() {
   const login = () => {
     localStorage.setItem("token", "123"); 
     //서버와 통신 로직 추가 필요
+
+    localStorage.setItem("이름", "홍길동");
+    localStorage.setItem("직책", "행정보급관");
+    localStorage.setItem("계급", "상사");
+
     window.location.replace("/");
   };
 
