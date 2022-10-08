@@ -21,8 +21,6 @@ class LoginPage extends StatelessWidget {
 
       backgroundColor: GlobalColors.mainColor,
 
-
-
       body: SafeArea(
         child: Form(
           key: loginPageController.loginFormKey,
