@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:myapp/view/front_page.dart';
 import 'package:myapp/view/login_page.dart';
 import 'package:myapp/view/registar_page.dart';
+//import 'package:myapp/view/front_page.dart';
+//import 'package:myapp/view/login_page.dart';
+//import 'package:myapp/view/registar_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,10 +21,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: FrontPage(),
       initialRoute: "/",
       getPages: [
-        GetPage(name: "/loginPage", page: () => const LoginPage()),
+        GetPage(name: "/loginPage", page: () => LoginPage()),
         GetPage(name: "/registarPage", page: () => RegistarPage()),
         GetPage(name: "/loginPage", page: () => const FrontPage()),
       ],

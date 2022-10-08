@@ -8,6 +8,7 @@ class RegistarPageController extends GetxController {
       passwordController,
       passwordController2;
 
+  //화원가입 변수
   var email = '';
   var password = '';
   var password2 = '';
@@ -34,19 +35,26 @@ class RegistarPageController extends GetxController {
     return null;
   }
 
-  String? validatePassword(passwordvalue) {
-    if (passwordvalue.length <= 6) {
+  String? validatePassword(password) {
+    if (password.length <= 6) {
       return "패스워드는 6글자이상이어야 합니다.";
     }
     return null;
   }
 
-  String? checkvalidatePassword(value) {
-    if (passwordController2.text != passwordController.text) {
-      return "불일치";
+
+  checkValidatePassword() {
+    //비밀번호 없을시 아무것도 X
+    if (password == null) {
+      return;
+      //비밀번호 불일치시
+    } else if (password2 != password) {
+      return "비밀번호가 틀립니다.";
     }
-    return null;
+    //비밀번호 일치시
+    return "비밀번호가 일치합니다.";
   }
+
 
    void checkLogin() {
     final isValid = loginFormKey.currentState!.validate();
