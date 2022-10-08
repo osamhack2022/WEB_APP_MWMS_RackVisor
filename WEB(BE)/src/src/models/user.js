@@ -51,7 +51,7 @@ module.exports = class User extends Sequelize.Model {
           allowNull: false,
         },
         position: {
-          type: Sequelize.String(20),
+          type: Sequelize.STRING(20),
           allowNull: false,
         },
         phoneNumber: {
