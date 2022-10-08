@@ -3,7 +3,7 @@ import ExampleModal from '../modal/ExampleModal';
 import Modal from '../modal/default/Modal';
 import SettingModal from '../modal/SettingModal';
 //https://binaryjourney.tistory.com/20 [Binary Journey:티스토리]
-function Posts({ posting, setPosting }) {
+function Posts({ posting, total, setPosting }) {
   const [modal, setModal] = useState({
     open: false,
     id: -1,
@@ -13,12 +13,12 @@ function Posts({ posting, setPosting }) {
   const [plusTitle, setPlusTitle] = useState("");
   const [plusContent, setPlusContent] = useState("");
 
-  useEffect(() => {
+  useEffect(() => { 
     setPlusTitle("");
     setPlusContent("");
   }, [plus]);
 
-  const titleChange = (e) => {
+  const titleChange = (e) => {  
     setPlusTitle(e.currentTarget.value)
   }
 
@@ -28,18 +28,18 @@ function Posts({ posting, setPosting }) {
 
   const openModal = (e) => {
     setModal({
-      content : posting.find(post => post.id == e.target.id).content,
+      content : total.find(post => post.id == e.target.id).content,
       open : true
     });
   }
 
   const erasePost = (e) => {
-    setPosting(posting.filter(post => post.id != e.target.id))
+    setPosting(total.filter(post => post.id != e.target.id))
   }
 
   const makePost = () => {
-    setPosting(posting.concat({
-      id : posting[posting.length - 1].id + 1,
+    setPosting(total.concat({
+      id : total.length != 0 ? total[total.length - 1].id + 1 : 1,
       title : plusTitle,
       milClass : localStorage.getItem("계급"),
       name : localStorage.getItem("이름"),
