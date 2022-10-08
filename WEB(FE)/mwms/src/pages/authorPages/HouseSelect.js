@@ -8,7 +8,7 @@ import { AuthorContext } from '../../routes/Author'
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
-import SearchInput from '../../utils/SearchInput'
+
 
 function HouseSelect() {
   const [houseList, setHouseList] = useState([{name : "1종창고"}, {name : "2종창고"}, {name : "3종창고"}]);

@@ -21,6 +21,10 @@ function LoginPage() {
     setPw(event.currentTarget.value);
   };
 
+  const signUp =() => {
+    navigate("/signup");
+  }
+
   const login = () => {
     localStorage.setItem("token", "123"); 
     //서버와 통신 로직 추가 필요
@@ -36,13 +40,15 @@ function LoginPage() {
     <div>
       <body>
         <Header buttonList={loginButtonList} isLogin={false}/>
-        <section class="bg-gray-50 dark:bg-gray-900">
+        <h1 class="border-b-2 m-6 ml-40 pl-8 pb-6 font-bold text-4xl">로그인</h1>  
+        <section>
           <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
               <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                   <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                      <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                          로그인
-                      </h1>
+                      <h2 class="text-xl font-bold leading-tight text-center tracking-tight text-gray-900 md:text-xl dark:text-white">
+                          국방물자관리체계<br/>
+                          Military Warehouse Management System
+                      </h2>
                       <form class="space-y-4 md:space-y-6" action="#">
                           <div>
                               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">군번</label>
@@ -75,6 +81,13 @@ function LoginPage() {
                             로그인
                           </button>
                       </form>
+
+                      <button 
+                            class="w-full text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                            onClick={signUp}
+                          >
+                            회원가입
+                      </button>
                   </div>
               </div>
           </div>

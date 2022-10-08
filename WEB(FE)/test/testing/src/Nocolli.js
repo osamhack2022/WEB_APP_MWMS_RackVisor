@@ -7,7 +7,7 @@ const GridLayout = WidthProvider(Responsive);
 const Drag = () => {
   // layout is an array of objects, see the demo for more complete usage
   const [layout,setLayout] = useState([
-    { i: "a", x: 0, y: 0, w: 1, h: 1, },
+    { i: "box0", x: 0, y: 0, w: 1, h: 1, },
   ]);
   const [cnt, setCnt] = useState(0);
 

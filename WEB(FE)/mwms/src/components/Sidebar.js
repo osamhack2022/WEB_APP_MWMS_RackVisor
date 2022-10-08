@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 function Sidebar() {
   return (
-    <aside class="w-64" aria-label="Sidebar">
-      <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+    <aside class="w-48" aria-label="Sidebar">
+      <div class="overflow-y-auto h-full py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
           <ul class="space-y-2">
             <li>
               <Link to="/main" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
