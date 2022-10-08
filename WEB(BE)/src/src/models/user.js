@@ -42,8 +42,16 @@ module.exports = class User extends Sequelize.Model {
             'BG',
             'MG',
             'LTG',
-            'GEN'
-          ), //각 준장, 소장, 중장, 대장
+            'GEN' //각 준장, 소장, 중장, 대장
+          ),
+          allowNull: false,
+        },
+        reigment: {
+          type: Sequelize.STRING(30),
+          allowNull: false,
+        },
+        position: {
+          type: Sequelize.String(20),
           allowNull: false,
         },
         phoneNumber: {
