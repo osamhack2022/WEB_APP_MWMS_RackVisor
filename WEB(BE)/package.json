@@ -6,8 +6,10 @@
     "dev": "ts-node src/index.ts"
   },
   "dependencies": {
+    "@fastify/jwt": "^6.3.2",
     "@prisma/client": "4.4.0",
-    "fastify": "4.7.0"
+    "fastify": "4.7.0",
+    "fastify-plugin": "^4.2.1"
   },
   "devDependencies": {
     "@types/node": "16.11.64",
