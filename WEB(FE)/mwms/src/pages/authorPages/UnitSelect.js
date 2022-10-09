@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import logoutButtonList from '../../utils/logoutButtonList';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useAuth } from '../../routes/AuthContext';

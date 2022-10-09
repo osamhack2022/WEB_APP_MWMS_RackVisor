@@ -1,13 +1,12 @@
 import React from 'react'
 import Header from '../../components/Header';
-import loginButtonList from '../../utils/loginButtonList';
 import Footer from '../../components/Footer';
 
 function ServiceIntroducePage() {
   return (
     <body>
       <div>
-        <Header buttonList={loginButtonList} isLogin={false}/>
+        <Header/>
         <h1 class="border-b-2 m-6 ml-40 pl-8 pb-6 font-bold text-4xl">서비스 소개</h1>  
         <div class="m-6 ml-40">
           <ul>

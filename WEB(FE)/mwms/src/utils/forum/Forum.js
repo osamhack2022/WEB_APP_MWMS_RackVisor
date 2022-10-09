@@ -29,7 +29,7 @@ function Forum() {
   }, [posts, currentPage]);
 
   return (
-    <div>
+    <div class="border">
       <Posts posting={currPostList} total={posts} setPosting={setPosts}/>
       <Pagination
         postsPerPage={postsPerPage}

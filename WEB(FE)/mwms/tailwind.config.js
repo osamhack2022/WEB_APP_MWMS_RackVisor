@@ -45,7 +45,9 @@ module.exports = {
       'Noto Color Emoji'
     ]
   },
-    plugins: [],
     darkMode: 'class',
+    plugins: [
+      require('flowbite/plugin')
+    ]
   }
 }

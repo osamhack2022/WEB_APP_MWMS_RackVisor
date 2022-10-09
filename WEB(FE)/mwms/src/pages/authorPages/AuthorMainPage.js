@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import loginButtonList from '../../utils/loginButtonList'
-import ExampleModal from '../../utils/modal/ExampleModal'
 import AuthorHeader from '../../components/AuthorHeader'
 import { AuthorContext } from '../../routes/Author'
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
-import SearchInput from '../../utils/SearchInput'
 import Forum from '../../utils/forum/Forum'
+import SearchInput from '../../utils/search/SearchInput';
+import HouseImageList from '../../utils/houseImage/HouseImageList';
 
 function AuthorMainPage() {
   let auth = useAuth();
@@ -28,7 +26,14 @@ function AuthorMainPage() {
       <div class="flex">
         <Sidebar/>
         <div class="flex-1">
+          <div>공지 사항</div>
           <Forum/>
+          <div>창고 도면</div>
+          <HouseImageList/>
+        </div>
+        <div class = "flex-1">
+          <div>간단 검색</div>
+          <SearchInput/>
         </div>
       </div>
       <Footer/>

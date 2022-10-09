@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import loginButtonList from "../../utils/loginButtonList";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
@@ -39,7 +38,7 @@ function LoginPage() {
   return (
     <div>
       <body>
-        <Header buttonList={loginButtonList} isLogin={false}/>
+        <Header/>
         <h1 class="border-b-2 m-6 ml-40 pl-8 pb-6 font-bold text-4xl">로그인</h1>  
         <section>
           <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

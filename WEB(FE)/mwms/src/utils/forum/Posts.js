@@ -51,7 +51,7 @@ function Posts({ posting, total, setPosting }) {
   return (
     <div>
       <table>
-        <colgroup>
+        <colgroup class="flex">
           <col width="10%" />
           <col width="10%" />
           <col width="10%" />
