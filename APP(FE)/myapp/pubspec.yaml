@@ -48,7 +48,7 @@ dependencies:
   #stylish_bottom_bar
   stylish_bottom_bar: ^0.1.5 
 
-  dio: ^3.0.9
+  dio: ^4.0.6
   
 dev_dependencies:
   flutter_test:
