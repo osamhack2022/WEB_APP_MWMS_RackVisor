@@ -9,7 +9,7 @@ app.post<{
 }>(`/signup`, async (req, res) => {
   const { name, email, posts } = req.body
 
-  const postData = posts?.map((post: Prisma.PostCreateInput) => {
+  const postData = posts?.map((post: Prisma.) => {
     return { title: post?.title, content: post?.content }
   })
 
@@ -132,14 +132,17 @@ app.get<{
 }>('/feed', async (req, res) => {
   const { searchString, skip, take, orderBy } = req?.query
 
-  const or: Prisma.PostWhereInput = searchString
-    ? {
-        OR: [
-          { title: { contains: searchString as string } },
-          { content: { contains: searchString as string } },
-        ],
-      }
-    : {}
+  const or: Prisma.WarehouseCreateInput = {'storedUnit':{
+    'connect':{''}
+  }}
+  //  = searchString
+  //   ? {
+  //       OR: [
+  //         { title: { contains: searchString as string } },
+  //         { content: { contains: searchString as string } },
+  //       ],
+  //     }
+  //   : {}
 
   const posts = await prisma.post.findMany({
     where: {
@@ -176,7 +179,7 @@ interface ICreatePostBody {
 interface ISignupBody {
   name: string | null
   email: string
-  posts: Prisma.PostCreateInput[]
+  posts: Prisma.BoxCreateInput[]
 }
 
 app.listen(3000, (err) => {
