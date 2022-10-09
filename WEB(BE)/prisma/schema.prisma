@@ -3,25 +3,118 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("mysql://root:root@localhost:3306/test_db")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  name         String
+  rank         Rank           @default(RANK_NULL)
+  reigment     String
+  position     String
+  phoneNumber  String
+  UsersOnUnits UsersOnUnits[]
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  viewCount Int      @default(0)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model Unit {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  comment      String?
+  warehouses   Warehouse[]
+  UsersOnUnits UsersOnUnits[]
+}
+
+model UsersOnUnits {
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  unit   Unit @relation(fields: [unitId], references: [id])
+  unitId Int
+
+  @@id([userId, unitId])
+}
+
+model Warehouse {
+  id           Int     @id @default(autoincrement())
+  name         String
+  comment      String?
+  storedUnit   Unit    @relation(fields: [storedUnitId], references: [id])
+  storedUnitId Int
+  racks        Rack[]
+}
+
+model Rack {
+  id                Int       @id @default(autoincrement())
+  name              String
+  locationX         Int
+  locationY         Int
+  width             Int
+  height            Int
+  storedWarehouse   Warehouse @relation(fields: [storedWarehouseId], references: [id])
+  storedWarehouseId Int
+  boxes             Box[]
+}
+
+model Box {
+  id           Int     @id @default(autoincrement())
+  name         String
+  locationX    Int
+  locationY    Int
+  width        Int
+  height       Int
+  storedRack   Rack    @relation(fields: [storedRackId], references: [id])
+  storedRackId Int
+  stocks       Stock[]
+}
+
+model Stock {
+  id             Int       @id @default(autoincrement())
+  name           String
+  type           StockType
+  specipicType   String
+  amount         Int       @default(1)
+  barcode        String?
+  comment        String?
+  expirationDate DateTime?
+  storedBox      Box       @relation(fields: [storedBoxId], references: [id])
+  storedBoxId    Int
+}
+
+enum Rank {
+  RANK_NULL
+  RANK_PV2 //이병
+  RANK_PFC //일병
+  RANK_SPC //상병
+  RANK_SGT //병장
+  RANK_SSG //하사
+  RANK_SFC //중사
+  RANK_MSG //상사
+  RANK_SGM //원사
+  RANK_WO1 //준위
+  RANK_2LT //소위
+  RANK_1LT //중위
+  RANK_CPT //대위
+  RANK_MAJ //소령
+  RANK_LTC //중령
+  RANK_COL //대령
+  RANK_BG //준장
+  RANK_MG //소장
+  RANK_LTG //중장
+  RANK_GEN //대장
+}
+
+enum StockType {
+  TYPE_NULL
+  TYPE_1
+  TYPE_2
+  TYPE_3
+  TYPE_4
+  TYPE_5
+  TYPE_6
+  TYPE_7
+  TYPE_8
+  TYPE_9
+  TYPE_10
+  //todo 물품 타입 정의
 }
