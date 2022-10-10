@@ -117,6 +117,7 @@ app.listen({ port: 3003 }, (err, address) => {
     process.exit(1);
   }
   console.log(`
+<<<<<<< HEAD
   🚀 Server ready at: http://localhost:3003
   ⭐️ See sample requests: http://pris.ly/e/ts/rest-fastify#3-using-the-rest-api`);
 });
