@@ -1,17 +1,15 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import CreateList from '../cabinet/Cabinet';
+import Modal from './default/Modal';
 
-const SelectBox = ({ setModalShow, visible }) => {
-
-  return createPortal(
-    <div style={{visibility: visible}}>
-      <button onClick={() => setModalShow("hidden")}>끄기</button>
+function SelectBox({onClose}) {
+  return (
+    <Modal onClose={onClose}>
       <CreateList/>
-    </div>,
-    document.getElementById('modal')
-  );
-};
+    </Modal>
+  )
+}
 
 //모달 - https://velog.io/@dfd1123/react-create-portal-%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC
 

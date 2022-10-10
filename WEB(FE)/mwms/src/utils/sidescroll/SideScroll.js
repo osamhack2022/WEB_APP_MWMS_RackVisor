@@ -4,13 +4,10 @@ import { LeftArrow, RightArrow } from "./Arrow";
 import Card from './Card';
 import usePrevious from "./usePrevious";
 
-const elemPrefix = "test";
-const getId = (index) => `${elemPrefix}${index}`;
+const elemPrefix = "번 박스";
+const getId = (index) => `${index}${elemPrefix}`;
 
-const exampleItems = () =>
-  Array(20)
-    .fill(0)
-    .map((_, ind) => ({ id: getId(ind) }));
+const exampleItems = ["1번 박스"]
 
 function SideScroll(exampleItem) {
   const [items, setItems] = useState(exampleItems);
