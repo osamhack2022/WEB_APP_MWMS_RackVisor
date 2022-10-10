@@ -1,22 +1,28 @@
-
-import 'package:dio/dio.dart';
+import 'dart:convert';
 import 'package:myapp/model/unit_page_model.dart';
+import 'package:http/http.dart' as http;
 
 class WebService {
-  var dio = new Dio();
+  static Future<List<Album>> getPhotos() async {
+    var uri = Uri.parse('https://jsonplaceholder.typicode.com/photos');
 
-  Future<List<UnitArticle>> fetchTopheadLines() async {
-    String url = "https://newsapi.org/v2/everything?q=keyword&apiKey=7a75dfe4d5f742f59ae554e2cb051df0";
+    try {
+      final response = await http
+          .get(uri);
 
-    final response = await dio.get(url);
-
-    if(response.statusCode == 200) {
-      final result = response.data;
-      Iterable list = result['articles'];
-      return list.map((article) => UnitArticle.fromJson(article)).toList();
-    } else {
-      throw Exception("failed to get information");
+      if (response.statusCode == 200) {
+        List<Album> list = parsePhotos(response.body);
+        return list;
+      } else {
+        throw Exception("Error");
+      }
+    } catch (e) {
+      throw Exception(e.toString());
     }
+  }
 
+  static List<Album> parsePhotos(String responsebody) {
+    final parsed = json.decode(responsebody).cast<Map<String, dynamic>>();
+    return parsed.map<Album>((json) => Album.fromJson(json)).toList();
   }
 }

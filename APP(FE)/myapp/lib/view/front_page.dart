@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:myapp/controller/bottom_nav_controller.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
-
+import 'First_page.dart';
 
 class FrontPage extends StatefulWidget {
   const FrontPage({
@@ -23,12 +23,15 @@ class _FrontPage extends State<FrontPage> {
     super.dispose();
   }
 
+  //선택한 부대의 이름
+  var value = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        title: const Text("start"),
+        title: Text(value),
       ),
       bottomNavigationBar: StylishBottomBar(
         items: [
@@ -40,14 +43,12 @@ class _FrontPage extends State<FrontPage> {
               selectedColor: Colors.teal,
               backgroundColor: Colors.tealAccent,
               title: const Text('Home')),
-
           AnimatedBarItems(
               icon: const Icon(Icons.star_border_rounded),
               selectedIcon: const Icon(Icons.star_rounded),
               selectedColor: Colors.green,
               backgroundColor: Colors.lightGreenAccent,
               title: const Text('Star')),
-
           AnimatedBarItems(
               icon: const Icon(
                 Icons.style_outlined,
@@ -56,7 +57,6 @@ class _FrontPage extends State<FrontPage> {
               backgroundColor: Colors.amber,
               selectedColor: Colors.deepOrangeAccent,
               title: const Text('Style')),
-
           AnimatedBarItems(
               icon: const Icon(
                 Icons.person_outline,
@@ -82,8 +82,8 @@ class _FrontPage extends State<FrontPage> {
       ),
       body: PageView(
         controller: c.controller,
-        children: const [
-          Center(child: Text('Home')),
+        children: [
+          FirstPage(),
           Center(child: Text('Star')),
           Center(child: Text('Add')),
           Center(child: Text('Style')),

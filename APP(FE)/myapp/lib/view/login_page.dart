@@ -9,6 +9,7 @@ import 'package:myapp/utils/global_colors.dart';
 //import 'package:myapp/utils/global_colors.dart';
 
 class LoginPage extends StatelessWidget {
+
   LoginPage({key}) : super(key: key);
 
   LoginPageController loginPageController = Get.put(LoginPageController());
@@ -16,7 +17,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(LoginPageController());
-
     return Scaffold(
 
       backgroundColor: GlobalColors.mainColor,

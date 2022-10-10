@@ -84,7 +84,7 @@ class RegistarPage extends StatelessWidget {
                     controller: registarPageController.passwordController,
 
                     onChanged: (value) {
-                      registarPageController.password = value!;
+                      registarPageController.password = value;
                     },
 
                     //6글자 판별기
@@ -117,7 +117,7 @@ class RegistarPage extends StatelessWidget {
                     controller: registarPageController.passwordController2,
 
                     onChanged: (value) {
-                      registarPageController.password2 = value!;
+                      registarPageController.password2 = value;
 
                     },
 

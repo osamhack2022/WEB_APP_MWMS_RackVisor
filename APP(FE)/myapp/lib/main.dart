@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapp/controller/unit_page_controller.dart';
 import 'package:myapp/view/front_page.dart';
 import 'package:myapp/view/login_page.dart';
 import 'package:myapp/view/registar_page.dart';
@@ -27,9 +28,10 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: "/loginPage", page: () => LoginPage()),
         GetPage(name: "/registarPage", page: () => RegistarPage()),
-        GetPage(name: "/loginPage", page: () => const FrontPage()),
+        GetPage(name: "/frontPage", page: () => const FrontPage()),
         GetPage(name: "/unitPage", page: () => UnitPage()),
-      ],
+        
+      ]
     );
   }
 }

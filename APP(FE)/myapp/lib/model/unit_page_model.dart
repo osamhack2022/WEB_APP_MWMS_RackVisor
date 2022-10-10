@@ -1,19 +1,20 @@
-class UnitArticle {
-  final String unitname;
-  final String author;
-  final String url;
-  final String urlToImage;
+class Album {
+  int albumId;
+  int id;
+  String title;
+  String url;
+  String thumbnailUrl;
 
-UnitArticle({required this.unitname, required this.author, required this.url, required this.urlToImage});
+  Album({required this.albumId, required this.id, required this.title, required this.url, required this.thumbnailUrl});
 
-  factory UnitArticle.fromJson(Map<String, dynamic> json) {
-    return UnitArticle(
-      unitname: json['unitname'],
-      author: json['author'],
-      url: json['url'],
-      urlToImage: json['urlToImage'],
-
-
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      albumId: json['albumId'] as int,
+      id: json['id'] as int,
+      title: json['title'] as String,
+      url: json['url'] as String,
+      thumbnailUrl :json['thumbnailUrl'] as String,
     );
   }
 }
+
