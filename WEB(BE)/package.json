@@ -6,15 +6,16 @@
     "dev": "ts-node src/index.ts"
   },
   "dependencies": {
+    "@fastify/jwt": "^6.3.2",
     "@fastify/static": "5.0.0",
     "@fastify/swagger": "^7.6.1",
     "@prisma/client": "4.4.0",
     "fastify": "^4.7.0",
     "fastify-cli": "^5.5.0",
+    "fastify-plugin": "^4.2.1",
     "fastify-zod": "^1.2.0",
     "request": "^2.88.2",
-    "@fastify/jwt": "^6.3.2",
-    "fastify-plugin": "^4.2.1"
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@types/node": "16.11.64",

@@ -1,12 +1,9 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient, User } from '@prisma/client';
+import { INSPECT_MAX_BYTES } from 'buffer';
 import fastify from 'fastify';
 
 const prisma = new PrismaClient();
 const app = fastify();
-
-app.get('/testapi', async (req, res) => {
-  res.send({ hello: 'hello' });
-});
 
 app.register(require('@fastify/swagger'), {
   routePrefix: '/docs',
@@ -53,63 +50,9 @@ app.register(require('@fastify/swagger'), {
   exposeRoute: true,
 });
 
-app.get('/healthcheck', async function () {
-  return { status: 'ok' };
-});
+//test api
 
-app.put(
-  '/some-route/:id',
-  {
-    schema: {
-      description: 'post some data',
-      tags: ['user', 'code'],
-      summary: 'qwerty',
-      params: {
-        type: 'object',
-        properties: {
-          id: {
-            type: 'string',
-            description: 'user id',
-          },
-        },
-      },
-      body: {
-        type: 'object',
-        properties: {
-          hello: { type: 'string' },
-          obj: {
-            type: 'object',
-            properties: {
-              some: { type: 'string' },
-            },
-          },
-        },
-      },
-      response: {
-        201: {
-          description: 'Successful response',
-          type: 'object',
-          properties: {
-            hello: { type: 'string' },
-          },
-        },
-        default: {
-          description: 'Default response',
-          type: 'object',
-          properties: {
-            foo: { type: 'string' },
-          },
-        },
-      },
-      security: [
-        {
-          apiKey: [],
-        },
-      ],
-    },
-  },
-  (req, reply) => {}
-);
+//routing
 
 app.listen({ port: 3003 }, (err, address) => {
   if (err) {
