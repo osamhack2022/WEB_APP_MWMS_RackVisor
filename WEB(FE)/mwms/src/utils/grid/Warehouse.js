@@ -1,11 +1,12 @@
 import React from "react";
 import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
+import EditableText from "../text/EditableText";
 
 const ReactGridLayout = WidthProvider(RGL);
 
 
-export default class ScaledLayout extends React.PureComponent {
+export default class WarehouseGridLayout extends React.PureComponent {
   static defaultProps = {
     className: "layout",
     items: 0,
@@ -21,16 +22,7 @@ export default class ScaledLayout extends React.PureComponent {
 
     const layout = this.generateLayout();
     this.state = {
-      items: [].map(function(i, key, list) {
-        return {
-          i: i.toString(),
-          x: i * 2,
-          y: 0,
-          w: 2,
-          h: 2,
-          add: i === (list.length - 1)
-        };
-      }),
+      items: [],
       newItemCounter: 0,
       newDoorCounter: 0,
       layout,
@@ -47,20 +39,11 @@ export default class ScaledLayout extends React.PureComponent {
       top: 0,
       cursor: "pointer"
     };
-    const i = el.add ? "+" : el.i;
+    const i = el.i;
     return (
       <div key={i} data-grid={el}>
-        {el.add ? (
-          <span
-            className="add text"
-            onClick={this.onAddDoor}
-            title="You can add a door by clicking here, too."
-          >
-            Add +
-          </span>
-        ) : (
-          <span className="text">{i}</span>
-        )}
+        <EditableText value={"door" + i}></EditableText>
+        <span className="text">{i}</span>
         <span
           className="remove"
           style={removeStyle}
@@ -79,20 +62,10 @@ export default class ScaledLayout extends React.PureComponent {
       top: 0,
       cursor: "pointer"
     };
-    const i = el.add ? "+" : el.i;
+    const i =el.i;
     return (
       <div key={i} data-grid={el}>
-        {el.add ? (
-          <span
-            className="add text"
-            onClick={this.onAddItem}
-            title="You can add an item by clicking here, too."
-          >
-            Add +
-          </span>
-        ) : (
-          <span className="text">{i}</span>
-        )}
+        <EditableText value={i}></EditableText>
         <span
           className="remove"
           style={removeStyle}
