@@ -43,7 +43,7 @@ class UnitPageState extends State<UnitPage> {
   }
 
   cellClick(Album album) {
-    Get.toNamed("/frontPage", arguments: album.title);
+    Get.toNamed("/frontPage", arguments: album);
 
     //페이지 데이터 삭제후 이동
     //Get.off(() =>FrontPage(), arguments: album.title)

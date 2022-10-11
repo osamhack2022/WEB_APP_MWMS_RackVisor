@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controller/bottom_nav_controller.dart';
+import 'package:myapp/view/Fourth_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 import 'First_page.dart';
@@ -24,14 +25,14 @@ class _FrontPage extends State<FrontPage> {
   }
 
   //선택한 부대의 이름
-  var value = Get.arguments;
+  var oopp21 = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        title: Text(value),
+        title: Text(oopp21.title),
       ),
       bottomNavigationBar: StylishBottomBar(
         items: [
@@ -80,13 +81,13 @@ class _FrontPage extends State<FrontPage> {
           });
         },
       ),
-      body: PageView(
+      body: (
         controller: c.controller,
         children: [
           FirstPage(),
           Center(child: Text('Star')),
           Center(child: Text('Add')),
-          Center(child: Text('Style')),
+          Get.to(FourthPage() ,arguments: oopp21),
         ],
       ),
     );

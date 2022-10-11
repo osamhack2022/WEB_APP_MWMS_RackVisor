@@ -4,6 +4,7 @@ import 'package:myapp/controller/unit_page_controller.dart';
 import 'package:myapp/view/front_page.dart';
 import 'package:myapp/view/login_page.dart';
 import 'package:myapp/view/registar_page.dart';
+import 'package:myapp/view/serach_page.dart';
 import 'package:myapp/view/unit_page.dart';
 //import 'package:myapp/view/front_page.dart';
 //import 'package:myapp/view/login_page.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/registarPage", page: () => RegistarPage()),
         GetPage(name: "/frontPage", page: () => const FrontPage()),
         GetPage(name: "/unitPage", page: () => UnitPage()),
+        GetPage(name: "/searchPage", page: () => SearchPage()),
         
       ]
     );

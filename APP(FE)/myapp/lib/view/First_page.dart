@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myapp/controller/searchbar_controller.dart';
 import 'package:myapp/utils/global_colors.dart';
 
 class FirstPage extends StatelessWidget {
+
+  SearchBarController searchBarController = Get.put(SearchBarController());
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalColors.mainColor,
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "찾으시려는 물품을 검색하세요.",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold),
-            )
+            InkWell(
+              child: Container(
+                color: Colors.blueGrey,
+                child: const Text('검색쪽으로 이동'),
+                ),
+              onTap: () => Get.toNamed('/searchPage'),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
