@@ -23,6 +23,7 @@ function HouseSelect() {
     setHouseList((houseList) => 
       houseList.concat({name : newName})
     );
+    auth.addHouse({name : newName});
   }
   
   useEffect(() => {

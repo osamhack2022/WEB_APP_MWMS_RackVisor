@@ -1,15 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, } from "react";
 
 const authContext = createContext({
   unitSelected : "",
   unitSelect : () => {},
   houseSelected : "",
-  houseSelect : () => {}
+  houseSelect : () => {},
+  houseList: [],
+  addHouse:() => {},
 });
 
 export function useProvideAuth(){
   const [unitSelected, setUnitSelected] = useState("");
   const [houseSelected, setHouseSelected] = useState("");
+  const [houseList, setHouseList] = useState([]);
 
   const unitSelect = (newUnit) => {
     setUnitSelected(newUnit);
@@ -18,11 +21,18 @@ export function useProvideAuth(){
     setHouseSelected(newHouse);
   }
 
+  const  addHouse= (newHouse) => {
+    let newHouseList = houseList.concat(newHouse);
+    setHouseList(newHouseList);
+  }
+
   return {
     unitSelected,
     unitSelect,
     houseSelected,
-    houseSelect
+    houseSelect,
+    houseList,
+    addHouse,
   }
 }
 

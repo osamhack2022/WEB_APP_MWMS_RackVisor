@@ -16,7 +16,9 @@ export const AuthorContext = createContext({
   unitSelected : "",
   setUnitSelected : () => {},
   houseSelected : "",
-  setHouseSelected : () => {}
+  setHouseSelected : () => {},
+  houseList: [],
+  setHouseList: () => {}, 
 });
 
 function Author() {

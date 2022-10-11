@@ -9,8 +9,8 @@ const ReactGridLayout = WidthProvider(RGL);
 export default class WarehouseGridLayout extends React.PureComponent {
   static defaultProps = {
     className: "layout",
-    items: 0,
-    rowHeight: 50,
+    items: 20,
+    rowHeight: 10,
     onLayoutChange: function() {},
     cols: 20,
     transformScale: 0.5,
@@ -85,7 +85,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
         i: "door" + this.state.newDoorCounter,
         x: (this.state.items.length * 2) % (this.state.cols || 12),
         y: Infinity, // puts it at the bottom
-        w: 2,
+        w: 8,
         h: 1
       }),
       // Increment the counter to ensure key is always unique.
@@ -102,7 +102,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
         i: "box" + this.state.newItemCounter,
         x: (this.state.items.length * 2) % (this.state.cols || 12),
         y: Infinity, // puts it at the bottom
-        w: 2,
+        w: 8,
         h: 2
       }),
       // Increment the counter to ensure key is always unique.
@@ -162,10 +162,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
   render() {
     return (
       <div style={{transform: 'scale(0.5) translate(-50%, -50%)'}}>
-        <div>
-          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-2xl" onClick={this.onAddItem}>Add box + </button>
-          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-red-900" onClick={this.onAddDoor}>Add door + </button>
-        </div>
         <ReactGridLayout 
           layout={this.state.layout}
           onLayoutChange={this.onLayoutChange}
