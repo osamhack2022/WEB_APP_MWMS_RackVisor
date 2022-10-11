@@ -13,8 +13,7 @@ function HouseManage() {
   const auth = useAuth();
   const navigate = useNavigate();
 
-  const onToHouseSelect = (e) =>
-  {
+  const onToHouseSelect = (e) => {
     navigate("/houseSelect");
   }
 

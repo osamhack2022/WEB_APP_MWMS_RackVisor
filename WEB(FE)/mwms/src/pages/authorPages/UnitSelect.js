@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useAuth } from '../../routes/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import AuthorHeader from '../../components/AuthorHeader';
-import Sidebar from '../../components/Sidebar';
+import Title from '../../utils/with_description';
+import UIModal from '../../utils/modal/simple_with_dismiss_button';
+import Example from '../../utils/simple';
 
 function UnitSelect() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function UnitSelect() {
 
   const onSelectUnit = (e) => {
     auth.unitSelect(e.target.id);
+    e.stopPropagation();
     navigate("/main");
   }
 
@@ -28,20 +30,28 @@ function UnitSelect() {
     auth.unitSelect("");
   }, []);
 
+  const [open, setOpen] = useState(false);
+
   return (
     <div>
       <body>
         <AuthorHeader />
-
-        <div> 부대 관리 </div>
-        <div class="grid grid-cols-4 gap-4">
+        <Title title={"부대 선택"} descript={"부대를 선택해주세요"}/>
+        <div class="grid grid-cols-4 gap-4 px-4 py-3 border-gray-200 bg-gray">
           {unitList.map((un) => (
-            <div class = "border" id={un.name} onClick={onSelectUnit}>{un.name}</div>
+            <div id={un.name} onClick={onSelectUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <h5 id={un.name} onClick={onSelectUnit} class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{un.name}</h5>
+            </div>
           ))}
-          <div class = "border" onClick={addUnit}>+ 부대 추가</div>
+          <div onClick={addUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <h5 class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 부대 추가</h5>
+          </div>
+          <Example/> 
         </div>
-        
+        <button onClick={() => setOpen(true)}>excel로 업로드</button>
+        <UIModal open={open} setOpen={setOpen}/>
         <Footer/>
+
       </body>
     </div>
   )

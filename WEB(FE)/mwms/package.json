@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "v1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "date-fns": "^2.29.3",
+    "file-saver": "^2.0.5",
     "firebase": "^9.10.0",
     "flowbite": "^1.5.3",
+    "heroicons": "^2.0.12",
     "qrcode": "^1.5.1",
     "react": "^18.2.0",
     "react-datepicker": "^4.8.0",
@@ -19,7 +23,8 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-to-print": "^2.14.7",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

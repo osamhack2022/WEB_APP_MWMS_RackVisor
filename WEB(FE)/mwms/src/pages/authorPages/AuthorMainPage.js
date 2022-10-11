@@ -8,6 +8,7 @@ import Sidebar from '../../components/Sidebar'
 import Forum from '../../utils/forum/Forum'
 import SearchInput from '../../utils/search/SearchInput';
 import HouseImageList from '../../utils/houseImage/HouseImageList';
+import Example from '../../components/simple_striped';
 
 function AuthorMainPage() {
   let auth = useAuth();
@@ -34,6 +35,7 @@ function AuthorMainPage() {
         <div class = "flex-1">
           <div>간단 검색</div>
           <SearchInput/>
+          <Example/>
         </div>
       </div>
       <Footer/>

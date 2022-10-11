@@ -49,30 +49,45 @@ function Posts({ posting, total, setPosting }) {
   }
 
   return (
-    <div>
-      <table>
-        <colgroup class="flex">
-          <col width="10%" />
-          <col width="10%" />
-          <col width="10%" />
-          <col width="10%" />
-        </colgroup>
-        <tbody>
+    <div className="flex flex-col">
+      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+        <thead>
           <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>이름</th>
-            <th>삭제</th>
-            <th></th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              번호
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              제목
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              관등성명
+            </th>
+            <th scope="col" className="relative px-6 py-3">
+              <span className="sr-only">Edit</span>
+            </th>
           </tr>
-        </tbody>
+        </thead>
         <tbody>
           {posting && posting.map((article) => (
             <tr key={article.id}>
-              <td>{article.id}</td>
-              <td id={article.id} onClick={openModal}>{article.title}</td>
-              <td>{article.milClass} {article.name}</td>
-              <td id={article.id} onClick={erasePost}>X</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{article.id}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" id={article.id} onClick={openModal}>{article.title}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{article.milClass} {article.name}</td>
+              <td  className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" >
+                <div id={article.id} onClick={erasePost} className="text-indigo-600 hover:text-indigo-900">X</div>
+              </td>
             </tr>
           ))}
           {modal.open && (
@@ -95,6 +110,10 @@ function Posts({ posting, total, setPosting }) {
         </Modal>
       )}
     </div>
+    </div>
+    </div>
+    </div>
+
   );
 }
 

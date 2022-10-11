@@ -1,4 +1,5 @@
 import React from "react";
+import Example from "./card_footer_with_page_buttons";
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
@@ -20,6 +21,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
           </div>
         </div>
       ))}
+      <Example/>
     </div>
   );
 };

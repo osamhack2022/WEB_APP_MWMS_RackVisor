@@ -4,7 +4,7 @@ const authContext = createContext({
   unitSelected : "",
   unitSelect : () => {},
   houseSelected : "",
-  houseSelec : () => {}
+  houseSelect : () => {}
 });
 
 export function useProvideAuth(){

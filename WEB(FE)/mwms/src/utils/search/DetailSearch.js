@@ -18,7 +18,7 @@ export default function DetailSearch() {
     'duration' : false,
     'manager' : false,
     'quantity' : false,
-  });
+  }); 
 
   const [ch1, set1] = useState(false);
   const [ch2, set2] = useState(false);
