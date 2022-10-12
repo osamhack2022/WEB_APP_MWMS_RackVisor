@@ -1,7 +1,9 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import { verifyPassword } from '../../plugins/hash';
 import { CreateUserInput, LoginInput } from './user.schema';
 import { createUser, findUserByMSN, findUsers } from './user.service';
+
+const server = fastify();
 
 export async function registerUserHandler(
   request: FastifyRequest<{
@@ -44,9 +46,15 @@ export async function loginHandler(
   });
 
   if (correctPassword) {
-    const { password, salt, ...rest } = user;
-    const tempAccessToken = {};
-    return { accessToken: tempAccessToken };
+    const payload = {
+      id: user.id,
+      msn: user.militarySerialNumber,
+    };
+    const accessToken = await reply.jwtSign(payload, {
+      iss: 'MWMS',
+      expiresIn: '7d',
+    });
+    return { accessToken };
   }
 
   return reply.code(401).send({
