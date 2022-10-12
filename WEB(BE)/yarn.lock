@@ -23,6 +23,14 @@
     ajv-formats "^2.1.1"
     fast-uri "^2.0.0"
 
+"@fastify/auth@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@fastify/auth/-/auth-4.1.0.tgz#5307ab56f910dfb219dad23aa5bb2bbc5a23a64c"
+  integrity sha512-9IqT554DGUtsdMcsk+8WtZrQD4OyT3ugR8AU0ELXNnsMs/+wTCh6xwlo0yIyDHA2IaAIJIaE6+QAsCqe1lp85Q==
+  dependencies:
+    fastify-plugin "^4.0.0"
+    reusify "^1.0.4"
+
 "@fastify/deepmerge@^1.0.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@fastify/deepmerge/-/deepmerge-1.1.0.tgz"
