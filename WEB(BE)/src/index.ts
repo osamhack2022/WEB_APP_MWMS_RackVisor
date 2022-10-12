@@ -1,9 +1,15 @@
 import { Prisma, PrismaClient, User } from '@prisma/client';
 import { INSPECT_MAX_BYTES } from 'buffer';
 import fastify from 'fastify';
+import userRoutes from './routes/user/user.route';
+import { userSchemas } from './routes/user/user.schema';
 
 const prisma = new PrismaClient();
 const app = fastify();
+
+for (const schema of [...userSchemas]) {
+  app.addSchema(schema);
+}
 
 app.register(require('@fastify/swagger'), {
   routePrefix: '/docs',
@@ -50,9 +56,8 @@ app.register(require('@fastify/swagger'), {
   exposeRoute: true,
 });
 
-//test api
-
 //routing
+app.register(userRoutes, { prefix: 'api/users' });
 
 app.listen({ port: 3003 }, (err, address) => {
   if (err) {

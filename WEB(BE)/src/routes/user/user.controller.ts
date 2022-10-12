@@ -45,7 +45,8 @@ export async function loginHandler(
 
   if (correctPassword) {
     const { password, salt, ...rest } = user;
-    return { accessToken: request.jwt.sign(rest) };
+    const tempAccessToken = {};
+    return { accessToken: tempAccessToken };
   }
 
   return reply.code(401).send({
