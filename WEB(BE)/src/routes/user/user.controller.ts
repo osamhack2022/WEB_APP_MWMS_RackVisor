@@ -1,4 +1,5 @@
 import fastify, { FastifyReply, FastifyRequest } from 'fastify';
+
 import { verifyPassword } from '../../plugins/hash';
 import { CreateUserInput, LoginInput } from './user.schema';
 import { createUser, findUserByMSN, findUsers } from './user.service';
@@ -52,7 +53,12 @@ export async function loginHandler(
       iss: 'MWMS',
       expiresIn: '7d',
     });
-    return { accessToken };
+    return reply
+      .setCookie('jwt', accessToken, {
+        maxAge: 604_800_000,
+        signed: true,
+      })
+      .send({ success: true });
   }
 
   return reply.code(401).send({

@@ -17,9 +17,12 @@ for (const schema of [...userSchemas]) {
   app.addSchema(schema);
 }
 
-// ! [Register] JWT, BCrypt
-app.register(import('fastify-bcrypt'));
+// ! [Register] JWT, BCrypt, Cookie
 app.register(jwt);
+app.register(import('fastify-bcrypt'));
+app.register(import('@fastify/cookie'), {
+  secret: 'SECRET_HERE_COOKIE', // for cookies signature
+});
 
 // ! [Register] Swagger
 app.register(import('@fastify/swagger'), {
