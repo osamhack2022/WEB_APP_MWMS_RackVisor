@@ -1,12 +1,19 @@
-import { JWT } from '@fastify/jwt';
+import jwt from './plugins/jwt';
 import { Prisma, PrismaClient, User } from '@prisma/client';
-import fastify from 'fastify';
+import fastify, { FastifyInstance } from 'fastify';
 import userRoutes from './routes/user/user.route';
 import { userSchemas } from './routes/user/user.schema';
 import unitRoutes from './routes/unit/unit.route';
 
+export type DecoratedFastifyInstance = FastifyInstance & {
+  authenticateWithJWT: any;
+};
+
 function buildServer() {
   const app = fastify();
+
+  app.register(import('fastify-bcrypt'));
+  app.register(jwt);
 
   for (const schema of [...userSchemas]) {
     app.addSchema(schema);

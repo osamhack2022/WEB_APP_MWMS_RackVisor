@@ -1,4 +1,5 @@
-import { FastifyInstance } from 'fastify';
+import fastify, { FastifyInstance } from 'fastify';
+import { DecoratedFastifyInstance } from '../..';
 import {
   loginHandler,
   registerUserHandler,
@@ -10,6 +11,7 @@ async function userRoutes(server: FastifyInstance) {
   server.post(
     '/',
     {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         body: $ref('createUserSchema'),
         response: {
@@ -33,13 +35,13 @@ async function userRoutes(server: FastifyInstance) {
     loginHandler
   );
 
-  //   server.get(
-  //     '/',
-  //     {
-  //       preHandler: ,
-  //     },
-  //     getUsersHandler
-  //   );
+  server.get(
+    '/',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+    },
+    getUsersHandler
+  );
 }
 
 export default userRoutes;
