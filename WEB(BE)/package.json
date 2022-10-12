@@ -12,6 +12,7 @@
     "@fastify/swagger": "^7.6.1",
     "@prisma/client": "4.4.0",
     "fastify": "^4.7.0",
+    "fastify-bcrypt": "^1.0.0",
     "fastify-cli": "^5.5.0",
     "fastify-plugin": "^4.2.1",
     "fastify-zod": "^1.2.0",

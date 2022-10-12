@@ -5,19 +5,20 @@ import jwt from './plugins/jwt';
 import userRoutes from './routes/user/user.route';
 import { userSchemas } from './routes/user/user.schema';
 
+const prisma = new PrismaClient();
+const app = fastify();
+
 // ! [Export] Decorated Fastify Instace Type (auto type inject is not supported on decorator)
 export type DecoratedFastifyInstance = FastifyInstance & {
   authenticateWithJWT: any;
 };
 
-const prisma = new PrismaClient();
-const app = fastify();
-
 for (const schema of [...userSchemas]) {
   app.addSchema(schema);
 }
 
-// ! [Register] JWT
+// ! [Register] JWT, BCrypt
+app.register(import('fastify-bcrypt'));
 app.register(jwt);
 
 // ! [Register] Swagger

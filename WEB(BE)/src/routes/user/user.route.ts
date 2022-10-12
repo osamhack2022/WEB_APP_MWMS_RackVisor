@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify';
+import fastify, { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../..';
 import {
   loginHandler,
