@@ -8,14 +8,17 @@ generator client {
 }
 
 model User {
-  id           Int            @id @default(autoincrement())
-  email        String         @unique
-  name         String
-  rank         Rank           @default(RANK_NULL)
-  reigment     String
-  position     String
-  phoneNumber  String
-  UsersOnUnits UsersOnUnits[]
+  id                   Int            @id @default(autoincrement())
+  email                String         @unique
+  militarySerialNumber String         @unique
+  password             String
+  salt                 String
+  name                 String
+  rank                 Rank           @default(RANK_NULL)
+  reigment             String
+  position             String
+  phoneNumber          String
+  UsersOnUnits         UsersOnUnits[]
 }
 
 model Unit {
