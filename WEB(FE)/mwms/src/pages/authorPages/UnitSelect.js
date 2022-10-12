@@ -7,9 +7,27 @@ import Title from '../../utils/with_description';
 import UIModal from '../../utils/modal/simple_with_dismiss_button';
 import Example from '../../utils/simple';
 
+
+// lsUnitList 예시 [{name: "123부대"}, {name: "456부대"}, ... ]
+export function getLSUnitList()
+{
+  let lsUnitList = localStorage.getItem("unitList");
+  if(lsUnitList === null)
+  {
+    lsUnitList = [];
+  }
+  else
+  {
+    lsUnitList = JSON.parse(lsUnitList);
+  }
+  return lsUnitList;
+}
+
+let lsUnitList = getLSUnitList();
+
 function UnitSelect() {
   const navigate = useNavigate();
-  const [unitList, setUnitList] = useState([{name : "123부대"}, {name : "345부대"}, {name : "678부대"}]);
+  const [unitList, setUnitList] = useState(lsUnitList);
   //11번째 줄에서 서버에서 unit의 리스트를 받아오면 된다
   let auth = useAuth();
 
@@ -21,9 +39,13 @@ function UnitSelect() {
 
   const addUnit = () => {
     const newName = prompt("부대명을 입력해주세요"); //부대명이 서로 달라야 함
-    setUnitList((unitList) => 
-      unitList.concat({name : newName})
-    );
+    let lsUnitList = getLSUnitList();
+    lsUnitList.push({
+      name: newName,
+      houseList: [],
+    });
+    localStorage.setItem("unitList", JSON.stringify(lsUnitList));
+    setUnitList(lsUnitList);
   }
 
   useEffect(() => {
