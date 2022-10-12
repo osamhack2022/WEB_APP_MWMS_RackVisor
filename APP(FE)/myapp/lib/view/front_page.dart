@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controller/bottom_nav_controller.dart';
+import 'package:myapp/model/login_model.dart';
+
 import 'package:myapp/view/Fourth_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
@@ -17,6 +19,13 @@ class FrontPage extends StatefulWidget {
 
 class _FrontPage extends State<FrontPage> {
   BottomNavigationBarController c = Get.put(BottomNavigationBarController());
+  LoginModel loginModel = Get.put(LoginModel());
+
+  @override
+  void initState() {
+    super.initState();
+  
+  }
 
   @override
   void dispose() {
@@ -24,16 +33,33 @@ class _FrontPage extends State<FrontPage> {
     super.dispose();
   }
 
-  //선택한 부대의 이름
-  var oopp21 = Get.arguments;
+  //login model에 데이터 저장.
+  var value = Get.arguments;
+
+  //부대이름 업데이트
+  updateName() {
+    loginModel.unitNameUpdate(value.title.toString());
+  }
+
+  //이미지 업데이트
+  updateImage() {
+    loginModel.unitPhotosUpdate(value.thumbnailUrl.toString());
+  }
+  
 
   @override
   Widget build(BuildContext context) {
+
+
+    updateName();
+    updateImage();
+
+
     return Scaffold(
-      extendBody: true,
-      appBar: AppBar(
-        title: Text(oopp21.title),
-      ),
+      extendBody: true, 
+      appBar:  AppBar(
+          title: Text(loginModel.unitName),
+        ),
       bottomNavigationBar: StylishBottomBar(
         items: [
           AnimatedBarItems(
@@ -82,14 +108,17 @@ class _FrontPage extends State<FrontPage> {
         },
       ),
       body: (
+        PageView(
         controller: c.controller,
         children: [
           FirstPage(),
           Center(child: Text('Star')),
           Center(child: Text('Add')),
-          Get.to(FourthPage() ,arguments: oopp21),
+          FourthPage()
         ],
+      )
       ),
     );
   }
+  
 }

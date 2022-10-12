@@ -52,6 +52,10 @@ dependencies:
 
   #http
   http: ^0.13.5
+
+  #screnn_util
+  flutter_screenutil: ^5.5.4
+
   
 dev_dependencies:
   flutter_test:
