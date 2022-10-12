@@ -3,8 +3,6 @@ import { verifyPassword } from '../../plugins/hash';
 import { CreateUserInput, LoginInput } from './user.schema';
 import { createUser, findUserByMSN, findUsers } from './user.service';
 
-const server = fastify();
-
 export async function registerUserHandler(
   request: FastifyRequest<{
     Body: CreateUserInput;
