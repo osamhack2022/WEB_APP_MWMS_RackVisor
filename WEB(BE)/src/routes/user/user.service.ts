@@ -25,7 +25,7 @@ export async function findUserByMSN(militarySerialNumber: string) {
 export async function findUsers() {
   return prisma.user.findMany({
     select: {
-      email: true,
+      militarySerialNumber: true,
       name: true,
       id: true,
     },
