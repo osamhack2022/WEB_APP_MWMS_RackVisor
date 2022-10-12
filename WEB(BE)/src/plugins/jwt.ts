@@ -8,7 +8,7 @@ export default fp(async function (fastify, opts) {
 
   fastify.decorate("authenticate", async function (request: FastifyRequest, reply: FastifyReply) {
     try {
-      await request.jwtVerify();
+      await (request as any).jwtVerify();
     } catch (err) {
       reply.send(err);
     }
