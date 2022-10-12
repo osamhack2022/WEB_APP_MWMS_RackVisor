@@ -1,14 +1,15 @@
 import React from "react";
 import _ from "lodash";
-import RGL, { WidthProvider } from "react-grid-layout";
-import EditableText from "../text/EditableText";
+import RGL, { WidthProvider } from "react-grid-layout"
+import EditableText from "../text/EditableText"
+import { useAuth } from '../../routes/AuthContext'
+import { getLSUnitList } from '../../pages/authorPages/UnitSelect'
 
 const ReactGridLayout = WidthProvider(RGL);
 
-
 export default class WarehouseGridLayout extends React.PureComponent {
   static defaultProps = {
-    className: "layout",
+    className: "warehousegridlayout",
     items: 0,
     rowHeight: 50,
     onLayoutChange: function() {},
@@ -19,20 +20,44 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   constructor(props) {
     super(props);
-
-    const layout = this.generateLayout();
     this.state = {
       items: [],
-      newItemCounter: 0,
+      newBoxCounter: 0,
       newDoorCounter: 0,
-      layout,
+      newCabinetCounter: 0,
+      layout: [],
     };
-    this.onAddItem = this.onAddItem.bind(this);
+    this.onAddBox = this.onAddBox.bind(this);
     this.onAddDoor = this.onAddDoor.bind(this);
+    this.onAddCabinet = this.onAddCabinet.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
+    this.onLayoutChange = this.onLayoutChange.bind(this);
   }
 
-  createElement(el) {
+  createElement(el)
+  {
+    console.log("element: " + el);
+    if(el.type === "box")
+    {
+      return this.createBoxElement(el);
+    }
+    else if(el.type === "door")
+    {
+      return this.createDoorElement(el);
+    }
+    else if(el.type === "cabinet")
+    {
+      return this.createCabinetElement(el);
+    }
+    else
+    {
+      //ERROR
+    }
+
+  }
+ 
+
+  createDoorElement(el) {
     const removeStyle = {
       position: "absolute",
       right: "2px",
@@ -41,9 +66,8 @@ export default class WarehouseGridLayout extends React.PureComponent {
     };
     const i = el.i;
     return (
-      <div key={i} data-grid={el}>
-        <EditableText value={"door" + i}></EditableText>
-        <span className="text">{i}</span>
+      <div key={i} data-grid={el} style={{backgroundColor: "#7f1d1d", color: "white"}}>
+        <EditableText value={i}></EditableText>
         <span
           className="remove"
           style={removeStyle}
@@ -55,7 +79,29 @@ export default class WarehouseGridLayout extends React.PureComponent {
     );
   }
 
-  createElement(el) {
+  createCabinetElement(el) {
+    const removeStyle = {
+      position: "absolute",
+      right: "2px",
+      top: 0,
+      cursor: "pointer"
+    };
+    const i = el.i;
+    return (
+      <div key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", color: "white"}}>
+        <EditableText value={i}></EditableText>
+        <span
+          className="remove"
+          style={removeStyle}
+          onClick={this.onRemoveCabinet.bind(this, i)}
+        >
+          x
+        </span>
+      </div>
+    );
+  }
+
+  createBoxElement(el) {
     const removeStyle = {
       position: "absolute",
       right: "2px",
@@ -64,12 +110,12 @@ export default class WarehouseGridLayout extends React.PureComponent {
     };
     const i =el.i;
     return (
-      <div key={i} data-grid={el}>
+      <div key={i} data-grid={el} style={{backgroundColor: "#F9C38A"}}>
         <EditableText value={i}></EditableText>
         <span
           className="remove"
           style={removeStyle}
-          onClick={this.onRemoveItem.bind(this, i)}
+          onClick={this.onRemoveBox.bind(this, i)}
         >
           x
         </span>
@@ -82,6 +128,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.setState({
       // Add a new door. It must have a unique key!
       items: this.state.items.concat({
+        type: "door",
         i: "door" + this.state.newDoorCounter,
         x: (this.state.items.length * 2) % (this.state.cols || 12),
         y: Infinity, // puts it at the bottom
@@ -93,20 +140,38 @@ export default class WarehouseGridLayout extends React.PureComponent {
     });
   }
 
-  onAddItem() {
-    /*eslint no-console: 0*/
-    console.log("adding", "box" + this.state.newItemCounter);
+  onAddCabinet() {
+    console.log("adding", "cabinet" + this.state.newCabinetCounter);
     this.setState({
-      // Add a new item. It must have a unique key!
+      // Add a new door. It must have a unique key!
       items: this.state.items.concat({
-        i: "box" + this.state.newItemCounter,
+        type: "cabinet",
+        i: "Cabinet" + this.state.newCabinetCounter,
         x: (this.state.items.length * 2) % (this.state.cols || 12),
         y: Infinity, // puts it at the bottom
         w: 2,
         h: 2
       }),
       // Increment the counter to ensure key is always unique.
-      newItemCounter: this.state.newItemCounter + 1
+      newCabinetCounter: this.state.newCabinetCounter + 1
+    });
+  }
+
+  onAddBox() {
+    /*eslint no-console: 0*/
+    console.log("adding", "box" + this.state.newBoxCounter);
+    this.setState({
+      // Add a new item. It must have a unique key!
+      items: this.state.items.concat({
+        type: "box",
+        i: "box" + this.state.newBoxCounter,
+        x: (this.state.items.length * 2) % (this.state.cols || 12),
+        y: Infinity, // puts it at the bottom
+        w: 2,
+        h: 2
+      }),
+      // Increment the counter to ensure key is always unique.
+      newBoxCounter: this.state.newBoxCounter + 1
     });
   }
 
@@ -133,7 +198,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.setState({ layout: layout });
   }
 
-  onRemoveItem(i) {
+  onRemoveBox(i) {
     console.log("removing item", i);
     this.setState({ items: _.reject(this.state.items, { i: i }) });
  
@@ -144,27 +209,20 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.setState({ items: _.reject(this.state.items, { i: i }) });
   }
 
-  generateLayout() {
-    const p = this.props;
-    return _.map(new Array(p.items), function(item, i) {
-      const y = _.result(p, "y") || Math.ceil(Math.random() * 4) + 1;
-      return {
-        x: (i * 2) % 12,
-        y: Math.floor(i / 6) * y,
-        w: 2,
-        h: y,
-        i: i.toString()
-      };
-    });
+  onRemoveCabinet(i) {
+    console.log("removing cabinet", i);
+    this.setState({ items: _.reject(this.state.items, { i: i }) });
   }
 
-
   render() {
+
+
     return (
       <div style={{transform: 'scale(0.5) translate(-50%, -50%)'}}>
         <div>
-          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-2xl" onClick={this.onAddItem}>Add box + </button>
-          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-red-900" onClick={this.onAddDoor}>Add door + </button>
+          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-2xl bg-[#F9C38A]" onClick={this.onAddBox}>박스 추가 + </button>
+          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-red-900" onClick={this.onAddDoor}>문 추가 + </button>
+          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-blue-900" onClick={this.onAddCabinet}>캐비넷 추가 + </button>
         </div>
         <ReactGridLayout 
           layout={this.state.layout}
@@ -174,7 +232,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
         >
           {this.generateDOM()}
           {_.map(this.state.items, el => this.createElement(el))}
-        </ReactGridLayout>
+        </ReactGridLayout> 
       </div>
     );
   }

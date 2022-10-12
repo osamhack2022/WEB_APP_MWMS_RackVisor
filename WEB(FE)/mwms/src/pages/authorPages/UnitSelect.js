@@ -39,6 +39,10 @@ function UnitSelect() {
 
   const addUnit = () => {
     const newName = prompt("부대명을 입력해주세요"); //부대명이 서로 달라야 함
+    if(newName === null)
+    {
+      return;
+    }
     let lsUnitList = getLSUnitList();
     lsUnitList.push({
       name: newName,
