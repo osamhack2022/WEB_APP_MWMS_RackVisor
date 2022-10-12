@@ -22,7 +22,7 @@ app.register(import('fastify-bcrypt'));
 app.register(jwt);
 
 // ! [Register] Swagger
-app.register(require('@fastify/swagger'), {
+app.register(import('@fastify/swagger'), {
   routePrefix: '/docs',
   swagger: {
     info: {

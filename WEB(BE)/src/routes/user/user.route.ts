@@ -11,7 +11,6 @@ async function userRoutes(server: FastifyInstance) {
   server.post(
     '/',
     {
-      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         body: $ref('createUserSchema'),
         response: {
