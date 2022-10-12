@@ -10,7 +10,6 @@ const ReactGridLayout = WidthProvider(RGL);
 export default class WarehouseGridLayout extends React.PureComponent {
   static defaultProps = {
     className: "warehousegridlayout",
-    items: 0,
     rowHeight: 50,
     onLayoutChange: function() {},
     cols: 20,
@@ -36,7 +35,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   createElement(el)
   {
-    console.log("element: " + el);
     if(el.type === "box")
     {
       return this.createBoxElement(el);
@@ -173,8 +171,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
       // Increment the counter to ensure key is always unique.
       newBoxCounter: this.state.newBoxCounter + 1
     });
-
-    console.log("[@@@@ layout: " + this.state.layout + "@@@@]");
   }
 
   // We're using the cols coming back from this to calculate where to add new items.
@@ -196,6 +192,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   onLayoutChange(layout) {
+    console.log("[@@@@ onLayoutChange() @@@@]");
     this.props.onLayoutChange(layout);
     this.setState({ layout: layout });
   }
