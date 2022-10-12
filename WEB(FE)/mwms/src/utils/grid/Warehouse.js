@@ -147,10 +147,10 @@ export default class WarehouseGridLayout extends React.PureComponent {
       items: this.state.items.concat({
         type: "cabinet",
         i: "Cabinet" + this.state.newCabinetCounter,
-        x: (this.state.items.length * 2) % (this.state.cols || 12),
+        x: (this.state.items.length * 4) % (this.state.cols || 12),
         y: Infinity, // puts it at the bottom
-        w: 2,
-        h: 2
+        w: 4,
+        h: 4
       }),
       // Increment the counter to ensure key is always unique.
       newCabinetCounter: this.state.newCabinetCounter + 1
@@ -165,14 +165,16 @@ export default class WarehouseGridLayout extends React.PureComponent {
       items: this.state.items.concat({
         type: "box",
         i: "box" + this.state.newBoxCounter,
-        x: (this.state.items.length * 2) % (this.state.cols || 12),
+        x: (this.state.items.length * 4) % (this.state.cols || 12),
         y: Infinity, // puts it at the bottom
-        w: 2,
-        h: 2
+        w: 4,
+        h: 4
       }),
       // Increment the counter to ensure key is always unique.
       newBoxCounter: this.state.newBoxCounter + 1
     });
+
+    console.log("[@@@@ layout: " + this.state.layout + "@@@@]");
   }
 
   // We're using the cols coming back from this to calculate where to add new items.

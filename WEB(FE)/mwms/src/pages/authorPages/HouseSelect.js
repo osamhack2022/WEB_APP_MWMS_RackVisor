@@ -47,8 +47,9 @@ function HouseSelect() {
   }
 
   const addHouse = () => {
+    console.log("[@@@@ addHouse() @@@@]");
     const newName = prompt("창고명을 입력해주세요");
-    if(newNmae === null)
+    if(newName === null)
     {
       return;
     }
