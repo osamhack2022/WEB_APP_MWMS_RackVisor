@@ -1,14 +1,12 @@
-import React, {useContext, useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
 import logoImg from '../images/logo.png'
 import { useAuth } from '../routes/AuthContext';
-import UserModal from '../utils/modal/UserModal';
 import AlarmModal from '../utils/modal/AlarmModal';
 import SettingModal from '../utils/modal/SettingModal';
+import UserDropDown from '../utils/UserDropDown';
 
 function AuthorHeader() {
   const [alarm, setAlarm] = useState(false);
-  const [user, setUser] = useState(false);
   const [setting, setSetting] = useState(false);
 
   const name = localStorage.getItem("이름");
@@ -33,10 +31,9 @@ function AuthorHeader() {
             <ul class="flex flex-col mt-4 bg-gray-50 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-bold md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
               <button onClick={() => setAlarm(true)}>알람</button>
               <span>{position}</span>
-              <button class="border" onClick={() => setUser(true)}>{classes} {name}</button>
+              <UserDropDown milClass={classes} name={name}/>
               <span onClick={() => setSetting(true)}>환경설정</span>
               {alarm ? <AlarmModal onClose={() => setAlarm(false)}/> : ""}
-              {user ? <UserModal onClose={() => setUser(false)}/> : ""}
               {setting ? <SettingModal onClose={() => setSetting(false)}/> : ""}
             </ul>
           </div>

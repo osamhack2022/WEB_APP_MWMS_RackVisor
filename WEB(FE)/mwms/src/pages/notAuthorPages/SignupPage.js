@@ -106,13 +106,21 @@ function SignupPage() {
                   </div>
                   <div>
                     <label for="milClass" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">계급</label>
-                    <select class = "border" onChange={onMilClass} value={milClass}>
-                      {milClassList.map((millC) => (
-                        <option value={millC} key={millC}>
-                          {millC}
-                        </option>
-                      ))}
-                    </select>
+                    <div>
+                      <select
+                        id="location"
+                        name="location"
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                        onChange={onMilClass} 
+                        value={milClass}
+                      >
+                        {milClassList.map((millC) => (
+                          <option value={millC} key={millC}>
+                            {millC}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   <div>
                     <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">소속</label>

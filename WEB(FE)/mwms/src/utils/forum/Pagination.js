@@ -1,5 +1,5 @@
 import React from "react";
-import Example from "./card_footer_with_page_buttons";
+import Example from "./ForumList";
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];

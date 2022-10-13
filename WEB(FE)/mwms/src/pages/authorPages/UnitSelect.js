@@ -4,8 +4,9 @@ import { useAuth } from '../../routes/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import AuthorHeader from '../../components/AuthorHeader';
 import Title from '../../utils/with_description';
-import UIModal from '../../utils/modal/simple_with_dismiss_button';
-import Example from '../../utils/simple';
+import ExcelModal from '../../utils/modal/ExcelModal';
+import DropDown from '../../utils/DropDown';
+import ReactExcelDownload from '../../utils/modal/ExcelExampleFile';
 
 
 // lsUnitList 예시 [{name: "123부대"}, {name: "456부대"}, ... ]
@@ -72,12 +73,11 @@ function UnitSelect() {
           <div onClick={addUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
               <h5 class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 부대 추가</h5>
           </div>
-          <Example/> 
+          <DropDown />
         </div>
         <button onClick={() => setOpen(true)}>excel로 업로드</button>
-        <UIModal open={open} setOpen={setOpen}/>
+        <ExcelModal open={open} setOpen={setOpen}/>
         <Footer/>
-
       </body>
     </div>
   )

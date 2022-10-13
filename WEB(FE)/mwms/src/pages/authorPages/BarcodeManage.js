@@ -7,6 +7,8 @@ import Footer from '../../components/Footer';
 import QRCode from 'qrcode';
 import ReactToPrint from 'react-to-print';
 import {QrReader} from 'react-qr-reader';
+import SearchInput from '../../utils/search/SearchInput';
+
 //함수 내부 주석 -> 바코드 리더 부분을 일단 주석처리
 /*
 https://codiving.kr/57 -> 프린트기능
@@ -107,18 +109,6 @@ function BarcodeManage() {
   const [imageUrl, setImageUrl] = useState('');
   const printR = useRef(null);
 
-  const temp = props => {
-    const { printR } = props;
-    return (
-      <div ref={printR}>                
-        {imageUrl ? (
-        <a href={imageUrl} download>
-            <img src={imageUrl} alt="img"/>
-        </a>) : null}
-      </div>
-    ) 
-  }
-
   const generateQrCode = async () => {
     try {
       const response = await QRCode.toDataURL(text);
@@ -140,19 +130,16 @@ function BarcodeManage() {
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
-        <div class ="flex border">
-          <div class="flex-1 border">
-              <input class="border" onChange={(e) => setText(e.target.value)}/>
-              <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
-                <br/>
-                <br/>
-                <br/>
-                {imageUrl ? (
-                <a href={imageUrl} download>
-                    <div  ref={printR} class="display-none"><img src={imageUrl} alt="img"/>eoeo</div>
-                </a>) : null}
-          </div>
-          <div class="flex-1 border">
+        <SearchInput className = "flex-auto" />
+        <div class ="flex flex-auto border">
+          <div class="flex-auto border">
+            <input class="border" onChange={(e) => setText(e.target.value)}/>
+            <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
+              <br/>
+              {imageUrl ? (
+              <a href={imageUrl} download>
+                  <div  ref={printR} class="display-none"><img src={imageUrl} alt="img"/>eoeo</div>
+              </a>) : null}
             <ReactToPrint
               trigger={() => <button>프린트하기</button>}
               content={() => printR.current}

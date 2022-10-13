@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ExampleModal from '../modal/ExampleModal';
 import Modal from '../modal/default/Modal';
 import SettingModal from '../modal/SettingModal';
+import DetailContent from '../modal/DetailContent';
+
 //https://binaryjourney.tistory.com/20 [Binary Journey:티스토리]
 function Posts({ posting, total, setPosting }) {
   const [modal, setModal] = useState({
@@ -29,6 +31,7 @@ function Posts({ posting, total, setPosting }) {
   const openModal = (e) => {
     setModal({
       content : total.find(post => post.id == e.target.id).content,
+      title : total.find(post => post.id == e.target.id).title,
       open : true
     });
   }
@@ -91,11 +94,7 @@ function Posts({ posting, total, setPosting }) {
             </tr>
           ))}
           {modal.open && (
-            <Modal onClose={() => setModal(false)}>
-              <div>
-                {modal.content}
-              </div>
-            </Modal>
+            <DetailContent open={modal.open} setOpen={() => setModal(false)} title={modal.title} content={modal.content}/>
           )}
         </tbody>
       </table>

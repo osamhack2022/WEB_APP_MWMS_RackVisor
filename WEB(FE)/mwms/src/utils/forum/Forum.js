@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Posts from './Posts';
 import Pagination from './Pagination';
-import Example from './card_footer_with_page_buttons';
+import ForumList from './ForumList';
 //https://chanhuiseok.github.io/posts/react-12/
 
 function Forum() {
@@ -26,7 +26,7 @@ function Forum() {
     {id : 13, title:"wow", milClass:"일병", name:"홍길동", content:"내용입니당1" },
     {id : 14, title:"wow", milClass:"일병", name:"홍길동", content:"내용입니당1" },
     {id : 15, title:"wow", milClass:"일병", name:"홍길동", content:"내용입니당1" },
-              {id : 16, title:"33", milClass:"이병", name:"홍길동", content:"내용입니당2"}]);
+    {id : 16, title:"33", milClass:"이병", name:"홍길동", content:"내용입니당2"}]);
 
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
@@ -55,7 +55,7 @@ function Forum() {
           paginate={setCurrentPage}
           currentPage={currentPage}
         ></Pagination> */}
-        <Example
+        <ForumList
           postsPerPage={postsPerPage}
           totalPosts={posts.length}
           paginate={setCurrentPage}
