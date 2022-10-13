@@ -11,7 +11,11 @@ function EditableText(props) {
       <div>
           <EditText
               value={fullName}
-              handleChange={(e) => setFullName(e.target.value)}
+              color={props.color}
+              handleChange={(e) => {
+                props.handleChange(e.target.value, props.iid);
+                setFullName(e.target.value);
+            }}
               
               handleDoubleClick={() => setShowInputEle(true)}
               handleBlur={() => setShowInputEle(false)}

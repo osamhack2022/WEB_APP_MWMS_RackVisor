@@ -10,6 +10,7 @@ function EditText(props) {
             style={{
               height: "25px",
               width: "150px",
+              color: "black",
             }}
             type="text"
             value={props.value}
@@ -24,6 +25,7 @@ function EditText(props) {
               display: "inline-block",
               height: "25px",
               minWidth: "150px",
+              color: props.color,
             }}
           >
             {props.value}
