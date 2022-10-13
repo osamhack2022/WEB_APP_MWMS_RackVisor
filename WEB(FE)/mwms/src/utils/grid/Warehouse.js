@@ -5,9 +5,6 @@ import EditableText from "../text/EditableText"
 import { getLSUnitList } from '../../pages/authorPages/UnitSelect'
 
 const ReactGridLayout = WidthProvider(RGL);
-
-
-
   
 export default class WarehouseGridLayout extends React.PureComponent {
   static defaultProps = {
@@ -20,13 +17,35 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
+    let unitName = this.props.unitSelected;
+    let lsGridLayout = [];
+    let lsItems = [];
+    let lsUnitList=  getLSUnitList();
+    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
+    let hl;
+    if(lsUnit === undefined)
+    {
+      hl = []
+    }
+    else
+    {
+      hl = lsUnit.houseList;
+      let house = hl.find( (e) => (e.name === this.props.houseSelected) );
+      if(house != undefined)
+      {
+        lsGridLayout = house.gridLayout;
+        lsItems = house.items;
+      }
+    }
+
     this.state = {
-      items: [],
+      items: lsItems,
       newBoxCounter: 0,
       newDoorCounter: 0,
       newCabinetCounter: 0,
       iid:0, //unique id for item
-      layout: [],
+      layout: lsGridLayout,
     };
     this.onLayoutChange = this.onLayoutChange.bind(this);
     this.onAddBox = this.onAddBox.bind(this);
@@ -167,13 +186,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
         h: 1,
         iid: this.state.iid + 1,
       }),
-      layout: this.state.layout.concat({
-        i: "door" + this.state.newDoorCounter,
-        x: (this.state.items.length * 4) % (this.state.cols || 12),
-        y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
-        w: 2,
-        h: 1
-      }),
       // Increment the counter to ensure key is always unique.
       newDoorCounter: this.state.newDoorCounter + 1,
       iid: this.state.iid + 1,
@@ -192,13 +204,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
         w: 4,
         h: 4,
         iid: this.state.iid + 1,
-      }),
-      layout: this.state.layout.concat({
-        i: "Cabinet" + this.state.newCabinetCounter,
-        x: (this.state.items.length * 4) % (this.state.cols || 12),
-        y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
-        w: 4,
-        h: 4
       }),
       // Increment the counter to ensure key is always unique.
       newCabinetCounter: this.state.newCabinetCounter + 1,
@@ -220,13 +225,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
         h: 4,
         iid: this.state.iid + 1,
       }),
-      layout: this.state.layout.concat({
-        i: "box" + this.state.newBoxCounter,
-        x: (this.state.items.length * 4) % (this.state.cols || 12),
-        y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
-        w: 4,
-        h: 4
-      }),
       // Increment the counter to ensure key is always unique.
       newBoxCounter: this.state.newBoxCounter + 1,
       iid: this.state.iid + 1,
@@ -235,6 +233,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   // We're using the cols coming back from this to calculate where to add new items.
   onBreakpointChange(breakpoint, cols) {
+    console.log("[@@@@ onBreakPointChange() @@@@]");
     this.setState({
       breakpoint: breakpoint,
       cols: cols
@@ -244,6 +243,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
 
   onLayoutChange(layout) {
+    console.log("[@@@@ onLayoutChange() @@@@]");
     this.props.onLayoutChange(layout);
     let newItems = [];
     let j;
@@ -281,9 +281,15 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   render() {
+    console.log("[@@@@ render() @@@@]");
 
     // TODO: 서버로부터 unit(부대) 불러와야함...
     let unitName = this.props.unitSelected;
+    console.log("unitName: " + unitName);
+    if(unitName === null)
+    {
+      return (<div></div>);
+    }
     let lsUnitList=  getLSUnitList();
     let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
     let hl;
@@ -296,9 +302,18 @@ export default class WarehouseGridLayout extends React.PureComponent {
       hl = lsUnit.houseList;
     }
     let house = hl.find( (e) => (e.name === this.props.houseSelected) );
+    if(house === undefined)
+    {
+      return (<div></div>);
+    }
+    
+    
     console.log("house: " + JSON.stringify(house));
     console.log("layout: " + JSON.stringify(this.state.layout));
     console.log("items: " + JSON.stringify(this.state.items));
+    house.gridLayout = this.state.layout;
+    house.items = this.state.items;
+    localStorage.setItem("unitList", JSON.stringify(lsUnitList));  
     return (
       <div style={{transform: 'scale(0.5) translate(-50%, -50%)'}}>
         <div>
@@ -308,7 +323,8 @@ export default class WarehouseGridLayout extends React.PureComponent {
         </div>
         <ReactGridLayout 
           {...this.props}
-          layout={this.state.layout}
+          layout={house.gridLayout}
+          items={house.items}
           onLayoutChange={this.onLayoutChange}
           onBreakpointChange={this.onBreakpointChange}
           onChangeItemName={this.onChangeItemName}

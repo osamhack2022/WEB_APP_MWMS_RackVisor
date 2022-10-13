@@ -36,7 +36,7 @@ function HouseSelect() {
     hl = lsUnit.houseList;
   }
   
-  // houseList 예시: [{name : "1종창고", gridLayout: []}, {name : "2종창고", gridLayout: []}, {name : "3종창고", gridLayout: []}] <- DB 설계에 따라 형식 바뀔 수 있음
+  // houseList 예시: [{name : "1종창고", gridLayout: [], items: []}, {name : "2종창고", gridLayout: [], items: []}, {name : "3종창고", gridLayout: [], items: []} ] <- DB 설계에 따라 형식 바뀔 수 있음
   const [houseList, setHouseList] = useState(hl);
   
 
@@ -57,6 +57,7 @@ function HouseSelect() {
     lsHouseList.push({
       name: newName,
       gridLayout: [],
+      items:[],
     });
     localStorage.setItem("unitList", JSON.stringify(lsUnitList));
     setHouseList(lsHouseList);
