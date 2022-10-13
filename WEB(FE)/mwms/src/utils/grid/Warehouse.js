@@ -67,6 +67,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
       cursor: "pointer"
     };
     const i = el.i;
+    const iid = el.iid;
     return (
       <div key={i} data-grid={el} style={{backgroundColor: "#7f1d1d"}}>
         <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="white"></EditableText>
@@ -89,6 +90,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
       cursor: "pointer"
     };
     const i = el.i;
+    const iid = el.iid;
     return (
       <div key={i} data-grid={el} style={{backgroundColor: "#1e3a8a"}}>
         <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="white"></EditableText>
