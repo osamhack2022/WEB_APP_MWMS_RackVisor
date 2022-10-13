@@ -1,176 +1,320 @@
 import React from "react";
 import _ from "lodash";
-import RGL, { WidthProvider } from "react-grid-layout";
-import EditableText from "../text/EditableText";
+import RGL, { WidthProvider } from "react-grid-layout"
+import EditableText from "../text/EditableText"
+import { getLSUnitList } from '../../pages/authorPages/UnitSelect'
 
 const ReactGridLayout = WidthProvider(RGL);
-
-
+  
 export default class WarehouseGridLayout extends React.PureComponent {
   static defaultProps = {
-    className: "layout",
-    items: 20,
-    rowHeight: 10,
+    className: "warehousegridlayout",
+    rowHeight: 50,
     onLayoutChange: function() {},
     cols: 20,
-    transformScale: 0.5,
-    verticalCompact: false
+    transformScale: 0.7,
+    style:{backgroundColor: "#f4a460"},
   };
 
   constructor(props) {
     super(props);
 
-    const layout = this.generateLayout();
+    let unitName = this.props.unitSelected;
+    let lsGridLayout = [];
+    let lsItems = [];
+    let lsUnitList=  getLSUnitList();
+    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
+    let hl;
+    if(lsUnit === undefined)
+    {
+      hl = []
+    }
+    else
+    {
+      hl = lsUnit.houseList;
+      let house = hl.find( (e) => (e.name === this.props.houseSelected) );
+      if(house != undefined)
+      {
+        lsGridLayout = house.gridLayout;
+        lsItems = house.items;
+      }
+ 
+    }
+
+
     this.state = {
-      items: [],
-      newItemCounter: 0,
+      items: lsItems,
+      newBoxCounter: 0,
       newDoorCounter: 0,
-      layout,
+      newCabinetCounter: 0,
+      iid:0, //unique id for item
+      layout: lsGridLayout,
     };
-    this.onAddItem = this.onAddItem.bind(this);
+    this.onLayoutChange = this.onLayoutChange.bind(this);
+    // this.onAddBox = this.onAddBox.bind(this);
     this.onAddDoor = this.onAddDoor.bind(this);
+    this.onAddCabinet = this.onAddCabinet.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
+    this.onChangeItemName = this.onChangeItemName.bind(this);
+    
   }
 
-  createElement(el) {
+  createElement(el)
+  {
+    if(el.type === "box")
+    {
+      return this.createBoxElement(el);
+    }
+    else if(el.type === "door")
+    {
+      return this.createDoorElement(el);
+    }
+    else if(el.type === "cabinet")
+    {
+      return this.createCabinetElement(el);
+    }
+    else
+    {
+      //ERROR
+    }
+
+  }
+ 
+
+  createDoorElement(el) {
     const removeStyle = {
       position: "absolute",
       right: "2px",
       top: 0,
-      cursor: "pointer"
+      cursor: "pointer",
+      fontSize: "30px",
+      color: "white"
     };
     const i = el.i;
+    const iid = el.iid;
     return (
-      <div key={i} data-grid={el}>
-        <EditableText value={"door" + i}></EditableText>
-        <span className="text">{i}</span>
-        <span
-          className="remove"
-          style={removeStyle}
-          onClick={this.onRemoveDoor.bind(this, i)}
-        >
-          x
-        </span>
+      <div key={i} data-grid={el} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}}>
+        <EditableText value={i} iid={iid} handleChange={(e) => console.log(e)} color="white"></EditableText>
       </div>
     );
   }
 
-  createElement(el) {
+  createCabinetElement(el) {
     const removeStyle = {
       position: "absolute",
       right: "2px",
       top: 0,
-      cursor: "pointer"
+      cursor: "pointer", 
+      fontSize: "30px",
+      color: "white"
     };
-    const i =el.i;
+    const i = el.i;
+    const iid = el.iid;
     return (
-      <div key={i} data-grid={el}>
-        <EditableText value={i}></EditableText>
-        <span
-          className="remove"
-          style={removeStyle}
-          onClick={this.onRemoveItem.bind(this, i)}
-        >
-          x
-        </span>
+      <div key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
+        <EditableText value={i} iid={iid} handleChange={(e) => console.log(e)} color="white"></EditableText>
       </div>
     );
   }
+
+  createBoxElement(el) {
+    const removeStyle = {
+      position: "absolute",
+      right: "2px",
+      top: 0,
+      cursor: "pointer",
+      fontsize: "30px",
+      color: "white"
+    };
+    const i =el.i;
+    const iid = el.iid;
+    return (
+      <div key={i} data-grid={el} style={{backgroundColor: "#F9C38A", alignItems:"center", justifyContent:"center"}}>
+        <EditableText value={i} iid={iid} handleChange={(e) => console.log(e)}></EditableText>
+      </div>
+    );
+  }
+
+  onChangeItemName(value, iid)
+  {
+    console.log("[@@@@ onChangeItemName(value:" + value +", iid: " +iid + ") @@@@]");
+    let newItems = [...this.state.items];
+    let newLayout = [...this.state.layout];
+
+    let j;
+    for(j = 0; j<newItems.length; j++)
+    {
+      let item = newItems[j];
+      if(item.iid == iid)
+      {
+        item.i = value;
+        newLayout[j].i = value;
+        break;
+      }
+    }
+
+    this.setState({
+      items:newItems,
+      layout: newLayout,
+    });
+
+  }
+
 
   onAddDoor() {
     console.log("adding", "door" + this.state.newDoorCounter);
     this.setState({
       // Add a new door. It must have a unique key!
       items: this.state.items.concat({
+        type: "door",
         i: "door" + this.state.newDoorCounter,
-        x: (this.state.items.length * 2) % (this.state.cols || 12),
-        y: Infinity, // puts it at the bottom
-        w: 8,
-        h: 1
+        x: (this.state.items.length * 4) % (this.state.cols || 12),
+        y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
+        w: 2,
+        h: 1,
+        iid: this.state.iid + 1,
       }),
       // Increment the counter to ensure key is always unique.
-      newDoorCounter: this.state.newDoorCounter + 1
+      newDoorCounter: this.state.newDoorCounter + 1,
+      iid: this.state.iid + 1,
     });
   }
 
-  onAddItem() {
-    /*eslint no-console: 0*/
-    console.log("adding", "box" + this.state.newItemCounter);
+  onAddCabinet() {
+    console.log("adding", "cabinet" + this.state.newCabinetCounter);
     this.setState({
-      // Add a new item. It must have a unique key!
+      // Add a new door. It must have a unique key!
       items: this.state.items.concat({
-        i: "box" + this.state.newItemCounter,
-        x: (this.state.items.length * 2) % (this.state.cols || 12),
-        y: Infinity, // puts it at the bottom
-        w: 8,
-        h: 2
+        type: "cabinet",
+        i: "Cabinet" + this.state.newCabinetCounter,
+        x: (this.state.items.length * 4) % (this.state.cols || 12),
+        y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
+        w: 4,
+        h: 4,
+        iid: this.state.iid + 1,
       }),
       // Increment the counter to ensure key is always unique.
-      newItemCounter: this.state.newItemCounter + 1
+      newCabinetCounter: this.state.newCabinetCounter + 1,
+      iid: this.state.iid + 1,
     });
   }
+
+  // onAddBox() {
+  //   /*eslint no-console: 0*/
+  //   console.log("adding", "box" + this.state.newBoxCounter);
+  //   this.setState({
+  //     // Add a new item. It must have a unique key!
+  //     items: this.state.items.concat({
+  //       type: "box",
+  //       i: "box" + this.state.newBoxCounter,
+  //       x: (this.state.items.length * 4) % (this.state.cols || 12),
+  //       y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
+  //       w: 4,
+  //       h: 4,
+  //       iid: this.state.iid + 1,
+  //     }),
+  //     // Increment the counter to ensure key is always unique.
+  //     newBoxCounter: this.state.newBoxCounter + 1,
+  //     iid: this.state.iid + 1,
+  //   });
+  // }
 
   // We're using the cols coming back from this to calculate where to add new items.
   onBreakpointChange(breakpoint, cols) {
+    console.log("[@@@@ onBreakPointChange() @@@@]");
     this.setState({
       breakpoint: breakpoint,
       cols: cols
     });
   }
 
-  generateDOM() {
-    return _.map(_.range(this.props.items), function(i) {
-      return (
-        <div key={i}>
-          <span className="text">{i}</span>
-        </div>
-      );
-    });
-  }
+
 
   onLayoutChange(layout) {
+    console.log("[@@@@ onLayoutChange() @@@@]");
     this.props.onLayoutChange(layout);
-    this.setState({ layout: layout });
+    let newItems = [];
+    let j;
+    for(j = 0; j<layout.length; j++)
+    {
+      let item = this.state.items[j];
+      item.i = layout[j].i
+      item.x = layout[j].x;
+      item.y = layout[j].y;
+      item.w = layout[j].w;
+      item.h = layout[j].h;
+      newItems.push(item);
+    }
+    this.setState({
+      layout: layout,
+      items: newItems
+    });
+    
   }
 
-  onRemoveItem(i) {
+  onRemoveBox(i) {
     console.log("removing item", i);
-    this.setState({ items: _.reject(this.state.items, { i: i }) });
+    this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
  
   }
 
   onRemoveDoor(i) {
     console.log("removing door", i);
-    this.setState({ items: _.reject(this.state.items, { i: i }) });
+    this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
   }
 
-  generateLayout() {
-    const p = this.props;
-    return _.map(new Array(p.items), function(item, i) {
-      const y = _.result(p, "y") || Math.ceil(Math.random() * 4) + 1;
-      return {
-        x: (i * 2) % 12,
-        y: Math.floor(i / 6) * y,
-        w: 2,
-        h: y,
-        i: i.toString()
-      };
-    });
+  onRemoveCabinet(i) {
+    console.log("removing cabinet", i);
+    this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
   }
-
 
   render() {
+    console.log("[@@@@ render() @@@@]");
+
+    // TODO: 서버로부터 unit(부대) 불러와야함...
+    let unitName = this.props.unitSelected;
+    console.log("unitName: " + unitName);
+    if(unitName === null)
+    {
+      return (<div></div>);
+    }
+    let lsUnitList=  getLSUnitList();
+    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
+    let hl;
+    if(lsUnit === undefined)
+    {
+      hl = []
+    }
+    else
+    {
+      hl = lsUnit.houseList;
+    }
+    let house = hl.find( (e) => (e.name === this.props.houseSelected) );
+    if(house === undefined)
+    {
+      return (<div></div>);
+    }
+    
+    console.log("house: " + JSON.stringify(house));
+    console.log("layout: " + JSON.stringify(this.state.layout));
+    console.log("items: " + JSON.stringify(this.state.items));
+    house.gridLayout = this.state.layout;
+    house.items = this.state.items;
+
     return (
-      <div style={{transform: 'scale(0.5) translate(-50%, -50%)'}}>
+      <div style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
         <ReactGridLayout 
-          layout={this.state.layout}
+          {...this.props}
+          layout={house.gridLayout}
+          items={house.items}
           onLayoutChange={this.onLayoutChange}
           onBreakpointChange={this.onBreakpointChange}
-          {...this.props}
+          onChangeItemName={this.onChangeItemName}
+          allowOverlap={false}
+          compactType={null}
         >
-          {this.generateDOM()}
           {_.map(this.state.items, el => this.createElement(el))}
-        </ReactGridLayout>
+        </ReactGridLayout> 
       </div>
     );
   }

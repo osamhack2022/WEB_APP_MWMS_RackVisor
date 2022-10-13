@@ -6,13 +6,15 @@ import { getLSUnitList } from '../../pages/authorPages/UnitSelect'
 
 const ReactGridLayout = WidthProvider(RGL);
   
+
 export default class WarehouseGridLayout extends React.PureComponent {
   static defaultProps = {
     className: "warehousegridlayout",
     rowHeight: 50,
     onLayoutChange: function() {},
     cols: 20,
-    transformScale: 0.5,
+    transformScale: 0.7,
+    style:{backgroundColor: "#f4a460"},
   };
 
   constructor(props) {
@@ -48,7 +50,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
       layout: lsGridLayout,
     };
     this.onLayoutChange = this.onLayoutChange.bind(this);
-    this.onAddBox = this.onAddBox.bind(this);
+    // this.onAddBox = this.onAddBox.bind(this);
     this.onAddDoor = this.onAddDoor.bind(this);
     this.onAddCabinet = this.onAddCabinet.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
@@ -83,12 +85,14 @@ export default class WarehouseGridLayout extends React.PureComponent {
       position: "absolute",
       right: "2px",
       top: 0,
-      cursor: "pointer"
+      cursor: "pointer",
+      fontSize: "30px",
+      color: "white"
     };
     const i = el.i;
     const iid = el.iid;
     return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#7f1d1d"}}>
+      <div key={i} data-grid={el} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}}>
         <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="white"></EditableText>
         <span
           className="remove"
@@ -106,12 +110,14 @@ export default class WarehouseGridLayout extends React.PureComponent {
       position: "absolute",
       right: "2px",
       top: 0,
-      cursor: "pointer"
+      cursor: "pointer", 
+      fontSize: "30px",
+      color: "white"
     };
     const i = el.i;
     const iid = el.iid;
     return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#1e3a8a"}}>
+      <div key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
         <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="white"></EditableText>
         <span
           className="remove"
@@ -129,12 +135,14 @@ export default class WarehouseGridLayout extends React.PureComponent {
       position: "absolute",
       right: "2px",
       top: 0,
-      cursor: "pointer"
+      cursor: "pointer",
+      fontsize: "30px",
+      color: "white"
     };
     const i =el.i;
     const iid = el.iid;
     return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#F9C38A"}}>
+      <div key={i} data-grid={el} style={{backgroundColor: "#F9C38A", alignItems:"center", justifyContent:"center"}}>
         <EditableText value={i} iid={iid} handleChange={this.onChangeItemName}></EditableText>
         <span
           className="remove"
@@ -150,14 +158,14 @@ export default class WarehouseGridLayout extends React.PureComponent {
   onChangeItemName(value, iid)
   {
     console.log("[@@@@ onChangeItemName(value:" + value +", iid: " +iid + ") @@@@]");
-    let newItems = this.state.items;
-    let newLayout = this.state.layout;
+    let newItems = [...this.state.items];
+    let newLayout = [...this.state.layout];
 
     let j;
     for(j = 0; j<newItems.length; j++)
     {
       let item = newItems[j];
-      if(item.iid === iid)
+      if(item.iid == iid)
       {
         item.i = value;
         newLayout[j].i = value;
@@ -211,25 +219,25 @@ export default class WarehouseGridLayout extends React.PureComponent {
     });
   }
 
-  onAddBox() {
-    /*eslint no-console: 0*/
-    console.log("adding", "box" + this.state.newBoxCounter);
-    this.setState({
-      // Add a new item. It must have a unique key!
-      items: this.state.items.concat({
-        type: "box",
-        i: "box" + this.state.newBoxCounter,
-        x: (this.state.items.length * 4) % (this.state.cols || 12),
-        y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
-        w: 4,
-        h: 4,
-        iid: this.state.iid + 1,
-      }),
-      // Increment the counter to ensure key is always unique.
-      newBoxCounter: this.state.newBoxCounter + 1,
-      iid: this.state.iid + 1,
-    });
-  }
+  // onAddBox() {
+  //   /*eslint no-console: 0*/
+  //   console.log("adding", "box" + this.state.newBoxCounter);
+  //   this.setState({
+  //     // Add a new item. It must have a unique key!
+  //     items: this.state.items.concat({
+  //       type: "box",
+  //       i: "box" + this.state.newBoxCounter,
+  //       x: (this.state.items.length * 4) % (this.state.cols || 12),
+  //       y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
+  //       w: 4,
+  //       h: 4,
+  //       iid: this.state.iid + 1,
+  //     }),
+  //     // Increment the counter to ensure key is always unique.
+  //     newBoxCounter: this.state.newBoxCounter + 1,
+  //     iid: this.state.iid + 1,
+  //   });
+  // }
 
   // We're using the cols coming back from this to calculate where to add new items.
   onBreakpointChange(breakpoint, cols) {
@@ -247,7 +255,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.props.onLayoutChange(layout);
     let newItems = [];
     let j;
-    for(j =0; j<layout.length; j++)
+    for(j = 0; j<layout.length; j++)
     {
       let item = this.state.items[j];
       item.i = layout[j].i
@@ -307,17 +315,17 @@ export default class WarehouseGridLayout extends React.PureComponent {
       return (<div></div>);
     }
     
-    
     console.log("house: " + JSON.stringify(house));
     console.log("layout: " + JSON.stringify(this.state.layout));
     console.log("items: " + JSON.stringify(this.state.items));
     house.gridLayout = this.state.layout;
     house.items = this.state.items;
-    localStorage.setItem("unitList", JSON.stringify(lsUnitList));  
+    localStorage.setItem("unitList", JSON.stringify(lsUnitList));
+
     return (
-      <div style={{transform: 'scale(0.5) translate(-50%, -50%)'}}>
+      <div style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
         <div>
-          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-2xl bg-[#F9C38A]" onClick={this.onAddBox}>박스 추가 + </button>
+          {/* <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-2xl bg-[#F9C38A]" onClick={this.onAddBox}>박스 추가 + </button> */}
           <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-red-900" onClick={this.onAddDoor}>문 추가 + </button>
           <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-blue-900" onClick={this.onAddCabinet}>캐비넷 추가 + </button>
         </div>

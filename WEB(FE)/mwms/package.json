@@ -27,6 +27,7 @@
     "react-scripts": "5.0.1",
     "react-to-print": "^2.14.7",
     "read-excel-file": "^5.5.1",
+    "source-map-loader": "^4.0.1",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },

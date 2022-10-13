@@ -5,6 +5,7 @@
 .react-grid-layout {
   position: relative;
   transition: height 200ms ease;
+  border-color: gray;
 }
 .react-grid-item {
   transition: all 200ms ease;
@@ -14,6 +15,7 @@
   pointer-events: none;
   user-select: none;  
 }
+
 .react-grid-item.cssTransforms {
   transition-property: transform;
 }

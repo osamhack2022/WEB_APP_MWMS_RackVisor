@@ -35,7 +35,9 @@ function HouseManage() {
           <button class="absolute top-47 right-5 m-2 p-1 content-end border-2 border-slate-500 rounded-md text-xs" onClick={onToHouseSelect}>{"<"}창고선택</button>
           <h1 class="border-b-2 m-1 pl-8 pb-4 font-bold text-2xl">{auth.houseSelected}<br/></h1>
           {console.log("창고이름: " + auth.houseSelected) }
+          <div>
           <WarehouseGridLayout unitSelected={auth.unitSelected} houseSelected={auth.houseSelected}/>
+          </div>
         </div>
       </div>
       <Footer />
