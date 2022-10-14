@@ -75,8 +75,6 @@ function UnitSelect() {
           </div>
           <DropDown />
         </div>
-        <button onClick={() => setOpen(true)}>excel로 업로드</button>
-        <ExcelModal open={open} setOpen={setOpen}/>
         <Footer/>
       </body>
     </div>
