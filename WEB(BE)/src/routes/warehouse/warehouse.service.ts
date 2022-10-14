@@ -12,7 +12,7 @@ export async function createWarehouse(
 }
 
 export async function findWarehouses(storedUnitId: number) {
-  const warehouses = prisma.warehouse.findMany({
+  const warehouses = await prisma.warehouse.findMany({
     where: {
       storedUnitId: storedUnitId,
     },
