@@ -11,14 +11,21 @@ const createWarehouseSchema = z.object({
   ...warehouseCore,
 });
 
-const createWarehouseResponseSchema = z.object({
+const warehouseResponseSchema = z.object({
   id: z.number(),
   ...warehouseCore,
 });
 
+const warehousesResponseSchema = z.array(warehouseResponseSchema);
+
 export type CreateWarehouseInput = z.infer<typeof createWarehouseSchema>;
 
-export const { schemas: warehouseSchemas, $ref } = buildJsonSchemas({
+const models = {
   createWarehouseSchema,
-  createWarehouseResponseSchema,
+  warehouseResponseSchema,
+  warehousesResponseSchema,
+};
+
+export const { schemas: warehouseSchemas, $ref } = buildJsonSchemas(models, {
+  $id: 'warehouseSchema',
 });
