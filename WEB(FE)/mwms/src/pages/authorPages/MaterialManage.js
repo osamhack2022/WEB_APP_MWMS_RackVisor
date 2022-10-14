@@ -14,12 +14,16 @@ import WarehouseGridLayout from '../../utils/grid/WarehouseMaterial'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { getLSUnitList } from './UnitSelect'
+import { vi } from 'date-fns/locale'
 
 function MaterialManage() {
   const auth =useAuth();
   const navigate = useNavigate();
   const [houList, setHouList] = useState([]);
   const [selHouse, setSelHouse] = useState("");
+  const [grid, setGrid] = useState([]);
+  const [itm, setItm] = useState([]);
+  const [visual, setVisual] = useState({});
 
   useEffect(() => {
     if(auth.unitSelected === "") {
@@ -31,6 +35,30 @@ function MaterialManage() {
     let lsUnitList=  getLSUnitList();
     let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
     let hl;
+    if (lsUnit === undefined) {
+      hl = []
+    } else {
+      hl = lsUnit.houseList;
+    }
+    setHouList(hl);
+
+    let visualJ = {};
+    hl.map((ttt) => {
+      console.log("ttt" + JSON.stringify(ttt));
+      visualJ[ttt.name] = false;
+    });
+    console.log("JJ" + JSON.stringify(visualJ));
+    setVisual(visualJ);
+
+  }, []);
+
+  useEffect(() => {
+    let unitName = auth.unitSelected;
+    let lsGridLayout = [];
+    let lsItems = [];
+    let lsUnitList=  getLSUnitList();
+    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
+    let hl;
     if(lsUnit === undefined)
     {
       hl = []
@@ -38,11 +66,41 @@ function MaterialManage() {
     else
     {
       hl = lsUnit.houseList;
+      if (selHouse == "") {
+        lsGridLayout = [];
+        lsItems = [];
+      }
+
+      else {
+        let house = hl.find( (e) => (e.name == selHouse) );
+        if( house != undefined )
+        {
+          lsGridLayout = house.gridLayout;
+          lsItems = house.items;
+        }
+      }
+ 
     }
-    setHouList(hl);
-  }, [])
+    console.log("여기다임마 + " + JSON.stringify(lsGridLayout));
+    console.log("여기다임마 + " + JSON.stringify(lsItems));
+    
+    setGrid(lsGridLayout);
+    setItm(lsItems);
 
+  }, [selHouse])
 
+  const onSelHouse = (e) => {
+    setSelHouse(e.currentTarget.value);
+    let viCopy = visual;
+    viCopy[selHouse] = false;
+    viCopy[e.currentTarget.value] = true;
+    setVisual(viCopy);
+    console.log("왜작동안함");
+  }
+
+  const testClick = (i) => {
+    alert("여기서" + i);
+  }
 
   return (
     <div>
@@ -59,21 +117,21 @@ function MaterialManage() {
             </div>
             <div class="gap-2">
               <span class="m-2 p-2 font-bold">위치 기반 물자 관리</span> <br /> 
-              {/* <DropdownButton id="dropdown-basic-button" title="창고를 선택하세요">
-              {hl.map((h) => (
-                <Dropdown.Item href="#/action">{h.name}</Dropdown.Item> 
-              ))}
-              </DropdownButton> */}
-              <select onChange={(e) => setSelHouse(e.target.value)} value={selHouse}>
+
+              <select onChange={onSelHouse} value={selHouse}>
+                <option value={"ttt"} key={"ttt"}>
+                  없음
+                </option>
                 {houList.map((hou) => (
                   <option value={hou.name} key={hou.name}>
                     {hou.name}
                   </option>
                 ))}
               </select>
-              { selHouse &&
-                <WarehouseGridLayout unitSelected={auth.unitSelected} houseSelected={selHouse}/>
-              } {/* TODO: box 클릭했을때 1,2,3층별로 나눠진 modal 추가 하기 */}
+
+              {houList.map((hou) => (
+                visual[hou.name] && <WarehouseGridLayout unitSelected={auth.unitSelected} houseSelected={hou.name} setClick={testClick}/>
+              ))}
             </div>
           </div>
         </div>

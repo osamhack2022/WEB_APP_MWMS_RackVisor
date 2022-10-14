@@ -14,6 +14,8 @@ export default class WarehouseGridLayout extends React.PureComponent {
     cols: 20,
     transformScale: 0.7,
     style:{backgroundColor: "#f4a460"},
+    isDraggable: false,
+    isResizable: false,
   };
 
   constructor(props) {
@@ -25,22 +27,16 @@ export default class WarehouseGridLayout extends React.PureComponent {
     let lsUnitList=  getLSUnitList();
     let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
     let hl;
-    if(lsUnit === undefined)
-    {
+    if(lsUnit === undefined) {
       hl = []
-    }
-    else
-    {
+    } else {
       hl = lsUnit.houseList;
       let house = hl.find( (e) => (e.name === this.props.houseSelected) );
-      if(house != undefined)
-      {
+      if(house != undefined) {
         lsGridLayout = house.gridLayout;
         lsItems = house.items;
       }
- 
     }
-
 
     this.state = {
       items: lsItems,
@@ -51,93 +47,51 @@ export default class WarehouseGridLayout extends React.PureComponent {
       layout: lsGridLayout,
     };
     this.onLayoutChange = this.onLayoutChange.bind(this);
-    // this.onAddBox = this.onAddBox.bind(this);
     this.onAddDoor = this.onAddDoor.bind(this);
     this.onAddCabinet = this.onAddCabinet.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
-    
   }
 
-  createElement(el)
-  {
-    if(el.type === "box")
-    {
-      return this.createBoxElement(el);
-    }
-    else if(el.type === "door")
-    {
+  createElement(el) {
+    if(el.type === "door") {
       return this.createDoorElement(el);
-    }
-    else if(el.type === "cabinet")
-    {
+    } else if(el.type === "cabinet") {
       return this.createCabinetElement(el);
-    }
-    else
-    {
+    } else {
       //ERROR
     }
-
   }
- 
 
   createDoorElement(el) {
-    const removeStyle = {
-      position: "absolute",
-      right: "2px",
-      top: 0,
-      cursor: "pointer",
-      fontSize: "30px",
-      color: "white"
-    };
     const i = el.i;
     const iid = el.iid;
+    const clicking = (e) => {
+      alert("Eee");
+    }
     return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}}>
-        <EditableText value={i} iid={iid} handleChange={(e) => console.log(e)} color="white"></EditableText>
+      <div key={i} data-grid={el} value={i} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}} >
+        <div value={i} className="text-xl align-middle text-center text-slate-100" color="white" onClick={clicking}>{i}</div>
       </div>
     );
+  }
+
+  onCabinetClick(i) {
+    this.props.setClick(i);
   }
 
   createCabinetElement(el) {
-    const removeStyle = {
-      position: "absolute",
-      right: "2px",
-      top: 0,
-      cursor: "pointer", 
-      fontSize: "30px",
-      color: "white"
-    };
     const i = el.i;
     const iid = el.iid;
     return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
-        <EditableText value={i} iid={iid} handleChange={(e) => console.log(e)} color="white"></EditableText>
-      </div>
-    );
-  }
-
-  createBoxElement(el) {
-    const removeStyle = {
-      position: "absolute",
-      right: "2px",
-      top: 0,
-      cursor: "pointer",
-      fontsize: "30px",
-      color: "white"
-    };
-    const i =el.i;
-    const iid = el.iid;
-    return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#F9C38A", alignItems:"center", justifyContent:"center"}}>
-        <EditableText value={i} iid={iid} handleChange={(e) => console.log(e)}></EditableText>
+      <div onClick={this.onCabinetClick.bind(this, i)} key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
+        <div value={i} className="text-xl align-middle text-center text-slate-100" color="white">{i}</div>
       </div>
     );
   }
 
   onChangeItemName(value, iid)
   {
-    console.log("[@@@@ onChangeItemName(value:" + value +", iid: " +iid + ") @@@@]");
     let newItems = [...this.state.items];
     let newLayout = [...this.state.layout];
 
@@ -160,11 +114,9 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   }
 
-
   onAddDoor() {
     console.log("adding", "door" + this.state.newDoorCounter);
     this.setState({
-      // Add a new door. It must have a unique key!
       items: this.state.items.concat({
         type: "door",
         i: "door" + this.state.newDoorCounter,
@@ -174,7 +126,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
         h: 1,
         iid: this.state.iid + 1,
       }),
-      // Increment the counter to ensure key is always unique.
       newDoorCounter: this.state.newDoorCounter + 1,
       iid: this.state.iid + 1,
     });
@@ -183,7 +134,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
   onAddCabinet() {
     console.log("adding", "cabinet" + this.state.newCabinetCounter);
     this.setState({
-      // Add a new door. It must have a unique key!
       items: this.state.items.concat({
         type: "cabinet",
         i: "Cabinet" + this.state.newCabinetCounter,
@@ -193,45 +143,19 @@ export default class WarehouseGridLayout extends React.PureComponent {
         h: 4,
         iid: this.state.iid + 1,
       }),
-      // Increment the counter to ensure key is always unique.
       newCabinetCounter: this.state.newCabinetCounter + 1,
       iid: this.state.iid + 1,
     });
   }
 
-  // onAddBox() {
-  //   /*eslint no-console: 0*/
-  //   console.log("adding", "box" + this.state.newBoxCounter);
-  //   this.setState({
-  //     // Add a new item. It must have a unique key!
-  //     items: this.state.items.concat({
-  //       type: "box",
-  //       i: "box" + this.state.newBoxCounter,
-  //       x: (this.state.items.length * 4) % (this.state.cols || 12),
-  //       y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
-  //       w: 4,
-  //       h: 4,
-  //       iid: this.state.iid + 1,
-  //     }),
-  //     // Increment the counter to ensure key is always unique.
-  //     newBoxCounter: this.state.newBoxCounter + 1,
-  //     iid: this.state.iid + 1,
-  //   });
-  // }
-
-  // We're using the cols coming back from this to calculate where to add new items.
   onBreakpointChange(breakpoint, cols) {
-    console.log("[@@@@ onBreakPointChange() @@@@]");
     this.setState({
       breakpoint: breakpoint,
       cols: cols
     });
   }
 
-
-
   onLayoutChange(layout) {
-    console.log("[@@@@ onLayoutChange() @@@@]");
     this.props.onLayoutChange(layout);
     let newItems = [];
     let j;
@@ -252,26 +176,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     
   }
 
-  onRemoveBox(i) {
-    console.log("removing item", i);
-    this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
- 
-  }
-
-  onRemoveDoor(i) {
-    console.log("removing door", i);
-    this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
-  }
-
-  onRemoveCabinet(i) {
-    console.log("removing cabinet", i);
-    this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
-  }
-
   render() {
-    console.log("[@@@@ render() @@@@]");
-
-    // TODO: 서버로부터 unit(부대) 불러와야함...
     let unitName = this.props.unitSelected;
     console.log("unitName: " + unitName);
     if(unitName === null)
