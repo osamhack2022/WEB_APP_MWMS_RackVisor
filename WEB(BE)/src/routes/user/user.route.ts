@@ -1,5 +1,5 @@
 import fastify, { FastifyInstance } from 'fastify';
-import { DecoratedFastifyInstance } from '../../index';
+import { DecoratedFastifyInstance } from '../..';
 import {
   loginHandler,
   registerUserHandler,
