@@ -1,4 +1,5 @@
 import { FastifyInstance } from 'fastify';
+import { DecoratedFastifyInstance } from '../../server';
 import {
   registerUnitHandler,
   findMyUnitsHandler,
@@ -10,10 +11,11 @@ async function unitRoutes(server: FastifyInstance) {
   server.post(
     '/',
     {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         body: $ref('createUnitSchema'),
         response: {
-          201: $ref('createUnitResponseSchema'),
+          201: $ref('unitResponseSchema'),
         },
       },
     },
@@ -23,7 +25,12 @@ async function unitRoutes(server: FastifyInstance) {
   server.get(
     '/myUnits',
     {
-      //preHandler: auth되어있는지 확인
+      schema: {
+        response: {
+          201: $ref('unitResponseSchema'),
+        },
+      },
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
     },
     findMyUnitsHandler
   );
@@ -31,7 +38,12 @@ async function unitRoutes(server: FastifyInstance) {
   server.get(
     '/',
     {
-      //preHandler: auth되어있는지 확인
+      schema: {
+        response: {
+          201: $ref('unitsResponseSchema'),
+        },
+      },
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
     },
     getUnitsHandler
   );

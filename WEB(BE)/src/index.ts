@@ -3,10 +3,21 @@ import fastify, { FastifyInstance } from 'fastify';
 import jwt from './plugins/jwt';
 
 import userRoutes from './routes/user/user.route';
+import unitRoutes from './routes/unit/unit.route';
 import { userSchemas } from './routes/user/user.schema';
 
 const prisma = new PrismaClient();
 const app = fastify();
+
+declare module '@fastify/jwt' {
+  interface FastifyJWT {
+    user: {
+      id: number;
+      email: string;
+      name: string;
+    };
+  }
+}
 
 // ! [Export] Decorated Fastify Instace Type (auto type inject is not supported on decorator)
 export type DecoratedFastifyInstance = FastifyInstance & {
@@ -48,6 +59,7 @@ app.register(import('@fastify/swagger'), {
 
 // ! [Register] Routing
 app.register(userRoutes, { prefix: 'api/users' });
+app.register(unitRoutes, { prefix: 'api/units' });
 
 // ! [Server] Start Listening
 app.listen({ port: 3003 }, (err, address) => {
