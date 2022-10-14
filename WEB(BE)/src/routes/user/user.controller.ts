@@ -1,4 +1,5 @@
 import fastify, { FastifyReply, FastifyRequest } from 'fastify';
+import { REPL_MODE_SLOPPY } from 'repl';
 
 import { verifyPassword } from '../../plugins/hash';
 import { CreateUserInput, LoginInput } from './user.schema';
@@ -54,11 +55,13 @@ export async function loginHandler(
       expiresIn: '7d',
     });
     return reply
-      .setCookie('jwt', accessToken, {
-        maxAge: 604_800_000,
-        signed: true,
+      .setCookie('token', accessToken, {
+        secure: true, // send cookie over HTTPS only
+        httpOnly: true,
+        sameSite: true, // alternative CSRF protection
       })
-      .send({ success: true });
+      .code(200)
+      .send('Cookie sent');
   }
 
   return reply.code(401).send({
@@ -66,8 +69,13 @@ export async function loginHandler(
   });
 }
 
-export async function getUsersHandler() {
+export async function getUsersHandler(
+  request: FastifyRequest<{
+    Body: CreateUserInput;
+  }>,
+  reply: FastifyReply
+) {
+  // TODO: remove this api
   const users = await findUsers();
-
-  return users;
+  return reply.send(users);
 }

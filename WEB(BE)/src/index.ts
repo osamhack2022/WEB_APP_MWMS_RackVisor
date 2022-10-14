@@ -6,6 +6,7 @@ import userRoutes from './routes/user/user.route';
 import unitRoutes from './routes/unit/unit.route';
 import { userSchemas } from './routes/user/user.schema';
 import { unitSchemas } from './routes/unit/unit.schema';
+import errorHandlers from './plugins/errorHandlers';
 
 const prisma = new PrismaClient();
 const app = fastify();
@@ -65,6 +66,9 @@ app.register(import('@fastify/swagger'), {
 // ! [Register] Routing
 app.register(userRoutes, { prefix: 'api/users' });
 app.register(unitRoutes, { prefix: 'api/units' });
+
+// ! Error Handler
+app.setErrorHandler(errorHandlers);
 
 // ! [Server] Start Listening
 app.listen({ port: 3003 }, (err, address) => {
