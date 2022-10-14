@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@fastify/auth": "^4.1.0",
+    "@fastify/cookie": "^8.3.0",
     "@fastify/jwt": "^6.3.2",
     "@fastify/static": "5.0.0",
     "@fastify/swagger": "^7.6.1",

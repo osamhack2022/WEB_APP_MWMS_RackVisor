@@ -26,9 +26,6 @@ async function userRoutes(server: FastifyInstance) {
     {
       schema: {
         body: $ref('loginSchema'),
-        response: {
-          200: $ref('loginResponseSchema'),
-        },
       },
     },
     loginHandler

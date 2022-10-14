@@ -1,4 +1,5 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import fastify, { FastifyReply, FastifyRequest } from 'fastify';
+
 import { verifyPassword } from '../../plugins/hash';
 import { CreateUserInput, LoginInput } from './user.schema';
 import { createUser, findUserByMSN, findUsers } from './user.service';
@@ -44,9 +45,20 @@ export async function loginHandler(
   });
 
   if (correctPassword) {
-    const { password, salt, ...rest } = user;
-    const tempAccessToken = {};
-    return { accessToken: tempAccessToken };
+    const payload = {
+      id: user.id,
+      msn: user.militarySerialNumber,
+    };
+    const accessToken = await reply.jwtSign(payload, {
+      iss: 'MWMS',
+      expiresIn: '7d',
+    });
+    return reply
+      .setCookie('jwt', accessToken, {
+        maxAge: 604_800_000,
+        signed: true,
+      })
+      .send({ success: true });
   }
 
   return reply.code(401).send({
