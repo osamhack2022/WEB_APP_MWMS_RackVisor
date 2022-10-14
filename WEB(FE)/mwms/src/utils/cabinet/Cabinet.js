@@ -11,8 +11,6 @@ const exampleItems = [{"id":"1번 박스"}]
 
 const CreateList = ({boxSelec, setBoxSelec}) => {
   const [countList, setCountList] = useState([1])
-  const [floor, setFloor] = useState(0);
-  const [idx, setIdx] = useState(0);
 
   const onAddDetailDiv = () => {
     let countArr = [...countList]
@@ -25,9 +23,9 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
     setCountList(countArr)
     console.log(countArr)
   }
+
   const [items, setItems] = useState(exampleItems);
   const [selected, setSelected] = useState("");
-  const handleItemClick = (itemId) => () => setSelected(itemId);
 
   const addItem = () => {
     setItems((items) =>
@@ -44,66 +42,30 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
     });
   };
 
-  const itemsPrev = usePrevious(items);
-  const apiRef = useRef({});
-  useEffect(() => {
-    if (items.length > itemsPrev?.length) {
-      apiRef.current?.scrollToItem?.(
-        apiRef.current?.getItemElementById(items.slice(-1)?.[0]?.id)
-      );
-    }
-  }, [items, itemsPrev]);
+  const handleBoxSelec = (e) => {
+    setBoxSelec(e.currentTarget.getAttribute('value'));
+  }
+
   return (
     <div>
       <button onClick={onAddDetailDiv}>
         추가
       </button>
       {countList.map((cnt) => (
-        <>
+        <div class="min-w-max min-h-max">
           <div>{cnt}층</div>
-          <>
-            <div className="example">
-              <div>
-                <ScrollMenu
-                  LeftArrow={LeftArrow}
-                  RightArrow={RightArrow}
-                  onWheel={onWheel}
-                >
-                  {items.map(({ id }) => (
-                    <Card
-                      title={id}
-                      itemId={id}
-                      key={id}
-                      onClick={handleItemClick(id)}
-                      selected={id === selected}
-                    />
-                  ))}
-                  <div style={{ marginTop: "20px" }}>
-                    <button onClick={removeItem}>Remove item</button>
-                    <button onClick={addItem}>Add item</button>
-                  </div>
-                </ScrollMenu>
+          <div class="flex">
+            {items.map((item) => (
+              <div value={item.id} class="w-24 h-12" onClick={handleBoxSelec}>
+                {item.id}
               </div>
-            </div>
-          </>
-        </>
+            ))}
+            <div onClick={addItem}>추가하기</div>
+            <div onClick={removeItem}>제거하기</div>
+          </div>
+        </div>
       ))}
     </div>
   )
 }
 export default CreateList
-
-function onWheel(apiObj, ev) {
-  const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;
-
-  if (isThouchpad) {
-    ev.stopPropagation();
-    return;
-  }
-
-  if (ev.deltaY < 0) {
-    apiObj.scrollNext();
-  } else if (ev.deltaY > 0) {
-    apiObj.scrollPrev();
-  }
-}

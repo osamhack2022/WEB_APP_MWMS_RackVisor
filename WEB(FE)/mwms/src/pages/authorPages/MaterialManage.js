@@ -124,7 +124,7 @@ function MaterialManage() {
               </>) : 
               ("")}
             </div>
-            <div class="gap-2">
+            <div class="gap-2 overflow-x-auto">
               {cabSelec ? 
               (<>
                 <button onClick={() => {
