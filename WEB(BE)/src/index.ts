@@ -5,6 +5,7 @@ import jwt from './plugins/jwt';
 import userRoutes from './routes/user/user.route';
 import unitRoutes from './routes/unit/unit.route';
 import { userSchemas } from './routes/user/user.schema';
+import { unitSchemas } from './routes/unit/unit.schema';
 
 const prisma = new PrismaClient();
 const app = fastify();
@@ -24,7 +25,8 @@ export type DecoratedFastifyInstance = FastifyInstance & {
   authenticateWithJWT: any;
 };
 
-for (const schema of [...userSchemas]) {
+// ! Add schmeas to Fastify
+for (const schema of [...userSchemas, ...unitSchemas]) {
   app.addSchema(schema);
 }
 

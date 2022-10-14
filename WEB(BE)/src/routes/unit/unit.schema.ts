@@ -22,8 +22,12 @@ const unitsResponseSchema = z.array(unitResponseSchema);
 
 export type CreateUnitInput = z.infer<typeof createUnitSchema>;
 
-export const { schemas: unitSchemas, $ref } = buildJsonSchemas({
+const models = {
   createUnitSchema,
   unitResponseSchema,
   unitsResponseSchema,
+};
+
+export const { schemas: unitSchemas, $ref } = buildJsonSchemas(models, {
+  $id: 'unitSchema',
 });

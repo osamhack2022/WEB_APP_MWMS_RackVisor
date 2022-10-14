@@ -64,8 +64,12 @@ export type CreateUserInput = z.infer<typeof createUserSchema>;
 
 export type LoginInput = z.infer<typeof loginSchema>;
 
-export const { schemas: userSchemas, $ref } = buildJsonSchemas({
+const models = {
   createUserSchema,
   createUserResponseSchema,
   loginSchema,
+};
+
+export const { schemas: userSchemas, $ref } = buildJsonSchemas(models, {
+  $id: 'userSchema',
 });
