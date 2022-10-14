@@ -15,6 +15,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { getLSUnitList } from './UnitSelect'
 import { vi } from 'date-fns/locale'
+import SelectBoxModal from '../../utils/modal/SelectBoxModal'
+import CreateList from '../../utils/cabinet/Cabinet'
 
 function MaterialManage() {
   const auth =useAuth();
@@ -24,6 +26,10 @@ function MaterialManage() {
   const [grid, setGrid] = useState([]);
   const [itm, setItm] = useState([]);
   const [visual, setVisual] = useState({});
+  const [cabSelec, setCabSelec] = useState("");
+  const [boxSelec, setBoxSelec] = useState("");
+  const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
+  const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
 
   useEffect(() => {
     if(auth.unitSelected === "") {
@@ -81,9 +87,7 @@ function MaterialManage() {
       }
  
     }
-    console.log("여기다임마 + " + JSON.stringify(lsGridLayout));
-    console.log("여기다임마 + " + JSON.stringify(lsItems));
-    
+
     setGrid(lsGridLayout);
     setItm(lsItems);
 
@@ -95,11 +99,10 @@ function MaterialManage() {
     viCopy[selHouse] = false;
     viCopy[e.currentTarget.value] = true;
     setVisual(viCopy);
-    console.log("왜작동안함");
   }
 
   const testClick = (i) => {
-    alert("여기서" + i);
+    setCabSelec(i);
   }
 
   return (
@@ -112,26 +115,41 @@ function MaterialManage() {
           <div class="grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div>
               <SearchInput/>
-              {/* <Example/>  */}
               <button class="w-50 h-20 mb-2 text-xl font-medium border-2" onClick={() => {console.log("TODO: 물자 추가 모달 구현")}}>물자 추가 +</button>
+              {boxSelec ? 
+              (
+              <>
+                <div>선택된 박스 {boxSelec}</div>
+                <Example defaultList={valList} data={data}/>
+              </>) : 
+              ("")}
             </div>
             <div class="gap-2">
-              <span class="m-2 p-2 font-bold">위치 기반 물자 관리</span> <br /> 
-
-              <select onChange={onSelHouse} value={selHouse}>
-                <option value={"ttt"} key={"ttt"}>
-                  없음
-                </option>
-                {houList.map((hou) => (
-                  <option value={hou.name} key={hou.name}>
-                    {hou.name}
+              {cabSelec ? 
+              (<>
+                <button onClick={() => {
+                  setCabSelec("");
+                  setBoxSelec("")}}>뒤로가기</button>
+                <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec}/>
+               </>
+              ) 
+              : (<>
+                <span class="m-2 p-2 font-bold">위치 기반 물자 관리</span> <br/> 
+                <select onChange={onSelHouse} value={selHouse}>
+                  <option value={""} key={"none"}>
+                    없음
                   </option>
+                  {houList.map((hou) => (
+                    <option value={hou.name} key={hou.name}>
+                      {hou.name}
+                    </option>
+                  ))}
+                </select>
+                {houList.map((hou) => (
+                  visual[hou.name] && <WarehouseGridLayout unitSelected={auth.unitSelected} houseSelected={hou.name} setClick={testClick}/>
                 ))}
-              </select>
-
-              {houList.map((hou) => (
-                visual[hou.name] && <WarehouseGridLayout unitSelected={auth.unitSelected} houseSelected={hou.name} setClick={testClick}/>
-              ))}
+              </>)
+              }
             </div>
           </div>
         </div>

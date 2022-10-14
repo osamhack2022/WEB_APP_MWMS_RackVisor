@@ -22,9 +22,6 @@ function Card({ itemId, selected, onClick, title }) {
     >
       <div>
         <div>{title}</div>
-        <div style={{ backgroundColor: visible ? "transparent" : "gray" }}>
-          visible: {JSON.stringify(visible)}
-        </div>
         <div>selected: {JSON.stringify(!!selected)}</div>
       </div>
       <div

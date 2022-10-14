@@ -7,12 +7,16 @@ import usePrevious from "./usePrevious";
 const elemPrefix = "번 박스";
 const getId = (index) => `${index}${elemPrefix}`;
 
-const exampleItems = ["1번 박스"]
+const exampleItems = [{"id":"1번 박스"}]
 
-function SideScroll(exampleItem) {
+function SideScroll({floor, idx, setFloor, setIdx}) {
   const [items, setItems] = useState(exampleItems);
   const [selected, setSelected] = useState("");
   const handleItemClick = (itemId) => () => setSelected(itemId);
+
+  useEffect(() => {
+    
+  }, []);
 
   const addItem = () => {
     setItems((items) =>
@@ -41,7 +45,7 @@ function SideScroll(exampleItem) {
 
   return (
     <>
-      <div className="example" style={{ paddingTop: "100px" }}>
+      <div className="example">
         <div>
           <ScrollMenu
             LeftArrow={LeftArrow}

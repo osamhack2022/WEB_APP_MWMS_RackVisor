@@ -1,3 +1,4 @@
 {
-  "search.useParentIgnoreFiles": false
+  "search.useParentIgnoreFiles": false,
+  "cmake.sourceDirectory": "${workspaceFolder}/APP(FE)/myapp/linux"
 }

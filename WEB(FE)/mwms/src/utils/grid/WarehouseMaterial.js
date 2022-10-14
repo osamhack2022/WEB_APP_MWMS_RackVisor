@@ -1,7 +1,6 @@
 import React from "react";
 import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout"
-import EditableText from "../text/EditableText"
 import { getLSUnitList } from '../../pages/authorPages/UnitSelect'
 
 const ReactGridLayout = WidthProvider(RGL);
@@ -66,12 +65,9 @@ export default class WarehouseGridLayout extends React.PureComponent {
   createDoorElement(el) {
     const i = el.i;
     const iid = el.iid;
-    const clicking = (e) => {
-      alert("Eee");
-    }
     return (
       <div key={i} data-grid={el} value={i} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}} >
-        <div value={i} className="text-xl align-middle text-center text-slate-100" color="white" onClick={clicking}>{i}</div>
+        <div value={i} className="text-xl align-middle text-center text-slate-100" color="white">{i}</div>
       </div>
     );
   }

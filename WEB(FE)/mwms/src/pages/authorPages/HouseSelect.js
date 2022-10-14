@@ -58,6 +58,7 @@ function HouseSelect() {
       name: newName,
       gridLayout: [],
       items:[],
+      iid: 0
     });
     localStorage.setItem("unitList", JSON.stringify(lsUnitList));
     setHouseList(lsHouseList);

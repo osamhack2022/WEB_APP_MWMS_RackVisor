@@ -19,25 +19,22 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   constructor(props) {
     super(props);
-
     let unitName = this.props.unitSelected;
     let lsGridLayout = [];
     let lsItems = [];
-    let lsUnitList=  getLSUnitList();
+    let lsUnitList = getLSUnitList();
     let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
     let hl;
-    if(lsUnit === undefined)
-    {
+    let iidCnt;
+    if (lsUnit === undefined) {
       hl = []
-    }
-    else
-    {
+    } else {
       hl = lsUnit.houseList;
       let house = hl.find( (e) => (e.name === this.props.houseSelected) );
-      if(house != undefined)
-      {
+      if (house != undefined) {
         lsGridLayout = house.gridLayout;
         lsItems = house.items;
+        iidCnt = house.iidCnt;
       }
     }
 
@@ -46,7 +43,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
       newBoxCounter: 0,
       newDoorCounter: 0,
       newCabinetCounter: 0,
-      iid:0, //unique id for item
+      iid:iidCnt, //unique id for item
       layout: lsGridLayout,
     };
     this.onLayoutChange = this.onLayoutChange.bind(this);
@@ -55,7 +52,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.onAddCabinet = this.onAddCabinet.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
-    
   }
 
   createElement(el)
@@ -130,6 +126,11 @@ export default class WarehouseGridLayout extends React.PureComponent {
     );
   }
 
+  onNewName(iid) {
+    let value = alert("새로운 이름을 입력해주세요");
+    this.onChangeItemName(value, iid);
+  }
+
   createBoxElement(el) {
     const removeStyle = {
       position: "absolute",
@@ -143,7 +144,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const iid = el.iid;
     return (
       <div key={i} data-grid={el} style={{backgroundColor: "#F9C38A", alignItems:"center", justifyContent:"center"}}>
-        <EditableText value={i} iid={iid} handleChange={this.onChangeItemName}></EditableText>
+        <EditableText value={i} iid={iid} handleChange={this.onNewName.bind(this, iid)}></EditableText>
         <span
           className="remove"
           style={removeStyle}
@@ -155,8 +156,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     );
   }
 
-  onChangeItemName(value, iid)
-  {
+  onChangeItemName(value, iid) {
     console.log("[@@@@ onChangeItemName(value:" + value +", iid: " +iid + ") @@@@]");
     let newItems = [...this.state.items];
     let newLayout = [...this.state.layout];
@@ -267,7 +267,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     }
     this.setState({
       layout: layout,
-      items: newItems
+      items: newItems,
     });
     
   }
@@ -320,6 +320,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     console.log("items: " + JSON.stringify(this.state.items));
     house.gridLayout = this.state.layout;
     house.items = this.state.items;
+    house.iidCnt = this.state.iid;
     localStorage.setItem("unitList", JSON.stringify(lsUnitList));
 
     return (
@@ -345,3 +346,42 @@ export default class WarehouseGridLayout extends React.PureComponent {
     );
   }
 }
+
+/*
+[{"name":"테스트테스트",
+  "houseList":[
+    {"name":"테스트-1",
+       "gridLayout": [{"w":4,"h":4,"x":0,"y":7,"i":"캐비넷1","moved":false,"static":false},
+                      {"w":2,"h":1,"x":4,"y":4,"i":"문열어라 문","moved":false,"static":false},
+                      {"w":4,"h":4,"x":16,"y":17,"i":"캐비넷2","moved":false,"static":false},
+                      {"w":2,"h":1,"x":0,"y":0,"i":"문문","moved":false,"static":false}],
+       "items":      [{"type":"cabinet","i":"캐비넷1","x":0,"y":7,"w":4,"h":4,"iid":1},
+                      {"type":"door","i":"문열어라 문","x":4,"y":4,"w":2,"h":1,"iid":2},
+                      {"type":"cabinet","i":"캐비넷2","x":16,"y":17,"w":4,"h":4,"iid":3},
+                      {"type":"door","i":"문문","x":0,"y":0,"w":2,"h":1,"iid":4}],
+       "cabinet" :   [{"iid":2, "content": [[0]]},
+                      {"iid":3, "content": [[0]]}],
+       "iidCnt" : x,
+    },
+    {"name":"테스트-2",
+        "gridLayout":[{"w":2,"h":1,"x":0,"y":0,"i":"door0","moved":false,"static":false},
+                      {"w":4,"h":4,"x":16,"y":10,"i":"Cabinet0","moved":false,"static":false},
+                      {"w":2,"h":1,"x":8,"y":2,"i":"door1","moved":false,"static":false},
+                      {"w":4,"h":4,"x":3,"y":5,"i":"이제 다음으로 할 일","moved":false,"static":false},
+                      {"w":2,"h":1,"x":4,"y":0,"i":"door2","moved":false,"static":false},
+                      {"w":4,"h":4,"x":3,"y":13,"i":"Cabinet2","moved":false,"static":false},
+                      {"w":2,"h":1,"x":0,"y":10,"i":"door3","moved":false,"static":false},
+                      {"w":4,"h":4,"x":11,"y":2,"i":"오류변경이상여부확인","moved":false,"static":false}],
+         "items":    [{"type":"door","i":"door0","x":0,"y":0,"w":2,"h":1,"iid":1},
+                      {"type":"cabinet","i":"Cabinet0","x":16,"y":10,"w":4,"h":4,"iid":2},
+                      {"type":"door","i":"door1","x":8,"y":2,"w":2,"h":1,"iid":3},
+                      {"type":"cabinet","i":"이제 다음으로 할 일","x":3,"y":5,"w":4,"h":4,"iid":4},
+                      {"type":"door","i":"door2","x":4,"y":0,"w":2,"h":1,"iid":5},
+                      {"type":"cabinet","i":"Cabinet2","x":3,"y":13,"w":4,"h":4,"iid":6},
+                      {"type":"door","i":"door3","x":0,"y":10,"w":2,"h":1,"iid":7},
+                      {"type":"cabinet","i":"오류변경이상여부확인","x":11,"y":2,"w":4,"h":4,"iid":8}],
+       "box" :       [{"iid":2, "content": [[0]]},
+                      {"iid":3, "content": [[0]]}],
+    }]
+  }],
+*/
