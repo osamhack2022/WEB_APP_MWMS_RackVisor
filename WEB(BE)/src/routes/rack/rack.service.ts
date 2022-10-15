@@ -25,4 +25,6 @@ export async function findRacks(storedWarehouseId: number) {
       height: true,
     },
   });
+
+  return racks;
 }

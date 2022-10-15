@@ -34,3 +34,5 @@ async function warehouseRoutes(server: FastifyInstance) {
     findWarehousesOnUnit
   );
 }
+
+export default warehouseRoutes;

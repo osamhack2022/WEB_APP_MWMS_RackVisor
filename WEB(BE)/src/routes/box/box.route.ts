@@ -1,35 +1,35 @@
 import { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../../index';
-import { registerRack, findRacksOnWarehouse } from './rack.controller';
-import { $ref } from './rack.schema';
+import { registerBox, findBoxesOnRack } from './box.controller';
+import { $ref } from './box.schema';
 
-async function rackRoutes(server: FastifyInstance) {
+async function boxRoutes(server: FastifyInstance) {
   server.post(
     '/',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
-        body: $ref('createRackSchema'),
+        body: $ref('createBoxSchema'),
         response: {
-          201: $ref('rackResponseSchema'),
+          201: $ref('boxResponseSchema'),
         },
       },
     },
-    registerRack
+    registerBox
   );
 
   server.get(
-    '/:storedWarehouseId',
+    ':/storedRackId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         response: {
-          201: $ref('racksResponseSchema'),
+          201: $ref('boxesResponseSchema'),
         },
       },
     },
-    findRacksOnWarehouse
+    findBoxesOnRack
   );
 }
 
-export default rackRoutes;
+export default boxRoutes;
