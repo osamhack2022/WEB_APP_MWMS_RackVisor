@@ -15,10 +15,7 @@ export default fp(async function (fastify, opts) {
     'authenticateWithJWT',
     async function (request: FastifyRequest, reply: FastifyReply) {
       try {
-        console.log(request.cookies)
-        console.log('JWT Verify start');
         await request.jwtVerify();
-        console.log('JWT Verify end');
       } catch (err: any) {
         switch (err.statusCode) {
           case 401:
