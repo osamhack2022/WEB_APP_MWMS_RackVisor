@@ -1,13 +1,22 @@
 import { PrismaClient } from '@prisma/client';
 import fastify, { FastifyInstance } from 'fastify';
 import jwt from './plugins/jwt';
+import errorHandlers from './plugins/errorHandlers';
 
+// ! [Import] Routes
 import userRoutes from './routes/user/user.route';
 import unitRoutes from './routes/unit/unit.route';
+import warehouseRoutes from './routes/warehouse/warehouse.route';
+import rackRoutes from './routes/rack/rack.route';
+import boxRoutes from './routes/box/box.route';
+import stockRoutes from './routes/stock/stock.route';
+
+// ! [Import] Schemas
 import { userSchemas } from './routes/user/user.schema';
 import { unitSchemas } from './routes/unit/unit.schema';
-import errorHandlers from './plugins/errorHandlers';
-import stockRoutes from './routes/stock/stock.route';
+import { warehouseSchemas } from './routes/warehouse/warehouse.schema';
+import { rackSchemas } from './routes/rack/rack.schema';
+import { boxSchemas } from './routes/box/box.schema';
 import { stockSchemas } from './routes/stock/stock.schema';
 
 const prisma = new PrismaClient();
@@ -29,7 +38,14 @@ export type DecoratedFastifyInstance = FastifyInstance & {
 };
 
 // ! Add schmeas to Fastify
-for (const schema of [...userSchemas, ...unitSchemas, ...stockSchemas]) {
+for (const schema of [
+  ...userSchemas,
+  ...unitSchemas,
+  ...warehouseSchemas,
+  ...rackSchemas,
+  ...boxSchemas,
+  ...stockSchemas,
+]) {
   app.addSchema(schema);
 }
 
@@ -68,6 +84,9 @@ app.register(import('@fastify/swagger'), {
 // ! [Register] Routing
 app.register(userRoutes, { prefix: 'api/users' });
 app.register(unitRoutes, { prefix: 'api/units' });
+app.register(warehouseRoutes, { prefix: 'api/warehouses' });
+app.register(rackRoutes, { prefix: 'api/racks' });
+app.register(boxRoutes, { prefix: 'api/boxes' });
 app.register(stockRoutes, { prefix: 'api/stocks' });
 
 // ! Error Handler
