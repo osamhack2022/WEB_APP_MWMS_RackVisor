@@ -56,6 +56,7 @@ export async function loginHandler(
     });
     return reply
       .setCookie('token', accessToken, {
+        path: '/api',
         secure: true, // send cookie over HTTPS only
         httpOnly: true,
         sameSite: true, // alternative CSRF protection

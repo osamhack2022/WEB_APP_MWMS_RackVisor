@@ -7,6 +7,8 @@ import unitRoutes from './routes/unit/unit.route';
 import { userSchemas } from './routes/user/user.schema';
 import { unitSchemas } from './routes/unit/unit.schema';
 import errorHandlers from './plugins/errorHandlers';
+import stockRoutes from './routes/stock/stock.route';
+import { stockSchemas } from './routes/stock/stock.schema';
 
 const prisma = new PrismaClient();
 const app = fastify();
@@ -27,7 +29,7 @@ export type DecoratedFastifyInstance = FastifyInstance & {
 };
 
 // ! Add schmeas to Fastify
-for (const schema of [...userSchemas, ...unitSchemas]) {
+for (const schema of [...userSchemas, ...unitSchemas, ...stockSchemas]) {
   app.addSchema(schema);
 }
 
@@ -66,6 +68,7 @@ app.register(import('@fastify/swagger'), {
 // ! [Register] Routing
 app.register(userRoutes, { prefix: 'api/users' });
 app.register(unitRoutes, { prefix: 'api/units' });
+app.register(stockRoutes, { prefix: 'api/stocks' });
 
 // ! Error Handler
 app.setErrorHandler(errorHandlers);

@@ -15,6 +15,7 @@ export default fp(async function (fastify, opts) {
     'authenticateWithJWT',
     async function (request: FastifyRequest, reply: FastifyReply) {
       try {
+        console.log(request.cookies)
         console.log('JWT Verify start');
         await request.jwtVerify();
         console.log('JWT Verify end');
@@ -22,6 +23,10 @@ export default fp(async function (fastify, opts) {
         switch (err.statusCode) {
           case 401:
             reply.send('NO_TOKEN');
+            break;
+          default:
+            console.error(err);
+            throw new Error('CRITICAL');
         }
       }
     }
