@@ -31,7 +31,7 @@ function Sidebar() {
                 <span class="flex-1 ml-3 whitespace-nowrap">QR코드 관리</span>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/static" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span class="flex-1 ml-3 whitespace-nowrap">통계</span>
               </Link>
@@ -40,7 +40,7 @@ function Sidebar() {
               <Link to="/cost" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span class="flex-1 ml-3 whitespace-nowrap">청구하기</span>
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span class="flex-1 ml-3 whitespace-nowrap">{'<-'}다시 부대 선택</span>
