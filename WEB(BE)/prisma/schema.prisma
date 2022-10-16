@@ -18,15 +18,15 @@ model User {
   reigment             String
   position             String
   phoneNumber          String
-  UsersOnUnits         UsersOnUnits[]
+  units                UsersOnUnits[]
 }
 
 model Unit {
-  id           Int            @id @default(autoincrement())
-  name         String         @unique
-  comment      String?
-  warehouses   Warehouse[]
-  UsersOnUnits UsersOnUnits[]
+  id         Int            @id @default(autoincrement())
+  name       String         @unique
+  comment    String?
+  warehouses Warehouse[]
+  users      UsersOnUnits[]
 }
 
 model UsersOnUnits {
@@ -42,6 +42,7 @@ model Warehouse {
   id           Int     @id @default(autoincrement())
   name         String
   comment      String?
+  layout       String?
   storedUnit   Unit    @relation(fields: [storedUnitId], references: [id])
   storedUnitId Int
   racks        Rack[]
@@ -50,10 +51,7 @@ model Warehouse {
 model Rack {
   id                Int       @id @default(autoincrement())
   name              String
-  locationX         Int
-  locationY         Int
-  width             Int
-  height            Int
+  layout            String?
   storedWarehouse   Warehouse @relation(fields: [storedWarehouseId], references: [id])
   storedWarehouseId Int
   boxes             Box[]
@@ -62,10 +60,6 @@ model Rack {
 model Box {
   id           Int     @id @default(autoincrement())
   name         String
-  locationX    Int
-  locationY    Int
-  width        Int
-  height       Int
   storedRack   Rack    @relation(fields: [storedRackId], references: [id])
   storedRackId Int
   stocks       Stock[]
