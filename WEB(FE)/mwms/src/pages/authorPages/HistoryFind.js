@@ -19,7 +19,11 @@ function HistoryFind() {
           </div>
         </div>
         <div className="flex-auto">
-          히스토리 로그 하나씩 세부 사항 출력 부분
+          <div>물자 추가 / 제거 / 위치 변경</div>
+          <div>물품명 :  </div>
+          <div>변동 수량 : </div>
+          <div>변동 위치 : </div>
+          <div>담당자 : </div>
         </div>
       </div>
     </div>

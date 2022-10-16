@@ -8,6 +8,7 @@ import QRCode from 'qrcode';
 import ReactToPrint from 'react-to-print';
 import {QrReader} from 'react-qr-reader';
 import SearchInput from '../../utils/search/SearchInput';
+import Example from '../../components/simple_striped';
 
 //함수 내부 주석 -> 바코드 리더 부분을 일단 주석처리
 /*
@@ -108,10 +109,13 @@ function BarcodeManage() {
   const [text, setText] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const printR = useRef(null);
+  const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
+  const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
+  const [ item, setItem ] = useState("");
 
-  const generateQrCode = async () => {
+  const generateQrCode = async (textInput) => {
     try {
-      const response = await QRCode.toDataURL(text);
+      const response = await QRCode.toDataURL(textInput);
       setImageUrl(response);
     }catch (error) {
       console.log(error);
@@ -125,17 +129,27 @@ function BarcodeManage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (item != "") {
+      setText(item['이름']);
+      generateQrCode(item['이름']);
+    }
+  }, [item]);
+
   return (
     <div>
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
+        <div>
         <SearchInput className = "flex-auto" />
+        <Example defaultList={valList} data={data} setSelect={setItem}/>
+        </div>
         <div class ="flex flex-auto border">
           <div class="flex-auto border">
-            <input class="border" onChange={(e) => setText(e.target.value)}/>
+            {/* <input class="border" onChange={(e) => setText(e.target.value)}/>
             <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
-              <br/>
+              <br/> */}
               {imageUrl ? (
               <a href={imageUrl} download>
                   <div  ref={printR} class="display-none"><img src={imageUrl} alt="img"/>eoeo</div>
