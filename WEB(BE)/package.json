@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "ts-node src/index.ts",
     "dev": "ts-node src/index.ts"
   },
   "dependencies": {
