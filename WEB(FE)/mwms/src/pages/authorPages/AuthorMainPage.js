@@ -36,7 +36,7 @@ function AuthorMainPage() {
         <div class = "flex-1">
           <div>간단 검색</div>
           <SearchInput/>
-          <Example defaultList={valList} data={data}/>
+          <Example defaultList={valList} data={data} setSelect={() => {}}/>
         </div>
       </div>
       <Footer/>

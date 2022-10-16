@@ -5,7 +5,14 @@ const people = [
   // More people...
 ]
 
-export default function Example({defaultList, data}) {
+export default function Example({defaultList, data, setSelect}) {
+  const selecting = (e) => {
+    data.map((dt, idx) => {
+      if (idx == e.currentTarget.value) {
+        setSelect(dt);
+      }
+    });
+  }
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -29,15 +36,15 @@ export default function Example({defaultList, data}) {
               </thead>
               <tbody>
                 {data.map((person, personIdx) => (
-                  <tr key={personIdx}>
+                  <tr key={personIdx} className={personIdx}>
                     {defaultList.map((de, deIndex) => (
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{person[de]}</td>
 
                     ))}
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        수정
-                      </a>
+                      <button onClick={selecting} value={personIdx} className="text-indigo-600 hover:text-indigo-900">
+                        선택
+                      </button>
                     </td>
                   </tr>
                 ))}

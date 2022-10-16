@@ -55,6 +55,8 @@ function UnitSelect() {
 
   useEffect(() => {
     auth.unitSelect("");
+    let lsUnitList = getLSUnitList();
+    setUnitList(lsUnitList);
   }, []);
 
   const [open, setOpen] = useState(false);

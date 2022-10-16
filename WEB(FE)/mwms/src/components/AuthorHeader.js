@@ -6,6 +6,7 @@ import DropDown from '../utils/DropDown';
 import AlarmModal from '../utils/modal/AlarmModal';
 import SettingModal from '../utils/modal/SettingModal';
 import UserDropDown from '../utils/UserDropDown';
+import { Link } from 'react-router-dom';
 
 function AuthorHeader() {
   const [alarm, setAlarm] = useState(false);
@@ -34,7 +35,7 @@ function AuthorHeader() {
               <AlarmDropDown/>
               <span>{position}</span>
               <UserDropDown milClass={classes} name={name}/>
-              <Link to="/cose"}>환경설정</Link>
+              <Link to="/cost">환경설정</Link>
             </ul>
           </div>
         </div>
