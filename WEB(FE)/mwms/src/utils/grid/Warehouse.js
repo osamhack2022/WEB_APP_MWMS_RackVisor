@@ -269,7 +269,9 @@ export default class WarehouseGridLayout extends React.PureComponent {
       layout: layout,
       items: newItems,
     });
-    
+
+    // TODO: Send to server
+    console.log(layout)
   }
 
   onRemoveBox(i) {
@@ -315,13 +317,15 @@ export default class WarehouseGridLayout extends React.PureComponent {
       return (<div></div>);
     }
     
-    console.log("house: " + JSON.stringify(house));
-    console.log("layout: " + JSON.stringify(this.state.layout));
-    console.log("items: " + JSON.stringify(this.state.items));
+    // Removed due to performance issue
+    // console.log("house: " + JSON.stringify(house));
+    // console.log("layout: " + JSON.stringify(this.state.layout));
+    // console.log("items: " + JSON.stringify(this.state.items));
     house.gridLayout = this.state.layout;
     house.items = this.state.items;
     house.iidCnt = this.state.iid;
-    localStorage.setItem("unitList", JSON.stringify(lsUnitList));
+
+    // localStorage.setItem("unitList", JSON.stringify(lsUnitList));
 
     return (
       <div style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
