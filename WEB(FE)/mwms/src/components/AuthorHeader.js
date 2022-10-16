@@ -34,8 +34,7 @@ function AuthorHeader() {
               <AlarmDropDown/>
               <span>{position}</span>
               <UserDropDown milClass={classes} name={name}/>
-              <span onClick={() => setSetting(true)}>환경설정</span>
-              {setting ? <SettingModal onClose={() => setSetting(false)}/> : ""}
+              <Link to="/cose"}>환경설정</Link>
             </ul>
           </div>
         </div>

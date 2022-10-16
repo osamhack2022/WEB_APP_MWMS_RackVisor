@@ -15,8 +15,7 @@ function CostPage() {
       <div className="flex">
         <Sidebar/>
         <div>
-          <button onClick={handleTest}>열기</button>
-          {forTest && <SelectBox class ="overflow-auto" onClose={() => setTest(false)}/>}
+          환경설정
         </div>
       </div>
       <Footer/>
