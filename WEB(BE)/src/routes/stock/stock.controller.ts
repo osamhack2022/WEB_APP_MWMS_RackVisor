@@ -13,7 +13,6 @@ export async function registerStock(
 
   try {
     const stock = await createStock(body);
-
     return reply.code(201).send(stock);
   } catch (e) {
     console.error(e);
