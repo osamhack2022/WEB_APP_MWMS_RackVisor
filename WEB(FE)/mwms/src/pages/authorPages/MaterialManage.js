@@ -1,15 +1,11 @@
-import EditableText from '../../utils/text/EditableText'
 import React, { useContext, useEffect, useState } from 'react'
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import ExampleModal from '../../utils/modal/ExampleModal'
 import AuthorHeader from '../../components/AuthorHeader'
 import { AuthorContext } from '../../routes/Author'
 import {Link, useNavigate} from 'react-router-dom'
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
 import SearchInput from '../../utils/search/SearchInput'
-import Example from '../../components/simple_striped'
 import WarehouseGridLayout from '../../utils/grid/WarehouseMaterial'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
@@ -18,6 +14,7 @@ import { vi } from 'date-fns/locale'
 import SelectBoxModal from '../../utils/modal/SelectBoxModal'
 import CreateList from '../../utils/cabinet/Cabinet'
 import ExcelModal from '../../utils/modal/ExcelModal'
+import ManageList from '../../components/ManageList'
 
 function MaterialManage() {
   const auth =useAuth();
@@ -32,6 +29,7 @@ function MaterialManage() {
   const [open, setOpen] = useState(false);
   const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
   const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
+  const [material, setMaterial] = useState({});
 
   useEffect(() => {
     if(localStorage.getItem("부대") === "") {
@@ -124,7 +122,8 @@ function MaterialManage() {
               (
               <>
                 <div>선택된 박스 {boxSelec}</div>
-                <Example defaultList={valList} data={data}/>
+                <ManageList defaultList={valList} data={data} setSelect={setMaterial}/>
+                <div>선택된 물품 {JSON.stringify(material)}</div>
               </>) : 
               ("")}
             </div>

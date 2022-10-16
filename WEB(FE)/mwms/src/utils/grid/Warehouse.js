@@ -324,7 +324,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     localStorage.setItem("unitList", JSON.stringify(lsUnitList));
 
     return (
-      <div style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
+      <div className="w-[100rem]"style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
         <div>
           {/* <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-2xl bg-[#F9C38A]" onClick={this.onAddBox}>박스 추가 + </button> */}
           <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-red-900" onClick={this.onAddDoor}>문 추가 + </button>

@@ -1,46 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import { ScrollMenu } from "react-horizontal-scrolling-menu";
-import Card from "../sidescroll/Card";
-import { LeftArrow, RightArrow } from "../sidescroll/Arrow";
-import usePrevious from "../sidescroll/usePrevious";
-
-const elemPrefix = "번 박스";
-const getId = (index) => `${index}${elemPrefix}`;
-
-const exampleItems = [{"id":"1번 박스"}]
+import React, { useState, useEffect } from "react";
 
 const CreateList = ({boxSelec, setBoxSelec}) => {
-  const [countList, setCountList] = useState([1])
-
-  const onAddDetailDiv = () => {
-    let countArr = [...countList]
-    let counter = countArr[0]
-    countArr.reverse()
-    counter += 1
-    countArr.push(counter)	// index 사용 X
-    countArr.reverse();
-    // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-    setCountList(countArr)
-    console.log(countArr)
-  }
-
-  const [items, setItems] = useState(exampleItems);
-
-  const addItem = () => {
-    setItems((items) =>
-      items.concat({ id: getId(String(Math.random()).slice(2, 5)) })
-    );
-    console.log(items);
-  };
-  
-  const removeItem = () => {
-    setItems((items) => {
-      const newItems = [...items];
-      newItems.splice(-1, 1);
-      return newItems;
-    });
-  };
-
+  const [rend, setRend] = useState(true);
   const handleBoxSelec = (e) => {
     setBoxSelec(e.currentTarget.getAttribute('value'));
   }
@@ -54,32 +15,41 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
     let newFloor = {};
     let newFloorList = floorList;
     newFloorList.floorList.reverse();
-    newFloor.floor = newFloorList.totCnt;
+    newFloor.floor = newFloorList.totCnt + 1;
     newFloor.list = [{id : 1, iid: 1}];
     newFloor.iid = 1;
     newFloorList.totCnt += 1;
     newFloorList.floorList.push(newFloor);
     newFloorList.floorList.reverse();
     setFloorList(newFloorList);
+    setRend(Math.random());
+
   }
 
-  // const addItem = (e) => {
-  //   let currFloor = e.currentTarget.getAttribute('value');
-  //   let upDateFloor = floorList.floorList.filter(floor => floor.floor == currFloor).iid;
+  const addItem = (e) => {
+    let currFloor = e.currentTarget.getAttribute('value');
+    console.log("floor : " + currFloor);
+    let copyFloorList = floorList;
+    let newId = copyFloorList.floorList.find(floor => floor.floor == currFloor).iid + 1;
+    let floorIdx = copyFloorList.floorList.findIndex(floor => floor.floor == currFloor);
+    let newBox = {id : newId, iid : newId};
 
-
-  // }
-
-  // const removeItem = (e) => {
-  //   e.currentTarget.getAttribute('value')
-  // }
+    console.log(JSON.stringify(newBox));
+    
+    copyFloorList.floorList[floorIdx].list.push(newBox);
+    copyFloorList.floorList[floorIdx].iid += 1;
+    
+    console.log(JSON.stringify(copyFloorList));
+    setFloorList(copyFloorList);
+    setRend(Math.random());
+  }
 
   return (
     <div>
       <button className="border" onClick={floorAdd}>
         층 추가
       </button>
-
+      <div className="hidden">{rend}</div>
       {floorList.floorList.map((floor) => (
         <div class="min-w-max min-h-max">
           <div>{floor.floor} 층</div>
@@ -89,8 +59,7 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
                 {item.id}
               </div>
             ))}
-            <div value={floor.floor} onClick={addItem}>추가하기</div>
-            <div value={floor.floor} onClick={removeItem}>제거하기</div>
+            <button value={floor.floor} onClick={addItem}>추가하기</button>
           </div>
         </div>
       ))}
