@@ -3,11 +3,6 @@ import { buildJsonSchemas } from 'fastify-zod';
 
 const rackCore = {
   name: z.string(),
-  locationX: z.number(),
-  locationY: z.number(),
-  width: z.number(),
-  height: z.number(),
-  storedWarehouseId: z.number(),
 };
 
 const createRackSchema = z.object({
@@ -17,14 +12,22 @@ const createRackSchema = z.object({
 const rackResponseSchema = z.object({
   id: z.number(),
   ...rackCore,
+  storedWarehouseId: z.number(),
+});
+
+const updateRackLayoutSchema = z.object({
+  layout: z.string(),
 });
 
 const racksResponseSchema = z.array(rackResponseSchema);
 
 export type CreateRackInput = z.infer<typeof createRackSchema>;
 
+export type UpdateRackLayoutInput = z.infer<typeof updateRackLayoutSchema>;
+
 const models = {
   createRackSchema,
+  updateRackLayoutSchema,
   rackResponseSchema,
   racksResponseSchema,
 };
