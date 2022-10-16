@@ -47,39 +47,54 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
 
   const defaultFloorList = 
         {totCnt: 1, 
-         floorList: [{floor : 1, list : [{id : 1, iid: 1}]}]}
+         floorList: [{floor : 1, list : [{id : 1, iid: 1}], iid : 1}]}
   const [floorList, setFloorList] = useState( defaultFloorList );
 
   const floorAdd = () => {
-
+    let newFloor = {};
+    let newFloorList = floorList;
+    newFloorList.floorList.reverse();
+    newFloor.floor = newFloorList.totCnt;
+    newFloor.list = [{id : 1, iid: 1}];
+    newFloor.iid = 1;
+    newFloorList.totCnt += 1;
+    newFloorList.floorList.push(newFloor);
+    newFloorList.floorList.reverse();
+    setFloorList(newFloorList);
   }
+
+  // const addItem = (e) => {
+  //   let currFloor = e.currentTarget.getAttribute('value');
+  //   let upDateFloor = floorList.floorList.filter(floor => floor.floor == currFloor).iid;
+
+
+  // }
+
+  // const removeItem = (e) => {
+  //   e.currentTarget.getAttribute('value')
+  // }
 
   return (
     <div>
-      <button onClick={onAddDetailDiv}>
-        추가
+      <button className="border" onClick={floorAdd}>
+        층 추가
       </button>
-      {countList.map((cnt) => (
+
+      {floorList.floorList.map((floor) => (
         <div class="min-w-max min-h-max">
-          <div>{cnt}층</div>
+          <div>{floor.floor} 층</div>
           <div class="flex border">
-            {items.map((item) => (
+            {floor.list.map((item) => (
               <div value={item.id} class="w-24 h-12 border" onClick={handleBoxSelec}>
                 {item.id}
               </div>
             ))}
-            <div onClick={addItem}>추가하기</div>
-            <div onClick={removeItem}>제거하기</div>
+            <div value={floor.floor} onClick={addItem}>추가하기</div>
+            <div value={floor.floor} onClick={removeItem}>제거하기</div>
           </div>
         </div>
       ))}
 
-
-      {items.map((item, idx) => (
-        <div>
-          
-        </div>
-      ))}
     </div>
   )
 }
