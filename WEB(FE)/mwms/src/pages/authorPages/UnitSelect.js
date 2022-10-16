@@ -78,7 +78,6 @@ function UnitSelect() {
               <h5 class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 부대 추가</h5>
           </div>
         </div>
-
         <Footer/>
       </body>
     </div>
