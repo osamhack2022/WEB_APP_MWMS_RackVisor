@@ -1,51 +1,39 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+const sidebarButtonList = [
+  {link : "/main", name : "메인", index: 0,},
+  {link : "/materialManage", name : "물자 관리", index:1,},
+  {link : "/houseSelect", name : "창고 관리", index:2,},
+  {link : "/history", name : "히스토리", index:3,},
+  {link : "/barcode", name : "QR코드 관리", index:4,},
+  {link : "/static", name : "통계", index:5,},
+  {link : "/", name : "< 부대 선택", index:5,},
+]
+
 function Sidebar() {
+
+
   return (
     <aside class="w-48" aria-label="Sidebar">
-      <div class="overflow-y-auto h-full py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+      <div class="overflow-y-auto h-full py-4 px-3 bg-primary-900">
           <ul class="space-y-2">
-            <li>
-              <Link to="/main" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                <span class="ml-3">메인</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/materialManage" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                <span class="flex-1 ml-3 whitespace-nowrap">물자 관리</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/houseSelect" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                <span class="flex-1 ml-3 whitespace-nowrap">창고 관리</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/history" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                <span class="flex-1 ml-3 whitespace-nowrap">히스토리</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/barcode" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                <span class="flex-1 ml-3 whitespace-nowrap">QR코드 관리</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/static" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                <span class="flex-1 ml-3 whitespace-nowrap">통계</span>
-              </Link>
-            </li>
+            {
+              sidebarButtonList.map(button => (
+                <li>
+                  <Link to={button.link} class="flex items-center p-2 text-base font-normal font-poppins text-white rounded-lg hover:bg-gradient-to-r from-cyan-400 to-blue-800 ">
+                    <span class="ml-3">{button.name}</span>
+                  </Link>
+                </li>
+              ))
+            }
+            
             {/* <li>
               <Link to="/cost" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span class="flex-1 ml-3 whitespace-nowrap">환경설정</span>
               </Link>
             </li> */}
-            <li>
-              <Link to="/" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                <span class="flex-1 ml-3 whitespace-nowrap">{'<-'}다시 부대 선택</span>
-              </Link>
-            </li>
+
           </ul>
       </div>
     </aside>

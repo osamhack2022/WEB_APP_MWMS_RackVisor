@@ -17,7 +17,7 @@ function Header() {
 
   return (
     <div>
-      <nav class="w-full flex py-6 justify-between items-center navbar">
+      <nav class="bg-primary-900 w-full flex py-6 justify-between items-center navbar">
         
         <a href="./" class="flex items-center">
           <img src= {logoImg} class="w-[124px] h-[48px]" alt="logo image" />
@@ -53,10 +53,6 @@ function Header() {
           </div>
         </div>
 
-
-
-        
-        
       </nav>
     </div>
   )

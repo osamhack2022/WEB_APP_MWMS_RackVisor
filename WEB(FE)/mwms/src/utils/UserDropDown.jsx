@@ -11,7 +11,7 @@ export default function UserDropDown({milClass, name}) {
   return (
     <Menu as="div" className="text-slate-900 z-50">
       <div>
-        <Menu.Button className=" font-bold inline-flex justify-center rounded-md shadow-sm text-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 text-slate-900">
+        <Menu.Button className=" font-bold inline-flex justify-cent0er rounded-md text-sm text-white hover:text-blue-300 mr-10">
           {milClass} {name}
         </Menu.Button>
       </div>

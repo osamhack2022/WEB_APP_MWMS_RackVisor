@@ -23,7 +23,7 @@ function AuthorMainPage() {
   }, []);
 
   return (
-    <div>
+    <div class="overflow-hidden">
       <AuthorHeader/>
       <div class="flex">  
         <Sidebar/>

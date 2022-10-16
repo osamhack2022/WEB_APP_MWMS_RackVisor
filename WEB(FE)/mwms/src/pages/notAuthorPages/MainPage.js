@@ -24,7 +24,7 @@ function MainPage() {
 
       <div class={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div class={`${styles.boxWidth}`}>
-          
+          <Footer />
         </div>
       </div>
 
