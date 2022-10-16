@@ -34,12 +34,12 @@ function MaterialManage() {
   const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
 
   useEffect(() => {
-    if(auth.unitSelected === "") {
+    if(localStorage.getItem("부대") === "") {
       alert("부대를 선택해주세요");
       navigate("/");
     }
     // TODO: 서버로부터 unit(부대) 불러와야함...
-    let unitName = auth.unitSelected;
+    let unitName = localStorage.getItem("부대");
     let lsUnitList=  getLSUnitList();
     let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
     let hl;
@@ -61,7 +61,7 @@ function MaterialManage() {
   }, []);
 
   useEffect(() => {
-    let unitName = auth.unitSelected;
+    let unitName = localStorage.getItem("부대");
     let lsGridLayout = [];
     let lsItems = [];
     let lsUnitList=  getLSUnitList();
@@ -150,7 +150,7 @@ function MaterialManage() {
                   ))}
                 </select>
                 {houList.map((hou) => (
-                  visual[hou.name] && <WarehouseGridLayout unitSelected={auth.unitSelected} houseSelected={hou.name} setClick={testClick}/>
+                  visual[hou.name] && <WarehouseGridLayout unitSelected={localStorage.getItem("부대")} houseSelected={hou.name} setClick={testClick}/>
                 ))}
               </>)
               }

@@ -9,6 +9,7 @@ function LogoutPage() {
     localStorage.setItem("이름", "");
     localStorage.setItem("직책", "");
     localStorage.setItem("계급", "");
+    localStorage.setItem("부대", "");
     window.location.replace("/");
   }, [])
 

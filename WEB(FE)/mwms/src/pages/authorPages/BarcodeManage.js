@@ -123,7 +123,7 @@ function BarcodeManage() {
   }
 
   useEffect(() => {
-    if (auth.unitSelected === "") {
+    if (localStorage.getItem("부대") === "") {
       alert("부대를 다시 선택해주세요");
       navigate("/");
     }
