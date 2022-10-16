@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import DetailSearch from './DetailSearch';
 
-//style={{position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate(0px, 10px)"}}
 function SearchInput({search, setSearch}) {
-  //https://velog.io/@hoje15v/React-%EB%8B%A4%EC%A4%91%ED%95%84%ED%84%B0-%EB%A1%9C%EC%A7%81-%EC%A7%9C%EB%8A%94-%EB%B2%95-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-with-query-string -> 여기
-  //
-  const [dropDown, setDropDown] = useState(false);
   const [name, setName] = useState();
   const [detail, setDetail] = useState(false);
 

@@ -25,7 +25,6 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
   }
 
   const [items, setItems] = useState(exampleItems);
-  const [selected, setSelected] = useState("");
 
   const addItem = () => {
     setItems((items) =>
@@ -46,6 +45,15 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
     setBoxSelec(e.currentTarget.getAttribute('value'));
   }
 
+  const defaultFloorList = 
+        {totCnt: 1, 
+         floorList: [{floor : 1, list : [{id : 1, iid: 1}]}]}
+  const [floorList, setFloorList] = useState( defaultFloorList );
+
+  const floorAdd = () => {
+
+  }
+
   return (
     <div>
       <button onClick={onAddDetailDiv}>
@@ -54,15 +62,22 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
       {countList.map((cnt) => (
         <div class="min-w-max min-h-max">
           <div>{cnt}층</div>
-          <div class="flex">
+          <div class="flex border">
             {items.map((item) => (
-              <div value={item.id} class="w-24 h-12" onClick={handleBoxSelec}>
+              <div value={item.id} class="w-24 h-12 border" onClick={handleBoxSelec}>
                 {item.id}
               </div>
             ))}
             <div onClick={addItem}>추가하기</div>
             <div onClick={removeItem}>제거하기</div>
           </div>
+        </div>
+      ))}
+
+
+      {items.map((item, idx) => (
+        <div>
+          
         </div>
       ))}
     </div>

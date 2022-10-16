@@ -34,6 +34,7 @@ function UnitSelect() {
 
   const onSelectUnit = (e) => {
     auth.unitSelect(e.target.id);
+    localStorage.setItem("부대", e.target.id);
     e.stopPropagation();
     navigate("/main");
   }
@@ -51,15 +52,15 @@ function UnitSelect() {
     });
     localStorage.setItem("unitList", JSON.stringify(lsUnitList));
     setUnitList(lsUnitList);
+
   }
 
   useEffect(() => {
     auth.unitSelect("");
     let lsUnitList = getLSUnitList();
     setUnitList(lsUnitList);
+    localStorage.setItem("부대", "");
   }, []);
-
-  const [open, setOpen] = useState(false);
 
   return (
     <div>

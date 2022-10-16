@@ -15,7 +15,7 @@ function HouseSelect() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(auth.unitSelected === "") {
+    if(localStorage.getItem("부대") === "") {
       alert("부대를 선택해주세요");
       navigate("/");
     }
@@ -23,7 +23,7 @@ function HouseSelect() {
 
 
   // TODO: 서버로부터 unit(부대) 불러와야함...
-  let unitName = auth.unitSelected;
+  let unitName = localStorage.getItem("부대");
   let lsUnitList=  getLSUnitList();
   let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
   let hl;
