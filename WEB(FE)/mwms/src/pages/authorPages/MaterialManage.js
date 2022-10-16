@@ -15,6 +15,8 @@ import SelectBoxModal from '../../utils/modal/SelectBoxModal'
 import CreateList from '../../utils/cabinet/Cabinet'
 import ExcelModal from '../../utils/modal/ExcelModal'
 import ManageList from '../../components/ManageList'
+import MaterialManageModal from '../../utils/modal/MaterialManageModal'
+import MaterialChangeModal from '../../utils/modal/MaterialChangeModal'
 
 function MaterialManage() {
   const auth =useAuth();
@@ -30,6 +32,7 @@ function MaterialManage() {
   const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
   const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
   const [material, setMaterial] = useState({});
+  const [openPlus, setOpenPlus] = useState(false);
 
   useEffect(() => {
     if(localStorage.getItem("부대") === "") {
@@ -105,6 +108,12 @@ function MaterialManage() {
     setCabSelec(i);
   }
 
+  const openMaterialChange = (i) => {
+    if (i == false) {
+      setMaterial();
+    }
+  }
+
   return (
     <div>
       <AuthorHeader/>
@@ -117,13 +126,14 @@ function MaterialManage() {
               <SearchInput/>
               <button onClick={() => setOpen(true)}>excel로 업로드</button>
               <ExcelModal open={open} setOpen={setOpen}/>
-              <button class="w-50 h-20 mb-2 text-xl font-medium border-2" onClick={() => {console.log("TODO: 물자 추가 모달 구현")}}>물자 추가 +</button>
+              <button class="w-50 h-20 mb-2 text-xl font-medium border-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
+              <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
               {boxSelec ? 
               (
               <>
                 <div>선택된 박스 {boxSelec}</div>
                 <ManageList defaultList={valList} data={data} setSelect={setMaterial}/>
-                <div>선택된 물품 {JSON.stringify(material)}</div>
+                <MaterialChangeModal open={material} setOpen={openMaterialChange} materialInfo={material}/>
               </>) : 
               ("")}
             </div>

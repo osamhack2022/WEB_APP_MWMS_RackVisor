@@ -213,13 +213,14 @@ function BarcodeManage() {
               </div>
               {imageUrl ? (
               <>
-              <a href={imageUrl} download>
+              <div>
                 <img src={imageUrl} alt="img" style={{width:"100px", height:"100px"}} className="border"/>
                 {showName && <div className="flex">휴지</div>}
                 {showDue && <div className="flex">2022-10-27</div>}
                 {showManager && <div className="flex">홍길동</div>}
                 {showLocation && <div className="flex">2종창고 - A 캐비넷</div>}
-              </a>
+              </div>
+              <a href={imageUrl} download>QR 코드 다운로드</a>
               <div className="hidden">  
                 <div ref={printR} className= {cname}>
                   {printArr.map(() => (

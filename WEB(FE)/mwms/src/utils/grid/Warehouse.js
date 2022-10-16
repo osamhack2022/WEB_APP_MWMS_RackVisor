@@ -50,6 +50,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     // this.onAddBox = this.onAddBox.bind(this);
     this.onAddDoor = this.onAddDoor.bind(this);
     this.onAddCabinet = this.onAddCabinet.bind(this);
+    this.onLocalSave = this.onLocalSave.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
   }
@@ -200,6 +201,34 @@ export default class WarehouseGridLayout extends React.PureComponent {
     });
   }
 
+  onLocalSave() {
+    console.log("[@@@@ render() @@@@]");
+
+    // TODO: 서버로부터 unit(부대) 불러와야함...
+    let unitName = this.props.unitSelected;
+    console.log("unitName: " + unitName);
+    let lsUnitList=  getLSUnitList();
+    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
+    let hl;
+    if(lsUnit === undefined)
+    {
+      hl = []
+    }
+    else
+    {
+      hl = lsUnit.houseList;
+    }
+    let house = hl.find( (e) => (e.name === this.props.houseSelected) );
+
+    console.log("house: " + JSON.stringify(house));
+    console.log("layout: " + JSON.stringify(this.state.layout));
+    console.log("items: " + JSON.stringify(this.state.items));
+    house.gridLayout = this.state.layout;
+    house.items = this.state.items;
+    house.iidCnt = this.state.iid;
+    localStorage.setItem("unitList", JSON.stringify(lsUnitList));
+  }
+
   onAddCabinet() {
     console.log("adding", "cabinet" + this.state.newCabinetCounter);
     this.setState({
@@ -321,7 +350,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
     house.gridLayout = this.state.layout;
     house.items = this.state.items;
     house.iidCnt = this.state.iid;
-    localStorage.setItem("unitList", JSON.stringify(lsUnitList));
 
     return (
       <div className="w-[100rem]"style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
@@ -329,6 +357,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
           {/* <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-2xl bg-[#F9C38A]" onClick={this.onAddBox}>박스 추가 + </button> */}
           <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-red-900" onClick={this.onAddDoor}>문 추가 + </button>
           <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-blue-900" onClick={this.onAddCabinet}>캐비넷 추가 + </button>
+          <button class="m-6 p-3 border-4 border-slate-500 rounded-md text-white text-2xl bg-green-900" onClick={this.onLocalSave}>저장 </button>
         </div>
         <ReactGridLayout 
           {...this.props}
