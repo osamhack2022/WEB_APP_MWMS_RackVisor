@@ -112,7 +112,16 @@ function BarcodeManage() {
   const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
   const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
   const [ item, setItem ] = useState("");
-
+  const [size, setSize] = useState(0);
+  const [count, setCount] = useState(0);
+  const [convert, setConvert] = useState("");
+  const [printArr, setPrintArr] = useState([]);
+  const [cname, setCName] = useState("");
+  const [showName, setShowName] = useState(false);
+  const [showDue, setShowDue] = useState(false);
+  const [showManager, setShowManager] = useState(false);
+  const [showLocation, setShowLocation] = useState(false);
+  
   const generateQrCode = async (textInput) => {
     try {
       const response = await QRCode.toDataURL(textInput);
@@ -136,6 +145,34 @@ function BarcodeManage() {
     }
   }, [item]);
 
+   const handleSize = (e) => {
+    setSize(e.target.value);
+    setConvert((e.target.value * 10).toString() + "mm");
+
+    let gridCnt = parseInt(20 / (e.target.value));
+    if (gridCnt > 5) {
+      setCName("grid grid-cols-5");
+    } else if (gridCnt == 3) {
+      if ((20 / (e.target.value)) > 3.5) {
+        setCName("grid grid-cols-4");
+      } else {
+        setCName("grid grid-cols-2");
+      }
+    } else if (gridCnt > 0) {
+      setCName("grid grid-cols-" + gridCnt.toString());
+    }
+  }
+
+  const handleCount = (e) => {
+    setCount(e.target.value);
+    let i;
+    let inputArr = [];
+    for (i = 0; i < e.target.value; i++) {
+      inputArr.push("1");
+    }
+    setPrintArr(inputArr);
+  } 
+  
   return (
     <div>
       <AuthorHeader/>
@@ -147,6 +184,30 @@ function BarcodeManage() {
         </div>
         <div class ="flex flex-auto border">
           <div class="flex-auto border">
+          <div className="flex">
+                <div>사이즈 입력 {'(cm 단위)'} : </div>
+                <input type="number" value={size} onChange={handleSize} className="border"/>
+              </div>
+              <div className="flex">
+                <div>개수 입력 : </div>
+                <input type="number" value={count} onChange={handleCount} className="border"/>
+              </div>
+              <div className="flex">
+                <input type="checkbox" value={showName} onChange={() => setShowName(!showName)} className="border"/>
+                <div>이름 출력</div>
+              </div>
+              <div className="flex">
+                <input type="checkbox" value={showDue} onChange={() => setShowDue(!showDue)} className="border"/>
+                <div>유통기한 출력</div>
+              </div>
+              <div className="flex">
+                <input type="checkbox" value={showManager} onChange={() => setShowManager(!showManager)} className="border"/>
+                <div>담당자 출력</div>
+              </div>
+              <div className="flex">
+                <input type="checkbox" value={showLocation} onChange={() => setShowLocation(!showLocation)} className="border"/>
+                <div>위치 출력</div>
+              </div>
             {/* <input class="border" onChange={(e) => setText(e.target.value)}/>
             <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
               <br/> */}
