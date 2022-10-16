@@ -21,10 +21,6 @@ export async function findBoxes(storedRackId: number) {
         select: {
           name: true,
           id: true,
-          locationX: true,
-          locationY: true,
-          width: true,
-          height: true,
         },
       },
     },

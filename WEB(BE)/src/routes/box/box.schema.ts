@@ -3,11 +3,6 @@ import { buildJsonSchemas } from 'fastify-zod';
 
 const boxCore = {
   name: z.string(),
-  locationX: z.number(),
-  locationY: z.number(),
-  width: z.number(),
-  height: z.number(),
-  storedRackId: z.number(),
 };
 
 const createBoxSchema = z.object({
