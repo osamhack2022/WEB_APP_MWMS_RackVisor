@@ -11,7 +11,7 @@ export default function AlarmDropDown() {
   return (
     <Menu as="div" className="text-slate-900 z-50">
       <div>
-        <Menu.Button className="font-bold inline-flex justify-center rounded-md text-sm text-white hover:text-blue-300">
+        <Menu.Button className="font-bold inline-flex justify-center rounded-md text-sm text-white hover:text-blue-300 xs:mr-10 ss:mr-0 sm:mr-10 md:mr-0">
           알람
         </Menu.Button>
       </div>
