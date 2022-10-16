@@ -6,7 +6,7 @@ import GetStarted from "./GetStarted"
 function Hero() 
 {
     return (
-        <section id="home" class={`flex md:flex-row flex-col h-[85vh] ${styles.paddingY}`}>
+        <section id="home" class={`flex md:flex-row flex-col ${styles.paddingY}`}>
         <div class={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
           <div class="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
             

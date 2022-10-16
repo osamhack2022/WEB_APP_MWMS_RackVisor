@@ -9,14 +9,14 @@ function MainPage() {
     <div class="bg-primary-900 w-full overflow-hidden">
 
 
-      <div class={`${styles.paddingX} ${styles.flexCenter}`}>
+      <div class={`bg-primary-900 ${styles.flexCenter}`}>
         <div class={`${styles.boxWidth}`}>
           <Header/>
         </div>
       </div>
 
 
-      <div class={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+      <div class={`bg-primary-900 ${styles.paddingX} ${styles.flexStart}`}>
         <div class={`${styles.boxWidth}`}>
           <Hero/>
           <Footer />
