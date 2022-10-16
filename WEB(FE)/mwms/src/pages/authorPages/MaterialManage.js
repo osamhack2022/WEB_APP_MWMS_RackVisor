@@ -17,6 +17,7 @@ import { getLSUnitList } from './UnitSelect'
 import { vi } from 'date-fns/locale'
 import SelectBoxModal from '../../utils/modal/SelectBoxModal'
 import CreateList from '../../utils/cabinet/Cabinet'
+import ExcelModal from '../../utils/modal/ExcelModal'
 
 function MaterialManage() {
   const auth =useAuth();
@@ -28,6 +29,7 @@ function MaterialManage() {
   const [visual, setVisual] = useState({});
   const [cabSelec, setCabSelec] = useState("");
   const [boxSelec, setBoxSelec] = useState("");
+  const [open, setOpen] = useState(false);
   const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
   const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
 
@@ -115,6 +117,8 @@ function MaterialManage() {
           <div class="grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div>
               <SearchInput/>
+              <button onClick={() => setOpen(true)}>excel로 업로드</button>
+              <ExcelModal open={open} setOpen={setOpen}/>
               <button class="w-50 h-20 mb-2 text-xl font-medium border-2" onClick={() => {console.log("TODO: 물자 추가 모달 구현")}}>물자 추가 +</button>
               {boxSelec ? 
               (

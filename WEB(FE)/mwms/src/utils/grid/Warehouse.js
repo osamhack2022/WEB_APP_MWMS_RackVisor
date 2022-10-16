@@ -34,7 +34,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
       if (house != undefined) {
         lsGridLayout = house.gridLayout;
         lsItems = house.items;
-        iidCnt = house.iidCnt;
+        iidCnt = house.iid;
       }
     }
 

@@ -1,8 +1,15 @@
 import React from 'react'
+import AuthorHeader from '../../components/AuthorHeader'
+import Footer from '../../components/Footer'
+import Sidebar from '../../components/Sidebar'
 
 function StaticsPage() {
   return (
-    <div>StaticsPage</div>
+    <>
+    <AuthorHeader/>
+    <Sidebar/>
+    <Footer/>
+    </>
   )
 }
 

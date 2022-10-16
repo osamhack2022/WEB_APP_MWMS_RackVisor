@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import logoImg from '../images/logo.png'
 import { useAuth } from '../routes/AuthContext';
+import AlarmDropDown from '../utils/AlarmDropDown';
+import DropDown from '../utils/DropDown';
 import AlarmModal from '../utils/modal/AlarmModal';
 import SettingModal from '../utils/modal/SettingModal';
 import UserDropDown from '../utils/UserDropDown';
@@ -29,11 +31,10 @@ function AuthorHeader() {
           </button>
           <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
             <ul class="flex flex-col mt-4 bg-gray-50 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-bold md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-              <button onClick={() => setAlarm(true)}>알람</button>
+              <AlarmDropDown/>
               <span>{position}</span>
               <UserDropDown milClass={classes} name={name}/>
               <span onClick={() => setSetting(true)}>환경설정</span>
-              {alarm ? <AlarmModal onClose={() => setAlarm(false)}/> : ""}
               {setting ? <SettingModal onClose={() => setSetting(false)}/> : ""}
             </ul>
           </div>

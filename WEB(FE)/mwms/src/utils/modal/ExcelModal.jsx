@@ -6,6 +6,7 @@ import FileSaver, { saveAs } from 'file-saver'
 import ExcelExampleFile from './ExcelExampleFile'
 import readXlsxFile from 'read-excel-file'
 import Example from '../../components/simple_striped'
+import { useEffect } from 'react'
 
 export default function ExcelModal({open, setOpen}) {
   const [data, setData] = useState([]);
@@ -26,6 +27,10 @@ export default function ExcelModal({open, setOpen}) {
       setData(newInput)
     });
   }
+
+  useEffect(() => {
+    setData([]);
+  }, []);
 
   return (
     <Transition.Root show={open} as={Fragment}>
