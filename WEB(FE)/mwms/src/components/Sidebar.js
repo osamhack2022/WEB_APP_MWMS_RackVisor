@@ -15,7 +15,7 @@ function Sidebar() {
 
 
   return (
-    <aside class="w-48" aria-label="Sidebar">
+    <aside class="w-48 h-screen" aria-label="Sidebar">
       <div class="overflow-y-auto h-full py-4 px-3 bg-primary-900">
           <ul class="space-y-2">
             {
