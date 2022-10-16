@@ -10,13 +10,26 @@ module.exports = {
         secondary: "#00f6ff",
         dimWhite: "rgba(255, 255, 255, 0.7)",
         dimBlue: "rgba(9, 151, 124, 0.1)",
+
+        height: {
+          "10v": "10vh",
+          "20v": "20vh",
+          "30v": "30vh",
+          "40v": "40vh",
+          "50v": "50vh",
+          "60v": "60vh",
+          "70v": "70vh",
+          "80v": "80vh",
+          "90v": "90vh",
+          "100v": "100vh",
+        },
       }
     },
         screens: {
       xs: "480px",
       ss: "620px",
       sm: "768px",
-      md: "1060px",
+      md: "1080px",
       lg: "1200px",
       xl: "1700px",
     },

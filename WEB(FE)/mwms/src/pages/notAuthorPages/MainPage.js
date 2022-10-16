@@ -19,15 +19,9 @@ function MainPage() {
       <div class={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div class={`${styles.boxWidth}`}>
           <Hero/>
-        </div>
-      </div>
-
-      <div class={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
-        <div class={`${styles.boxWidth}`}>
           <Footer />
         </div>
       </div>
-
     </div>
   )
 }

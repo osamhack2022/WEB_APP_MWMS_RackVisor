@@ -6,7 +6,7 @@ import GetStarted from "./GetStarted"
 function Hero() 
 {
     return (
-        <section id="home" class={`flex md:flex-row flex-col ${styles.paddingY}`}>
+        <section id="home" class={`flex md:flex-row flex-col h-[85vh] ${styles.paddingY}`}>
         <div class={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
           <div class="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
             
@@ -34,7 +34,7 @@ function Hero()
         </div>
   
         <div class={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}>
-          <img src={warehouseImg} alt="billing" class="w-[100%] h-[100%] relative z-[5]" />
+          <img src={warehouseImg} alt="warehouse" class="w-[80%] h-[100%] relative z-[5]" />
   
           {/* gradient start */}
           <div class="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
