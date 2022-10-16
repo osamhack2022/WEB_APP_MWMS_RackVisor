@@ -3,12 +3,13 @@ import { DecoratedFastifyInstance } from '../../index';
 import {
   registerWarehouse,
   findWarehousesOnUnit,
+  updateLayoutOfWarehouse,
 } from './warehouse.controller';
 import { $ref } from './warehouse.schema';
 
 async function warehouseRoutes(server: FastifyInstance) {
   server.post(
-    '/',
+    '/:storedUnitId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
@@ -22,7 +23,7 @@ async function warehouseRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/:storedUnitId/',
+    '/:storedUnitId/my-warehouses',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
@@ -32,6 +33,20 @@ async function warehouseRoutes(server: FastifyInstance) {
       },
     },
     findWarehousesOnUnit
+  );
+
+  server.put(
+    '/:storedUnitId/:warehouseId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateWarehouseLayoutSchema'),
+        response: {
+          201: $ref('updateWarehouseLayoutSchema'),
+        },
+      },
+    },
+    updateLayoutOfWarehouse
   );
 }
 

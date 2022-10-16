@@ -1,17 +1,26 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { CreateWarehouseInput } from './warehouse.schema';
-import { createWarehouse, findWarehouses } from './warehouse.service';
+import {
+  CreateWarehouseInput,
+  UpdateWarehouseLayout,
+} from './warehouse.schema';
+import {
+  createWarehouse,
+  readWarehousesOnUnit,
+  updateWarehouseLayout,
+} from './warehouse.service';
 
 export async function registerWarehouse(
   request: FastifyRequest<{
     Body: CreateWarehouseInput;
+    Params: number;
   }>,
   reply: FastifyReply
 ) {
   const body = request.body;
+  const params = request.params;
 
   try {
-    const warehouse = await createWarehouse(body);
+    const warehouse = await createWarehouse(body, params);
 
     return reply.code(201).send(warehouse);
   } catch (e) {
@@ -20,6 +29,39 @@ export async function registerWarehouse(
   }
 }
 
-export async function findWarehousesOnUnit(request: FastifyRequest) {
-  //   const storedUnitId = request.params.storedUnitId;
+export async function updateLayoutOfWarehouse(
+  request: FastifyRequest<{
+    Body: UpdateWarehouseLayout;
+    Params: number;
+  }>,
+  reply: FastifyReply
+) {
+  const body = request.body;
+
+  try {
+    const layout = await updateWarehouseLayout(body, request.params);
+
+    return reply.code(201).send(layout);
+  } catch (e) {
+    console.error(e);
+    return reply.code(500).send(e);
+  }
+}
+
+export async function findWarehousesOnUnit(
+  request: FastifyRequest<{
+    Params: number;
+  }>,
+  reply: FastifyReply
+) {
+  const params = request.params;
+
+  try {
+    const warehouses = await readWarehousesOnUnit(params);
+
+    return reply.code(201).send(warehouses);
+  } catch (e) {
+    console.error(e);
+    return reply.code(500).send(e);
+  }
 }

@@ -1,17 +1,41 @@
-import { CreateWarehouseInput } from './warehouse.schema';
+import {
+  CreateWarehouseInput,
+  UpdateWarehouseLayout,
+} from './warehouse.schema';
 import prisma from '../../plugins/prisma';
 
 export async function createWarehouse(
-  data: CreateWarehouseInput & { storedUnitId: number }
+  data: CreateWarehouseInput,
+  storedUnitId: number
 ) {
   const warehouse = await prisma.warehouse.create({
-    data: data,
+    data: {
+      storedUnitId: storedUnitId,
+      name: data.name,
+      comment: data.comment,
+    },
   });
 
   return warehouse;
 }
 
-export async function findWarehouses(storedUnitId: number) {
+export async function updateWarehouseLayout(
+  data: UpdateWarehouseLayout,
+  warehouseId: number
+) {
+  const warehouse = await prisma.warehouse.update({
+    where: {
+      id: warehouseId,
+    },
+    data: {
+      layout: data.layout,
+    },
+  });
+
+  return warehouse.layout;
+}
+
+export async function readWarehousesOnUnit(storedUnitId: number) {
   const warehouses = await prisma.warehouse.findMany({
     where: {
       storedUnitId: storedUnitId,
