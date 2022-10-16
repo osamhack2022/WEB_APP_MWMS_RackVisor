@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { CreateUnitInput } from './unit.schema';
 import {
+  addUserOnUnit,
   createUnit,
-  findUnitByName,
   findUnitByUser,
   findUnits,
 } from './unit.service';
@@ -16,10 +16,25 @@ export async function registerUnitHandler(
   const body = request.body;
 
   try {
-    const unit = await createUnit(
-      body
-      //todo: service M:N 관계 설정 구현하면 userId 추가
-    );
+    const unit = await createUnit(body, request.user.id);
+
+    return reply.code(201).send(unit);
+  } catch (e) {
+    console.error(e);
+    return reply.code(500).send(e);
+  }
+}
+
+export async function registerUserOnUnit(
+  request: FastifyRequest<{
+    Params: number;
+  }>,
+  reply: FastifyReply
+) {
+  const params = request.params;
+
+  try {
+    const unit = await addUserOnUnit(params, request.user.id);
 
     return reply.code(201).send(unit);
   } catch (e) {
