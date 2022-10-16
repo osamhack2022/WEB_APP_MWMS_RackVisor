@@ -5,6 +5,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "v1",
+    "@nivo/core": "^0.80.0",
+    "@nivo/line": "^0.80.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -14,6 +16,7 @@
     "firebase": "^9.10.0",
     "flowbite": "^1.5.3",
     "heroicons": "^2.0.12",
+    "nivo": "^0.31.0",
     "qrcode": "^1.5.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",

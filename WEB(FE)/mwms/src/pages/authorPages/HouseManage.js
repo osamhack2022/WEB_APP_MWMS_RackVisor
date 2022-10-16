@@ -12,9 +12,9 @@ import WarehouseGridLayout from '../../utils/grid/Warehouse'
 function HouseManage() {
   const auth = useAuth();
   const navigate = useNavigate();
-
+  
   useEffect(() => {
-    if(auth.unitSelected === "") {
+    if(localStorage.getItem("부대") == "") {
       alert("부대를 선택해주세요");
       navigate("/");
     }
@@ -36,7 +36,7 @@ function HouseManage() {
           <h1 class="border-b-2 m-1 pl-8 pb-4 font-bold text-2xl">{auth.houseSelected}<br/></h1>
           {console.log("창고이름: " + auth.houseSelected) }
           <div>
-          <WarehouseGridLayout unitSelected={auth.unitSelected} houseSelected={auth.houseSelected}/>
+          <WarehouseGridLayout unitSelected={localStorage.getItem("부대")} houseSelected={auth.houseSelected}/>
           </div>
         </div>
       </div>

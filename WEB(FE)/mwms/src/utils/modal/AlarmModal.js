@@ -9,7 +9,7 @@ function AlarmModal({onClose}) {
   return (
     <Modal onClose={onClose}> 
       <div>
-        {auth.unitSelected} 의 알람을 표시하는 모달창
+        {localStorage.getItem("부대")} 의 알람을 표시하는 모달창
       </div>
     </Modal>
   )
