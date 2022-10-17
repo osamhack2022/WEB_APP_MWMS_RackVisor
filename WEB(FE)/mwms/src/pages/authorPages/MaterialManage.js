@@ -135,51 +135,50 @@ function MaterialManage() {
       <div class="flex">
         <Sidebar/>
         <div class="flex-1">
-          <button class="w-30 h-10 mb-2 text-sm font-medium border-2" onClick={() => setOpen(true)}>excel로 업로드</button>
-          <ExcelModal open={open} setOpen={setOpen}/>
-          <button class="w-30 h-10 mb-2 text-sm font-medium border-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
-          <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
-          
           <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div class="flex-1">
               <Tabs defaultTabs={defaultTabs} setTabType={setTabType}/>
               <div>
-                {tabType == "material" && <><SearchInput/></>} {/* 여기 하나 해야함 */}
-                {boxSelec ? (<>
-                  {tabType == "box" && <div>창고 : {selHouse} - 선반 : {cabSelec} -  박스 : {boxSelec}</div>}
-                  </>) : ("")}
-                { (boxSelec || tabType == "material") && 
+                {tabType == "material" && <><SearchInput/></>}
+                {boxSelec ? ( <> {tabType == "box" && <div>창고 : {selHouse} - 선반 : {cabSelec} -  박스 : {boxSelec}</div>} </> ) : ("")}
+                {tabType == "box" && 
+                  <div class="flex-1 gap-2 overflow-x-auto">
+                    {cabSelec ? (<>
+                      <button onClick={() => {
+                        setCabSelec("");
+                        setBoxSelec("")}}>뒤로가기</button>
+                      <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec}/>
+                      </>)
+                    : (<>
+                      <span class="m-2 p-2 font-bold">위치 기반 물자 관리</span> <br/> 
+                      <select onChange={onSelHouse} value={selHouse}>
+                        <option value={""} key={"none"}>
+                          없음
+                        </option>
+                        {houList.map((hou) => (
+                          <option value={hou.name} key={hou.name}>
+                            {hou.name}
+                          </option>
+                        ))}
+                      </select>
+                      {houList.map((hou) => (
+                        visual[hou.name] && <WarehouseGridLayout unitSelected={localStorage.getItem("부대")} houseSelected={hou.name} setClick={testClick}/>
+                      ))}
+                    </>)
+                    }
+                  </div>
+                } 
+                <button class="w-30 h-10 mb-2 text-sm font-medium border-2" onClick={() => setOpen(true)}>excel로 업로드</button>
+                <ExcelModal open={open} setOpen={setOpen}/>
+                <button class="w-30 h-10 mb-2 text-sm font-medium border-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
+                <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
+              </div>
+            </div>
+            { (boxSelec || tabType == "material") && 
                 (<>
                   <ManageList defaultList={valList} data={data} setSelect={materialHandle}/>
                   <MaterialChangeModal open={materialChangeOpen} setOpen={closeChangeModalClose} materialInfo={material}/>
                 </>)}
-              </div>
-            </div>
-            {tabType == "box" && <div class="flex-1 gap-2 overflow-x-auto">
-              {cabSelec ? (<>
-                <button onClick={() => {
-                  setCabSelec("");
-                  setBoxSelec("")}}>뒤로가기</button>
-                <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec}/>
-               </>)
-              : (<>
-                <span class="m-2 p-2 font-bold">위치 기반 물자 관리</span> <br/> 
-                <select onChange={onSelHouse} value={selHouse}>
-                  <option value={""} key={"none"}>
-                    없음
-                  </option>
-                  {houList.map((hou) => (
-                    <option value={hou.name} key={hou.name}>
-                      {hou.name}
-                    </option>
-                  ))}
-                </select>
-                {houList.map((hou) => (
-                  visual[hou.name] && <WarehouseGridLayout unitSelected={localStorage.getItem("부대")} houseSelected={hou.name} setClick={testClick}/>
-                ))}
-              </>)
-              }
-            </div>}
           </div>
         </div>
       </div>
