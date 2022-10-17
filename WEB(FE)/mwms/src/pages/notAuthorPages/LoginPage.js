@@ -3,6 +3,7 @@ import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import { useNavigate } from "react-router-dom"
 import styles from '../../style.js'
+import Title from '../../utils/with_description'
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -46,9 +47,7 @@ function LoginPage() {
       </div>
 
       
-      <h1 class={`sm:flex hidden border-b-2 border-cyan-500 mx-80 pb-6 font-bold text-3xl text-white`}>로그인</h1>  
-      <h1 class="sm:hidden border-b-2 border-cyan-500 text-[32px] mx-4 font-bold text-white text-center pb-6">로그인</h1> 
-
+      <Title title={"로그인"} />
       
       <section>
         

@@ -4,6 +4,7 @@ import { useAuth } from '../../routes/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import AuthorHeader from '../../components/AuthorHeader';
 import Title from '../../utils/with_description';
+import styles from '../../style.js';
 import ExcelModal from '../../utils/modal/ExcelModal';
 import DropDown from '../../utils/DropDown';
 import ReactExcelDownload from '../../utils/modal/ExcelExampleFile';
@@ -63,24 +64,34 @@ function UnitSelect() {
   }, []);
 
   return (
-    <div>
-      <body>
-        <AuthorHeader />
-        <Title title={"부대 선택"} descript={"부대를 선택해주세요"}/>
-        <div class="h-screen">
-          <div class="grid grid-cols-4 gap-4 px-4 py-3 border-gray-200 bg-gray">
-            {unitList.map((un) => (
-              <div id={un.name} onClick={onSelectUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 id={un.name} onClick={onSelectUnit} class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{un.name}</h5>
-              </div>
-            ))}
-            <div onClick={addUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 부대 추가</h5>
+    <div class="bg-primary-900 w-full">
+
+      <div class={`bg-primary-900 ${styles.flexCenter}`}>
+        <div class={`${styles.boxWidth}`}>
+          <AuthorHeader />
+        </div>
+      </div>
+
+      <Title title={"부대 선택"} />
+      <div class={`h-screen mx-48 px-32 `}>
+        <div class="grid grid-cols-4 gap-4 px-4 py-3 border-gray-200 bg-gray">
+          {unitList.map((un) => (
+            <div id={un.name} onClick={onSelectUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <h5 id={un.name} onClick={onSelectUnit} class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{un.name}</h5>
             </div>
+          ))}
+          <div onClick={addUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <span class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 부대 추가</span>
           </div>
         </div>
-        <Footer/>
-      </body>
+      </div>
+
+      <div class={`bg-primary-900 ${styles.paddingX} ${styles.flexStart}`}>
+        <div class={`${styles.boxWidth}`}>
+          <Footer />
+        </div>
+      </div>
+    
     </div>
   )
 }

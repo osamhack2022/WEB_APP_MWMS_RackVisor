@@ -1,11 +1,15 @@
 /* This example requires Tailwind CSS v2.0+ */
-export default function Title({title, descript}) {
+export default function Title({title}) {
   return (
-    <div className="px-4 py-3 pb-5 border-b border-gray-200">
-      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
-      <p className="mt-2 max-w-4xl text-sm text-gray-500">
-        {descript}  
-      </p>
+    <div> 
+      <h1 class={`sm:flex hidden border-b-2 border-cyan-500 md:mx-80  pb-6 font-bold text-3xl text-white`}>
+        {title}
+      </h1>
+  
+      <h1 class="sm:hidden border-b-2 border-cyan-500 text-[32px] mx-4 font-bold text-white text-center pb-6">
+        {title}
+      </h1> 
+
     </div>
   )
 }
