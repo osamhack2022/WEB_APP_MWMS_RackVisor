@@ -11,7 +11,7 @@
     "bootstrap": "^5.2.2",
     "date-fns": "^2.29.3",
     "file-saver": "^2.0.5",
-    "firebase": "^9.10.0",
+    "firebase": "^9.12.1",
     "flowbite": "^1.5.3",
     "heroicons": "^2.0.12",
     "qrcode": "^1.5.1",

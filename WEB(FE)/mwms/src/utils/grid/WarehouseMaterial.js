@@ -203,7 +203,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     house.items = this.state.items;
 
     return (
-      <div style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
+      <div style={{transform: 'scale(0.7) translate(0%, 0%)'}}>
         <ReactGridLayout 
           {...this.props}
           layout={house.gridLayout}

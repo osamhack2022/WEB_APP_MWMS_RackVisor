@@ -3,6 +3,7 @@ import ExampleModal from '../modal/ExampleModal';
 import Modal from '../modal/default/Modal';
 import SettingModal from '../modal/SettingModal';
 import DetailContent from '../modal/DetailContent';
+import ContentPlusModal from '../modal/contentPlusModal';
 
 //https://binaryjourney.tistory.com/20 [Binary Journey:티스토리]
 function Posts({ posting, total, setPosting }) {
@@ -16,7 +17,7 @@ function Posts({ posting, total, setPosting }) {
   const [plusContent, setPlusContent] = useState("");
 
   useEffect(() => { 
-    setPlusTitle("");
+    setPlusTitle(""); 
     setPlusContent("");
   }, [plus]);
 
@@ -48,6 +49,8 @@ function Posts({ posting, total, setPosting }) {
       name : localStorage.getItem("이름"),
       content : plusContent
     }))
+    setPlusTitle("");
+    setPlusContent("");
     setPlus(false)
   }
 
@@ -65,12 +68,12 @@ function Posts({ posting, total, setPosting }) {
             >
               번호
             </th>
-            <th
+            <button
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               제목
-            </th>
+            </button>
             <th
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -86,7 +89,7 @@ function Posts({ posting, total, setPosting }) {
           {posting && posting.map((article) => (
             <tr key={article.id}>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{article.id}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" id={article.id} onClick={openModal}>{article.title}</td>
+              <button className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" id={article.id} onClick={openModal}>{article.title}</button>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{article.milClass} {article.name}</td>
               <td  className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" >
                 <div id={article.id} onClick={erasePost} className="text-indigo-600 hover:text-indigo-900">X</div>
@@ -98,16 +101,13 @@ function Posts({ posting, total, setPosting }) {
           )}
         </tbody>
       </table>
-      <div onClick={() => setPlus(true)}>추가하기</div>
-      {plus && (
-        <Modal onClose={() => setPlus(false)}>
-          <div>
-            <input type="text" value={plusTitle} onChange={titleChange}placeholder="제목"></input>
-            <input type="text" value={plusContent}  onChange={contentChange} placeholder="내용"></input>
-            <button onClick={makePost}>저장</button>
-          </div>
-        </Modal>
-      )}
+      <button onClick={() => {
+        setPlus(true);
+        setPlusContent("");
+        setPlusTitle("");
+      }}>추가하기</button>
+      <ContentPlusModal open={plus} setOpen={setPlus} title={plusTitle} setTitle={titleChange} content={plusContent} setContent={contentChange} makePost={makePost}/>
+
     </div>
     </div>
     </div>

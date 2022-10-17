@@ -88,7 +88,8 @@ function BoxSelect({setBoxSelect}) {
   }
 
   useEffect(() => {
-    setBoxSelect({"위치" : selHouse.toString() + " " +  cabSelec.toString() + " " + boxSelec.toString()});
+    let newLocation = selHouse.toString() + " " +  cabSelec.toString() + " " + boxSelec.toString();
+    setBoxSelect({위치 : newLocation});
   }, [boxSelec]);
 
   return (

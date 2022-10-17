@@ -2,8 +2,10 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
+import BoxSelect from '../../components/BoxSelect'
 
-export default function MaterialManageModal({open, setOpen}) {
+export default function LocationSelectModal({open, setOpen, setLocation}) {
+  const [boxSelect, setBoxSelect] = useState("");
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -49,14 +51,9 @@ export default function MaterialManageModal({open, setOpen}) {
               <div className="sm:flex sm:items-start">
 
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                    물품 추가
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      여기다가 하나씩 입력 창을 추가해야함
-                    </p>
-                  </div>
+                  {boxSelect && <div>{boxSelect} 선택된 박스</div>}
+                  <BoxSelect setBoxSelect={setLocation}/>
+
                 </div>
               </div>
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
@@ -65,7 +62,7 @@ export default function MaterialManageModal({open, setOpen}) {
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => {
                     setOpen(false);
-                    alert("물품이 추가되었습니다");
+                    setLocation(boxSelect);
                   }}
                 >
                   저장

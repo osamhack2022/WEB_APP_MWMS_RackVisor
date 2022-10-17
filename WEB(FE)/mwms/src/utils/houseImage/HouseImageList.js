@@ -43,11 +43,13 @@ function HouseImageList() {
   }
 
   return (
-    <div>
-      <div class="flex">
-        {(currHouse > 0) && (<div onClick={onLeft}>{'<-'}</div>)}
-        {houseList[currHouse]}
-        {(currHouse < houseList.length - 1) && (<div onClick={onRight}>{'->'}</div>)}
+    <div class="text-center">
+      <div class="flex-auto text-center">
+        <p class="flex text-center">
+          {(currHouse > 0) && (<button onClick={onLeft}>{'<-'}</button>)}
+          {houseList[currHouse]}
+          {(currHouse < houseList.length - 1) && (<button onClick={onRight}>{'->'}</button>)}
+        </p>
       </div>
       <HouseImage imageList={imageList} setImageList={setImageList} currHouse={currHouse} />
     </div>

@@ -22,7 +22,7 @@ function HouseImage({imageList, setImageList, currHouse}) {
   };
 
   return (
-    <main className="container border">
+    <main className="container px-3">
       <div className="preview">
         {imageSrc && <img src={imageSrc} alt="preview-img" />}
       </div>

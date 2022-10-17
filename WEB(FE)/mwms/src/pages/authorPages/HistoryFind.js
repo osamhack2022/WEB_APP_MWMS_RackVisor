@@ -10,7 +10,7 @@ function HistoryFind() {
       <AuthorHeader/>
       <div className="flex">
         <Sidebar/>
-        <div className="flex-none">
+        <div className="flex-1">
           <div>
             <SearchInput/>
           </div>
@@ -19,7 +19,7 @@ function HistoryFind() {
           </div>
         </div>
         <div className="flex-auto">
-          <div>물자 추가 / 제거 / 위치 변경</div>
+          <div className="flex-auto">물자 추가 / 제거 / 위치 변경</div>
           <div>물품명 :  </div>
           <div>변동 수량 : </div>
           <div>변동 위치 : </div>

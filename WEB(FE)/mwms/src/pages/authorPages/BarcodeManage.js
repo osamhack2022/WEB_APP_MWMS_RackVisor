@@ -194,7 +194,7 @@ function BarcodeManage() {
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
-        <div>
+        <div class="flex-1">
         <Tabs setTabType={setTabType}/>
         { tabType == "material" ? 
         (<>

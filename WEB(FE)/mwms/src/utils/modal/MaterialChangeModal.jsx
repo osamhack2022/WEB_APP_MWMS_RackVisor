@@ -2,9 +2,12 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
+import LocationSelectModal from './LocationSelectModal'
 
 export default function MaterialChangeModal({open, setOpen, materialInfo, setMaterialInfo}) {
-
+  const [locationOpen, setLocationOpen] = useState(false);
+  const [loc, setLoc] = useState("");
+  
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
@@ -56,6 +59,9 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
                     <p className="text-sm text-gray-500">
                       여기다가 하나씩 입력 창을 추가해야함
                     </p>
+                    <div onClick={() => setLocationOpen(true)}>위치 선정하기</div>
+                    {loc && <div>선정된 위치 {loc['위치']}</div>}
+                    {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
                   </div>
                 </div>
               </div>

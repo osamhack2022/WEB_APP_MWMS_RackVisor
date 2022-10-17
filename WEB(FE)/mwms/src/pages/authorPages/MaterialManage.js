@@ -17,6 +17,7 @@ import ExcelModal from '../../utils/modal/ExcelModal'
 import ManageList from '../../components/ManageList'
 import MaterialManageModal from '../../utils/modal/MaterialManageModal'
 import MaterialChangeModal from '../../utils/modal/MaterialChangeModal'
+import LocationSelectModal from '../../utils/modal/LocationSelectModal'
 
 function MaterialManage() {
   const auth =useAuth();
@@ -33,6 +34,8 @@ function MaterialManage() {
   const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
   const [material, setMaterial] = useState({});
   const [openPlus, setOpenPlus] = useState(false);
+  const [materialChangeOpen, setMaterialChangeModal] = useState(false);
+  const [loc, setLoc] = useState({});
 
   useEffect(() => {
     if(localStorage.getItem("부대") === "") {
@@ -108,10 +111,15 @@ function MaterialManage() {
     setCabSelec(i);
   }
 
-  const openMaterialChange = (i) => {
-    if (i == false) {
-      setMaterial();
-    }
+  const materialHandle = (e) => {
+    console.log("여기 클릭되었음" + JSON.stringify(e));
+    setMaterial(e);
+    setMaterialChangeModal(true);
+  }
+
+  const closeChangeModalClose = () => {
+    setMaterialChangeModal(false);
+    setMaterial({});
   }
 
   return (
@@ -124,7 +132,7 @@ function MaterialManage() {
           <div class="grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div>
               <SearchInput/>
-              <button onClick={() => setOpen(true)}>excel로 업로드</button>
+              <button class="w-50 h-20 mb-2 text-xl font-medium border-2" onClick={() => setOpen(true)}>excel로 업로드</button>
               <ExcelModal open={open} setOpen={setOpen}/>
               <button class="w-50 h-20 mb-2 text-xl font-medium border-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
               <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
@@ -132,8 +140,8 @@ function MaterialManage() {
               (
               <>
                 <div>선택된 박스 {boxSelec}</div>
-                <ManageList defaultList={valList} data={data} setSelect={setMaterial}/>
-                <MaterialChangeModal open={material} setOpen={openMaterialChange} materialInfo={material}/>
+                <ManageList defaultList={valList} data={data} setSelect={materialHandle}/>
+                <MaterialChangeModal open={materialChangeOpen} setOpen={closeChangeModalClose}/>
               </>) : 
               ("")}
             </div>

@@ -1,10 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
 
-export default function MaterialManageModal({open, setOpen}) {
-
+export default function ContentPlusModal({open, setOpen, title, setTitle, content, setContent, makePost}) {
+  useEffect(() => {
+    
+  }, [])
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
@@ -50,12 +52,15 @@ export default function MaterialManageModal({open, setOpen}) {
 
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                    물품 추가
+                    게시물 등록
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      여기다가 하나씩 입력 창을 추가해야함
-                    </p>
+                  <div className="flex-1">
+                    <div>
+                      <input value={title} onChange={setTitle} className="text-sm text-gray-500 border" placeholder='제목'/>
+                    </div>
+                    <div>
+                      <textarea value={content} onChange={setContent} className="text-sm text-gray-500 border" placeholder='내용'></textarea>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -63,17 +68,15 @@ export default function MaterialManageModal({open, setOpen}) {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => {
-                    setOpen(false);
-                    alert("물품이 추가되었습니다");
-                  }}
+                  onClick={() => makePost()}
                 >
                   저장
                 </button>
                 <button
                   type="button"
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false)}}
                 >
                   취소
                 </button>
