@@ -1,4 +1,3 @@
-
 export default function ManageList({defaultList, data, setSelect}) {
   const selecting = (e) => {
     data.map((dt, idx) => {

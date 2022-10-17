@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ExampleModal from '../modal/ExampleModal';
 import Modal from '../modal/default/Modal';
 import SettingModal from '../modal/SettingModal';
 import DetailContent from '../modal/DetailContent';

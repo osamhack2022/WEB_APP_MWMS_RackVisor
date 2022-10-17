@@ -1,5 +1,5 @@
 import React from "react";
-import Example from "./ForumList";
+import ForumList from "./ForumList";
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
@@ -21,7 +21,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
           </div>
         </div>
       ))}
-      <Example/>
+      <ForumList/>
     </div>
   );
 };

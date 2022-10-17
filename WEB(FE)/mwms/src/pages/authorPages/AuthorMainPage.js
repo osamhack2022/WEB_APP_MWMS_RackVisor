@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Footer from '../../components/Footer'
 import AuthorHeader from '../../components/AuthorHeader'
-import { AuthorContext } from '../../routes/Author'
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
 import Forum from '../../utils/forum/Forum'

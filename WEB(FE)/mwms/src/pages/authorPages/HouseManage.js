@@ -1,10 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Header from '../../components/Header'
+import React, { useEffect } from 'react'
 import Footer from '../../components/Footer'
-import ExampleModal from '../../utils/modal/ExampleModal'
 import AuthorHeader from '../../components/AuthorHeader'
-import { AuthorContext } from '../../routes/Author'
-import {Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
 import WarehouseGridLayout from '../../utils/grid/Warehouse'

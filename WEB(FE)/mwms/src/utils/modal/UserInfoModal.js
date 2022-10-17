@@ -6,7 +6,7 @@ import ExcelExampleFile from './ExcelExampleFile'
 import readXlsxFile from 'read-excel-file'
 import Example from '../../components/simple_striped'
 
-export default function ExcelModal({open, setOpen}) {
+export default function UserInfoModal({open, setOpen}) {
   const [data, setData] = useState([]);
   const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
 
