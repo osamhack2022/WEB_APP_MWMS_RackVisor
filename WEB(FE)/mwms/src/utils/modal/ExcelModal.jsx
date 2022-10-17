@@ -30,7 +30,7 @@ export default function ExcelModal({open, setOpen}) {
 
   useEffect(() => {
     setData([]);
-  }, []);
+  }, [open]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -66,7 +66,10 @@ export default function ExcelModal({open, setOpen}) {
                 <button
                   type="button"
                   className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false)
+                    setData([]);
+                  }}
                 >
                   <span className="sr-only">Close</span>
                   <XIcon className="h-6 w-6" aria-hidden="true" />
@@ -86,6 +89,7 @@ export default function ExcelModal({open, setOpen}) {
                     <ExcelExampleFile/>
                   </div>
                   <input 
+                    accept=".xlsx" 
                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
                     type="file" 
                     onChange={(e) => inputFile(e.target.files[0])}/>
@@ -96,14 +100,18 @@ export default function ExcelModal({open, setOpen}) {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {setOpen(false)
+                    setData([]);
+                  }}
                 >
                   저장
                 </button>
                 <button
                   type="button"
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {setOpen(false)
+                    setData([]);
+                  }}
                 >
                   취소
                 </button>

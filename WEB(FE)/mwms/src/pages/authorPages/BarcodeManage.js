@@ -9,6 +9,8 @@ import ReactToPrint from 'react-to-print';
 import {QrReader} from 'react-qr-reader';
 import SearchInput from '../../utils/search/SearchInput';
 import Example from '../../components/simple_striped';
+import Tabs from '../../components/Tabs';
+import BoxSelect from '../../components/BoxSelect';
 
 //함수 내부 주석 -> 바코드 리더 부분을 일단 주석처리
 /*
@@ -121,6 +123,8 @@ function BarcodeManage() {
   const [showDue, setShowDue] = useState(false);
   const [showManager, setShowManager] = useState(false);
   const [showLocation, setShowLocation] = useState(false);
+  const [tabType, setTabType] = useState("material");
+  const [boxSelect, setBoxSelect] = useState("");
 
   const generateQrCode = async (textInput) => {
     try {
@@ -167,11 +171,23 @@ function BarcodeManage() {
   }, []);
 
   useEffect(() => {
-    if (item != "") {
+    if (item != "" && tabType == "material") {
+      alert("물품이 선택됨 : " + item["이름"]);
       setText(item['이름']);
       generateQrCode(item['이름']);
+    } else if (item != "" && tabType == "box") {
+      alert("박스가 선택됨 : " + item['위치']);
+      setText(item['위치']);
+      generateQrCode(item['위치']);
+    } else {
+      setImageUrl();
     }
   }, [item]);
+
+  useEffect(() => {
+    setItem("");
+  }, [tabType])
+
 
   return (
     <div>
@@ -179,8 +195,17 @@ function BarcodeManage() {
       <div class="flex">
         <Sidebar/>
         <div>
-        <SearchInput className = "flex-auto" />
-        <Example defaultList={valList} data={data} setSelect={setItem}/>
+        <Tabs setTabType={setTabType}/>
+        { tabType == "material" ? 
+        (<>
+          <SearchInput className = "flex-auto" />
+          <Example defaultList={valList} data={data} setSelect={setItem}/>
+        </>) : 
+        (<>
+          <BoxSelect setBoxSelect={setItem}/>
+        </>
+        )
+        }
         </div>
         <div class ="flex flex-auto border">
           <div class="flex-auto border">
@@ -195,6 +220,8 @@ function BarcodeManage() {
                 <div>개수 입력 : </div>
                 <input type="number" value={count} onChange={handleCount} className="border"/>
               </div>
+              { tabType == "material" ? 
+              <>
               <div className="flex">
                 <input type="checkbox" value={showName} onChange={() => setShowName(!showName)} className="border"/>
                 <div>이름 출력</div>
@@ -207,6 +234,9 @@ function BarcodeManage() {
                 <input type="checkbox" value={showManager} onChange={() => setShowManager(!showManager)} className="border"/>
                 <div>담당자 출력</div>
               </div>
+              </> :
+              ""
+              }
               <div className="flex">
                 <input type="checkbox" value={showLocation} onChange={() => setShowLocation(!showLocation)} className="border"/>
                 <div>위치 출력</div>
@@ -215,9 +245,9 @@ function BarcodeManage() {
               <>
               <div>
                 <img src={imageUrl} alt="img" style={{width:"100px", height:"100px"}} className="border"/>
-                {showName && <div className="flex">휴지</div>}
-                {showDue && <div className="flex">2022-10-27</div>}
-                {showManager && <div className="flex">홍길동</div>}
+                {tabType == "material" && showName && <div className="flex">휴지</div>}
+                {tabType == "material" && showDue && <div className="flex">2022-10-27</div>}
+                {tabType == "material" && showManager && <div className="flex">홍길동</div>}
                 {showLocation && <div className="flex">2종창고 - A 캐비넷</div>}
               </div>
               <a href={imageUrl} download>QR 코드 다운로드</a>
@@ -226,9 +256,9 @@ function BarcodeManage() {
                   {printArr.map(() => (
                     <div className="">
                       <img src={imageUrl} alt="img" style={{width: convert, height: convert}} className="border flex"/>
-                      {showName && <div className="flex">휴지</div>}
-                      {showDue && <div className="flex">2022-10-27</div>}
-                      {showManager && <div className="flex">홍길동</div>}
+                      {tabType == "material" && showName && <div className="flex">휴지</div>}
+                      {tabType == "material" && showDue && <div className="flex">2022-10-27</div>}
+                      {tabType == "material" && showManager && <div className="flex">홍길동</div>}
                       {showLocation && <div className="flex">2종창고 - A 캐비넷</div>}
                     </div>
                   ))}
