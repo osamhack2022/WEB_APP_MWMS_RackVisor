@@ -1,9 +1,46 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
+import LocationSelectModal from './LocationSelectModal'
+import "../search/datapicker.css";
+import {detailType} from '../search/typeList'
+import { ko } from "date-fns/esm/locale";
+import DatePicker, { registerLocale } from 'react-datepicker';
 
 export default function MaterialManageModal({open, setOpen}) {
+  const [locationOpen, setLocationOpen] = useState(false);
+  const [loc, setLoc] = useState("");
+  const [Content, setContent] = useState("없음");
+  const [type, setType] = useState("없음");
+  const [minCnt, setMinCnt] = useState("");
+  const [people, setPeople] = useState(localStorage.getItem("계급") + " " + localStorage.getItem("이름"));
+  const [name, setName] = useState("");
+  const [good, setGood] = useState("");
+  const [startDate, setStartDate] = useState(new Date()); //날짜 형식에 맞춰서 파싱해야함
+
+
+  const chgMinCnt = (e) => {
+    setMinCnt(e.currentTarget.value);
+  }
+
+  const chgName = (e) => {
+    setName(e.currentTarget.value);
+  }
+
+  const chgGood = (e) => {
+    setGood(e.currentTarget.value);
+  }
+
+  const onChangeHanlder = (e) => {
+  	setContent(e.currentTarget.value);
+    console.log(Content);
+  }
+  const onChangeType = (e) => {
+    setType(e.currentTarget.value);
+    console.log(type);
+  }
+
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -47,15 +84,62 @@ export default function MaterialManageModal({open, setOpen}) {
               </div>
 
               <div className="sm:flex sm:items-start">
-
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                    물품 추가
+                    물품 수정
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      여기다가 하나씩 입력 창을 추가해야함
-                    </p>
+                    <button onClick={() => setLocationOpen(true)}>위치 선정하기</button>
+                    {loc && <div>선정된 위치 {loc['위치']}</div>}
+                    {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
+
+                    <div>
+                      <div class="flex">
+                        <div>속성 : </div>
+                        <div>
+                          <select onChange={onChangeHanlder} value={Content}>
+                            {Object.keys(detailType).map((type) => (
+                              <option key={type}>{type}</option>
+                            ))}
+                          </select>
+                          <select onChange={onChangeType} value={type}>
+                            {Object.keys(detailType[Content]).map((ty) => (
+                              <option key={ty}>{ty}</option>
+                            ))}
+                          </select>
+                          <div>{detailType[Content][type]}</div>
+                        </div>
+                      </div>
+                      <div class="flex">
+                        <div>기한 : </div>
+                        <DatePicker 
+                          locale={ko}
+                          dateFormat="yyyy/MM/dd"
+                          selected={startDate}
+                          onChange={(date) => {
+                            setStartDate(date);
+                            console.log(date);
+                          }}
+                          selectsStart
+                        />
+                      </div>
+                      <div class="flex">
+                        <div>이름 : </div>
+                        <input type="string" class="border" value={name} onChange={chgName}/>
+                      </div>
+                      <div class="flex">
+                        <div>상태 : </div>
+                        <input type="string" class="border" value={good} onChange={chgGood}/>
+                      </div>
+                      <div class="flex">
+                        <div>담당자 : {people}</div>
+                      </div>
+                      <div class="flex">
+                        <div>{'수량 : '}</div>
+                        <input type="number" class="border" value={minCnt} onChange={chgMinCnt}/>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>

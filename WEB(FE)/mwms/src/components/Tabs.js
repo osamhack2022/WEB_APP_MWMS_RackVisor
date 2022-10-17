@@ -1,17 +1,11 @@
 import { useState } from "react";
 
-
-const defultTabs = [
-  { name: '물자 선택', value: 'material', current: true },
-  { name: '박스 선택', value: 'box', current: false },
-]
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Tabs({setTabType}) {
-  const [tabs, setTabs] = useState(defultTabs);
+export default function Tabs({setTabType, defaultTabs}) {
+  const [tabs, setTabs] = useState(defaultTabs);
 
   const setType = (e) => {
     console.log(e.currentTarget.getAttribute('value'));

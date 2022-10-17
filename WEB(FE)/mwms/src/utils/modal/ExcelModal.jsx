@@ -5,11 +5,14 @@ import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
 import FileSaver, { saveAs } from 'file-saver'
 import ExcelExampleFile from './ExcelExampleFile'
 import readXlsxFile from 'read-excel-file'
-import Example from '../../components/simple_striped'
 import { useEffect } from 'react'
+import SimpleSearch from '../../components/SimpleSearchList'
+import LocationSelectModal from './LocationSelectModal'
 
 export default function ExcelModal({open, setOpen}) {
   const [data, setData] = useState([]);
+  const [open1, setOpen1] = useState(false);
+  const [loc, setLoc] = useState({위치 : ""});
   const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
 
   const inputFile = (file) => {
@@ -93,7 +96,12 @@ export default function ExcelModal({open, setOpen}) {
                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
                     type="file" 
                     onChange={(e) => inputFile(e.target.files[0])}/>
-                  <Example defaultList={valList} data={data}/>
+                  <div>
+                    <button class="border" onClick={() => setOpen1(true)}>위치 선택하기</button>
+                    <LocationSelectModal open={open1} setOpen={setOpen1} setLocation={setLoc}/>
+                    {loc['위치'] && <div>{loc['위치']}</div>}
+                  </div>
+                    <SimpleSearch defaultList={valList} data={data}/>
                 </div>
               </div>
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
@@ -102,6 +110,7 @@ export default function ExcelModal({open, setOpen}) {
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => {setOpen(false)
                     setData([]);
+                    setLoc({위치 : ""});
                   }}
                 >
                   저장
@@ -111,6 +120,7 @@ export default function ExcelModal({open, setOpen}) {
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
                   onClick={() => {setOpen(false)
                     setData([]);
+                    setLoc({위치 : ""});
                   }}
                 >
                   취소

@@ -55,9 +55,9 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
           <div>{floor.floor} 층</div>
           <div class="flex border">
             {floor.list.map((item) => (
-              <div value={item.id} class="w-24 h-12 border" onClick={handleBoxSelec}>
+              <button value={(floor.floor).toString() + "층 "  + (item.id).toString()} class="w-24 h-12 border" onClick={handleBoxSelec}>
                 {item.id}
-              </div>
+              </button>
             ))}
             <button value={floor.floor} onClick={addItem}>추가하기</button>
           </div>

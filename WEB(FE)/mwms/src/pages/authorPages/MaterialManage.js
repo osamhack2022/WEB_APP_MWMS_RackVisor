@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+  import React, { useContext, useEffect, useState } from 'react'
 import Footer from '../../components/Footer'
 import AuthorHeader from '../../components/AuthorHeader'
 import { AuthorContext } from '../../routes/Author'
@@ -18,6 +18,7 @@ import ManageList from '../../components/ManageList'
 import MaterialManageModal from '../../utils/modal/MaterialManageModal'
 import MaterialChangeModal from '../../utils/modal/MaterialChangeModal'
 import LocationSelectModal from '../../utils/modal/LocationSelectModal'
+import Tabs from '../../components/Tabs'
 
 function MaterialManage() {
   const auth =useAuth();
@@ -32,10 +33,11 @@ function MaterialManage() {
   const [open, setOpen] = useState(false);
   const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
   const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
-  const [material, setMaterial] = useState({});
+  const [material, setMaterial] = useState({'이름' : "", "종류" : "없음", "세부분류" : "없음", "수량" : "", "상태" : "", "기한" : ""});
   const [openPlus, setOpenPlus] = useState(false);
   const [materialChangeOpen, setMaterialChangeModal] = useState(false);
   const [loc, setLoc] = useState({});
+  const [tabType, setTabType] = useState("material");
 
   useEffect(() => {
     if(localStorage.getItem("부대") === "") {
@@ -112,15 +114,20 @@ function MaterialManage() {
   }
 
   const materialHandle = (e) => {
-    console.log("여기 클릭되었음" + JSON.stringify(e));
+    console.log("이거 바뀜" + JSON.stringify(e));
     setMaterial(e);
     setMaterialChangeModal(true);
   }
 
   const closeChangeModalClose = () => {
     setMaterialChangeModal(false);
-    setMaterial({});
+    setMaterial({'이름' : "", "종류" : "없음", "세부분류" : "없음", "수량" : "", "상태" : "", "기한" : ""});
   }
+
+  const defaultTabs = [
+    { name: '이름 기반 탐색', value: 'material', current: true },
+    { name: '위치 기반 탐색', value: 'box', current: false },
+  ]
 
   return (
     <div>
@@ -128,32 +135,33 @@ function MaterialManage() {
       <div class="flex">
         <Sidebar/>
         <div class="flex-1">
-          <div> 물자 관리 </div>
-          <div class="grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
-            <div>
-              <SearchInput/>
-              <button class="w-50 h-20 mb-2 text-xl font-medium border-2" onClick={() => setOpen(true)}>excel로 업로드</button>
-              <ExcelModal open={open} setOpen={setOpen}/>
-              <button class="w-50 h-20 mb-2 text-xl font-medium border-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
-              <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
-              {boxSelec ? 
-              (
-              <>
-                <div>선택된 박스 {boxSelec}</div>
-                <ManageList defaultList={valList} data={data} setSelect={materialHandle}/>
-                <MaterialChangeModal open={materialChangeOpen} setOpen={closeChangeModalClose}/>
-              </>) : 
-              ("")}
+          <button class="w-30 h-10 mb-2 text-sm font-medium border-2" onClick={() => setOpen(true)}>excel로 업로드</button>
+          <ExcelModal open={open} setOpen={setOpen}/>
+          <button class="w-30 h-10 mb-2 text-sm font-medium border-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
+          <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
+          
+          <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
+            <div class="flex-1">
+              <Tabs defaultTabs={defaultTabs} setTabType={setTabType}/>
+              <div>
+                {tabType == "material" && <><SearchInput/></>} {/* 여기 하나 해야함 */}
+                {boxSelec ? (<>
+                  {tabType == "box" && <div>창고 : {selHouse} - 선반 : {cabSelec} -  박스 : {boxSelec}</div>}
+                  </>) : ("")}
+                { (boxSelec || tabType == "material") && 
+                (<>
+                  <ManageList defaultList={valList} data={data} setSelect={materialHandle}/>
+                  <MaterialChangeModal open={materialChangeOpen} setOpen={closeChangeModalClose} materialInfo={material}/>
+                </>)}
+              </div>
             </div>
-            <div class="gap-2 overflow-x-auto">
-              {cabSelec ? 
-              (<>
+            {tabType == "box" && <div class="flex-1 gap-2 overflow-x-auto">
+              {cabSelec ? (<>
                 <button onClick={() => {
                   setCabSelec("");
                   setBoxSelec("")}}>뒤로가기</button>
                 <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec}/>
-               </>
-              ) 
+               </>)
               : (<>
                 <span class="m-2 p-2 font-bold">위치 기반 물자 관리</span> <br/> 
                 <select onChange={onSelHouse} value={selHouse}>
@@ -171,7 +179,7 @@ function MaterialManage() {
                 ))}
               </>)
               }
-            </div>
+            </div>}
           </div>
         </div>
       </div>

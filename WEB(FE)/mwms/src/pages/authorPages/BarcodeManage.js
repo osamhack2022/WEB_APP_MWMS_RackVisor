@@ -187,7 +187,11 @@ function BarcodeManage() {
   useEffect(() => {
     setItem("");
   }, [tabType])
-
+  
+  const defaultTabs = [
+    { name: '물자 선택', value: 'material', current: true },
+    { name: '박스 선택', value: 'box', current: false },
+  ]
 
   return (
     <div>
@@ -195,7 +199,7 @@ function BarcodeManage() {
       <div class="flex">
         <Sidebar/>
         <div class="flex-1">
-        <Tabs setTabType={setTabType}/>
+        <Tabs setTabType={setTabType} defaultTabs={defaultTabs}/>
         { tabType == "material" ? 
         (<>
           <SearchInput className = "flex-auto" />
