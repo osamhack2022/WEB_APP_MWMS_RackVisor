@@ -1,5 +1,9 @@
 import prisma from '../../plugins/prisma';
-import { CreateStockInput } from './stock.schema';
+import {
+  CreateStockInput,
+  deleteStockInput,
+  updateStockInput,
+} from './stock.schema';
 
 export async function createStock(input: CreateStockInput) {
   const stock = await prisma.stock.create({
@@ -31,4 +35,34 @@ export async function readStocksOnBox(storedBoxId: number) {
   });
 
   return stocks;
+}
+
+export async function updateStock(data: updateStockInput) {
+  const stock = await prisma.stock.update({
+    where: {
+      id: data.id,
+    },
+    data: {
+      name: data.name,
+      type: data.type,
+      specipicType: data.specipicType,
+      amount: data.amount,
+      barcode: data.barcode,
+      comment: data.comment,
+      expirationDate: data.expirationDate,
+      storedBoxId: data.storedBoxId,
+    },
+  });
+
+  return stock;
+}
+
+export async function deleteStock(stockId: deleteStockInput) {
+  const stock = await prisma.stock.delete({
+    where: {
+      id: stockId.id,
+    },
+  });
+
+  return stock;
 }

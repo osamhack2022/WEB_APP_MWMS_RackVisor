@@ -4,6 +4,8 @@ import {
   findStocksOnBox,
   findStocksOnWarehouse,
   registerStock,
+  updateStocks,
+  deleteStocks,
 } from './stock.controller';
 import { $ref } from './stock.schema';
 
@@ -46,6 +48,34 @@ async function stockRoutes(server: FastifyInstance) {
       },
     },
     findStocksOnBox
+  );
+
+  server.put(
+    '/stock-update',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateStockSchema'),
+        response: {
+          201: $ref('stockResponseSchema'),
+        },
+      },
+    },
+    updateStocks
+  );
+
+  server.delete(
+    '/stock',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('deleteStockSchema'),
+        response: {
+          201: $ref('stockResponseSchema'),
+        },
+      },
+    },
+    deleteStocks
   );
 }
 

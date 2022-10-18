@@ -33,14 +33,29 @@ const stockResponseSchema = z.object({
   ...stockCore,
 });
 
+const updateStockSchema = z.object({
+  id: z.number(),
+  ...stockCore,
+});
+
+const deleteStockSchema = z.object({
+  id: z.number(),
+});
+
 const stocksResponseSchema = z.array(stockResponseSchema);
 
 export type CreateStockInput = z.infer<typeof createStockSchema>;
+
+export type updateStockInput = z.infer<typeof updateStockSchema>;
+
+export type deleteStockInput = z.infer<typeof deleteStockSchema>;
 
 const models = {
   createStockSchema,
   stockResponseSchema,
   stocksResponseSchema,
+  updateStockSchema,
+  deleteStockSchema,
 };
 
 export const { schemas: stockSchemas, $ref } = buildJsonSchemas(models, {
