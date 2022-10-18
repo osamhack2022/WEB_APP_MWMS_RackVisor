@@ -19,7 +19,7 @@ async function rackRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/:storedWarehouseId',
+    '/racks-in-warehouse/:storedWarehouseId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {

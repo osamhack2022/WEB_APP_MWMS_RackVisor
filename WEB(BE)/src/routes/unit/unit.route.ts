@@ -37,7 +37,7 @@ async function unitRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/',
+    '/all-units',
     {
       schema: {
         response: {
@@ -50,7 +50,7 @@ async function unitRoutes(server: FastifyInstance) {
   );
 
   server.put(
-    '/:unitId',
+    'register-user-to-unit/:unitId',
     {
       schema: {
         response: {

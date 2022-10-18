@@ -16,7 +16,7 @@ export async function registerUnitHandler(
   const body = request.body;
 
   try {
-    const unit = await createUnit(body, request.user.id);
+    const unit = await createUnit(body);
 
     return reply.code(201).send(unit);
   } catch (e) {

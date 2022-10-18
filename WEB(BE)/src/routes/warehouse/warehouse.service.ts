@@ -4,13 +4,10 @@ import {
 } from './warehouse.schema';
 import prisma from '../../plugins/prisma';
 
-export async function createWarehouse(
-  data: CreateWarehouseInput,
-  storedUnitId: number
-) {
+export async function createWarehouse(data: CreateWarehouseInput) {
   const warehouse = await prisma.warehouse.create({
     data: {
-      storedUnitId: storedUnitId,
+      storedUnitId: data.storedUnitId,
       name: data.name,
       comment: data.comment,
     },

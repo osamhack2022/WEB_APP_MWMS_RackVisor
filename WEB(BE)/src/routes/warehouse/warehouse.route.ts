@@ -9,7 +9,7 @@ import { $ref } from './warehouse.schema';
 
 async function warehouseRoutes(server: FastifyInstance) {
   server.post(
-    '/:storedUnitId',
+    '/',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
@@ -23,7 +23,7 @@ async function warehouseRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/:storedUnitId/my-warehouses',
+    '/my-warehouses/:storedUnitId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
@@ -36,7 +36,7 @@ async function warehouseRoutes(server: FastifyInstance) {
   );
 
   server.put(
-    '/:storedUnitId/:warehouseId',
+    '/update-layout/:warehouseId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {

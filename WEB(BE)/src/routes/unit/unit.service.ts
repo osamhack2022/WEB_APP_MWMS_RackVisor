@@ -3,7 +3,7 @@ import prisma from '../../plugins/prisma';
 
 //todo unit create or register 할때 M:N관계 설정 - 좀 어려울 것 같아 일단 보류
 
-export async function createUnit(input: CreateUnitInput, userId: number) {
+export async function createUnit(input: CreateUnitInput) {
   const unit = await prisma.unit.create({
     data: {
       name: input.name,
@@ -13,7 +13,7 @@ export async function createUnit(input: CreateUnitInput, userId: number) {
           {
             user: {
               connect: {
-                id: userId,
+                id: input.userId,
               },
             },
           },

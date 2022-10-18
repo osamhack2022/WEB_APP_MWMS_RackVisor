@@ -12,15 +12,13 @@ import {
 export async function registerWarehouse(
   request: FastifyRequest<{
     Body: CreateWarehouseInput;
-    Params: number;
   }>,
   reply: FastifyReply
 ) {
   const body = request.body;
-  const params = request.params;
 
   try {
-    const warehouse = await createWarehouse(body, params);
+    const warehouse = await createWarehouse(body);
 
     return reply.code(201).send(warehouse);
   } catch (e) {
@@ -38,8 +36,10 @@ export async function updateLayoutOfWarehouse(
 ) {
   const body = request.body;
 
+  const params = request.params;
+
   try {
-    const layout = await updateWarehouseLayout(body, request.params);
+    const layout = await updateWarehouseLayout(body, params);
 
     return reply.code(201).send(layout);
   } catch (e) {

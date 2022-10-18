@@ -1,13 +1,10 @@
 import { CreateRackInput, UpdateRackLayoutInput } from './rack.schema';
 import prisma from '../../plugins/prisma';
 
-export async function createRack(
-  data: CreateRackInput,
-  storedWarehouseId: number
-) {
+export async function createRack(data: CreateRackInput) {
   const rack = await prisma.rack.create({
     data: {
-      storedWarehouseId: storedWarehouseId,
+      storedWarehouseId: data.storedWarehouseId,
       name: data.name,
     },
   });

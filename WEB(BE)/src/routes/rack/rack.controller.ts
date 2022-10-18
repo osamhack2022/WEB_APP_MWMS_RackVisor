@@ -5,15 +5,13 @@ import { createRack, findRacks } from './rack.service';
 export async function registerRack(
   request: FastifyRequest<{
     Body: CreateRackInput;
-    Params: number;
   }>,
   reply: FastifyReply
 ) {
   const body = request.body;
-  const params = request.params;
 
   try {
-    const rack = await createRack(body, params);
+    const rack = await createRack(body);
 
     return reply.code(201).send(rack);
   } catch (e) {

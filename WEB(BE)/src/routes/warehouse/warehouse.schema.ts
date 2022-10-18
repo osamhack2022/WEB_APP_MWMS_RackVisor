@@ -8,6 +8,7 @@ const warehouseCore = {
 
 const createWarehouseSchema = z.object({
   ...warehouseCore,
+  storedUnitId: z.number(),
 });
 
 const warehouseResponseSchema = z.object({

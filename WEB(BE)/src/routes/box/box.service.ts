@@ -1,11 +1,12 @@
 import { CreateBoxInput } from './box.schema';
 import prisma from '../../plugins/prisma';
 
-export async function createBox(
-  data: CreateBoxInput & { storedRackId: number }
-) {
+export async function createBox(data: CreateBoxInput) {
   const box = await prisma.box.create({
-    data: data,
+    data: {
+      name: data.name,
+      storedRackId: data.storedRackId,
+    },
   });
 
   return box;

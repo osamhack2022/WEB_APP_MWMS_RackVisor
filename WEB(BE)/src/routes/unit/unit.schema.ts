@@ -11,6 +11,7 @@ const unitCore = {
 
 const createUnitSchema = z.object({
   ...unitCore,
+  userId: z.number(),
 });
 
 const unitResponseSchema = z.object({

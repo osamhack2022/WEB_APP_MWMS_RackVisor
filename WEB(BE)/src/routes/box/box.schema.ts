@@ -7,6 +7,7 @@ const boxCore = {
 
 const createBoxSchema = z.object({
   ...boxCore,
+  storedRackId: z.number(),
 });
 
 const boxResponseSchema = z.object({

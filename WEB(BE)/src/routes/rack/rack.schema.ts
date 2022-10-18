@@ -7,6 +7,7 @@ const rackCore = {
 
 const createRackSchema = z.object({
   ...rackCore,
+  storedWarehouseId: z.number(),
 });
 
 const rackResponseSchema = z.object({
