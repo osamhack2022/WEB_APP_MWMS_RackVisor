@@ -19,6 +19,7 @@ model User {
   position             String
   phoneNumber          String
   units                UsersOnUnits[]
+  Post                 Post[]
 }
 
 model Unit {
@@ -27,6 +28,7 @@ model Unit {
   comment    String?
   warehouses Warehouse[]
   users      UsersOnUnits[]
+  History    History[]
 }
 
 model UsersOnUnits {
@@ -76,6 +78,23 @@ model Stock {
   expirationDate DateTime?
   storedBox      Box       @relation(fields: [storedBoxId], references: [id])
   storedBoxId    Int
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model History {
+  id         Int      @id @default(autoincrement())
+  content    String
+  createdAt  DateTime @default(now())
+  storedUnit Unit     @relation(fields: [unitId], references: [id])
+  unitId     Int
 }
 
 enum Rank {
