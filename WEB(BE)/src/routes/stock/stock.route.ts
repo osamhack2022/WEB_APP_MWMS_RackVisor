@@ -1,6 +1,10 @@
 import { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../..';
-import { registerStock } from './stock.controller';
+import {
+  findStocksOnBox,
+  findStocksOnWarehouse,
+  registerStock,
+} from './stock.controller';
 import { $ref } from './stock.schema';
 
 async function stockRoutes(server: FastifyInstance) {
@@ -18,18 +22,31 @@ async function stockRoutes(server: FastifyInstance) {
     registerStock
   );
 
-  // server.get(
-  //   '/:storedStockId',
-  //   {
-  //     onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
-  //     schema: {
-  //       response: {
-  //         201: $ref('stockResponseSchema'),
-  //       },
-  //     },
-  //   },
-  //   findRacksOnWarehouse
-  // );
+  server.get(
+    '/stocks-in-warehouse/:storedWarehouseId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        response: {
+          201: $ref('stocksResponseSchema'),
+        },
+      },
+    },
+    findStocksOnWarehouse
+  );
+
+  server.get(
+    '/stocks-in-box/:storedBoxId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        response: {
+          201: $ref('stocksResponseSchema'),
+        },
+      },
+    },
+    findStocksOnBox
+  );
 }
 
 export default stockRoutes;
