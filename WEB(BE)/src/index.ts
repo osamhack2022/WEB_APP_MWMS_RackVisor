@@ -56,6 +56,9 @@ app.register(import('fastify-bcrypt'));
 app.register(import('@fastify/cookie'), {
   secret: 'SECRET_HERE_COOKIE', // for cookies signature
 });
+app.register(import('@fastify/cors'), {
+  origin: false,
+})
 
 // ! [Register] Swagger
 app.register(import('@fastify/swagger'), {
