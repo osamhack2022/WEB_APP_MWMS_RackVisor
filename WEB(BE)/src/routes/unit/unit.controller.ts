@@ -15,8 +15,10 @@ export async function registerUnitHandler(
 ) {
   const body = request.body;
 
+  const userId = request.user.id;
+
   try {
-    const unit = await createUnit(body);
+    const unit = await createUnit(body, userId);
 
     return reply.code(201).send(unit);
   } catch (e) {
