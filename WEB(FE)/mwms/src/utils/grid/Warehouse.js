@@ -158,7 +158,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   onChangeItemName(value, iid) {
-    console.log("[@@@@ onChangeItemName(value:" + value +", iid: " +iid + ") @@@@]");
     let newItems = [...this.state.items];
     let newLayout = [...this.state.layout];
 
@@ -183,7 +182,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
 
   onAddDoor() {
-    console.log("adding", "door" + this.state.newDoorCounter);
     this.setState({
       // Add a new door. It must have a unique key!
       items: this.state.items.concat({
@@ -202,11 +200,9 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   onLocalSave() {
-    console.log("[@@@@ render() @@@@]");
 
     // TODO: 서버로부터 unit(부대) 불러와야함...
     let unitName = this.props.unitSelected;
-    console.log("unitName: " + unitName);
     let lsUnitList=  getLSUnitList();
     let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
     let hl;
@@ -220,9 +216,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
     }
     let house = hl.find( (e) => (e.name === this.props.houseSelected) );
 
-    console.log("house: " + JSON.stringify(house));
-    console.log("layout: " + JSON.stringify(this.state.layout));
-    console.log("items: " + JSON.stringify(this.state.items));
     house.gridLayout = this.state.layout;
     house.items = this.state.items;
     house.iidCnt = this.state.iid;
@@ -230,7 +223,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   onAddCabinet() {
-    console.log("adding", "cabinet" + this.state.newCabinetCounter);
     this.setState({
       // Add a new door. It must have a unique key!
       items: this.state.items.concat({
@@ -250,7 +242,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   // onAddBox() {
   //   /*eslint no-console: 0*/
-  //   console.log("adding", "box" + this.state.newBoxCounter);
   //   this.setState({
   //     // Add a new item. It must have a unique key!
   //     items: this.state.items.concat({
@@ -270,7 +261,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   // We're using the cols coming back from this to calculate where to add new items.
   onBreakpointChange(breakpoint, cols) {
-    console.log("[@@@@ onBreakPointChange() @@@@]");
     this.setState({
       breakpoint: breakpoint,
       cols: cols
@@ -280,7 +270,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
 
   onLayoutChange(layout) {
-    console.log("[@@@@ onLayoutChange() @@@@]");
     this.props.onLayoutChange(layout);
     let newItems = [];
     let j;
@@ -302,27 +291,22 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   onRemoveBox(i) {
-    console.log("removing item", i);
     this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
  
   }
 
   onRemoveDoor(i) {
-    console.log("removing door", i);
     this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
   }
 
   onRemoveCabinet(i) {
-    console.log("removing cabinet", i);
     this.setState({ items: _.reject(this.state.items, { i: i }), layout:_.reject(this.state.layout, {i:i}) });
   }
 
   render() {
-    console.log("[@@@@ render() @@@@]");
 
     // TODO: 서버로부터 unit(부대) 불러와야함...
     let unitName = this.props.unitSelected;
-    console.log("unitName: " + unitName);
     if(unitName === null)
     {
       return (<div></div>);
@@ -344,9 +328,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
       return (<div></div>);
     }
     
-    console.log("house: " + JSON.stringify(house));
-    console.log("layout: " + JSON.stringify(this.state.layout));
-    console.log("items: " + JSON.stringify(this.state.items));
     house.gridLayout = this.state.layout;
     house.items = this.state.items;
     house.iidCnt = this.state.iid;

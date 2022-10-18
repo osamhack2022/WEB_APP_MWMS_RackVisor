@@ -39,11 +39,9 @@ export default function DetailSearch() {
 
   const onChangeHanlder = (e) => {
   	setContent(e.currentTarget.value);
-    console.log(Content);
   }
   const onChangeType = (e) => {
     setType(e.currentTarget.value);
-    console.log(type);
   }
   
   const onChkBox = (e) => {

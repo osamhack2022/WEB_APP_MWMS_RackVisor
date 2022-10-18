@@ -111,7 +111,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   onAddDoor() {
-    console.log("adding", "door" + this.state.newDoorCounter);
     this.setState({
       items: this.state.items.concat({
         type: "door",
@@ -128,7 +127,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   onAddCabinet() {
-    console.log("adding", "cabinet" + this.state.newCabinetCounter);
     this.setState({
       items: this.state.items.concat({
         type: "cabinet",
@@ -174,7 +172,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   render() {
     let unitName = this.props.unitSelected;
-    console.log("unitName: " + unitName);
     if(unitName === null)
     {
       return (<div></div>);
@@ -196,9 +193,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
       return (<div></div>);
     }
     
-    console.log("house: " + JSON.stringify(house));
-    console.log("layout: " + JSON.stringify(this.state.layout));
-    console.log("items: " + JSON.stringify(this.state.items));
     house.gridLayout = this.state.layout;
     house.items = this.state.items;
 

@@ -22,7 +22,6 @@ function SideScroll({floor, idx, setFloor, setIdx}) {
     setItems((items) =>
       items.concat({ id: getId(String(Math.random()).slice(2, 5)) })
     );
-    console.log(items);
   };
   
   const removeItem = () => {

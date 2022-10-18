@@ -33,10 +33,8 @@ function BoxSelect({setBoxSelect}) {
 
     let visualJ = {};
     hl.map((ttt) => {
-      console.log("ttt" + JSON.stringify(ttt));
       visualJ[ttt.name] = false;
     });
-    console.log("JJ" + JSON.stringify(visualJ));
     setVisual(visualJ);
   }, []);
 

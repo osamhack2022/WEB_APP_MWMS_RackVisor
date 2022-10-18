@@ -58,10 +58,8 @@ function MaterialManage() {
 
     let visualJ = {};
     hl.map((ttt) => {
-      console.log("ttt" + JSON.stringify(ttt));
       visualJ[ttt.name] = false;
     });
-    console.log("JJ" + JSON.stringify(visualJ));
     setVisual(visualJ);
 
   }, []);
@@ -114,7 +112,6 @@ function MaterialManage() {
   }
 
   const materialHandle = (e) => {
-    console.log("이거 바뀜" + JSON.stringify(e));
     setMaterial(e);
     setMaterialChangeModal(true);
   }

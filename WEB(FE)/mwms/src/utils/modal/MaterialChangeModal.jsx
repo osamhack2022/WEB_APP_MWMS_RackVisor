@@ -42,11 +42,9 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
 
   const onChangeHanlder = (e) => {
   	setContent(e.currentTarget.value);
-    console.log(Content);
   }
   const onChangeType = (e) => {
     setType(e.currentTarget.value);
-    console.log(type);
   }
 
 
@@ -126,7 +124,6 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
                           selected={startDate}
                           onChange={(date) => {
                             setStartDate(date);
-                            console.log(date);
                           }}
                           selectsStart
                         />

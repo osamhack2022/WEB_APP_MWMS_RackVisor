@@ -20,7 +20,6 @@ export default function ForumList({ postsPerPage, totalPosts, paginate, currentP
     //   setBefore(e);
     // }
     // console.log("next: ");
-    console.log(e.currentTarget.id);
     // e.currentTarget.className = selectedClassName;
   }
 

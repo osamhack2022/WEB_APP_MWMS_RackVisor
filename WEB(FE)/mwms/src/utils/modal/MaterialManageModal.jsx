@@ -34,11 +34,9 @@ export default function MaterialManageModal({open, setOpen}) {
 
   const onChangeHanlder = (e) => {
   	setContent(e.currentTarget.value);
-    console.log(Content);
   }
   const onChangeType = (e) => {
     setType(e.currentTarget.value);
-    console.log(type);
   }
 
 
@@ -118,7 +116,6 @@ export default function MaterialManageModal({open, setOpen}) {
                           selected={startDate}
                           onChange={(date) => {
                             setStartDate(date);
-                            console.log(date);
                           }}
                           selectsStart
                         />

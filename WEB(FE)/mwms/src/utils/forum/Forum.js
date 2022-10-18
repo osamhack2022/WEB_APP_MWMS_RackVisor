@@ -32,7 +32,6 @@ function Forum() {
     const indexOfFirst = indexOfLast - postsPerPage;
     let currentPosts = 0;
     currentPosts = posts.slice(indexOfFirst, indexOfLast);
-    console.log(currentPosts);
     setCurrPostList(currentPosts);
   }, []);
 
@@ -41,7 +40,6 @@ function Forum() {
     const indexOfFirst = indexOfLast - postsPerPage;
     let currentPosts = 0;
     currentPosts = posts.slice(indexOfFirst, indexOfLast);
-    console.log(currentPosts);
     setCurrPostList(currentPosts);
   }, [posts, currentPage]);
 

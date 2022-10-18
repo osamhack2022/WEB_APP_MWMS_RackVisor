@@ -8,7 +8,6 @@ export default function Tabs({setTabType, defaultTabs}) {
   const [tabs, setTabs] = useState(defaultTabs);
 
   const setType = (e) => {
-    console.log(e.currentTarget.getAttribute('value'));
     setTabType(e.currentTarget.getAttribute('value'));
     let copyTab = tabs
     if (e.currentTarget.getAttribute('value') == "material") {

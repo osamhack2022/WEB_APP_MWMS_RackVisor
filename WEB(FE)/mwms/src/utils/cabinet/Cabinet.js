@@ -28,18 +28,15 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
 
   const addItem = (e) => {
     let currFloor = e.currentTarget.getAttribute('value');
-    console.log("floor : " + currFloor);
     let copyFloorList = floorList;
     let newId = copyFloorList.floorList.find(floor => floor.floor == currFloor).iid + 1;
     let floorIdx = copyFloorList.floorList.findIndex(floor => floor.floor == currFloor);
     let newBox = {id : newId, iid : newId};
 
-    console.log(JSON.stringify(newBox));
     
     copyFloorList.floorList[floorIdx].list.push(newBox);
     copyFloorList.floorList[floorIdx].iid += 1;
     
-    console.log(JSON.stringify(copyFloorList));
     setFloorList(copyFloorList);
     setRend(Math.random());
   }

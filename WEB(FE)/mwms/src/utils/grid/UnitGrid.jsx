@@ -65,7 +65,6 @@ export default class AddRemoveLayout extends React.PureComponent {
   }
 
   onAddItem() {
-    console.log("adding", "n" + this.state.newCounter);
     let name = prompt("부대명을 입력해주세요");
     this.setState({
       items: this.state.items.concat({
@@ -136,7 +135,6 @@ export default class AddRemoveLayout extends React.PureComponent {
   }
 
   onRemoveItem(i) {
-    console.log("removing", i);
     this.setState({ items: _.reject(this.state.items, { i: i }) });
   }
 
