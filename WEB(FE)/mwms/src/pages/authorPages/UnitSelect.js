@@ -6,6 +6,7 @@ import AuthorHeader from '../../components/AuthorHeader';
 import Title from '../../utils/with_description';
 import styles from '../../style.js';
 import Button from '../../components/Button';
+import { axiosPost } from '../../api';
 
 // lsUnitList 예시 [{name: "123부대"}, {name: "456부대"}, ... ]
 export function getLSUnitList()
@@ -37,10 +38,9 @@ function UnitSelect() {
     navigate("/main");
   }
 
-  const addUnit = () => {
+  const addUnit = async () => {
     const newName = prompt("부대명을 입력해주세요"); //부대명이 서로 달라야 함
-    if(newName === null)
-    {
+    if (newName === null) {
       return;
     }
     let lsUnitList = getLSUnitList();
@@ -48,9 +48,14 @@ function UnitSelect() {
       name: newName,
       houseList: [],
     });
+
+    // ? Add Unit
+    await axiosPost("/units", {
+      name: newName,
+      comment: newName,
+    });
     localStorage.setItem("unitList", JSON.stringify(lsUnitList));
     setUnitList(lsUnitList);
-
   }
 
   useEffect(() => {
