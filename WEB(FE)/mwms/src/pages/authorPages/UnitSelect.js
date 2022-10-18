@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthorHeader from '../../components/AuthorHeader';
 import Title from '../../utils/with_description';
 import styles from '../../style.js';
+import Button from '../../components/Button';
 
 // lsUnitList 예시 [{name: "123부대"}, {name: "456부대"}, ... ]
 export function getLSUnitList()
@@ -70,15 +71,11 @@ function UnitSelect() {
 
       <Title title={"부대 선택"} />
       <div class={`h-screen mx-48 px-32 `}>
-        <div class="grid grid-cols-4 gap-4 px-4 py-3 border-gray-200 bg-gray">
+        <div class="grid grid-cols-4 gap-4 px-4 py-3">
           {unitList.map((un) => (
-            <button id={un.name} onClick={onSelectUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-              <h5 id={un.name} onClick={onSelectUnit} class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{un.name}</h5>
-            </button>
+            <Button id={un.name} text={un.name} handleClick={onSelectUnit} class="hover:border-green-500 py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-blue-gradient border-2 border-white rounded-[10px]" />
           ))}
-          <button onClick={addUnit} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-              <span class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 부대 추가</span>
-          </button>
+          <Button text={"+ 부대 추가"} handleClick={addUnit} class="hover:border-green-500 py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-blue-gradient border-2 border-white rounded-[10px]"/>
         </div>
       </div>
 

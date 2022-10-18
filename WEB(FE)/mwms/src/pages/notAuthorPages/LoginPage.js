@@ -4,6 +4,7 @@ import Footer from "../../components/Footer"
 import { useNavigate } from "react-router-dom"
 import styles from '../../style.js'
 import Title from '../../utils/with_description'
+import Button from "../../components/Button"
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ function LoginPage() {
       <section>
         
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <div class="w-full max-w-[400px] bg-[#0c161f] rounded mx-auto p-8 px-8 sm:max-w-md">
+          <div class="w-full max-w-[600px] bg-[#0c161f] rounded mx-auto p-8 px-8 sm:max-w-md">
               <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                   <h2 class="text-xl font-bold leading-tight text-center tracking-tight text-white md:text-xl">
                       국방물자관리체계<br/>
@@ -61,7 +62,7 @@ function LoginPage() {
                   </h2>
                   <form class="space-y-4 md:space-y-6" action="#">
                       <div>
-                          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">군번</label>
+                          <label for="email" class="block mb-2 text-sm font-medium text-white">군번</label>
                           <input 
                             type="text" 
                             name="id" 
@@ -73,7 +74,7 @@ function LoginPage() {
                           />
                       </div>
                       <div>
-                          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
+                          <label for="password" class="block mb-2 text-sm font-medium text-white">비밀번호</label>
                           <input 
                             type="password" 
                             name="password" 
@@ -83,20 +84,20 @@ function LoginPage() {
                             value={pw}
                             onChange={onPasswordHandler}/>
                       </div>
-                      <button 
-                        class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        onClick={login}
-                      >
-                        로그인
-                      </button>
+                      <Button 
+                        class="w-full text-primary-900 bg-secondary hover:bg-cyan-600 font-semibold rounded-lg px-5 py-2.5 text-center"
+                        handleClick={login}
+                        text={"로그인"}
+                      />
+                        
+                      
                   </form>
 
-                  <button 
-                        class="w-full text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        onClick={signUp}
-                      >
-                        회원가입
-                  </button>
+                  <Button 
+                        class="w-full text-white bg-gray-600 hover:bg-black font-semibold rounded-lg px-5 py-2.5 text-center"
+                        handleClick={signUp}
+                        text={"회원가입"}
+                      />
               </div>
           </div>
         </div>
