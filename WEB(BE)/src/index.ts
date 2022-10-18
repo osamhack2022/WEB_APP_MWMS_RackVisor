@@ -94,11 +94,10 @@ app.register(stockRoutes, { prefix: 'api/stocks' });
 app.setErrorHandler(errorHandlers);
 
 // ! [Server] Start Listening
-app.listen({ port: 3003 }, (err, address) => {
+app.listen({ port: 80, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
   }
   console.log(`[DEV] Server Started at ${address}`);
-  console.log(`[DEV] 🚀 Server ready at: http://localhost:3003`);
 });
