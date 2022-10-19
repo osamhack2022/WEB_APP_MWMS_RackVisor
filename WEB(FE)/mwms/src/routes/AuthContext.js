@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, } from "react";
 
 const authContext = createContext({
-  unitSelected : "",
+  unitSelected : {},
   unitSelect : () => {},
-  houseSelected : "",
+  houseSelected : {},
   houseSelect : () => {},
 });
 

@@ -3,6 +3,7 @@ import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout"
 import EditableText from "../text/EditableText"
 import { getLSUnitList } from '../../pages/authorPages/UnitSelect'
+import { axiosGet, axiosPut } from "../../api";
 
 const ReactGridLayout = WidthProvider(RGL);
   
@@ -19,32 +20,16 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    let unitName = this.props.unitSelected;
-    let lsGridLayout = [];
-    let lsItems = [];
-    let lsUnitList = getLSUnitList();
-    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-    let hl;
-    let iidCnt;
-    if (lsUnit === undefined) {
-      hl = []
-    } else {
-      hl = lsUnit.houseList;
-      let house = hl.find( (e) => (e.name === this.props.houseSelected) );
-      if (house != undefined) {
-        lsGridLayout = house.gridLayout;
-        lsItems = house.items;
-        iidCnt = house.iid;
-      }
-    }
 
     this.state = {
-      items: lsItems,
+      currUnit: this.props.unitSelected,
+      currHouse: this.props.houseSelected,
+      items: [],
       newBoxCounter: 0,
       newDoorCounter: 0,
       newCabinetCounter: 0,
-      iid:iidCnt, //unique id for item
-      layout: lsGridLayout,
+      iid: 0, //unique id for item
+      layout: [],
     };
     this.onLayoutChange = this.onLayoutChange.bind(this);
     // this.onAddBox = this.onAddBox.bind(this);
@@ -53,6 +38,17 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.onLocalSave = this.onLocalSave.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
+  }
+
+  async componentDidMount() {
+    const response = await axiosPut('/warehouses/update-layout/' + this.props.unitSelected.id);
+
+    const json = await response.json();
+    // this.setState({ data: json });
+    //이쪽 부분 창고 api 이상함... unitId -> houseId 가 아니라 그냥 houseId 만 넣은 채 업데이트를 진행하며,
+    //기존에 layout을 get 할 수 있는 수단이 없음
+    //초기 layout 과 item list 를 저장해줄 필요가 있음
+    //itemList 도 저장할 방법이 필요함
   }
 
   createElement(el)
@@ -215,6 +211,11 @@ export default class WarehouseGridLayout extends React.PureComponent {
       hl = lsUnit.houseList;
     }
     let house = hl.find( (e) => (e.name === this.props.houseSelected) );
+
+
+    //여기서 추가된 rack 죄다 넣어줘야 함
+    //
+
 
     house.gridLayout = this.state.layout;
     house.items = this.state.items;

@@ -11,3 +11,8 @@ export const axiosPost = async (targetApiUrl, body) => {
   const { data } = await axios.post(baseUrl + targetApiUrl, body);
   return data;
 };
+
+export const axiosPut = async (targetApiUrl, body) => {
+  const { data } = await axios.put(baseUrl + targetApiUrl, body);
+  return data;
+};
