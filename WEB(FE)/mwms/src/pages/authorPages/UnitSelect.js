@@ -17,9 +17,9 @@ function UnitSelect() {
   let auth = useAuth();
 
   const onSelectUnit = (e) => {
-    //auth에 특정 unit 의 json 전체를 저장하여 사용할 예정
-    auth.unitSelect(unitList.find((unit) => (unit.id === e.target.id)));
-        
+    //TODO _ API
+    auth.unitSelect(unitList.find((unit) => (unit.id == e.target.id)));
+    
     e.stopPropagation();
     navigate("/main");
   };
@@ -36,8 +36,10 @@ function UnitSelect() {
       comment: newName,
     };
 
-    const itemResponse = await axiosPost("/units", itemToAdd);
-    itemToAdd.id = itemResponse.id;
+    //TODO _ API
+    // const itemResponse = await axiosPost("/units", itemToAdd);
+    // itemToAdd.id = itemResponse.id;
+    itemToAdd.id = 1;
 
     setUnitList((prev) => [...prev, itemToAdd]);
   };
@@ -53,7 +55,9 @@ function UnitSelect() {
 
   useEffect(() => {
     auth.unitSelect({});
-    fetchUnitList();
+    
+    //TODO _ API
+    // fetchUnitList();
   }, []);
 
   return (

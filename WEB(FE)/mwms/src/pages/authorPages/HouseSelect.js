@@ -26,16 +26,21 @@ function HouseSelect() {
   }, []);
 
   useEffect(() => {
-    if(currUnit === {}) {
+    auth.houseSelect({});
+
+    if(!currUnit) {
       alert("부대를 선택해주세요");
       navigate("/");
     }
-    fetchHouseList();
+    //TODO _ api
+    // fetchHouseList();
   }, []);
 
   // houseList 예시: [{name : "1종창고", gridLayout: [], items: []}, {name : "2종창고", gridLayout: [], items: []}, {name : "3종창고", gridLayout: [], items: []} ] <- DB 설계에 따라 형식 바뀔 수 있음
   const onSelectHouse = (e) => {
-    auth.houseSelect(houseList.find((hou) => (hou.id === e.target.id)));
+    auth.houseSelect(houseList.find((hou) => (hou.id == e.target.id)));
+    console.log(houseList.find((hou) => (hou.id == e.target.id)));
+
     e.stopPropagation();
     navigate("/houseManage");
   }
@@ -54,15 +59,13 @@ function HouseSelect() {
       storedUnitId: currUnit.id,
     };
 
-    const itemResponse = await axiosPost("/warehouses", itemToAdd);
-    itemToAdd.id = itemResponse.id;
+    //TODO _ api
+    // const itemResponse = await axiosPost("/warehouses", itemToAdd);
+    // itemToAdd.id = itemResponse.id;
+    itemToAdd.id = 1;
 
     setHouseList((prev) => [...prev, itemToAdd]);
   }
-  
-  useEffect(() => {
-    auth.houseSelect({});
-  }, []);
   
   return (
     <div>
@@ -73,13 +76,13 @@ function HouseSelect() {
           <div> 창고 관리 </div>
           <div class="grid grid-cols-4 gap-4 px-4 py-3 border-gray-200 bg-gray">
             {houseList.map((h) => (
-              <div id={h.name} onClick={onSelectHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div id = {h.name} onClick={onSelectHouse}  class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{h.name}</div>
-              </div> 
+              <button id={h.id} onClick={onSelectHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div id = {h.id} onClick={onSelectHouse}  class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{h.name}</div>
+              </button> 
             ))}
-            <div onClick={addHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <button onClick={addHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <span class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 창고 추가</span>
-            </div> 
+            </button> 
           </div>
         </div>
       </div>

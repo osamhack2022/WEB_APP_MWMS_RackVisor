@@ -35,6 +35,7 @@ function Posts({ posting, total, setPosting }) {
       title : total.find(post => post.id == e.target.id).title,
       open : true
     });
+    e.stopPropagation();
   }
 
   const erasePost = (e) => {
@@ -89,7 +90,7 @@ function Posts({ posting, total, setPosting }) {
           {posting && posting.map((article) => (
             <tr key={article.id}>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{article.id}</td>
-              <button className="px-6 py-4 whitespace-nowrap text-sm text-white" id={article.id} onClick={openModal}>{article.title}</button>
+              <button className="absolute px-6 py-4 z-[0] whitespace-nowrap text-sm text-white" id={article.id} onClick={openModal}>{article.title}</button>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{article.milClass} {article.name}</td>
               <td  className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" >
                 <div id={article.id} onClick={erasePost} className="text-white cursor-pointer hover:text-secondary">X</div>

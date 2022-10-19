@@ -32,11 +32,11 @@ function LoginPage() {
     localStorage.setItem("token", "123");
     //서버와 통신 로직 추가 필요
 
-    // ? Login
-    await axiosPost("/users/login", {
-      militarySerialNumber: "s21",
-      password: "string",
-    });
+    // // ? Login
+    // await axiosPost("/users/login", {
+    //   militarySerialNumber: "s21",
+    //   password: "string",
+    // });
 
     localStorage.setItem("이름", "홍길동");
     localStorage.setItem("직책", "행정보급관");

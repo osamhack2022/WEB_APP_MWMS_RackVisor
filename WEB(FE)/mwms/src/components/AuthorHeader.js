@@ -32,7 +32,7 @@ function AuthorHeader() {
 
         <div class="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[5px] mb-2">
             <p class={`${styles.paragraph} ml-2`}>
-              {localStorage.getItem("부대")}
+              {auth.unitSelected.name}
             </p>
         </div>
 
