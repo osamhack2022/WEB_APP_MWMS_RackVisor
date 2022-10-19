@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../..';
 import { registerPost, getPostOnId, getPostsOnUnit } from './post.controller';
-import { $ref, postSchemas } from './post.schema';
+import { $ref } from './post.schema';
 
 async function postRoutes(server: FastifyInstance) {
   server.post(
@@ -44,3 +44,5 @@ async function postRoutes(server: FastifyInstance) {
     getPostOnId
   );
 }
+
+export default postRoutes;
