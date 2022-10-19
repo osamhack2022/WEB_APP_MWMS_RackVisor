@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/model/unit_page_model.dart';
+import 'package:myapp/utils/global_colors.dart';
 import '../model/login_model.dart';
 import '../model/searchbar_model.dart';
 import '../services/web_service.dart';
@@ -12,44 +13,48 @@ class SearchBarController extends GetxController {
   }
 
   searchBar() {
-    return Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-        prefixIcon: const Icon(Icons.search),
-        prefixIconColor: const Color.fromARGB(255, 255, 255, 255)
-    ),
-    child: Row(
-      // ignore: prefer_const_literals_to_create_immutables
-      children: [
-        
-        //아이콘
-        const Expanded(
-          flex: 1,
-          child:  Icon(Icons.search),
-        ),
-
-        //검색하세요
-        const Expanded(
-          flex: 4,
-          child: Text("검색하세요"),
-        ),
-
-
-        //qr 스캐너 on
-        const Expanded(
-          flex: 4,
-          child: Icon(Icons.search_off),
-        ),
-
-
-     
-
-
-
-        ]
+    return InkWell(
+      child: Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
       ),
-  );
+
+
+      child: Row(
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          
+          //아이콘
+          const Expanded(
+            flex: 1,
+            child:  Icon(Icons.search,
+            color: Colors.grey
+            ),
+          ),
+
+          //검색하세요
+          const Expanded(
+            flex: 4,
+            child: Text("검색하세요"),
+          ),
+
+          Divider(thickness: 1,),
+
+          //qr 스캐너 on
+          const Expanded(
+            flex: 1,
+            child: Icon(Icons.search_off),
+          ),
+       
+
+
+          ]
+        ),
+  ),
+
+  onTap: ,
+    );
   }
 
   searchResultList(Album album) {

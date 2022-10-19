@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:myapp/view/front_page.dart';
 import 'package:myapp/view/login_page.dart';
+import 'package:myapp/view/notice_page.dart';
 import 'package:myapp/view/registar_page.dart';
 import 'package:myapp/view/serach_page.dart';
 import 'package:myapp/view/unit_page.dart';
