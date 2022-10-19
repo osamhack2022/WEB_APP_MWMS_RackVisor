@@ -29,6 +29,7 @@ model Unit {
   warehouses Warehouse[]
   users      UsersOnUnits[]
   History    History[]
+  Post       Post[]
 }
 
 model UsersOnUnits {
@@ -81,12 +82,14 @@ model Stock {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String
-  createdAt DateTime @default(now())
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+  id            Int      @id @default(autoincrement())
+  title         String
+  content       String
+  createdAt     DateTime @default(now())
+  author        User     @relation(fields: [authorId], references: [id])
+  authorId      Int
+  postingUnit   Unit     @relation(fields: [postingUnitId], references: [id])
+  postingUnitId Int
 }
 
 model History {
