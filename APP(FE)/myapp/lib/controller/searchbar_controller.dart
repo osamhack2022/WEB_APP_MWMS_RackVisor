@@ -5,26 +5,50 @@ import '../model/login_model.dart';
 import '../model/searchbar_model.dart';
 import '../services/web_service.dart';
 class SearchBarController extends GetxController {
-  Album album2;
+
 
   circularProgress() {
     return const Center(child: CircularProgressIndicator());
   }
 
   searchBar() {
-    return TextField(
-      style: const TextStyle(color: Colors.white),
-    decoration: InputDecoration(
-      filled: true,
-      fillColor: Colors.blueGrey,
-      border: OutlineInputBorder(
+    return Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide.none,
-        ),
-        hintText: "검색하세요",
         prefixIcon: const Icon(Icons.search),
         prefixIconColor: const Color.fromARGB(255, 255, 255, 255)
-    )
+    ),
+    child: Row(
+      // ignore: prefer_const_literals_to_create_immutables
+      children: [
+        
+        //아이콘
+        const Expanded(
+          flex: 1,
+          child:  Icon(Icons.search),
+        ),
+
+        //검색하세요
+        const Expanded(
+          flex: 4,
+          child: Text("검색하세요"),
+        ),
+
+
+        //qr 스캐너 on
+        const Expanded(
+          flex: 4,
+          child: Icon(Icons.search_off),
+        ),
+
+
+     
+
+
+
+        ]
+      ),
   );
   }
 
@@ -44,11 +68,6 @@ class SearchBarController extends GetxController {
     );
   }
 
-    void upadateList() {
-    setState(( {
-      album.where((element) => element.title)
-    }))
-  }
 
 
   searchResultListView(AsyncSnapshot<List<Album>> snapshot) {

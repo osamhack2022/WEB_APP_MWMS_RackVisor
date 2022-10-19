@@ -4,4 +4,5 @@ class GlobalColors {
   static HexColor mainColor = HexColor('#f9c38a');
   static HexColor textColor = HexColor('#111111');
   static HexColor loginBorder = HexColor('#ffffff');
+  static HexColor brightGrey = HexColor('#E2E2E2');
 }

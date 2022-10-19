@@ -5,7 +5,7 @@ import 'package:myapp/services/web_service.dart';
 import 'package:myapp/utils/global_colors.dart';
 
 import '../model/unit_page_model.dart';
-import 'gridcell.dart';
+import '../screen/gridcell.dart';
 
 class SearchPage extends StatelessWidget {
 

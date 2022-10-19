@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/model/unit_page_model.dart';
 import 'package:myapp/services/web_service.dart';
-import 'package:myapp/view/gridcell.dart';
+import 'package:myapp/screen/gridcell.dart';
 
 
 class UnitPage extends StatefulWidget {
