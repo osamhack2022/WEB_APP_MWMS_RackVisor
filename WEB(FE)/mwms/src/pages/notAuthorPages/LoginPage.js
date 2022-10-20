@@ -34,7 +34,6 @@ function LoginPage() {
     //서버와 통신 로직 추가 필요
 
     // // ? Login
-    
     const response = await axiosPost("/users/login", {
       militarySerialNumber: id,
       password: pw,
@@ -53,7 +52,6 @@ function LoginPage() {
 
   return (
     <div class="bg-primary-900 w-full overflow-hidden">
-      \
       <div class={`bg-primary-900 ${styles.flexCenter}`}>
         <div class={`${styles.boxWidth}`}>
           <Header />
