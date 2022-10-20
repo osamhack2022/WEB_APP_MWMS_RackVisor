@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controller/bottom_nav_controller.dart';
@@ -65,40 +66,30 @@ class _FrontPage extends State<FrontPage> {
       bottomNavigationBar: StylishBottomBar(
         items: [
           AnimatedBarItems(
-              icon: const Icon(
-                Icons.house_outlined,
-              ),
-              selectedIcon: const Icon(Icons.house_rounded),
-              selectedColor: Colors.teal,
-              backgroundColor: Colors.tealAccent,
-              title: const Text('Home')),
+              icon: const Icon(CupertinoIcons.home),
+              selectedIcon: const Icon(CupertinoIcons.home),
+              selectedColor: GlobalColors.backgroundColor,
+              title: const Text('홈')),
           AnimatedBarItems(
-              icon: const Icon(Icons.star_border_rounded),
-              selectedIcon: const Icon(Icons.star_rounded),
-              selectedColor: Colors.green,
-              backgroundColor: Colors.lightGreenAccent,
-              title: const Text('Star')),
+              icon: const Icon(CupertinoIcons.qrcode_viewfinder),
+              selectedIcon: const Icon(CupertinoIcons.qrcode_viewfinder),
+              selectedColor: GlobalColors.backgroundColor,
+              title: const Text('스캐너')),
           AnimatedBarItems(
               icon: const Icon(
-                Icons.style_outlined,
+                CupertinoIcons.rectangle_stack,
               ),
-              selectedIcon: const Icon(Icons.style),
-              backgroundColor: Colors.amber,
-              selectedColor: Colors.deepOrangeAccent,
-              title: const Text('Style')),
+              selectedIcon: const Icon(CupertinoIcons.rectangle_stack),
+              selectedColor: GlobalColors.backgroundColor,
+              title: const Text('창고관리')),
           AnimatedBarItems(
-              icon: const Icon(
-                Icons.person_outline,
-              ),
-              selectedIcon: const Icon(
-                Icons.person,
-              ),
-              backgroundColor: Colors.purpleAccent,
-              selectedColor: Colors.deepPurple,
-              title: const Text('Profile')),
+              icon: const Icon(CupertinoIcons.person),
+              selectedIcon: const Icon(CupertinoIcons.person),
+              selectedColor: GlobalColors.backgroundColor,
+              title: const Text('프로필')),
         ],
-        iconSize: 32,
-        iconStyle: IconStyle.animated,
+        iconSize: 30,
+        iconStyle: IconStyle.Default,
         hasNotch: true,
         opacity: 0.3,
         currentIndex: c.selected ?? 0,
@@ -120,6 +111,7 @@ class _FrontPage extends State<FrontPage> {
         ],
       )
       ),
+      backgroundColor: GlobalColors.mainBackgroundColor,
     );
   }
   

@@ -18,7 +18,7 @@ class SearchBarController extends GetxController {
       decoration: BoxDecoration(
         
         border: Border.all(
-          width: 3,
+          width: 2,
           color: GlobalColors.backgroundColor
         ),
 

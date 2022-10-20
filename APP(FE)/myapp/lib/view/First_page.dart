@@ -96,10 +96,12 @@ class _FirstPage extends State<FirstPage> {
  
  
     return Scaffold(
+      backgroundColor: GlobalColors.mainBackgroundColor,
       
       body: CustomScrollView(
         slivers: [ 
           SliverAppBar(
+          elevation: 5,
           backgroundColor: Colors.white,
           expandedHeight: 220.h,
           flexibleSpace: FlexibleSpaceBar(
@@ -145,15 +147,23 @@ class _FirstPage extends State<FirstPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
+                SizedBox(
+                  height: 20.h,
+                ),
+
                 Container(
                   padding: EdgeInsets.only(left: 40.w,right: 40.w),
                   height: 30.h,
                   child: searchBarController.searchBar(),
                 ),
               
-              
+              Container(
+                padding: EdgeInsets.all(40.w),
+                child: NoticeScreen(),
+              )
               // 공지사항
-              NoticeScreen(),
+              
    
             ]),
           )
