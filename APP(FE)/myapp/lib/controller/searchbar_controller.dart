@@ -16,8 +16,14 @@ class SearchBarController extends GetxController {
     return InkWell(
       child: Container(
       decoration: BoxDecoration(
+        
+        border: Border.all(
+          width: 3,
+          color: GlobalColors.backgroundColor
+        ),
+
         color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(10),
       ),
 
 
@@ -53,7 +59,6 @@ class SearchBarController extends GetxController {
         ),
   ),
 
-  onTap: ,
     );
   }
 

@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/registarPage", page: () => RegistarPage()),
         GetPage(name: "/frontPage", page: () => const FrontPage()),
         GetPage(name: "/unitPage", page: () => UnitPage()),
-        GetPage(name: "/searchPage", page: () => SearchPage()),
+        //GetPage(name: "/searchPage", page: () => SearchPage()),
         
       ]
     );

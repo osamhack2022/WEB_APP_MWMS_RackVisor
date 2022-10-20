@@ -96,19 +96,25 @@ class _FirstPage extends State<FirstPage> {
  
  
     return Scaffold(
+      
       body: CustomScrollView(
         slivers: [ 
           SliverAppBar(
+          backgroundColor: Colors.white,
           expandedHeight: 220.h,
           flexibleSpace: FlexibleSpaceBar(
+            
                   //이미지
                   background:  
                   Stack(
                     children: [
                       
-                      if (_imageFile == null) Image.asset("images/main_logo.png",
+                      if (_imageFile == null) 
+                      Center(
+                        child: Image.asset("images/no_image.png",
                       width: double.maxFinite,
                       fit: BoxFit.cover,) 
+                      )
                       else Image.network(_imageFile!.path,
                       width: double.maxFinite,
                       fit: BoxFit.cover,),
@@ -133,15 +139,21 @@ class _FirstPage extends State<FirstPage> {
           )
         ),
         ),
-          
- 
- 
- 
+
           //메인 밑
           SliverToBoxAdapter(
-            child: Column(children: [
-              searchBarController.searchBar(),
-              NoticeScreen()
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 40.w,right: 40.w),
+                  height: 30.h,
+                  child: searchBarController.searchBar(),
+                ),
+              
+              
+              // 공지사항
+              NoticeScreen(),
    
             ]),
           )

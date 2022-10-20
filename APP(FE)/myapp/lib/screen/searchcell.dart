@@ -7,15 +7,7 @@ class SearchCell extends StatelessWidget {
   final Album album;
 
   void searchAlbum(String query) {
-      final suggestions = main_search_list.where((album){
-        final albumTitle = album.title.toLowerCase();
-        final input = query.toLowerCase();
-
-        return albumTitle.contains(input);
-      }).toList();
-      setState(() {
-      main_search_list = suggestions;
-      });
+      
     }
 
   @override

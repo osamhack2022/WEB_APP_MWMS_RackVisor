@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controller/bottom_nav_controller.dart';
 import 'package:myapp/model/login_model.dart';
+import 'package:myapp/utils/global_colors.dart';
 
 import 'package:myapp/view/Fourth_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
@@ -58,6 +59,7 @@ class _FrontPage extends State<FrontPage> {
     return Scaffold(
       extendBody: true, 
       appBar:  AppBar(
+        backgroundColor: GlobalColors.backgroundColor,
           title: Text(loginModel.unitName),
         ),
       bottomNavigationBar: StylishBottomBar(
