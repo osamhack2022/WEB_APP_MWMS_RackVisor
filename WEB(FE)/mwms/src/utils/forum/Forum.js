@@ -56,7 +56,7 @@ function Forum() {
 
   return (
     <div class="px-4 py-3">
-      <div class="bg-gray-900 border border-2 border-secondary rounded-lg mb-6">
+      <div class="bg-gray-900 border border-2 border-white rounded-lg mb-6">
         <Posts posting={currPostList} total={posts} setPosting={setPosts}/>
         {/* <Pagination
           postsPerPage={postsPerPage}
