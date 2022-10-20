@@ -29,7 +29,7 @@ function LoginPage() {
   };
 
   const login = async () => {
-    // localStorage.setItem("token", "123");
+    localStorage.setItem("token", "123");
     
     //서버와 통신 로직 추가 필요
 
