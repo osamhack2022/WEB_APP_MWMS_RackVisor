@@ -9,6 +9,7 @@ export default function LocationSelectModal({open, setOpen, setLocation}) {
   const handle = (e) => {
     setBoxSelect(e);
   }
+  
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>

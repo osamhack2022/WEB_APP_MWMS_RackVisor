@@ -3,6 +3,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { axiosPost } from '../../api';
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function SignupPage() {
   }
 
   const onMilClass = (event) => {
-    setMilClass(event.target.value);
+    setMilClass(event.currentTarget.value);
   }
 
   const onUnit = (event) => {
@@ -42,9 +43,21 @@ function SignupPage() {
     setPos(event.currentTarget.value);
   }
 
-  const register = () => {
+  const register = async () => {
     //입력한 값이 valid 한지 확인하는 로직이 필요
     //서버와 통신하는 부분 - dumy value 가져갈 필요
+    let itemToAdd = {
+      email: "user@example.com",
+      name: name,
+      militarySerialNumber: id,
+      rank: "RANK_GEN",
+      reigment: unit,
+      position: pos,
+      phoneNumber: "string",
+      password: pw
+    }
+
+    await axiosPost('/users', itemToAdd);
     alert("회원가입이 되었습니다. 로그인해주세요");
     navigate("/login");
   };
@@ -67,7 +80,7 @@ function SignupPage() {
           <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
               <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <form class="space-y-4 md:space-y-6" action="#">
+                <div class="space-y-4 md:space-y-6">
                   <div>
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이름</label>
                     <input 
@@ -77,7 +90,7 @@ function SignupPage() {
                       class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                       placeholder="이름"
                       value={name} 
-                      onchange={onNameHandler}
+                      onChange={onNameHandler}
                     />
                   </div>
                   <div>
@@ -89,7 +102,7 @@ function SignupPage() {
                       class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                       placeholder="군번"
                       value={id} 
-                      onchange={onIdHandler}
+                      onChange={onIdHandler}
                     />
                   </div>
                   <div>
@@ -130,7 +143,7 @@ function SignupPage() {
                       class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                       placeholder="소속"
                       value={unit} 
-                      onchange={onUnit}
+                      onChange={onUnit}
                     />
                   </div>
                   <div>
@@ -140,9 +153,9 @@ function SignupPage() {
                       name="id" 
                       id="id" 
                       class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                      placeholder="직책"
+                      placeholder="직책"  
                       value={pos} 
-                      onchange={pos}
+                      onChange={onPos}
                     />
                   </div>
                   <button 
@@ -157,7 +170,7 @@ function SignupPage() {
                   >
                     취소
                   </button>
-                </form>
+                </div>
               </div>
             </div>
           </div>

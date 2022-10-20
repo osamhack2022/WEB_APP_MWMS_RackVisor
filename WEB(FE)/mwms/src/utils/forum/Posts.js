@@ -4,6 +4,8 @@ import SettingModal from '../modal/SettingModal';
 import DetailContent from '../modal/DetailContent';
 import ContentPlusModal from '../modal/contentPlusModal';
 import Button from '../../components/Button';
+import { axiosPost } from '../../api';
+import { useAuth } from '../../routes/AuthContext';
 
 //https://binaryjourney.tistory.com/20 [Binary Journey:티스토리]
 function Posts({ posting, total, setPosting }) {
@@ -15,6 +17,8 @@ function Posts({ posting, total, setPosting }) {
   const [plus, setPlus] = useState(false);
   const [plusTitle, setPlusTitle] = useState("");
   const [plusContent, setPlusContent] = useState("");
+  const auth = useAuth();
+  const currUnit = auth.unitSelected;
 
   useEffect(() => { 
     setPlusTitle(""); 
@@ -39,10 +43,23 @@ function Posts({ posting, total, setPosting }) {
   }
 
   const erasePost = (e) => {
+    //삭제 구현 필요
+  
     setPosting(total.filter(post => post.id != e.target.id))
+  
+  
   }
 
-  const makePost = () => {
+  const makePost = async () => {
+    // let itemToAdd = {
+    //   title : plusTitle,
+    //   milClass : localStorage.getItem("계급"),
+    //   name : localStorage.getItem("이름"),
+    //   content : plusContent
+    // }
+    // const itemResponse = await axiosPost("/posts/unit-posts/" + (currUnit.id).toString(), itemToAdd);
+    // setPosting(total.concat(itemResponse));
+
     setPosting(total.concat({
       id : total.length != 0 ? total[total.length - 1].id + 1 : 1,
       title : plusTitle,

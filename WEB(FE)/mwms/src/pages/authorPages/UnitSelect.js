@@ -19,7 +19,6 @@ function UnitSelect() {
   const onSelectUnit = (e) => {
     //TODO _ API
     auth.unitSelect(unitList.find((unit) => (unit.id == e.target.id)));
-    
     e.stopPropagation();
     navigate("/main");
   };
@@ -37,8 +36,8 @@ function UnitSelect() {
     };
 
     //TODO _ API
-    // const itemResponse = await axiosPost("/units", itemToAdd);
-    // itemToAdd.id = itemResponse.id;
+    const itemResponse = await axiosPost("/units", itemToAdd);
+    itemToAdd.id = itemResponse.id;
     itemToAdd.id = 1;
 
     setUnitList((prev) => [...prev, itemToAdd]);
@@ -57,7 +56,7 @@ function UnitSelect() {
     auth.unitSelect({});
     
     //TODO _ API
-    // fetchUnitList();
+    fetchUnitList();
   }, []);
 
   return (

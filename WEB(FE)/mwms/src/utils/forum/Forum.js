@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Posts from './Posts';
 import Pagination from './Pagination';
 import ForumList from './ForumList';
+import { axiosGet } from '../../api';
 //https://chanhuiseok.github.io/posts/react-12/
 
 function Forum() {
@@ -10,7 +11,17 @@ function Forum() {
   const [postsPerPage, setPostsPerPage] = useState(5);
   const [currPostList, setCurrPostList] = useState([]);
 
+  const fetchPostList = useCallback(async () => {
+    try {
+      const data = await axiosGet("/posts/");
+      setPosts(data);
+    } catch (error) {
+
+    }
+  });
+
   useEffect(() => {
+    //fetchPostList();
     setPosts([{id : 1, title:"wow", milClass:"일병", name:"홍길동", content:"내용입니당1" }, 
     {id : 2, title:"wow", milClass:"일병", name:"홍길동", content:"내용입니당1" },
     {id : 3, title:"wow", milClass:"일병", name:"홍길동", content:"내용입니당1" },

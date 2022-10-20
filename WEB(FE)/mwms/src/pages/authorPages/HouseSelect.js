@@ -18,7 +18,11 @@ function HouseSelect() {
 
   const fetchHouseList = useCallback(async () => {
     try {
-      const data = await axiosGet("/warehouse/my-warehouses/" + (currUnit.id).toString());
+      const newData = await axiosGet("/users/all-users");
+      alert(JSON.stringify(newData));
+
+      const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
+
       setHouseList(data);
     } catch (error) {
       alert("Error on feching house");
@@ -27,13 +31,13 @@ function HouseSelect() {
 
   useEffect(() => {
     auth.houseSelect({});
-
+    console.log(JSON.stringify(currUnit));
     if(!currUnit) {
       alert("부대를 선택해주세요");
       navigate("/");
     }
     //TODO _ api
-    // fetchHouseList();
+    fetchHouseList();
   }, []);
 
   // houseList 예시: [{name : "1종창고", gridLayout: [], items: []}, {name : "2종창고", gridLayout: [], items: []}, {name : "3종창고", gridLayout: [], items: []} ] <- DB 설계에 따라 형식 바뀔 수 있음
@@ -47,8 +51,7 @@ function HouseSelect() {
 
   const addHouse = async () => {
     const newName = prompt("창고명을 입력해주세요");
-    if(newName === null)
-    {
+    if(newName === null) {
       return;
     }
 
@@ -56,12 +59,12 @@ function HouseSelect() {
     let itemToAdd = {
       name: newName,
       comment: newName,
-      storedUnitId: currUnit.id,
+      storedUnitId: Number(currUnit.id),
     };
 
     //TODO _ api
-    // const itemResponse = await axiosPost("/warehouses", itemToAdd);
-    // itemToAdd.id = itemResponse.id;
+    const itemResponse = await axiosPost("/warehouses", itemToAdd);
+    itemToAdd.id = itemResponse.id;
     itemToAdd.id = 1;
 
     setHouseList((prev) => [...prev, itemToAdd]);
