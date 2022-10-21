@@ -41,6 +41,7 @@ export async function readWarehousesOnUnit(storedUnitId: number) {
       name: true,
       id: true,
       comment: true,
+      storedUnitId: true,
     },
   });
 }
