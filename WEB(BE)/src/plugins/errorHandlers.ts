@@ -7,6 +7,9 @@ export default function (
   request: FastifyRequest,
   reply: FastifyReply
 ) {
+  console.log('[New error start]')
+  console.log(typeof error)
+  console.log('[New error end]')
   switch (error.statusCode) {
     case 400:
       console.log('[ERROR] Schema Validation Failed');
@@ -16,7 +19,8 @@ export default function (
     default:
       console.log(error);
       console.log('[PANIC] Unexpected Error');
-      reply.status(500).send('Internal Error');
+      // TODO: Dev mode
+      reply.status(500).send(error);
       break;
   }
 }
