@@ -21,17 +21,24 @@ const updateWarehouseLayoutSchema = z.object({
   layout: z.string(),
 });
 
+const updateWarehouseItemlist = z.object({
+  itemlist: z.string(),
+});
+
 const warehousesResponseSchema = z.array(warehouseResponseSchema);
 
 export type CreateWarehouseInput = z.infer<typeof createWarehouseSchema>;
 
 export type UpdateWarehouseLayout = z.infer<typeof updateWarehouseLayoutSchema>;
 
+export type UpdateWarehouseItemlist = z.infer<typeof updateWarehouseItemlist>;
+
 const models = {
   createWarehouseSchema,
   updateWarehouseLayoutSchema,
   warehouseResponseSchema,
   warehousesResponseSchema,
+  updateWarehouseItemlist,
 };
 
 export const { schemas: warehouseSchemas, $ref } = buildJsonSchemas(models, {

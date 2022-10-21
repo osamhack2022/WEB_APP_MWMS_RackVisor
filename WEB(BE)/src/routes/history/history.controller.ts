@@ -22,14 +22,14 @@ export async function registerHistory(
 
 export async function getHistoryOnUnit(
   request: FastifyRequest<{
-    Params: number;
+    Params: { unitId: string };
   }>,
   reply: FastifyReply
 ) {
-  const params = request.params;
+  const { unitId } = request.params;
 
   try {
-    const historys = await readHistorysOnUnit(params);
+    const historys = await readHistorysOnUnit(+unitId);
 
     return reply.code(201).send(historys);
   } catch (e) {

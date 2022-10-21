@@ -1,6 +1,7 @@
 import {
   CreateWarehouseInput,
   UpdateWarehouseLayout,
+  UpdateWarehouseItemlist,
 } from './warehouse.schema';
 import prisma from '../../plugins/prisma';
 
@@ -16,12 +17,15 @@ export async function createWarehouse(data: CreateWarehouseInput) {
   return warehouse;
 }
 
-export async function updateWarehouseLayout(data: UpdateWarehouseLayout, id: number) {
+export async function updateWarehouseLayout(
+  data: UpdateWarehouseLayout,
+  id: number
+) {
   const { layout } = data;
 
   const warehouse = await prisma.warehouse.update({
     where: {
-      id
+      id,
     },
     data: {
       layout: layout,
@@ -44,4 +48,22 @@ export async function readWarehousesOnUnit(storedUnitId: number) {
     },
   });
   return warehouses;
+}
+
+export async function updateItemlist(
+  data: UpdateWarehouseItemlist,
+  id: number
+) {
+  const { itemlist } = data;
+
+  const warehouse = await prisma.warehouse.update({
+    where: {
+      id,
+    },
+    data: {
+      itemlist: itemlist,
+    },
+  });
+
+  return warehouse.itemlist;
 }

@@ -3,10 +3,7 @@ import prisma from '../../plugins/prisma';
 
 export async function createHistory(input: CreateHistoryInput) {
   const history = await prisma.history.create({
-    data: {
-      content: input.content,
-      unitId: input.unitId,
-    },
+    data: input,
   });
 
   return history;
