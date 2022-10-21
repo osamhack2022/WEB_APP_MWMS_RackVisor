@@ -1,5 +1,6 @@
 import prisma from '../../plugins/prisma';
 import {
+  AdvanedSearchStockInput,
   CreateStockInput,
   deleteStockInput,
   updateStockInput,
@@ -35,6 +36,27 @@ export async function readStocksOnBox(storedBoxId: number) {
   });
 
   return stocks;
+}
+
+export const advancedStockSearchService = async (body: AdvanedSearchStockInput) => {
+  const searchResult = await prisma.stock.findMany({
+    where: {
+      id: body.id,
+      name: body.name,
+      type: body.type,
+      amount: {
+        gte: body.minAmount,
+        lte: body.maxAmount
+      },
+      barcode: body.barcode,
+      expirationDate: {
+        gte: body.minExpDate,
+        lte: body.maxExpDate
+      }
+
+    }
+  })
+  return []
 }
 
 export async function updateStock(data: updateStockInput) {

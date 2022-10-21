@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
-import { DecoratedFastifyInstance } from '../../index';
-import { updateLayoutOfWarehouse } from '../warehouse/warehouse.controller';
-import { registerRack, findRacksOnWarehouse, updateItemListOfRack, updateLayoutOfRack } from './rack.controller';
+
+import { DecoratedFastifyInstance } from '../..';
+import { findRacksOnWarehouse, registerRack, updateLayoutOfRack } from './rack.controller';
 import { $ref } from './rack.schema';
 
 async function rackRoutes(server: FastifyInstance) {

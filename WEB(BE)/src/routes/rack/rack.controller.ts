@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { CreateRackInput, UpdateRackItemListInput, UpdateRackLayoutInput } from './rack.schema';
-import { createRack, findRacks, updateRackItemList, updateRackLayout } from './rack.service';
+
+import { CreateRackInput, UpdateRackLayoutInput } from './rack.schema';
+import { createRack, findRacks, updateRackLayout } from './rack.service';
 
 export async function registerRack(
   request: FastifyRequest<{
@@ -57,24 +58,3 @@ export async function updateLayoutOfRack(
     return reply.code(500).send(e);
   }
 }
-
-export async function updateItemListOfRack(
-  request: FastifyRequest<{
-    Body: UpdateRackItemListInput;
-    Params: { rackId: string };
-  }>,
-  reply: FastifyReply
-) {
-  const body = request.body;
-  const { rackId } = request.params;
-
-  try {
-    const layout = await updateRackItemList(body, +rackId);
-
-    return reply.code(200).send(layout);
-  } catch (e) {
-    console.error(e);
-    return reply.code(500).send(e);
-  }
-}
-

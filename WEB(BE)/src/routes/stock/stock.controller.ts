@@ -1,11 +1,13 @@
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import {
+  AdvanedSearchStockInput,
   CreateStockInput,
   deleteStockInput,
   updateStockInput,
 } from './stock.schema';
 import {
+  advancedStockSearchService,
   createStock,
   deleteStock,
   readStocksOnBox,
@@ -29,6 +31,17 @@ export async function registerStock(
     console.error(e);
     return reply.code(500).send(e);
   }
+}
+
+export async function advancedStockSearchController(
+  request: FastifyRequest<{
+    Body: AdvanedSearchStockInput;
+  }>,
+  reply: FastifyReply
+) {
+  const { body } = request;
+  const targetStocks = await advancedStockSearchService(body);
+  return reply.code(200).send(targetStocks);
 }
 
 export async function findStocksOnWarehouse(

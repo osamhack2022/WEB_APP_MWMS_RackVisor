@@ -50,6 +50,20 @@ async function stockRoutes(server: FastifyInstance) {
     findStocksOnBox
   );
 
+  // ? Advanced Search
+  server.post(
+    '/advanced-search',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        response: {
+          200: $ref('stocksResponseSchema'),
+        },
+      },
+    },
+    null
+  );
+
   server.put(
     '/stock-update',
     {
