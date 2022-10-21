@@ -1,10 +1,7 @@
 import { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../../index';
-import {
-  registerRack,
-  findRacksOnWarehouse,
-  updateLayoutOfLack,
-} from './rack.controller';
+import { updateLayoutOfWarehouse } from '../warehouse/warehouse.controller';
+import { registerRack, findRacksOnWarehouse } from './rack.controller';
 import { $ref } from './rack.schema';
 
 async function rackRoutes(server: FastifyInstance) {
@@ -28,7 +25,7 @@ async function rackRoutes(server: FastifyInstance) {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         response: {
-          201: $ref('racksResponseSchema'),
+          200: $ref('racksResponseSchema'),
         },
       },
     },
@@ -36,6 +33,7 @@ async function rackRoutes(server: FastifyInstance) {
   );
 
   server.put(
+<<<<<<< HEAD
     '/update-layout',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
@@ -44,6 +42,19 @@ async function rackRoutes(server: FastifyInstance) {
       },
     },
     updateLayoutOfLack
+=======
+    '/put-item-list/:rackId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateRackItemListSchema'),
+        response: {
+          200: $ref('updateRackItemListSchema'),
+        },
+      },
+    },
+    updateLayoutOfWarehouse
+>>>>>>> 7eeaed990fd318bc182250e39c85d33cb468b2cb
   );
 }
 

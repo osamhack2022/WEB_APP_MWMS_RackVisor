@@ -15,7 +15,7 @@ const createPostSchema = z.object({
 const postResponseSchema = z.object({
   id: z.number(),
   ...postCore,
-  craeatedAt: z.date(),
+  createdAt: z.date(),
   author: z.object({
     name: z.string(),
     rank: z.string(),

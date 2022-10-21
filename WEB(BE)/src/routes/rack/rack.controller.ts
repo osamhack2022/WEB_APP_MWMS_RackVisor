@@ -22,14 +22,14 @@ export async function registerRack(
 
 export async function findRacksOnWarehouse(
   request: FastifyRequest<{
-    Params: { storedWarehouseId: number };
+    Params: { storedWarehouseId: string };
   }>,
   reply: FastifyReply
 ) {
   const { storedWarehouseId } = request.params;
 
   try {
-    const racks = await findRacks(storedWarehouseId);
+    const racks = await findRacks(+storedWarehouseId);
 
     return reply.code(201).send(racks);
   } catch (e) {
