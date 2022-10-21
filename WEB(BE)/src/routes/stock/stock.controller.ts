@@ -22,15 +22,8 @@ export async function registerStock(
   reply: FastifyReply
 ) {
   const body = request.body;
-
-  try {
-    const stock = await createStock(body);
-
-    return reply.code(201).send(stock);
-  } catch (e) {
-    console.error(e);
-    return reply.code(500).send(e);
-  }
+  const stock = await createStock(body);
+  return reply.code(201).send(stock);
 }
 
 export async function advancedStockSearchController(
@@ -51,15 +44,9 @@ export async function findStocksOnWarehouse(
   reply: FastifyReply
 ) {
   const params = request.params;
+  const stocks = await readStocksOnWarehouse(params);
 
-  try {
-    const stocks = await readStocksOnWarehouse(params);
-
-    return reply.code(201).send(stocks);
-  } catch (e) {
-    console.error(e);
-    return reply.code(500).send(e);
-  }
+  return reply.code(201).send(stocks);
 }
 
 export async function findStocksOnBox(
@@ -69,15 +56,9 @@ export async function findStocksOnBox(
   reply: FastifyReply
 ) {
   const params = request.params;
+  const stocks = await readStocksOnBox(params);
 
-  try {
-    const stocks = await readStocksOnBox(params);
-
-    return reply.code(201).send(stocks);
-  } catch (e) {
-    console.error(e);
-    return reply.code(500).send(e);
-  }
+  return reply.code(200).send(stocks);
 }
 
 export async function updateStocks(
@@ -87,15 +68,8 @@ export async function updateStocks(
   reply: FastifyReply
 ) {
   const body = request.body;
-
-  try {
-    const stock = await updateStock(body);
-
-    return reply.code(201).send(stock);
-  } catch (e) {
-    console.error(e);
-    return reply.code(200).send(e);
-  }
+  const stock = await updateStock(body);
+  return reply.code(200).send(stock);
 }
 
 export async function deleteStocks(
@@ -105,13 +79,7 @@ export async function deleteStocks(
   reply: FastifyReply
 ) {
   const body = request.body;
+  const stock = await deleteStock(body);
 
-  try {
-    const stock = await deleteStock(body);
-
-    return reply.code(201).send(stock);
-  } catch (e) {
-    console.error(e);
-    return reply.code(500).send(e);
-  }
+  return reply.code(200).send(stock);
 }

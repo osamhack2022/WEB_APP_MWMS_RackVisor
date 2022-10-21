@@ -8,7 +8,7 @@ export default function (
   reply: FastifyReply
 ) {
   console.log('[New error start]')
-  console.log(error.statusCode)
+  console.log(error)
   console.log('[New error end]')
   switch (error.statusCode) {
     case 400:
