@@ -1,82 +1,153 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:myapp/model/login_model.dart';
-import 'package:myapp/utils/global_colors.dart';
+import '../model/profile_list_item.dart';
+import '../utils/constants.dart';
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: kDarkTheme,
+      home: FourthPage(),
+    );
+  }
+}
 
 class FourthPage extends StatelessWidget {
   LoginModel loginModel = Get.put(LoginModel());
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(896, 414));
 
-    var userInfo = Expanded(
-                child: Column(
-                  children: [
-                    Container(
-                      height:  10.w * 10,
-                      width: 10.w * 10,
-                      margin: EdgeInsets.only(top: 10.w * 3),
-                      child: Stack(
-                        children: [
-                          // 이미지 원모양안
-                          CircleAvatar(
-                          radius: 10.w * 5,
-                          backgroundImage: NetworkImage(loginModel.unitPhotos),
-                        ),
-
-                        Align(
-                        alignment: Alignment.bottomRight,
-                        child: Container(                  
-                          height: 10.w * 2.5,
-                          width: 10.w * 2.5,
-                          decoration: const BoxDecoration(
-                          color: Colors.black,
-                          shape: BoxShape.circle
-                        ),     
-                        child: Icon(
-                          Icons.add,
-                        color: GlobalColors.textColor,
-                        size: ScreenUtil().setSp(10.w * 1.5),
-                                ),
-                            ),
-                          ),   
-                        ]
-                      ), 
-                    ),
-                    SizedBox(height: 10.w * 2),
-
-                    Text(loginModel.unitName),
-                    SizedBox(height: 10.w * 0.5),
-
-                  ],
+    var profileInfo = Expanded(
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: kSpacingUnit.w * 10,
+            width: kSpacingUnit.w * 10,
+            margin: EdgeInsets.only(top: kSpacingUnit.w * 3),
+            child: Stack(
+              children: <Widget>[
+                CircleAvatar(
+                  radius: kSpacingUnit.w * 5,
+                  backgroundImage: NetworkImage(loginModel.unitPhotos),
                 ),
-              );
-    return Scaffold(
-      body: Column(
-        children: [
-
-          SizedBox(height: 10.w * 5),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(width: 10.w * 3),
-
-              Icon(Icons.access_alarm_sharp, 
-              size: ScreenUtil().setSp(10.w * 3), 
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    height: kSpacingUnit.w * 2.5,
+                    width: kSpacingUnit.w * 2.5,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).accentColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      heightFactor: kSpacingUnit.w * 1.5,
+                      widthFactor: kSpacingUnit.w * 1.5,
+                      child: Icon(
+                        Icons.add,
+                        color: kDarkPrimaryColor,
+                        size: ScreenUtil().setSp(kSpacingUnit.w * 1.5),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: kSpacingUnit.w * 2),
+          Text(
+            loginModel.unitName,
+            style: kTitleTextStyle,
+          ),
+          SizedBox(height: kSpacingUnit.w * 0.5),
+          Text(
+            'nicolasadams@gmail.com',
+            style: kCaptionTextStyle,
+          ),
+          SizedBox(height: kSpacingUnit.w * 2),
+          Container(
+            height: kSpacingUnit.w * 4,
+            width: kSpacingUnit.w * 20,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
+              color: Theme.of(context).accentColor,
+            ),
+            child: Center(
+              child: Text(
+                'Upgrade to PRO',
+                style: kButtonTextStyle,
               ),
+            ),
+          ),
+        ],
+      ),
+    );
 
-              userInfo,
 
+    var header = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(width: kSpacingUnit.w * 3),
+        Icon(
+          Icons.arrow_left,
+          size: ScreenUtil().setSp(kSpacingUnit.w * 3),
+        ),
+        profileInfo,
+        SizedBox(width: kSpacingUnit.w * 3),
+      ],
+    );
 
-
-            ],
-          ) 
-      ]),
+    return Container(
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: Column(
+              children: <Widget>[
+                SizedBox(height: kSpacingUnit.w * 5),
+                header,
+                Expanded(
+                  child: ListView(
+                    children: <Widget>[
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.user_shield,
+                        text: 'Privacy',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.history,
+                        text: 'Purchase History',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.question_circle,
+                        text: 'Help & Support',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.cog,
+                        text: 'Settings',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.user_plus,
+                        text: 'Invite a Friend',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.alternate_sign_out,
+                        text: 'Logout',
+                        hasNavigation: false,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
