@@ -4,7 +4,6 @@ import { updateLayoutOfWarehouse } from '../warehouse/warehouse.controller';
 import {
   registerRack,
   findRacksOnWarehouse,
-  updateItemListOfRack,
   updateLayoutOfRack,
   updateNameOfRack,
 } from './rack.controller';
