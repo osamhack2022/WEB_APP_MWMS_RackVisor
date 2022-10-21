@@ -32,10 +32,11 @@ export async function updateWarehouseLayout(
   return warehouse.layout;
 }
 
-export async function readWarehousesOnUnit(storedUnitId: number) {
+export async function readWarehousesOnUnit(obj: any) {
+  const storedUnitId = +obj.storedUnitId
   const warehouses = await prisma.warehouse.findMany({
     where: {
-      storedUnitId: storedUnitId,
+      storedUnitId
     },
     select: {
       name: true,
@@ -44,4 +45,5 @@ export async function readWarehousesOnUnit(storedUnitId: number) {
       storedUnitId: true,
     },
   });
+  return warehouses
 }
