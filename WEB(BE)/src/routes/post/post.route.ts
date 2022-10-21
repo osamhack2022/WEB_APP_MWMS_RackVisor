@@ -15,9 +15,9 @@ async function postRoutes(server: FastifyInstance) {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         body: $ref('createPostSchema'),
-        // response: {
-        //   201: $ref('postResponseSchema'),
-        // },
+        response: {
+          201: $ref('postResponseSchema'),
+        },
       },
     },
     registerPost

@@ -4,6 +4,20 @@ import prisma from '../../plugins/prisma';
 export async function createPost(input: CreatePostInput) {
   const post = await prisma.post.create({
     data: input,
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      authorId: true,
+      createdAt: true,
+      postingUnitId: true,
+      author: {
+        select: {
+          name: true,
+          rank: true,
+        },
+      },
+    },
   });
 
   return post;
@@ -20,6 +34,7 @@ export async function readPostsOnUnit(unitId: number) {
       content: true,
       authorId: true,
       createdAt: true,
+      postingUnitId: true,
       author: {
         select: {
           name: true,
@@ -43,6 +58,7 @@ export async function readPostOnId(id: number) {
       content: true,
       authorId: true,
       createdAt: true,
+      postingUnitId: true,
       author: {
         select: {
           name: true,
@@ -59,6 +75,20 @@ export async function deletePostOnId(id: number) {
   const post = await prisma.post.delete({
     where: {
       id: id,
+    },
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      authorId: true,
+      createdAt: true,
+      postingUnitId: true,
+      author: {
+        select: {
+          name: true,
+          rank: true,
+        },
+      },
     },
   });
 
