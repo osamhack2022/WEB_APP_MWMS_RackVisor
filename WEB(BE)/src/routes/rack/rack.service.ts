@@ -19,10 +19,10 @@ export async function updateRackLayout(
 ) {
   const rack = await prisma.rack.update({
     where: {
-      id: id,
+      id: rackId
     },
     data: {
-      layout: layout,
+      layout: data.layout,
     },
   });
 

@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../../index';
 import { updateLayoutOfWarehouse } from '../warehouse/warehouse.controller';
-import { registerRack, findRacksOnWarehouse, updateItemListOfRack } from './rack.controller';
+import { registerRack, findRacksOnWarehouse, updateItemListOfRack, updateLayoutOfRack } from './rack.controller';
 import { $ref } from './rack.schema';
 
 async function rackRoutes(server: FastifyInstance) {
@@ -33,16 +33,16 @@ async function rackRoutes(server: FastifyInstance) {
   );
 
   server.put(
-<<<<<<< HEAD
-    '/update-layout',
+    '/update-layout/:rackId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         body: $ref('updateRackLayoutSchema'),
       },
     },
-    updateLayoutOfLack
-=======
+    updateLayoutOfRack
+  )
+  server.put(
     '/put-item-list/:rackId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
@@ -54,7 +54,6 @@ async function rackRoutes(server: FastifyInstance) {
       },
     },
     updateItemListOfRack
->>>>>>> 7eeaed990fd318bc182250e39c85d33cb468b2cb
   );
 }
 
