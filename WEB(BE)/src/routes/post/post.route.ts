@@ -50,7 +50,7 @@ async function postRoutes(server: FastifyInstance) {
   );
 
   server.delete(
-    '/deletePost',
+    '/delete-post',
     {
       schema: {
         body: $ref('deletePostSchema'),
