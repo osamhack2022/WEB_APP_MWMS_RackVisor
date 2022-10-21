@@ -20,6 +20,17 @@ export async function registerRack(
   }
 }
 
-export async function findRacksOnWarehouse(request: FastifyRequest) {
-  //todo 구현
+export async function findRacksOnWarehouse(request: FastifyRequest<{
+  Params: { storedWarehouseId: number }
+}>, reply: FastifyReply) {
+  const { storedWarehouseId } = request.params;
+
+  try {
+    const racks = await findRacks(storedWarehouseId);
+
+    return reply.code(200).send(racks);
+  } catch (e) {
+    console.error(e);
+    return reply.code(500).send(e);
+  }
 }

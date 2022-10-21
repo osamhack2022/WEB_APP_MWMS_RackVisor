@@ -41,7 +41,7 @@ export async function updateLayoutOfWarehouse(
   try {
     const layout = await updateWarehouseLayout(body, params);
 
-    return reply.code(201).send(layout);
+    return reply.code(200).send(layout);
   } catch (e) {
     console.error(e);
     return reply.code(500).send(e);
@@ -59,7 +59,7 @@ export async function findWarehousesOnUnit(
   try {
     const warehouses = await readWarehousesOnUnit(params);
 
-    return reply.code(201).send(warehouses);
+    return reply.code(200).send(warehouses);
   } catch (e) {
     console.error(e);
     return reply.code(500).send(e);
