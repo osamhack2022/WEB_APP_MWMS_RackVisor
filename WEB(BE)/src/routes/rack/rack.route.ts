@@ -33,6 +33,16 @@ async function rackRoutes(server: FastifyInstance) {
   );
 
   server.put(
+<<<<<<< HEAD
+    '/update-layout',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateRackLayoutSchema'),
+      },
+    },
+    updateLayoutOfLack
+=======
     '/put-item-list/:rackId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
@@ -44,6 +54,7 @@ async function rackRoutes(server: FastifyInstance) {
       },
     },
     updateItemListOfRack
+>>>>>>> 7eeaed990fd318bc182250e39c85d33cb468b2cb
   );
 }
 

@@ -1,12 +1,13 @@
-import { CreateRackInput, UpdateRackItemListInput, UpdateRackLayoutInput } from './rack.schema';
+import {
+  CreateRackInput,
+  UpdateRackItemListInput,
+  UpdateRackLayoutInput,
+} from './rack.schema';
 import prisma from '../../plugins/prisma';
 
 export async function createRack(data: CreateRackInput) {
   const rack = await prisma.rack.create({
-    data: {
-      storedWarehouseId: data.storedWarehouseId,
-      name: data.name,
-    },
+    data: data,
   });
 
   return rack;
@@ -18,10 +19,10 @@ export async function updateRackLayout(
 ) {
   const rack = await prisma.rack.update({
     where: {
-      id: rackId,
+      id: id,
     },
     data: {
-      layout: data.layout,
+      layout: layout,
     },
   });
 
