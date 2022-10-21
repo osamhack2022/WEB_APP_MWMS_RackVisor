@@ -56,9 +56,6 @@ export const advancedStockSearchService = async (body: AdvanedSearchStockInput) 
       storedBoxId: body.storedBoxId
     }
   })
-  console.log('SEARCH DONE1')
-  console.log(searchResult)
-  console.log('SEARCH DONE2')
   return searchResult
 }
 
