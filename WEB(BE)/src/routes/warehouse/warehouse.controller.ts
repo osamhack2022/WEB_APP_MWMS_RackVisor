@@ -35,7 +35,6 @@ export async function updateLayoutOfWarehouse(
   reply: FastifyReply
 ) {
   const body = request.body;
-
   const { warehouseId } = request.params;
 
   try {

@@ -16,12 +16,12 @@ export async function createWarehouse(data: CreateWarehouseInput) {
   return warehouse;
 }
 
-export async function updateWarehouseLayout(data: UpdateWarehouseLayout) {
-  const { id, layout } = data;
+export async function updateWarehouseLayout(data: UpdateWarehouseLayout, id: number) {
+  const { layout } = data;
 
   const warehouse = await prisma.warehouse.update({
     where: {
-      id: id,
+      id
     },
     data: {
       layout: layout,
