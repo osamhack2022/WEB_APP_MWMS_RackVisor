@@ -15,7 +15,8 @@ export async function registerUnitHandler(
 ) {
   const body = request.body;
 
-  const userId = request.user.id;
+  const userId = 1
+  // const userId = request.user.id;
 
   try {
     const unit = await createUnit(body, userId);
