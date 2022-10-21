@@ -27,14 +27,14 @@ export async function registerPost(
 
 export async function getPostOnId(
   request: FastifyRequest<{
-    Params: number;
+    Params: { unitId: number };
   }>,
   reply: FastifyReply
 ) {
-  const params = request.params;
+  const { unitId } = request.params;
 
   try {
-    const post = await readPostOnId(params);
+    const post = await readPostOnId(unitId);
 
     return reply.code(201).send(post);
   } catch (e) {
@@ -45,11 +45,11 @@ export async function getPostOnId(
 
 export async function getPostsOnUnit(
   request: FastifyRequest<{
-    Params: {id: string}
+    Params: { id: number };
   }>,
   reply: FastifyReply
 ) {
-  const {id} = request.params;
+  const { id } = request.params;
 
   try {
     const posts = await readPostsOnUnit(+id);
