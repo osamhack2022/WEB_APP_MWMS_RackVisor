@@ -6,6 +6,7 @@ import {
   updateLayoutOfWarehouse,
   updateWarehouseItemlist,
   getWarehouseOnId,
+  updateWarehouseImageController,
 } from './warehouse.controller';
 import { $ref } from './warehouse.schema';
 
@@ -44,11 +45,22 @@ async function warehouseRoutes(server: FastifyInstance) {
       schema: {
         body: $ref('updateWarehouseLayoutSchema'),
         response: {
-          201: $ref('updateWarehouseLayoutSchema'),
+          200: $ref('updateWarehouseLayoutSchema'),
         },
       },
     },
     updateLayoutOfWarehouse
+  );
+
+  server.put(
+    '/house-image/:warehouseId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateWarehouseImageSchema'),
+      },
+    },
+    updateWarehouseImageController
   );
 
   server.put(

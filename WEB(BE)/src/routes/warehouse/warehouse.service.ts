@@ -2,6 +2,7 @@ import {
   CreateWarehouseInput,
   UpdateWarehouseLayout,
   UpdateWarehouseItemlist,
+  UpdateWarehouseImage,
 } from './warehouse.schema';
 import prisma from '../../plugins/prisma';
 
@@ -66,6 +67,16 @@ export async function updateItemlist(
   });
 
   return warehouse.itemlist;
+}
+
+export const updateWarehouseImageService = async (data: UpdateWarehouseImage,
+  id: number) => {
+  await prisma.warehouse.update({
+    where: { id },
+    data: {
+      warehouseImageBinary: Buffer.from(data.imgBase64, 'base64')
+    }
+  })
 }
 
 export async function readWarehouseOnId(id: number) {

@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import {
   CreateWarehouseInput,
+  UpdateWarehouseImage,
   UpdateWarehouseItemlist,
   UpdateWarehouseLayout,
 } from './warehouse.schema';
@@ -9,6 +10,7 @@ import {
   readWarehouseOnId,
   readWarehousesOnUnit,
   updateItemlist,
+  updateWarehouseImageService,
   updateWarehouseLayout,
 } from './warehouse.service';
 
@@ -49,6 +51,21 @@ export async function updateLayoutOfWarehouse(
     return reply.code(500).send(e);
   }
 }
+
+export async function updateWarehouseImageController(
+  request: FastifyRequest<{
+    Body: UpdateWarehouseImage;
+    Params: { warehouseId: string };
+  }>,
+  reply: FastifyReply
+) {
+  const body = request.body;
+  const { warehouseId } = request.params;
+  const result = await updateWarehouseImageService(body, +warehouseId);
+
+  return reply.code(200).send(result);
+}
+
 
 export async function findWarehousesOnUnit(
   request: FastifyRequest<{
