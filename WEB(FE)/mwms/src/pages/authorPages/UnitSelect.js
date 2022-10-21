@@ -17,8 +17,8 @@ function UnitSelect() {
   let auth = useAuth();
 
   const onSelectUnit = (e) => {
-    auth.unitSelect(e.target.id);
-    localStorage.setItem("부대", e.target.id);
+    //TODO _ API
+    auth.unitSelect(unitList.find((unit) => (unit.id == e.target.id)));
     e.stopPropagation();
     navigate("/main");
   };
@@ -30,11 +30,16 @@ function UnitSelect() {
     }
 
     // ? Add Unit
-    const itemToAdd = {
+    let itemToAdd = {
       name: newName,
       comment: newName,
     };
-    await axiosPost("/units", itemToAdd);
+
+    //TODO _ API
+    const itemResponse = await axiosPost("/units", itemToAdd);
+    itemToAdd.id = itemResponse.id;
+    itemToAdd.id = 1;
+
     setUnitList((prev) => [...prev, itemToAdd]);
   };
 
@@ -48,7 +53,9 @@ function UnitSelect() {
   }, []);
 
   useEffect(() => {
-    auth.unitSelect("");
+    auth.unitSelect({});
+    
+    //TODO _ API
     fetchUnitList();
   }, [auth, fetchUnitList]);
 
@@ -65,7 +72,7 @@ function UnitSelect() {
         <div class="grid grid-cols-4 gap-4 px-4 py-3">
           {unitList.map((un) => (
             <Button
-              id={un.name}
+              id={un.id}
               text={un.name}
               handleClick={onSelectUnit}
               class="hover:border-green-500 py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-blue-gradient border-2 border-white rounded-[10px]"

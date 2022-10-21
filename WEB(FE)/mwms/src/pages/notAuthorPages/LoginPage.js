@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../../style.js";
 import Title from "../../utils/with_description";
 import Button from "../../components/Button";
-import { axiosPost } from "../../api";
+import { axiosGet, axiosPost } from "../../api";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -30,13 +30,18 @@ function LoginPage() {
 
   const login = async () => {
     localStorage.setItem("token", "123");
+    
     //서버와 통신 로직 추가 필요
 
-    // ? Login
-    await axiosPost("/users/login", {
-      militarySerialNumber: "s21",
-      password: "string",
+    // // ? Login
+    const response = await axiosPost("/users/login", {
+      militarySerialNumber: id,
+      password: pw,
     });
+    alert(JSON.stringify(response));
+
+    const way = await axiosGet("/users/all-users");
+    console.log(JSON.stringify(way));
 
     localStorage.setItem("이름", "홍길동");
     localStorage.setItem("직책", "행정보급관");
@@ -47,7 +52,6 @@ function LoginPage() {
 
   return (
     <div class="bg-primary-900 w-full overflow-hidden">
-      \
       <div class={`bg-primary-900 ${styles.flexCenter}`}>
         <div class={`${styles.boxWidth}`}>
           <Header />
@@ -77,7 +81,7 @@ function LoginPage() {
                     class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     placeholder="군번"
                     value={id}
-                    onchange={onIdHandler}
+                    onChange={onIdHandler}
                   />
                 </div>
                 <div>

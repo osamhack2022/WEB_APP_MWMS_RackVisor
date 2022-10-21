@@ -1,4 +1,4 @@
-  import React, { useContext, useEffect, useState } from 'react'
+  import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Footer from '../../components/Footer'
 import AuthorHeader from '../../components/AuthorHeader'
 import { AuthorContext } from '../../routes/Author'
@@ -19,14 +19,13 @@ import MaterialManageModal from '../../utils/modal/MaterialManageModal'
 import MaterialChangeModal from '../../utils/modal/MaterialChangeModal'
 import LocationSelectModal from '../../utils/modal/LocationSelectModal'
 import Tabs from '../../components/Tabs'
+import { axiosGet } from '../../api'
 
 function MaterialManage() {
   const auth =useAuth();
   const navigate = useNavigate();
   const [houList, setHouList] = useState([]);
   const [selHouse, setSelHouse] = useState("");
-  const [grid, setGrid] = useState([]);
-  const [itm, setItm] = useState([]);
   const [visual, setVisual] = useState({});
   const [cabSelec, setCabSelec] = useState("");
   const [boxSelec, setBoxSelec] = useState("");
@@ -38,72 +37,37 @@ function MaterialManage() {
   const [materialChangeOpen, setMaterialChangeModal] = useState(false);
   const [loc, setLoc] = useState({});
   const [tabType, setTabType] = useState("material");
+  const currUnit = auth.unitSelected;
 
-  useEffect(() => {
-    if(localStorage.getItem("부대") === "") {
-      alert("부대를 선택해주세요");
-      navigate("/");
+  const fetchHouseList = useCallback(async () => {
+    try {
+      const data = await axiosGet("/warehouse/my-warehouses/" + (currUnit.id).toString());
+      let visualJ = {};
+      data.map((da) => {
+        visualJ[da.id] = false;
+      })
+      setVisual(visualJ);
+    } catch (error) {
+      alert("Error on feching house");
     }
-    // TODO: 서버로부터 unit(부대) 불러와야함...
-    let unitName = localStorage.getItem("부대");
-    let lsUnitList=  getLSUnitList();
-    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-    let hl;
-    if (lsUnit === undefined) {
-      hl = []
-    } else {
-      hl = lsUnit.houseList;
-    }
-    setHouList(hl);
-
-    let visualJ = {};
-    hl.map((ttt) => {
-      visualJ[ttt.name] = false;
-    });
-    setVisual(visualJ);
-
   }, []);
 
   useEffect(() => {
-    let unitName = localStorage.getItem("부대");
-    let lsGridLayout = [];
-    let lsItems = [];
-    let lsUnitList=  getLSUnitList();
-    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-    let hl;
-    if(lsUnit === undefined)
-    {
-      hl = []
-    }
-    else
-    {
-      hl = lsUnit.houseList;
-      if (selHouse == "") {
-        lsGridLayout = [];
-        lsItems = [];
-      }
-
-      else {
-        let house = hl.find( (e) => (e.name == selHouse) );
-        if( house != undefined )
-        {
-          lsGridLayout = house.gridLayout;
-          lsItems = house.items;
-        }
-      }
- 
+    if(!currUnit) {
+      alert("부대를 선택해주세요");
+      navigate("/");
     }
 
-    setGrid(lsGridLayout);
-    setItm(lsItems);
-
-  }, [selHouse])
+    //fetchHouseList();
+  }, []);
 
   const onSelHouse = (e) => {
-    setSelHouse(e.currentTarget.value);
+    setSelHouse(houList.find((hou) => (hou.id == e.currentTarget.value)));
+
     let viCopy = visual;
-    viCopy[selHouse] = false;
+    viCopy[selHouse.id] = false;
     viCopy[e.currentTarget.value] = true;
+    
     setVisual(viCopy);
   }
 
@@ -153,13 +117,13 @@ function MaterialManage() {
                           없음
                         </option>
                         {houList.map((hou) => (
-                          <option value={hou.name} key={hou.name}>
+                          <option value={hou.id} key={hou.name}>
                             {hou.name}
                           </option>
                         ))}
                       </select>
                       {houList.map((hou) => (
-                        visual[hou.name] && <WarehouseGridLayout unitSelected={localStorage.getItem("부대")} houseSelected={hou.name} setClick={testClick}/>
+                        visual[hou.id] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={hou.name} setClick={testClick}/>
                       ))}
                     </>)
                     }

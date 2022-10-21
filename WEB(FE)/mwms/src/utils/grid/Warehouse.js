@@ -3,10 +3,10 @@ import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout"
 import EditableText from "../text/EditableText"
 import { getLSUnitList } from '../../pages/authorPages/UnitSelect'
+import { axiosGet, axiosPut } from "../../api";
 
 const ReactGridLayout = WidthProvider(RGL);
   
-
 export default class WarehouseGridLayout extends React.PureComponent {
   static defaultProps = {
     className: "warehousegridlayout",
@@ -19,32 +19,16 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    let unitName = this.props.unitSelected;
-    let lsGridLayout = [];
-    let lsItems = [];
-    let lsUnitList = getLSUnitList();
-    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-    let hl;
-    let iidCnt;
-    if (lsUnit === undefined) {
-      hl = []
-    } else {
-      hl = lsUnit.houseList;
-      let house = hl.find( (e) => (e.name === this.props.houseSelected) );
-      if (house != undefined) {
-        lsGridLayout = house.gridLayout;
-        lsItems = house.items;
-        iidCnt = house.iid;
-      }
-    }
 
     this.state = {
-      items: lsItems,
+      currUnit: this.props.unitSelected,
+      currHouse: this.props.houseSelected,
+      items: [],
       newBoxCounter: 0,
       newDoorCounter: 0,
       newCabinetCounter: 0,
-      iid:iidCnt, //unique id for item
-      layout: lsGridLayout,
+      iid: 0, //unique id for item
+      layout: [],
     };
     this.onLayoutChange = this.onLayoutChange.bind(this);
     // this.onAddBox = this.onAddBox.bind(this);
@@ -54,6 +38,18 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
   }
+
+  // async componentDidMount() {
+    //API 연결  
+    //this.state.currUnit.name / id -> 현재 부대의 정보
+    //this.state.currHouse.name / id -> 현재 창고의 정보
+    //item 들고오기 없으면 기본 []
+    //layout 들고오기 없으면 기본 []
+    // this.setState({
+    //   items:newItems,
+    //   layout: newLayout,
+    // });
+    // }
 
   createElement(el)
   {
@@ -199,27 +195,13 @@ export default class WarehouseGridLayout extends React.PureComponent {
     });
   }
 
-  onLocalSave() {
-
-    // TODO: 서버로부터 unit(부대) 불러와야함...
-    let unitName = this.props.unitSelected;
-    let lsUnitList=  getLSUnitList();
-    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-    let hl;
-    if(lsUnit === undefined)
-    {
-      hl = []
-    }
-    else
-    {
-      hl = lsUnit.houseList;
-    }
-    let house = hl.find( (e) => (e.name === this.props.houseSelected) );
-
-    house.gridLayout = this.state.layout;
-    house.items = this.state.items;
-    house.iidCnt = this.state.iid;
-    localStorage.setItem("unitList", JSON.stringify(lsUnitList));
+  async onLocalSave() {
+    //API
+    //this.state.currHouse / this.state.currUnit ->  과 관련해서 정보를 받아서 body를 구성해서 여기서 뿌리면 된다
+    let cabinetList = [];
+    this.state.items.filter(item => item.type == "cabinet") //캐비넷 하나씩 만들어서 array 하나씩 추가해줘야 한다 -> cabinet 원소 하나씩 넣어주면 된다
+    //그다음에 -> items 원소 중 key 로 해서 unique id 라는 property 를 하나 더 추가해줘야 한다
+    //그걸 서버에 업로드 해주거나 서버에서 return 을 해줘야 한다 그니까 cabinet 에 고유한 id 가 박혀있는 걸 줘야 함.  서버에서 나중에 불러올 때
   }
 
   onAddCabinet() {
@@ -271,6 +253,8 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   onLayoutChange(layout) {
     this.props.onLayoutChange(layout);
+    console.log("변경1 : " + JSON.stringify(layout));
+    console.log("변경2 : " + JSON.stringify(this.state.items));
     let newItems = [];
     let j;
     for(j = 0; j<layout.length; j++)
@@ -305,32 +289,32 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   render() {
 
-    // TODO: 서버로부터 unit(부대) 불러와야함...
-    let unitName = this.props.unitSelected;
-    if(unitName === null)
-    {
-      return (<div></div>);
-    }
-    let lsUnitList=  getLSUnitList();
-    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-    let hl;
-    if(lsUnit === undefined)
-    {
-      hl = []
-    }
-    else
-    {
-      hl = lsUnit.houseList;
-    }
-    let house = hl.find( (e) => (e.name === this.props.houseSelected) );
-    if(house === undefined)
-    {
-      return (<div></div>);
-    }
+    // // TODO: 서버로부터 unit(부대) 불러와야함...
+    // let unitName = this.props.unitSelected;
+    // if(unitName === null)
+    // {
+    //   return (<div></div>);
+    // }
+    // let lsUnitList=  getLSUnitList();
+    // let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
+    // let hl;
+    // if(lsUnit === undefined)
+    // {
+    //   hl = []
+    // }
+    // else
+    // {
+    //   hl = lsUnit.houseList;
+    // }
+    // let house = hl.find( (e) => (e.name === this.props.houseSelected) );
+    // if(house === undefined)
+    // {
+    //   return (<div></div>);
+    // }
     
-    house.gridLayout = this.state.layout;
-    house.items = this.state.items;
-    house.iidCnt = this.state.iid;
+    // house.gridLayout = this.state.layout;
+    // house.items = this.state.items;
+    // house.iidCnt = this.state.iid;
 
     return (
       <div className="w-[100rem]"style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
@@ -342,8 +326,8 @@ export default class WarehouseGridLayout extends React.PureComponent {
         </div>
         <ReactGridLayout 
           {...this.props}
-          layout={house.gridLayout}
-          items={house.items}
+          layout={this.state.gridLayout}
+          items={this.state.items}
           onLayoutChange={this.onLayoutChange}
           onBreakpointChange={this.onBreakpointChange}
           onChangeItemName={this.onChangeItemName}

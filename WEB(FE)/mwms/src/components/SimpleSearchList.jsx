@@ -10,7 +10,7 @@ export default function SimpleSearch({defaultList, data}) {
                   {defaultList.map((de) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
                     >
                       {de}
                     </th>
@@ -21,7 +21,7 @@ export default function SimpleSearch({defaultList, data}) {
                 {data.map((person, personIdx) => (
                   <tr key={personIdx} className={personIdx}>
                     {defaultList.map((de, deIndex) => (
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{person[de]}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{person[de]}</td>
                     ))}
                   </tr>
                 ))}

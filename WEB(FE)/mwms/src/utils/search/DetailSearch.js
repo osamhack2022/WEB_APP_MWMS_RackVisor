@@ -3,6 +3,7 @@ import {detailType} from './typeList';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import "./datapicker.css";
 import { ko } from "date-fns/esm/locale";
+import "./react-datepicker.css";
 
 export default function DetailSearch() {
   const [Content, setContent] = useState('없음');
@@ -64,15 +65,15 @@ export default function DetailSearch() {
   return (
     <div>
       <div class="flex">
-        <input id = "property" type="checkbox" checked={ch1} onChange={onChkBox}/>
-        <div>속성 : </div>
+        <input class="m-2" id = "property" type="checkbox" checked={ch1} onChange={onChkBox}/>
+        <div class="text-white font-bold mx-2">속성 : </div>
         <div>
-          <select onChange={onChangeHanlder} value={Content}>
+          <select class="bg-gray-700 text-white rounded" onChange={onChangeHanlder} value={Content}>
             {Object.keys(detailType).map((type) => (
               <option key={type}>{type}</option>
             ))}
           </select>
-          <select onChange={onChangeType} value={type}>
+          <select class="bg-gray-700 text-white rounded" onChange={onChangeType} value={type}>
             {Object.keys(detailType[Content]).map((ty) => (
               <option key={ty}>{ty}</option>
             ))}
@@ -80,9 +81,10 @@ export default function DetailSearch() {
           <div>{detailType[Content][type]}</div>
         </div>
       </div>
+
       <div class="flex">
-        <input id = "duration" type="checkbox" checked={ch2} onChange={onChkBox}/>
-        <div>기한 : </div>
+        <input class="m-2" id = "duration" type="checkbox" checked={ch2} onChange={onChkBox}/>
+        <div class="text-white font-bold mx-2">기한 : </div>
         <DatePicker 
           locale={ko}
           dateFormat="yyyy년 MM월 dd일"
@@ -92,7 +94,7 @@ export default function DetailSearch() {
           startDate={startDate}
           endDate={endDate}
         />
-        <div> 부터 ~ </div>
+        <div class="text-white font-semibold mx-2"> 부터 ~ </div>
         <DatePicker 
           locale={ko}
           dateFormat="yyyy년 MM월 dd일"
@@ -103,20 +105,22 @@ export default function DetailSearch() {
           endDate={endDate}
           minDate={startDate}
         />
-        <div> 까지 </div>
+        <div class="text-white font-semibold mx-2"> 까지 </div>
       </div>
+
       <div class="flex">
-        <input id = "manager" type="checkbox" checked={ch3} onChange={onChkBox}/>
-        <div>담당자 : </div>
-        <input type="string" class="border" value={people} onChange={chgPeople}/>
+        <input class="m-2" id = "manager" type="checkbox" checked={ch3} onChange={onChkBox}/>
+        <div class="text-white font-bold mx-2">담당자 : </div>
+        <input type="string" class="bg-gray-700 text-white rounded border" value={people} onChange={chgPeople}/>
       </div>
+
       <div class="flex">
-        <input id = "quantity" type="checkbox" checked={ch4} onChange={onChkBox}/>
-        <div>{'수량 : '}</div>
-        <input type="number" class="border" value={minCnt} onChange={chgMinCnt}/>
-        <div>이상 ~ </div>
-        <input type="number" class="border" value={maxCnt} onChange={chgMaxCnt}/>
-        <div>이하</div>
+        <input class="m-2 border" id = "quantity" type="checkbox" checked={ch4} onChange={onChkBox}/>
+        <div class="text-white font-bold mx-2">{'수량 : '}</div>
+        <input class="m-2 border bg-gray-700 text-white rounded" type="number" value={minCnt} onChange={chgMinCnt}/>
+        <div class="text-white font-bold mx-2">이상 ~ </div>
+        <input class="m-2 border bg-gray-700 text-white rounded" type="number" value={maxCnt} onChange={chgMaxCnt}/>
+        <div class="text-white font-bold mx-2">이하</div>
       </div>
     </div>
   );

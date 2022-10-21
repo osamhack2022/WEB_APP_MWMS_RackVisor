@@ -35,6 +35,13 @@ export default function ExcelModal({open, setOpen}) {
     setData([]);
   }, [open]);
 
+  const save = async () => {
+    
+    setOpen(false)
+    setData([]);
+    setLoc({위치 : ""});
+  }
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
@@ -108,10 +115,7 @@ export default function ExcelModal({open, setOpen}) {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => {setOpen(false)
-                    setData([]);
-                    setLoc({위치 : ""});
-                  }}
+                  onClick={() => save()}
                 >
                   저장
                 </button>

@@ -7,63 +7,68 @@ import {Link, useNavigate} from 'react-router-dom'
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
 import { getLSUnitList } from './UnitSelect'
-import { axiosGet } from '../../api'
+import { axiosGet, axiosPost } from '../../api'
 
 function HouseSelect() {
-  let unitName = localStorage.getItem("부대");
-  // houseList 예시: [{name : "1종창고", gridLayout: [], items: []}, {name : "2종창고", gridLayout: [], items: []}, {name : "3종창고", gridLayout: [], items: []} ] <- DB 설계에 따라 형식 바뀔 수 있음
-  const [houseList, setHouseList] = useState([]);
-  
   let auth = useAuth();
+  const currUnit = auth.unitSelected;
+  const unitName = currUnit.name;
   const navigate = useNavigate();
+  const [houseList, setHouseList] = useState([]);
 
-  const fetchWarehouseList = useCallback(async () => {
+  const fetchHouseList = useCallback(async () => {
     try {
-      const data = [];
-      // const data = await axiosGet("/units/all-units");
+      const newData = await axiosGet("/users/all-users");
+      alert(JSON.stringify(newData));
+
+      const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
+
       setHouseList(data);
     } catch (error) {
-      alert("Error on fetching unit");
+      alert("Error on feching house");
     }
   }, []);
 
   useEffect(() => {
-    fetchWarehouseList()
-  }, [fetchWarehouseList]);
+    auth.houseSelect({});
+    console.log(JSON.stringify(currUnit));
+    if(!currUnit) {
+      alert("부대를 선택해주세요");
+      navigate("/");
+    }
+    //TODO _ api
+    fetchHouseList();
+  }, []);
 
-
-  // TODO: 서버로부터 unit(부대) 불러와야함...
-  
-      
-  
-
+  // houseList 예시: [{name : "1종창고", gridLayout: [], items: []}, {name : "2종창고", gridLayout: [], items: []}, {name : "3종창고", gridLayout: [], items: []} ] <- DB 설계에 따라 형식 바뀔 수 있음
   const onSelectHouse = (e) => {
-    auth.houseSelect(e.target.id);
+    auth.houseSelect(houseList.find((hou) => (hou.id == e.target.id)));
+    console.log(houseList.find((hou) => (hou.id == e.target.id)));
+
+    e.stopPropagation();
     navigate("/houseManage");
   }
 
-  const addHouse = () => {
+  const addHouse = async () => {
     const newName = prompt("창고명을 입력해주세요");
-    if(newName === null)
-    {
+    if(newName === null) {
       return;
     }
-    let lsUnitList = getLSUnitList();
-    let lsUnit = lsUnitList.find( (e) => (e.name === unitName)); 
-    let lsHouseList = lsUnit.houseList;
-    lsHouseList.push({
+
+    // ? Add Unit
+    let itemToAdd = {
       name: newName,
-      gridLayout: [],
-      items:[],
-      iid: 0
-    });
-    localStorage.setItem("unitList", JSON.stringify(lsUnitList));
-    setHouseList(lsHouseList);
+      comment: newName,
+      storedUnitId: Number(currUnit.id),
+    };
+
+    //TODO _ api
+    const itemResponse = await axiosPost("/warehouses", itemToAdd);
+    itemToAdd.id = itemResponse.id;
+    itemToAdd.id = 1;
+
+    setHouseList((prev) => [...prev, itemToAdd]);
   }
-  
-  useEffect(() => {
-    auth.houseSelect("");
-  }, []);
   
   return (
     <div>
@@ -74,13 +79,13 @@ function HouseSelect() {
           <div> 창고 관리 </div>
           <div class="grid grid-cols-4 gap-4 px-4 py-3 border-gray-200 bg-gray">
             {houseList.map((h) => (
-              <div id={h.name} onClick={onSelectHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div id = {h.name} onClick={onSelectHouse}  class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{h.name}</div>
-              </div> 
+              <button id={h.id} onClick={onSelectHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div id = {h.id} onClick={onSelectHouse}  class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{h.name}</div>
+              </button> 
             ))}
-            <div onClick={addHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <button onClick={addHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <span class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 창고 추가</span>
-            </div> 
+            </button> 
           </div>
         </div>
       </div>

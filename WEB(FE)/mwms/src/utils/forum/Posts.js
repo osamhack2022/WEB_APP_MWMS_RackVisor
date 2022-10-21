@@ -3,6 +3,9 @@ import Modal from '../modal/default/Modal';
 import SettingModal from '../modal/SettingModal';
 import DetailContent from '../modal/DetailContent';
 import ContentPlusModal from '../modal/contentPlusModal';
+import Button from '../../components/Button';
+import { axiosPost } from '../../api';
+import { useAuth } from '../../routes/AuthContext';
 
 //https://binaryjourney.tistory.com/20 [Binary Journey:티스토리]
 function Posts({ posting, total, setPosting }) {
@@ -14,6 +17,8 @@ function Posts({ posting, total, setPosting }) {
   const [plus, setPlus] = useState(false);
   const [plusTitle, setPlusTitle] = useState("");
   const [plusContent, setPlusContent] = useState("");
+  const auth = useAuth();
+  const currUnit = auth.unitSelected;
 
   useEffect(() => { 
     setPlusTitle(""); 
@@ -34,13 +39,27 @@ function Posts({ posting, total, setPosting }) {
       title : total.find(post => post.id == e.target.id).title,
       open : true
     });
+    e.stopPropagation();
   }
 
   const erasePost = (e) => {
+    //삭제 구현 필요
+  
     setPosting(total.filter(post => post.id != e.target.id))
+  
+  
   }
 
-  const makePost = () => {
+  const makePost = async () => {
+    // let itemToAdd = {
+    //   title : plusTitle,
+    //   milClass : localStorage.getItem("계급"),
+    //   name : localStorage.getItem("이름"),
+    //   content : plusContent
+    // }
+    // const itemResponse = await axiosPost("/posts/unit-posts/" + (currUnit.id).toString(), itemToAdd);
+    // setPosting(total.concat(itemResponse));
+
     setPosting(total.concat({
       id : total.length != 0 ? total[total.length - 1].id + 1 : 1,
       title : plusTitle,
@@ -57,41 +76,41 @@ function Posts({ posting, total, setPosting }) {
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
+          <div className="shadow overflow-hidden border-b border-white">
+            <table className="min-w-full divide-y divide-white">
         <thead>
           <tr>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
             >
               번호
             </th>
             <button
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
             >
               제목
             </button>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
             >
               관등성명
             </th>
             <th scope="col" className="relative px-6 py-3">
-              <span className="sr-only">Edit</span>
+              <span className="sr-only text-white font-bold">Edit</span>
             </th>
           </tr>
         </thead>
         <tbody>
           {posting && posting.map((article) => (
             <tr key={article.id}>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{article.id}</td>
-              <button className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" id={article.id} onClick={openModal}>{article.title}</button>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{article.milClass} {article.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{article.id}</td>
+              <button className="absolute px-6 py-4 z-[0] whitespace-nowrap text-sm text-white" id={article.id} onClick={openModal}>{article.title}</button>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{article.milClass} {article.name}</td>
               <td  className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" >
-                <div id={article.id} onClick={erasePost} className="text-indigo-600 hover:text-indigo-900">X</div>
+                <div id={article.id} onClick={erasePost} className="text-white cursor-pointer hover:text-secondary">X</div>
               </td>
             </tr>
           ))}
@@ -100,11 +119,16 @@ function Posts({ posting, total, setPosting }) {
           )}
         </tbody>
       </table>
-      <button onClick={() => {
-        setPlus(true);
-        setPlusContent("");
-        setPlusTitle("");
-      }}>추가하기</button>
+      <Button
+        class="text-primary-900 bg-blue-gradient font-poppins font-semibold m-2 p-2 rounded"
+        handleClick={() => {
+          setPlus(true);
+          setPlusContent("");
+          setPlusTitle("");
+        }}
+        text="추가하기"
+
+      />
       <ContentPlusModal open={plus} setOpen={setPlus} title={plusTitle} setTitle={titleChange} content={plusContent} setContent={contentChange} makePost={makePost}/>
 
     </div>

@@ -20,30 +20,15 @@ export default class WarehouseGridLayout extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    let unitName = this.props.unitSelected;
-    let lsGridLayout = [];
-    let lsItems = [];
-    let lsUnitList=  getLSUnitList();
-    let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-    let hl;
-    if(lsUnit === undefined) {
-      hl = []
-    } else {
-      hl = lsUnit.houseList;
-      let house = hl.find( (e) => (e.name === this.props.houseSelected) );
-      if(house != undefined) {
-        lsGridLayout = house.gridLayout;
-        lsItems = house.items;
-      }
-    }
-
     this.state = {
-      items: lsItems,
+      items: [],
       newBoxCounter: 0,
       newDoorCounter: 0,
       newCabinetCounter: 0,
       iid:0, //unique id for item
-      layout: lsGridLayout,
+      layout: [],
+      currUnit: this.props.unitSelected,
+      currHouse: this.props.houseSelected,
     };
     this.onLayoutChange = this.onLayoutChange.bind(this);
     this.onAddDoor = this.onAddDoor.bind(this);
@@ -51,6 +36,18 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
   }
+
+    // async componentDidMount() {
+    //API 연결  
+    //this.state.currUnit.name / id -> 현재 부대의 정보
+    //this.state.currHouse.name / id -> 현재 창고의 정보
+    //item 들고오기 없으면 기본 []
+    //layout 들고오기 없으면 기본 []
+    // this.setState({
+    //   items:newItems,
+    //   layout: newLayout,
+    // });
+    // }
 
   createElement(el) {
     if(el.type === "door") {
