@@ -3,12 +3,7 @@ import prisma from '../../plugins/prisma';
 
 export async function createPost(input: CreatePostInput) {
   const post = await prisma.post.create({
-    data: {
-      title: input.title,
-      content: input.content,
-      authorId: input.authorId,
-      postingUnitId: input.postingUnitId,
-    },
+    data: input,
   });
 
   return post;
@@ -40,7 +35,7 @@ export async function readPostsOnUnit(unitId: number) {
 export async function readPostOnId(id: number) {
   const post = await prisma.post.findFirst({
     where: {
-      id: id,
+      id,
     },
     select: {
       id: true,
@@ -63,7 +58,7 @@ export async function readPostOnId(id: number) {
 export async function deletePostOnId(id: number) {
   const post = await prisma.post.delete({
     where: {
-      id: id,
+      id,
     },
   });
 
