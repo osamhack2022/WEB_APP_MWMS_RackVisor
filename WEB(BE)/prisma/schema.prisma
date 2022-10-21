@@ -44,7 +44,7 @@ model Warehouse {
   name         String
   comment      String?
   layout       String?
-  itemlist     String?
+  itemlist     String? @db.MediumText
   storedUnit   Unit    @relation(fields: [storedUnitId], references: [id])
   storedUnitId Int
   racks        Rack[]

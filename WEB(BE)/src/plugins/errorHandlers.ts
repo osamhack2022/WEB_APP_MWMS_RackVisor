@@ -7,6 +7,9 @@ export default function (
   request: FastifyRequest,
   reply: FastifyReply
 ) {
+  console.log('[New error start]')
+  console.log(error.statusCode)
+  console.log('[New error end]')
   switch (error.statusCode) {
     case 400:
       console.log('[ERROR] Schema Validation Failed');

@@ -57,6 +57,7 @@ async function stockRoutes(server: FastifyInstance) {
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
+        body: $ref('searchStockSchema'),
         response: {
           200: $ref('stocksResponseSchema'),
         },
