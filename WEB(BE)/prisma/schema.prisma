@@ -43,7 +43,7 @@ model Warehouse {
   id           Int     @id @default(autoincrement())
   name         String
   comment      String?
-  layout       String?
+  layout       String? @db.MediumText
   itemlist     String? @db.MediumText
   storedUnit   Unit    @relation(fields: [storedUnitId], references: [id])
   storedUnitId Int
