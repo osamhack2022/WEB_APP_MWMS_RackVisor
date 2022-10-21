@@ -35,7 +35,7 @@ export async function readPostsOnUnit(unitId: number) {
 export async function readPostOnId(id: number) {
   const post = await prisma.post.findFirst({
     where: {
-      id,
+      id: id,
     },
     select: {
       id: true,
