@@ -18,9 +18,6 @@ function HouseSelect() {
 
   const fetchHouseList = useCallback(async () => {
     try {
-      const newData = await axiosGet("/users/all-users");
-      alert(JSON.stringify(newData));
-
       const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
 
       setHouseList(data);

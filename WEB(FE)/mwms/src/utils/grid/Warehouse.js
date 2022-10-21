@@ -40,14 +40,17 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   async componentDidMount() {
-    const response = await axiosGet("/warehouses/my-warehouses/" + (this.state.currHouse.id).toString());
+    const response = await axiosGet("/warehouses/" + (this.state.currHouse.id).toString());
     const newItems = response.itemList ? JSON.parse(response.itemList) : []   // id -> 현재 부대의 정보
     const newLayout = response.layout ? JSON.parse(response.layout) : [] // id -> 현재 창고의 정보
-    
+    alert("test" + JSON.stringify(response));
+
     this.setState({
       items: newItems,
       layout: newLayout,
     });
+    alert(JSON.stringify(newItems));
+    alert(JSON.stringify(newLayout));
   }
 
   createElement(el)
@@ -197,19 +200,22 @@ export default class WarehouseGridLayout extends React.PureComponent {
   async onLocalSave() {
     //API
     //this.state.currHouse / this.state.currUnit ->  과 관련해서 정보를 받아서 body를 구성해서 여기서 뿌리면 된다
-    let cabinetList = [];
-    this.state.items.filter(item => item.type == "cabinet") //캐비넷 하나씩 만들어서 array 하나씩 추가해줘야 한다 -> cabinet 원소 하나씩 넣어주면 된다
-    //그다음에 -> items 원소 중 key 로 해서 unique id 라는 property 를 하나 더 추가해줘야 한다
-    //그걸 서버에 업로드 해주거나 서버에서 return 을 해줘야 한다 그니까 cabinet 에 고유한 id 가 박혀있는 걸 줘야 함.  서버에서 나중에 불러올 때
-    alert(this.state.currHouse.id);
+    // this.state.items.filter(item => item.type == "cabinet") //캐비넷 하나씩 만들어서 array 하나씩 추가해줘야 한다 -> cabinet 원소 하나씩 넣어주면 된다
+    // //그다음에 -> items 원소 중 key 로 해서 unique id 라는 property 를 하나 더 추가해줘야 한다
+    // //그걸 서버에 업로드 해주거나 서버에서 return 을 해줘야 한다 그니까 cabinet 에 고유한 id 가 박혀있는 걸 줘야 함.  서버에서 나중에 불러올 때
+    // alert(this.state.currHouse.id);
 
     await axiosPut("/warehouses/update-layout/" + (this.state.currHouse.id).toString(), {
       layout: JSON.stringify(this.state.layout)
     })
     
-    // await axiosPut("/warehouses/put-item-list/" + (this.state.currHouse.id).toString(), {
-    //   itemList : JSON.stringify(this.state.items)
-    // })
+    await axiosPut("warehouses/update-itemlist/" + (this.state.currHouse.id).toString(), {
+      itemList : JSON.stringify(this.state.items)
+    })
+
+    this.state.items.filter((item) => (
+      item.type == "cabinet"
+    ));
 
     alert("저장되었습니다")
   }

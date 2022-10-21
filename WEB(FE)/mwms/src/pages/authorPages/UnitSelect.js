@@ -48,7 +48,7 @@ function UnitSelect() {
       const data = await axiosGet("/units/all-units");
       setUnitList(data);
     } catch (error) {
-      alert("Error on fetching unit");
+      // alert("Error on fetching unit");
     }
   }, []);
 
@@ -57,7 +57,7 @@ function UnitSelect() {
     
     //TODO _ API
     fetchUnitList();
-  }, [auth, fetchUnitList]);
+  }, []);
 
   return (
     <div class="bg-primary-900 w-full">
