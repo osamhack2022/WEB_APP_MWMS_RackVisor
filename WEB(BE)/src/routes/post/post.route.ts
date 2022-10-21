@@ -1,6 +1,11 @@
 import { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../..';
-import { registerPost, getPostOnId, getPostsOnUnit } from './post.controller';
+import {
+  registerPost,
+  getPostOnId,
+  getPostsOnUnit,
+  deletePost,
+} from './post.controller';
 import { $ref } from './post.schema';
 
 async function postRoutes(server: FastifyInstance) {
@@ -42,6 +47,16 @@ async function postRoutes(server: FastifyInstance) {
       },
     },
     getPostOnId
+  );
+
+  server.delete(
+    '/deletePost',
+    {
+      schema: {
+        body: $ref('deletePostSchema'),
+      },
+    },
+    deletePost
   );
 }
 

@@ -25,6 +25,12 @@ export async function readPostsOnUnit(unitId: number) {
       content: true,
       authorId: true,
       createdAt: true,
+      author: {
+        select: {
+          name: true,
+          rank: true,
+        },
+      },
     },
   });
 
@@ -42,6 +48,22 @@ export async function readPostOnId(id: number) {
       content: true,
       authorId: true,
       createdAt: true,
+      author: {
+        select: {
+          name: true,
+          rank: true,
+        },
+      },
+    },
+  });
+
+  return post;
+}
+
+export async function deletePostOnId(id: number) {
+  const post = await prisma.post.delete({
+    where: {
+      id: id,
     },
   });
 
