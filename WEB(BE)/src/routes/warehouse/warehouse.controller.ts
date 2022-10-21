@@ -6,6 +6,7 @@ import {
 } from './warehouse.schema';
 import {
   createWarehouse,
+  readWarehouseOnId,
   readWarehousesOnUnit,
   updateItemlist,
   updateWarehouseLayout,
@@ -85,4 +86,16 @@ export async function updateWarehouseItemlist(
     console.error(e);
     return reply.code(500).send(e);
   }
+}
+
+export async function getWarehouseOnId(
+  request: FastifyRequest<{
+    Params: { warehouseId: string };
+  }>,
+  reply: FastifyReply
+) {
+  const { warehouseId } = request.params;
+  const warehouse = await readWarehouseOnId(+warehouseId);
+
+  return reply.code(201).send(warehouse);
 }

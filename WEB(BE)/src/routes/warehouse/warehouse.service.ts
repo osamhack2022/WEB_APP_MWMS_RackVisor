@@ -67,3 +67,21 @@ export async function updateItemlist(
 
   return warehouse.itemlist;
 }
+
+export async function readWarehouseOnId(id: number) {
+  const warehouse = await prisma.warehouse.findFirst({
+    where: {
+      id: id,
+    },
+    select: {
+      id: true,
+      name: true,
+      comment: true,
+      storedUnitId: true,
+      layout: true,
+      itemlist: true,
+    },
+  });
+
+  return warehouse;
+}

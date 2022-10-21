@@ -15,6 +15,8 @@ const warehouseResponseSchema = z.object({
   id: z.number(),
   ...warehouseCore,
   storedUnitId: z.number(),
+  layout: z.string(),
+  itemlist: z.string(),
 });
 
 const updateWarehouseLayoutSchema = z.object({
