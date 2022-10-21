@@ -50,7 +50,7 @@ function UnitSelect() {
   useEffect(() => {
     auth.unitSelect("");
     fetchUnitList();
-  }, []);
+  }, [auth, fetchUnitList]);
 
   return (
     <div class="bg-primary-900 w-full">

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import AuthorHeader from '../../components/AuthorHeader'
@@ -7,36 +7,34 @@ import {Link, useNavigate} from 'react-router-dom'
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
 import { getLSUnitList } from './UnitSelect'
+import { axiosGet } from '../../api'
 
 function HouseSelect() {
+  let unitName = localStorage.getItem("부대");
+  // houseList 예시: [{name : "1종창고", gridLayout: [], items: []}, {name : "2종창고", gridLayout: [], items: []}, {name : "3종창고", gridLayout: [], items: []} ] <- DB 설계에 따라 형식 바뀔 수 있음
+  const [houseList, setHouseList] = useState([]);
   
   let auth = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if(localStorage.getItem("부대") === "") {
-      alert("부대를 선택해주세요");
-      navigate("/");
+  const fetchWarehouseList = useCallback(async () => {
+    try {
+      const data = [];
+      // const data = await axiosGet("/units/all-units");
+      setHouseList(data);
+    } catch (error) {
+      alert("Error on fetching unit");
     }
   }, []);
 
+  useEffect(() => {
+    fetchWarehouseList()
+  }, [fetchWarehouseList]);
+
 
   // TODO: 서버로부터 unit(부대) 불러와야함...
-  let unitName = localStorage.getItem("부대");
-  let lsUnitList=  getLSUnitList();
-  let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-  let hl;
-  if(lsUnit === undefined)
-  {
-    hl = []
-  }
-  else
-  {
-    hl = lsUnit.houseList;
-  }
   
-  // houseList 예시: [{name : "1종창고", gridLayout: [], items: []}, {name : "2종창고", gridLayout: [], items: []}, {name : "3종창고", gridLayout: [], items: []} ] <- DB 설계에 따라 형식 바뀔 수 있음
-  const [houseList, setHouseList] = useState(hl);
+      
   
 
   const onSelectHouse = (e) => {
