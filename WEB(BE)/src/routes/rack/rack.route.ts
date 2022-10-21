@@ -42,19 +42,6 @@ async function rackRoutes(server: FastifyInstance) {
     },
     updateLayoutOfRack
   )
-  server.put(
-    '/put-item-list/:rackId',
-    {
-      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
-      schema: {
-        body: $ref('updateRackItemListSchema'),
-        response: {
-          200: $ref('updateRackItemListSchema'),
-        },
-      },
-    },
-    updateItemListOfRack
-  );
 }
 
 export default rackRoutes;
