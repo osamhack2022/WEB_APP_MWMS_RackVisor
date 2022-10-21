@@ -1,6 +1,11 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { CreatePostInput } from './post.schema';
-import { createPost, readPostOnId, readPostsOnUnit } from './post.service';
+import { CreatePostInput, DeletePostInput } from './post.schema';
+import {
+  createPost,
+  deletePostOnId,
+  readPostOnId,
+  readPostsOnUnit,
+} from './post.service';
 
 export async function registerPost(
   request: FastifyRequest<{
@@ -50,6 +55,24 @@ export async function getPostsOnUnit(
     const posts = await readPostsOnUnit(params);
 
     return reply.code(201).send(posts);
+  } catch (e) {
+    console.error(e);
+    return reply.code(500).send(e);
+  }
+}
+
+export async function deletePost(
+  request: FastifyRequest<{
+    Body: DeletePostInput;
+  }>,
+  reply: FastifyReply
+) {
+  const body = request.body;
+
+  try {
+    const post = await deletePostOnId(body.id);
+
+    return reply.code(201).send(post);
   } catch (e) {
     console.error(e);
     return reply.code(500).send(e);
