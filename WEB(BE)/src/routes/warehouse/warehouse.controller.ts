@@ -30,16 +30,16 @@ export async function registerWarehouse(
 export async function updateLayoutOfWarehouse(
   request: FastifyRequest<{
     Body: UpdateWarehouseLayout;
-    Params: { storedUnitId: string };
+    Params: { warehouseId: string };
   }>,
   reply: FastifyReply
 ) {
   const body = request.body;
 
-  const { storedUnitId } = request.params;
+  const { warehouseId } = request.params;
 
   try {
-    const layout = await updateWarehouseLayout(body, +storedUnitId);
+    const layout = await updateWarehouseLayout(body, +warehouseId);
 
     return reply.code(200).send(layout);
   } catch (e) {
