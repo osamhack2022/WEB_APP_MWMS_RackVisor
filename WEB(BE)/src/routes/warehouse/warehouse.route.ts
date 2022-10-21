@@ -36,7 +36,7 @@ async function warehouseRoutes(server: FastifyInstance) {
   );
 
   server.put(
-    '/update-layout',
+    '/update-layout/:warehouseId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
