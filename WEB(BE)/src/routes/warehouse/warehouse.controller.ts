@@ -30,16 +30,16 @@ export async function registerWarehouse(
 export async function updateLayoutOfWarehouse(
   request: FastifyRequest<{
     Body: UpdateWarehouseLayout;
-    Params: number;
+    Params: { storedUnitId: number };
   }>,
   reply: FastifyReply
 ) {
   const body = request.body;
 
-  const params = request.params;
+  const { storedUnitId } = request.params;
 
   try {
-    const layout = await updateWarehouseLayout(body, params);
+    const layout = await updateWarehouseLayout(body, storedUnitId);
 
     return reply.code(200).send(layout);
   } catch (e) {
@@ -50,14 +50,14 @@ export async function updateLayoutOfWarehouse(
 
 export async function findWarehousesOnUnit(
   request: FastifyRequest<{
-    Params: number;
+    Params: { storedUnitId: number };
   }>,
   reply: FastifyReply
 ) {
-  const params = request.params;
+  const { storedUnitId } = request.params;
 
   try {
-    const warehouses = await readWarehousesOnUnit(params);
+    const warehouses = await readWarehousesOnUnit(storedUnitId);
 
     return reply.code(200).send(warehouses);
   } catch (e) {
