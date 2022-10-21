@@ -1,5 +1,4 @@
 import { FastifyInstance } from 'fastify';
-import { Schema } from 'zod';
 import { DecoratedFastifyInstance } from '../../index';
 import {
   registerWarehouse,
@@ -54,7 +53,8 @@ async function warehouseRoutes(server: FastifyInstance) {
   server.put(
     '/update-itemlist/:warehouseId',
     {
-      Schema: {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
         body: $ref('updateWarehouseItemlist'),
         response: {
           201: $ref('updateWarehouseItemlist'),
