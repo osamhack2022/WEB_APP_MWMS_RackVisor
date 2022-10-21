@@ -47,7 +47,7 @@ const searchStockSchema = z.object({
   barcode: z.string().optional(),
   minExpDate: z.string().optional(),
   maxExpDate: z.string().optional(),
-  storedBoxId: z.string().optional(),
+  storedBoxId: z.number().optional(),
 });
 
 

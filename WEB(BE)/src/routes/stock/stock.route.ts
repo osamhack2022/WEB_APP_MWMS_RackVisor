@@ -6,6 +6,7 @@ import {
   registerStock,
   updateStocks,
   deleteStocks,
+  advancedStockSearchController,
 } from './stock.controller';
 import { $ref } from './stock.schema';
 
@@ -51,18 +52,18 @@ async function stockRoutes(server: FastifyInstance) {
   );
 
   // ? Advanced Search
-  // server.post(
-  //   '/advanced-search',
-  //   {
-  //     onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
-  //     schema: {
-  //       response: {
-  //         200: $ref('stocksResponseSchema'),
-  //       },
-  //     },
-  //   },
-  //   null
-  // );
+  server.post(
+    '/advanced-search',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        response: {
+          200: $ref('stocksResponseSchema'),
+        },
+      },
+    },
+    advancedStockSearchController
+  );
 
   server.put(
     '/stock-update',

@@ -52,11 +52,11 @@ export const advancedStockSearchService = async (body: AdvanedSearchStockInput) 
       expirationDate: {
         gte: body.minExpDate,
         lte: body.maxExpDate
-      }
-
+      },
+      storedBoxId: body.storedBoxId
     }
   })
-  return []
+  return searchResult
 }
 
 export async function updateStock(data: updateStockInput) {
