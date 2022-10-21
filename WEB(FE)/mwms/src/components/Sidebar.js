@@ -16,12 +16,12 @@ function Sidebar() {
 
   return (
     <aside class="w-48 h-screen" aria-label="Sidebar">
-      <div class="overflow-y-auto h-full py-4 px-3 bg-primary-900">
+      <div class="overflow-y-auto h-full py-4 px-3 bg-[#202020] drop-shadow-2xl">
           <ul class="space-y-2">
             {
               sidebarButtonList.map(button => (
                 <li>
-                  <Link to={button.link} class="flex items-center p-2 text-base font-normal font-poppins text-white rounded-lg hover:bg-gradient-to-r from-cyan-400 to-blue-800 ">
+                  <Link to={button.link} class="flex items-center p-2 text-base font-normal font-poppins text-white rounded-lg hover:bg-[#7A5EA6] ">
                     <span class="ml-3">{button.name}</span>
                   </Link>
                 </li>

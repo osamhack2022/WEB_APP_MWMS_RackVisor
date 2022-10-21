@@ -74,31 +74,31 @@ function Posts({ posting, total, setPosting }) {
 
   return (
     <div className="flex flex-col">
-      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 rounded-tr-2xl rounded-tl-2xl">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-white">
-            <table className="min-w-full divide-y divide-white">
-        <thead>
-          <tr>
+            <table className="min-w-full divide-y divide-white rounded-tr-2xl rounded-tl-2xl">
+        <thead class = "bg-[#706F6F]">
+          <tr class=" ">
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
+              className="px-4 py-3 text-left text-lg font-blod text-[#CFCFCF] uppercase tracking-wider rounded-tl-2xl text-center"
             >
               번호
             </th>
-            <button
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
-            >
-              제목
-            </button>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"
+              className="px-5 py-3 text-left text-lg font-blod text-[#CFCFCF] uppercase tracking-wider"
             >
               관등성명
             </th>
-            <th scope="col" className="relative px-6 py-3">
+            <th
+              scope="col"
+              className="px-7 py-3 text-left text-lg font-blod text-[#CFCFCF] uppercase tracking-wider"
+            >
+              제목
+            </th>
+            <th scope="col" className="relative px-6 py-3 rounded-tr-2xl">
               <span className="sr-only text-white font-bold">Edit</span>
             </th>
           </tr>
@@ -106,11 +106,11 @@ function Posts({ posting, total, setPosting }) {
         <tbody>
           {posting && posting.map((article) => (
             <tr key={article.id}>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{article.id}</td>
-              <button className="absolute px-6 py-4 z-[0] whitespace-nowrap text-sm text-white" id={article.id} onClick={openModal}>{article.title}</button>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{article.milClass} {article.name}</td>
-              <td  className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" >
-                <div id={article.id} onClick={erasePost} className="text-white cursor-pointer hover:text-secondary">X</div>
+              <td className="text-center px-4 py-4 whitespace-nowrap text-base font-medium text-white">{article.id}</td>
+              <td className=" px-5 py-4 whitespace-nowrap text-base text-white">{article.milClass} {article.name}</td>
+              <button className=" absolute px-7 py-4 z-[0] whitespace-nowrap text-base text-white" id={article.id} onClick={openModal}>{article.title}</button>
+              <td  className="px-6 py-4 whitespace-nowrap text-right text-base font-medium" >
+                <div id={article.id} onClick={erasePost} className="text-white cursor-pointer hover:text-[#7A5EA6]">X</div>
               </td>
             </tr>
           ))}
@@ -120,14 +120,13 @@ function Posts({ posting, total, setPosting }) {
         </tbody>
       </table>
       <Button
-        class="text-primary-900 bg-blue-gradient font-poppins font-semibold m-2 p-2 rounded"
+        class="text-[#5AB0AD] font-poppins font-semibold ml-3 mb-3"
         handleClick={() => {
           setPlus(true);
           setPlusContent("");
           setPlusTitle("");
         }}
         text="추가하기"
-
       />
       <ContentPlusModal open={plus} setOpen={setPlus} title={plusTitle} setTitle={titleChange} content={plusContent} setContent={contentChange} makePost={makePost}/>
 

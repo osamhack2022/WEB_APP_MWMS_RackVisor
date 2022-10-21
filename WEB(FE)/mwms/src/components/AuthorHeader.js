@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import logoImg from '../images/logo.png'
+import logoImg from '../images/Image.jpeg'
 import { useAuth } from '../routes/AuthContext';
 import AlarmDropDown from '../utils/AlarmDropDown';
 import DropDown from '../utils/DropDown';
@@ -24,14 +24,14 @@ function AuthorHeader() {
 
   return (
     <div>
-      <nav class="bg-primary-900 w-full flex py-6 justify-between items-center navbar">
+      <nav class="bg-[#323232] w-full flex justify-between py-3 justify-start items-center navbar">
         
         <a href="./" class="flex items-center">
-          <img src= {logoImg} class="w-[124px] h-[48px]" alt="logo image" />
+          <img src= {logoImg} class="w-[150px] h-[70px]" alt="logo image" />
         </a>
 
-        <div class="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[5px] mb-2">
-            <p class={`${styles.paragraph} ml-2`}>
+        <div class="py-[6px] px-4 text-white text-2xl rounded-[5px] mb-2">
+            <p class="ml-2">
               {auth.unitSelected.name}
             </p>
         </div>

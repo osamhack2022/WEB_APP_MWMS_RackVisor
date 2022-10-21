@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 import styles from "../../style.js";
 import Title from "../../utils/with_description";
 import Button from "../../components/Button";
 import { axiosGet, axiosPost } from "../../api";
+import Footer from "../../components/Footercopy";
 
 function LoginPage() {
   const navigate = useNavigate();

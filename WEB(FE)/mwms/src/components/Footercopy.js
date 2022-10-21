@@ -4,10 +4,10 @@ import logoImg from '../images/logo.png'
 function Footer() {
   return (
     <div>
-      <footer class="p-4 bg-[#202020] shadow">
+      <footer class="p-4 bg-primary-900 shadow">
         <div class="sm:flex sm:items-center sm:justify-between">
             <a href="./" class="flex items-center mb-4 sm:mb-0">
-                <span class = "text-2xl text-white font-bold">MWMS</span>
+                <span class = "text-2xl text-white font-bold text-gradient">MWMS</span>
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500">
                 <li>

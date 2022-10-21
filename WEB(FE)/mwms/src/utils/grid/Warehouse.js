@@ -39,17 +39,16 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.onChangeItemName = this.onChangeItemName.bind(this);
   }
 
-  // async componentDidMount() {
-    //API 연결  
-    //this.state.currUnit.name / id -> 현재 부대의 정보
-    //this.state.currHouse.name / id -> 현재 창고의 정보
-    //item 들고오기 없으면 기본 []
-    //layout 들고오기 없으면 기본 []
-    // this.setState({
-    //   items:newItems,
-    //   layout: newLayout,
-    // });
-    // }
+  async componentDidMount() {
+    const response = await axiosGet("/warehouses/my-warehouses/" + (this.state.currHouse.id).toString());
+    const newItems = response.itemList ? JSON.parse(response.itemList) : []   // id -> 현재 부대의 정보
+    const newLayout = response.layout ? JSON.parse(response.layout) : [] // id -> 현재 창고의 정보
+    
+    this.setState({
+      items: newItems,
+      layout: newLayout,
+    });
+  }
 
   createElement(el)
   {
@@ -202,6 +201,17 @@ export default class WarehouseGridLayout extends React.PureComponent {
     this.state.items.filter(item => item.type == "cabinet") //캐비넷 하나씩 만들어서 array 하나씩 추가해줘야 한다 -> cabinet 원소 하나씩 넣어주면 된다
     //그다음에 -> items 원소 중 key 로 해서 unique id 라는 property 를 하나 더 추가해줘야 한다
     //그걸 서버에 업로드 해주거나 서버에서 return 을 해줘야 한다 그니까 cabinet 에 고유한 id 가 박혀있는 걸 줘야 함.  서버에서 나중에 불러올 때
+    alert(this.state.currHouse.id);
+
+    await axiosPut("/warehouses/update-layout/" + (this.state.currHouse.id).toString(), {
+      layout: JSON.stringify(this.state.layout)
+    })
+    
+    // await axiosPut("/warehouses/put-item-list/" + (this.state.currHouse.id).toString(), {
+    //   itemList : JSON.stringify(this.state.items)
+    // })
+
+    alert("저장되었습니다")
   }
 
   onAddCabinet() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Footer from "../../components/Footercopy";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosPost } from '../../api';

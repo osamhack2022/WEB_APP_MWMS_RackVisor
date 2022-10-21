@@ -86,7 +86,7 @@ function UnitSelect() {
         </div>
       </div>
 
-      <div class={`bg-primary-900 ${styles.paddingX} ${styles.flexStart}`}>
+      <div class={`bg-[#202020] ${styles.paddingX} ${styles.flexStart}`}>
         <div class={`${styles.boxWidth}`}>
           <Footer />
         </div>
