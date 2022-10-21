@@ -33,7 +33,7 @@ async function rackRoutes(server: FastifyInstance) {
   );
 
   server.put(
-    '/:rackId',
+    '/put-item-list/:rackId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
