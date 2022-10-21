@@ -45,14 +45,14 @@ export async function getPostOnId(
 
 export async function getPostsOnUnit(
   request: FastifyRequest<{
-    Params: number;
+    Params: {id: string}
   }>,
   reply: FastifyReply
 ) {
-  const params = request.params;
+  const {id} = request.params;
 
   try {
-    const posts = await readPostsOnUnit(params);
+    const posts = await readPostsOnUnit(+id);
 
     return reply.code(201).send(posts);
   } catch (e) {
