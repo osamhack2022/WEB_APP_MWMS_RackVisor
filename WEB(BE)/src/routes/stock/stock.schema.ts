@@ -23,7 +23,7 @@ const stockCore = {
   amount: z.number(),
   barcode: z.string(),
   comment: z.string(),
-  expirationDate: z.date().or(z.string()),
+  expirationDate: z.date().or(z.any()),
   storedBoxId: z.number(),
 };
 

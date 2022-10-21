@@ -9,6 +9,8 @@ export default function (
 ) {
   console.log('[New error start]')
   console.log(typeof error)
+  console.log(error.statusCode)
+  console.log(error.message)
   console.log('[New error end]')
   switch (error.statusCode) {
     case 400:
