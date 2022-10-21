@@ -6,6 +6,7 @@ import {
   findRacksOnWarehouse,
   updateLayoutOfRack,
   updateNameOfRack,
+  getRackOnId,
 } from './rack.controller';
 import { $ref } from './rack.schema';
 
@@ -57,6 +58,19 @@ async function rackRoutes(server: FastifyInstance) {
       },
     },
     updateNameOfRack
+  );
+
+  server.get(
+    '/:rackId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        response: {
+          201: $ref('rackResponseSchema'),
+        },
+      },
+    },
+    getRackOnId
   );
 }
 

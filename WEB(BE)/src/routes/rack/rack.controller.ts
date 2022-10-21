@@ -8,6 +8,7 @@ import {
 import {
   createRack,
   findRacks,
+  readRackOnId,
   updateRackLayout,
   updateRackName,
 } from './rack.service';
@@ -86,4 +87,16 @@ export async function updateNameOfRack(
     console.error(e);
     return reply.code(500).send(e);
   }
+}
+
+export async function getRackOnId(
+  request: FastifyRequest<{
+    Params: { rackId: String };
+  }>,
+  reply: FastifyReply
+) {
+  const { rackId } = request.params;
+  const rack = await readRackOnId(+rackId);
+
+  return reply.code(201).send(rack);
 }

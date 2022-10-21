@@ -59,3 +59,19 @@ export async function updateRackName(
 
   return rack.name;
 }
+
+export async function readRackOnId(rackId: number) {
+  const rack = await prisma.rack.findFirst({
+    where: {
+      id: rackId,
+    },
+    select: {
+      id: true,
+      name: true,
+      layout: true,
+      storedWarehouseId: true,
+    },
+  });
+
+  return rack;
+}
