@@ -24,6 +24,8 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
     setFloorList(newFloorList);
     setRend(Math.random());
 
+    //층 하나 추가 와 box 한개 추가하는 로직
+
   }
 
   const addItem = (e) => {
@@ -32,7 +34,7 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
     let newId = copyFloorList.floorList.find(floor => floor.floor == currFloor).iid + 1;
     let floorIdx = copyFloorList.floorList.findIndex(floor => floor.floor == currFloor);
     let newBox = {id : newId, iid : newId};
-
+    //박스 추가하기
     
     copyFloorList.floorList[floorIdx].list.push(newBox);
     copyFloorList.floorList[floorIdx].iid += 1;

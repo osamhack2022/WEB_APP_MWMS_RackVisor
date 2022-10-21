@@ -14,7 +14,7 @@ function HouseImageList() {
 
   const fetchImgList = useCallback(async () => {
     try {
-      const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
+      const data = await axiosGet("/warehouses/my-warehouses" + (currUnit.id).toString());
       //사진에 관한 정보
       let newImgList = [];
       data.map((da) => {

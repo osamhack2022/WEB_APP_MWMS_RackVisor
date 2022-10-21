@@ -47,13 +47,11 @@ function SignupPage() {
     //입력한 값이 valid 한지 확인하는 로직이 필요
     //서버와 통신하는 부분 - dumy value 가져갈 필요
     let itemToAdd = {
-      email: "user@example.com",
       name: name,
       militarySerialNumber: id,
-      rank: "RANK_GEN",
+      rank: milClass,
       reigment: unit,
       position: pos,
-      phoneNumber: "string",
       password: pw
     }
 

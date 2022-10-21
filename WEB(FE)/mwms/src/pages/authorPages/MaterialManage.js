@@ -41,7 +41,7 @@ function MaterialManage() {
 
   const fetchHouseList = useCallback(async () => {
     try {
-      const data = await axiosGet("/warehouse/my-warehouses/" + (currUnit.id).toString());
+      const data = await axiosGet("/warehouse/my-warehouses" + (currUnit.id).toString());
       let visualJ = {};
       data.map((da) => {
         visualJ[da.id] = false;

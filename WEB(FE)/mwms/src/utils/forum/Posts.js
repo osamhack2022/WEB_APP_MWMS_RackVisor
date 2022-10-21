@@ -51,25 +51,18 @@ function Posts({ posting, total, setPosting }) {
   }
 
   const makePost = async () => {
-    // let itemToAdd = {
-    //   title : plusTitle,
-    //   milClass : localStorage.getItem("계급"),
-    //   name : localStorage.getItem("이름"),
-    //   content : plusContent
-    // }
-    // const itemResponse = await axiosPost("/posts/unit-posts/" + (currUnit.id).toString(), itemToAdd);
-    // setPosting(total.concat(itemResponse));
-
-    setPosting(total.concat({
-      id : total.length != 0 ? total[total.length - 1].id + 1 : 1,
+    let itemToAdd = {
       title : plusTitle,
-      milClass : localStorage.getItem("계급"),
-      name : localStorage.getItem("이름"),
+      authorId : localStorage.getItem("id"),
+      postingUnitId : Number(currUnit.id),
       content : plusContent
-    }))
+    }
+  
+    const itemResponse = await axiosPost("/posts", itemToAdd);
+    setPosting(total.concat(itemResponse));
     setPlusTitle("");
     setPlusContent("");
-    setPlus(false)
+    setPlus(false);
   }
 
   return (
@@ -107,7 +100,7 @@ function Posts({ posting, total, setPosting }) {
           {posting && posting.map((article) => (
             <tr key={article.id}>
               <td className="text-center px-4 py-4 whitespace-nowrap text-base font-medium text-white">{article.id}</td>
-              <td className=" px-5 py-4 whitespace-nowrap text-base text-white">{article.milClass} {article.name}</td>
+              <td className=" px-5 py-4 whitespace-nowrap text-base text-white">{article.author.rank} {article.author.name}</td>
               <button className=" absolute px-7 py-4 z-[0] whitespace-nowrap text-base text-white" id={article.id} onClick={openModal}>{article.title}</button>
               <td  className="px-6 py-4 whitespace-nowrap text-right text-base font-medium" >
                 <div id={article.id} onClick={erasePost} className="text-white cursor-pointer hover:text-[#7A5EA6]">X</div>

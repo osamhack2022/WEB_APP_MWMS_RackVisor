@@ -3,7 +3,7 @@ import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout"
 import EditableText from "../text/EditableText"
 import { getLSUnitList } from '../../pages/authorPages/UnitSelect'
-import { axiosGet, axiosPut } from "../../api";
+import { axiosGet, axiosPost, axiosPut } from "../../api";
 
 const ReactGridLayout = WidthProvider(RGL);
   
@@ -40,17 +40,17 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   async componentDidMount() {
-    const response = await axiosGet("/warehouses/" + (this.state.currHouse.id).toString());
-    const newItems = response.itemList ? JSON.parse(response.itemList) : []   // id -> 현재 부대의 정보
+    const response = await axiosGet("/warehouses" + (this.state.currHouse.id).toString());
+    const newItems = response.itemlist ? JSON.parse(response.itemList) : []   // id -> 현재 부대의 정보
     const newLayout = response.layout ? JSON.parse(response.layout) : [] // id -> 현재 창고의 정보
-    alert("test" + JSON.stringify(response));
 
     this.setState({
       items: newItems,
       layout: newLayout,
     });
-    alert(JSON.stringify(newItems));
-    alert(JSON.stringify(newLayout));
+
+    console.log("item : " + newItems);
+    console.log("layout : " + newLayout);
   }
 
   createElement(el)
@@ -205,17 +205,75 @@ export default class WarehouseGridLayout extends React.PureComponent {
     // //그걸 서버에 업로드 해주거나 서버에서 return 을 해줘야 한다 그니까 cabinet 에 고유한 id 가 박혀있는 걸 줘야 함.  서버에서 나중에 불러올 때
     // alert(this.state.currHouse.id);
 
-    await axiosPut("/warehouses/update-layout/" + (this.state.currHouse.id).toString(), {
+    // let cpyItem = [...this.state.items];
+    // const rackInServer = await axiosGet("/racks/racks-in-warehouse/" + (this.state.currHouse.id).toString());
+
+    // //이름 update 용 리스트 업
+    // rackInServer.map(async (rack) => {
+    //   let nameUp = cpyItem.find((item) => ((item.iid == rack.name) && (item.id != rack.name)));
+    //   if (nameUp) {
+    //     await axiosPut("/racks/update-name/" + (nameUp.iid).toString(), {
+    //       name : nameUp.id
+    //     });
+    //   }
+    // });
+
+    // //추가된 rack 만들기
+    // cpyItem.map(async (item) => {
+    //   if (!rackInServer.find((rack) => (rack.id == item.iid))) {
+    //     let newItem = {
+    //       name : item.id,
+    //       storedWarehouseId : Number(this.state.currHouse.id)
+    //     }
+    //     const response = await axiosPost("/racks/", newItem);
+    //     newItem.id = response.id;
+    //     item.iid = newItem.id;
+    //   }
+    // });
+
+    // this.setState({
+    //   items: cpyItem
+    // })
+
+    await axiosPut("/warehouses/update-layout" + (this.state.currHouse.id).toString(), {
       layout: JSON.stringify(this.state.layout)
     })
     
-    await axiosPut("warehouses/update-itemlist/" + (this.state.currHouse.id).toString(), {
-      itemList : JSON.stringify(this.state.items)
+
+    await axiosPut("/warehouses/update-itemlist" + (this.state.currHouse.id).toString(), {
+      itemlist : JSON.stringify(this.state.items)
     })
 
-    this.state.items.filter((item) => (
-      item.type == "cabinet"
-    ));
+    //update rack
+    // const rackInServer = await axiosGet("/racks/racks-in-warehouse/" + (this.state.currHouse.id).toString());
+    // let newUpdate = [];
+    // let nameUpdate = [];
+
+    // rackInServer.map((rack) => {
+    //   this.state.items.filter((item) => (item.iid == rack.id)).map((item) => {
+        
+    //   });
+    // })
+
+    // [{"w":2,"h":1,"x":0,"y":0,"i":"door0","moved":false,"static":false},
+    // {"w":4,"h":4,"x":4,"y":4,"i":"Cabinet0","moved":false,"static":false},
+    // {"w":4,"h":4,"x":8,"y":8,"i":"Cabinet1","moved":false,"static":false},
+    // {"w":4,"h":4,"x":0,"y":1,"i":"Cabinet2","moved":false,"static":false}]
+    
+    // [{"type":"door","i":"door0","x":0,"y":0,"w":2,"h":1,"iid":1},
+    // {"type":"cabinet","i":"Cabinet0","x":4,"y":4,"w":4,"h":4,"iid":2},
+    // {"type":"cabinet","i":"Cabinet1","x":8,"y":8,"w":4,"h":4,"iid":3},
+    // {"type":"cabinet","i":"Cabinet2","x":0,"y":0,"w":4,"h":4,"iid":4}]
+    
+    // this.state.items.filter((item) => (item.type == "cabinet")).map(async (item) => {
+    //   let newRack = {
+    //     name : item.name,
+    //     storedWarehouseId : Number(this.state.currHouse.id)
+    //   }
+    //   const response = await axiosPost("/rack/", newRack);
+    //   newRack.id = response.id;
+    //   rackList.push(newRack);
+    // });
 
     alert("저장되었습니다")
   }
@@ -272,19 +330,24 @@ export default class WarehouseGridLayout extends React.PureComponent {
     console.log("변경1 : " + JSON.stringify(layout));
     console.log("변경2 : " + JSON.stringify(this.state.items));
     let newItems = [];
+    let updateLayout = [...layout];
+    let newLayout = [];
     let j;
     for(j = 0; j<layout.length; j++)
     {
       let item = this.state.items[j];
-      item.i = layout[j].i
-      item.x = layout[j].x;
-      item.y = layout[j].y;
-      item.w = layout[j].w;
-      item.h = layout[j].h;
+      let lay = layout[j];
+      lay.iid = item.iid;
+      item.i = updateLayout[j].i
+      item.x = updateLayout[j].x;
+      item.y = updateLayout[j].y;
+      item.w = updateLayout[j].w;
+      item.h = updateLayout[j].h;
       newItems.push(item);
+      newLayout.push(lay);
     }
     this.setState({
-      layout: layout,
+      layout: updateLayout,
       items: newItems,
     });
     
