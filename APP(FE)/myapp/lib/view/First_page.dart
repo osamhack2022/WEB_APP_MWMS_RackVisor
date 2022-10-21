@@ -72,7 +72,9 @@ class _FirstPage extends State<FirstPage> {
                   onPressed: () {
                    takePhoto(ImageSource.camera);
                   },
-                  label: Text("카메라")
+                  label: Text("카메라",
+                  style: TextStyle(color: Colors.black),
+                  ),
  
                 ),
  
@@ -96,8 +98,6 @@ class _FirstPage extends State<FirstPage> {
  
  
     return Scaffold(
-      backgroundColor: GlobalColors.mainBackgroundColor,
-      
       body: CustomScrollView(
         slivers: [ 
           SliverAppBar(

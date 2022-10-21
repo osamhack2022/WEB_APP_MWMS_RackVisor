@@ -1,10 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/model/unit_page_model.dart';
 import 'package:myapp/utils/global_colors.dart';
-import '../model/login_model.dart';
-import '../model/searchbar_model.dart';
-import '../services/web_service.dart';
 class SearchBarController extends GetxController {
 
 
@@ -19,7 +17,7 @@ class SearchBarController extends GetxController {
         
         border: Border.all(
           width: 2,
-          color: GlobalColors.backgroundColor
+          color: Colors.white,
         ),
 
         color: Colors.white,
@@ -42,7 +40,8 @@ class SearchBarController extends GetxController {
           //검색하세요
           const Expanded(
             flex: 4,
-            child: Text("검색하세요"),
+            child: Text("검색하세요",
+            style: TextStyle(color: Colors.grey),),
           ),
 
           Divider(thickness: 1,),
@@ -50,7 +49,8 @@ class SearchBarController extends GetxController {
           //qr 스캐너 on
           const Expanded(
             flex: 1,
-            child: Icon(Icons.search_off),
+            child: Icon(CupertinoIcons.qrcode,
+               ),
           ),
        
 

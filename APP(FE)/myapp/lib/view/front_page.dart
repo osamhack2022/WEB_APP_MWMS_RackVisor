@@ -6,6 +6,7 @@ import 'package:myapp/model/login_model.dart';
 import 'package:myapp/utils/global_colors.dart';
 
 import 'package:myapp/view/Fourth_page.dart';
+import 'package:myapp/view/twice_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 import 'First_page.dart';
@@ -105,7 +106,7 @@ class _FrontPage extends State<FrontPage> {
         controller: c.controller,
         children: [
           FirstPage(),
-          Center(child: Text('Star')),
+          TwicePage(),
           Center(child: Text('Add')),
           FourthPage()
         ],

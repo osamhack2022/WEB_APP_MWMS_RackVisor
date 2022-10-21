@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:myapp/utils/constants.dart';
 import 'package:myapp/utils/global_colors.dart';
 
 
@@ -7,6 +8,9 @@ import 'package:myapp/utils/global_colors.dart';
 class NoticeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    ScreenUtil.init(context, designSize: const Size(896, 414));
+
     return Container(
         padding: const EdgeInsets.all(25),
         decoration: BoxDecoration(
@@ -19,18 +23,19 @@ class NoticeScreen extends StatelessWidget {
             // 공지사항틀 제목
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children:  [
                 Text("공지사항",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),),
+                style: kTextBlackTitle,
+                ),
+
                 //공지사항 3개 screen에 more
-                Icon(Icons.more_horiz),
+                const Icon(Icons.more_horiz,
+                color: Color(0xFF373737),
+                ),
               ],
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
     

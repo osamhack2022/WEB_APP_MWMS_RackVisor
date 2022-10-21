@@ -4,8 +4,7 @@ import '../screen/qrScreen.dart';
 
 
 class TwicePage extends StatefulWidget {
-  TwicePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  
 
   @override
   _TwicePageState createState() => _TwicePageState();
@@ -16,29 +15,28 @@ class _TwicePageState extends State<TwicePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '여기에 링크가 뜨게 됩니다.',
-            ),
-            Text(
-              qrResult,
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-          ],
+    return Expanded(
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                '여기에 링크가 뜨게 됩니다.',
+              ),
+              Text(
+                qrResult,
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ],
+          ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _onPressedFAB,
+          tooltip: 'Increment',
+          child: Icon(Icons.add),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _onPressedFAB,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 

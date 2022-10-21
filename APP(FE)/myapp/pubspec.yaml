@@ -65,6 +65,9 @@ dependencies:
   #qrScanner
   qr_code_scanner: ^1.0.1
   
+  #carousel_slider
+  carousel_slider: ^4.1.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
