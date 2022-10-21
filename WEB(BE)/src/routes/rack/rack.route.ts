@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../../index';
 import { updateLayoutOfWarehouse } from '../warehouse/warehouse.controller';
-import { registerRack, findRacksOnWarehouse } from './rack.controller';
+import { registerRack, findRacksOnWarehouse, updateItemListOfRack } from './rack.controller';
 import { $ref } from './rack.schema';
 
 async function rackRoutes(server: FastifyInstance) {
@@ -43,7 +43,7 @@ async function rackRoutes(server: FastifyInstance) {
         },
       },
     },
-    updateLayoutOfWarehouse
+    updateItemListOfRack
   );
 }
 
