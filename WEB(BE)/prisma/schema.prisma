@@ -9,15 +9,13 @@ generator client {
 
 model User {
   id                   Int            @id @default(autoincrement())
-  email                String         @unique
   militarySerialNumber String         @unique
   password             String
   salt                 String
   name                 String
-  rank                 Rank           @default(RANK_NULL)
+  rank                 String
   reigment             String
   position             String
-  phoneNumber          String
   units                UsersOnUnits[]
   Post                 Post[]
 }
@@ -98,29 +96,6 @@ model History {
   createdAt  DateTime @default(now())
   storedUnit Unit     @relation(fields: [unitId], references: [id])
   unitId     Int
-}
-
-enum Rank {
-  RANK_NULL
-  RANK_PV2 //이병
-  RANK_PFC //일병
-  RANK_SPC //상병
-  RANK_SGT //병장
-  RANK_SSG //하사
-  RANK_SFC //중사
-  RANK_MSG //상사
-  RANK_SGM //원사
-  RANK_WO1 //준위
-  RANK_2LT //소위
-  RANK_1LT //중위
-  RANK_CPT //대위
-  RANK_MAJ //소령
-  RANK_LTC //중령
-  RANK_COL //대령
-  RANK_BG //준장
-  RANK_MG //소장
-  RANK_LTG //중장
-  RANK_GEN //대장
 }
 
 enum StockType {
