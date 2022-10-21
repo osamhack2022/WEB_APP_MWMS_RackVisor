@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { DecoratedFastifyInstance } from '../../index';
+import { updateLayoutOfWarehouse } from '../warehouse/warehouse.controller';
 import { registerRack, findRacksOnWarehouse } from './rack.controller';
 import { $ref } from './rack.schema';
 
@@ -24,11 +25,25 @@ async function rackRoutes(server: FastifyInstance) {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         response: {
-          201: $ref('racksResponseSchema'),
+          200: $ref('racksResponseSchema'),
         },
       },
     },
     findRacksOnWarehouse
+  );
+
+  server.put(
+    '/:rackId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateRackItemListSchema'),
+        response: {
+          200: $ref('updateRackItemListSchema'),
+        },
+      },
+    },
+    updateLayoutOfWarehouse
   );
 }
 
