@@ -1,11 +1,13 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import {
   CreateWarehouseInput,
+  UpdateWarehouseItemlist,
   UpdateWarehouseLayout,
 } from './warehouse.schema';
 import {
   createWarehouse,
   readWarehousesOnUnit,
+  updateItemlist,
   updateWarehouseLayout,
 } from './warehouse.service';
 
@@ -59,6 +61,26 @@ export async function findWarehousesOnUnit(
     const warehouses = await readWarehousesOnUnit(+storedUnitId);
 
     return reply.code(200).send(warehouses);
+  } catch (e) {
+    console.error(e);
+    return reply.code(500).send(e);
+  }
+}
+
+export async function updateWarehouseItemlist(
+  request: FastifyRequest<{
+    Body: UpdateWarehouseItemlist;
+    Params: { warehouseId: string };
+  }>,
+  reply: FastifyReply
+) {
+  const body = request.body;
+  const { warehouseId } = request.params;
+
+  try {
+    const itemlist = await updateItemlist(body, +warehouseId);
+
+    return reply.code(201).send(itemlist);
   } catch (e) {
     console.error(e);
     return reply.code(500).send(e);

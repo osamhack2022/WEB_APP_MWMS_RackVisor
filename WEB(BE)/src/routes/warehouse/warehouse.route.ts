@@ -1,9 +1,11 @@
 import { FastifyInstance } from 'fastify';
+import { Schema } from 'zod';
 import { DecoratedFastifyInstance } from '../../index';
 import {
   registerWarehouse,
   findWarehousesOnUnit,
   updateLayoutOfWarehouse,
+  updateWarehouseItemlist,
 } from './warehouse.controller';
 import { $ref } from './warehouse.schema';
 
@@ -47,6 +49,19 @@ async function warehouseRoutes(server: FastifyInstance) {
       },
     },
     updateLayoutOfWarehouse
+  );
+
+  server.put(
+    '/update-itemlist/:warehouseId',
+    {
+      Schema: {
+        body: $ref('updateWarehouseItemlist'),
+        response: {
+          201: $ref('updateWarehouseItemlist'),
+        },
+      },
+    },
+    updateWarehouseItemlist
   );
 }
 
