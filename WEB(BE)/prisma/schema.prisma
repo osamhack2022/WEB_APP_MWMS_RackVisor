@@ -54,7 +54,6 @@ model Rack {
   id                Int       @id @default(autoincrement())
   name              String
   layout            String?
-  itemList          String?
   storedWarehouse   Warehouse @relation(fields: [storedWarehouseId], references: [id])
   storedWarehouseId Int
   boxes             Box[]
