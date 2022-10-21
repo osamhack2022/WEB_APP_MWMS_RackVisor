@@ -36,10 +36,8 @@ export async function updateLayoutOfWarehouse(
 ) {
   const body = request.body;
 
-  const params = request.params;
-
   try {
-    const layout = await updateWarehouseLayout(body, params);
+    const layout = await updateWarehouseLayout(body);
 
     return reply.code(200).send(layout);
   } catch (e) {

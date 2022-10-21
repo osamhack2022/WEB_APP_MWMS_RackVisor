@@ -3,25 +3,21 @@ import prisma from '../../plugins/prisma';
 
 export async function createRack(data: CreateRackInput) {
   const rack = await prisma.rack.create({
-    data: {
-      storedWarehouseId: data.storedWarehouseId,
-      name: data.name,
-    },
+    data: data,
   });
 
   return rack;
 }
 
-export async function updateRackLayout(
-  data: UpdateRackLayoutInput,
-  rackId: number
-) {
+export async function updateRackLayout(data: UpdateRackLayoutInput) {
+  const { id, layout } = data;
+
   const warehouse = await prisma.rack.update({
     where: {
-      id: rackId,
+      id: id,
     },
     data: {
-      layout: data.layout,
+      layout: layout,
     },
   });
 

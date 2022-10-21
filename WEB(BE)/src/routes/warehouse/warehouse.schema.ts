@@ -18,6 +18,7 @@ const warehouseResponseSchema = z.object({
 });
 
 const updateWarehouseLayoutSchema = z.object({
+  id: z.number(),
   layout: z.string(),
 });
 

@@ -16,16 +16,15 @@ export async function createWarehouse(data: CreateWarehouseInput) {
   return warehouse;
 }
 
-export async function updateWarehouseLayout(
-  data: UpdateWarehouseLayout,
-  warehouseId: number
-) {
+export async function updateWarehouseLayout(data: UpdateWarehouseLayout) {
+  const { id, layout } = data;
+
   const warehouse = await prisma.warehouse.update({
     where: {
-      id: warehouseId,
+      id: id,
     },
     data: {
-      layout: data.layout,
+      layout: layout,
     },
   });
 
@@ -33,10 +32,10 @@ export async function updateWarehouseLayout(
 }
 
 export async function readWarehousesOnUnit(obj: any) {
-  const storedUnitId = +obj.storedUnitId
+  const storedUnitId = +obj.storedUnitId;
   const warehouses = await prisma.warehouse.findMany({
     where: {
-      storedUnitId
+      storedUnitId,
     },
     select: {
       name: true,
@@ -45,5 +44,5 @@ export async function readWarehousesOnUnit(obj: any) {
       storedUnitId: true,
     },
   });
-  return warehouses
+  return warehouses;
 }

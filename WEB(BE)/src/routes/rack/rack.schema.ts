@@ -17,6 +17,7 @@ const rackResponseSchema = z.object({
 });
 
 const updateRackLayoutSchema = z.object({
+  id: z.number(),
   layout: z.string(),
 });
 
