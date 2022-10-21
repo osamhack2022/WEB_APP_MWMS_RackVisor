@@ -31,8 +31,7 @@ export async function updateWarehouseLayout(data: UpdateWarehouseLayout) {
   return warehouse.layout;
 }
 
-export async function readWarehousesOnUnit(obj: any) {
-  const storedUnitId = +obj.storedUnitId;
+export async function readWarehousesOnUnit(storedUnitId: number) {
   const warehouses = await prisma.warehouse.findMany({
     where: {
       storedUnitId,
