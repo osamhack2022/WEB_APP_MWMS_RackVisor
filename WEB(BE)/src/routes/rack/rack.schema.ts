@@ -25,18 +25,27 @@ const updateRackItemListSchema = z.object({
   itemList: z.string(),
 });
 
+const updateRackNameSchema = z.object({
+  name: z.string(),
+});
+
 const racksResponseSchema = z.array(rackResponseSchema);
 
 export type CreateRackInput = z.infer<typeof createRackSchema>;
 
 export type UpdateRackLayoutInput = z.infer<typeof updateRackLayoutSchema>;
+
 export type UpdateRackItemListInput = z.infer<typeof updateRackItemListSchema>;
+
+export type UpdateRackNameInput = z.infer<typeof updateRackNameSchema>;
 
 const models = {
   createRackSchema,
   updateRackLayoutSchema,
   rackResponseSchema,
-  racksResponseSchema, updateRackItemListSchema
+  racksResponseSchema,
+  updateRackItemListSchema,
+  updateRackNameSchema,
 };
 
 export const { schemas: rackSchemas, $ref } = buildJsonSchemas(models, {
