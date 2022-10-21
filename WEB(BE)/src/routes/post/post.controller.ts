@@ -67,10 +67,10 @@ export async function deletePost(
   }>,
   reply: FastifyReply
 ) {
-  const body = request.body;
+  const { id } = request.body;
 
   try {
-    const post = await deletePostOnId(body.id);
+    const post = await deletePostOnId(id);
 
     return reply.code(201).send(post);
   } catch (e) {

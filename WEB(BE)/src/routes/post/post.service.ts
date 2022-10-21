@@ -58,7 +58,7 @@ export async function readPostOnId(id: number) {
 export async function deletePostOnId(id: number) {
   const post = await prisma.post.delete({
     where: {
-      id,
+      id: id,
     },
   });
 
