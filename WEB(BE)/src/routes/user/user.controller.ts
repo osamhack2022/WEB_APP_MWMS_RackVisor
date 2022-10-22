@@ -49,6 +49,8 @@ export async function loginHandler(
     const payload = {
       id: user.id,
       msn: user.militarySerialNumber,
+      rank: user.rank,
+      position: user.position,
     };
     const accessToken = await reply.jwtSign(payload, {
       iss: 'MWMS',
