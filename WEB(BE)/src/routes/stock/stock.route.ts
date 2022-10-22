@@ -7,6 +7,7 @@ import {
   updateStocks,
   deleteStocks,
   advancedStockSearchController,
+  getStocksOnExpirationDate,
 } from './stock.controller';
 import { $ref } from './stock.schema';
 
@@ -92,6 +93,19 @@ async function stockRoutes(server: FastifyInstance) {
       },
     },
     deleteStocks
+  );
+
+  server.get(
+    '/by-expiration-date/:storedWarehouseId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        response: {
+          201: $ref('stocksResponseSchema'),
+        },
+      },
+    },
+    getStocksOnExpirationDate
   );
 }
 

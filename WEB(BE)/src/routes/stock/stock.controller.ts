@@ -11,6 +11,7 @@ import {
   createStock,
   deleteStock,
   readStocksOnBox,
+  readStocksOnExpirationDate,
   readStocksOnWarehouse,
   updateStock,
 } from './stock.service';
@@ -82,4 +83,16 @@ export async function deleteStocks(
   const stock = await deleteStock(body);
 
   return reply.code(200).send(stock);
+}
+
+export async function getStocksOnExpirationDate(
+  request: FastifyRequest<{
+    Params: { storedWarehouseId: string };
+  }>,
+  reply: FastifyReply
+) {
+  const { storedWarehouseId } = request.params;
+  const stocks = await readStocksOnExpirationDate(+storedWarehouseId);
+
+  return reply.code(201).send(stocks);
 }

@@ -38,7 +38,9 @@ export async function readStocksOnBox(storedBoxId: number) {
   return stocks;
 }
 
-export const advancedStockSearchService = async (body: AdvanedSearchStockInput) => {
+export const advancedStockSearchService = async (
+  body: AdvanedSearchStockInput
+) => {
   const searchResult = await prisma.stock.findMany({
     where: {
       id: body.id,
@@ -46,18 +48,18 @@ export const advancedStockSearchService = async (body: AdvanedSearchStockInput) 
       type: body.type,
       amount: {
         gte: body.minAmount,
-        lte: body.maxAmount
+        lte: body.maxAmount,
       },
       barcode: body.barcode,
       expirationDate: {
         gte: body.minExpDate,
-        lte: body.maxExpDate
+        lte: body.maxExpDate,
       },
-      storedBoxId: body.storedBoxId
-    }
-  })
-  return searchResult
-}
+      storedBoxId: body.storedBoxId,
+    },
+  });
+  return searchResult;
+};
 
 export async function updateStock(data: updateStockInput) {
   const stock = await prisma.stock.update({
@@ -87,4 +89,27 @@ export async function deleteStock(stockId: deleteStockInput) {
   });
 
   return stock;
+}
+
+export async function readStocksOnExpirationDate(warehouseId: number) {
+  const nowDate = new Date();
+  nowDate.setDate(nowDate.getDate() + 7);
+
+  const stocks = await prisma.stock.findMany({
+    where: {
+      storedBox: {
+        storedRack: {
+          storedWarehouseId: warehouseId,
+        },
+      },
+      expirationDate: {
+        lte: nowDate,
+      },
+    },
+    orderBy: {
+      expirationDate: 'asc',
+    },
+  });
+
+  return stocks;
 }
