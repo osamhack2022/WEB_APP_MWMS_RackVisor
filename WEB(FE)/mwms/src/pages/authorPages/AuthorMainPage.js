@@ -36,7 +36,7 @@ function AuthorMainPage() {
       <div class={`${styles.flexStart}`}>  
         <Sidebar/>
 
-        <div class="flex-1">
+        <div class="flex-1 grid grid-cols-2 gap-4 ">
           <div class={`md:my-0 my-10 relative mt-6`}>
             {/* gradient start */}
             {/* <div class="absolute pointer-events-none z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
@@ -51,31 +51,23 @@ function AuthorMainPage() {
             </div>
           </div>
 
-          <div class="flex justify-center">
-            <div class="text-white text-xl font-semibold ml-11 m-3">간단 검색 🔍</div>
-          </div>
-          <div class="flex justify-center">
-          <div class="">
-            <div class="justify-center flex">
+          <div class="justify-center">
+            <div class="text-white text-xl font-semibold m-3">간단 검색 🔍<br/></div>
             <div class="px-4 py-3 w-[40rem] drop-shadow-xl">
               <div class="bg-[#323232] rounded-2xl">
-            <SearchInput />
-            <SimpleSearch defaultList={valList} data={data}/>
-            </div>
-            </div>
+                <SearchInput />
+                <SimpleSearch defaultList={valList} data={data}/>
+              </div>
             </div>
           </div>
+          
+          <div class = "flex-1">
+          <div class="flex justify-center">
+            <div class="text-white text-xl font-semibold ml-11 m-3">창고 배치도 🖽</div>
+            </div>
+            <HouseImageList/>
           </div>
         </div>
-
-        <div class = "flex-1">
-        <div class="flex justify-center">
-          <div class="text-white text-xl font-semibold ml-11 m-3">창고 배치도 🖽</div>
-          </div>
-          <HouseImageList/>
-        </div>
-
-
       </div>
 
 

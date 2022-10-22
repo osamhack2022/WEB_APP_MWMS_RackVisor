@@ -39,7 +39,7 @@ export default function Tabs({setTabType, defaultTabs}) {
         </select>
       </div>
       <div className="hidden sm:block">
-        <nav className="relative z-0 rounded-lg shadow flex divide-x divide-gray-500" aria-label="Tabs">
+        <nav className="relative z-0 rounded-lg shadow flex divide-x-2 divide-[#7A5EA6]" aria-label="Tabs">
           {tabs.map((tab, tabIdx) => (
             <button
               key={tab.name}
@@ -55,7 +55,7 @@ export default function Tabs({setTabType, defaultTabs}) {
               <span>{tab.name}</span>
               <span
                 className={classNames(
-                  tab.current ? 'bg-indigo-500' : 'bg-transparent',
+                  tab.current ? 'bg-[#7A5EA6]' : 'bg-transparent',
                   'absolute inset-x-0 bottom-0 h-0.5'
                 )}
               />
