@@ -17,6 +17,7 @@ const warehouseResponseSchema = z.object({
   storedUnitId: z.number(),
   layout: z.string(),
   itemlist: z.string(),
+  warehouseImageBinary: z.string(),
 });
 
 const updateWarehouseLayoutSchema = z.object({
@@ -27,8 +28,8 @@ const updateWarehouseItemlist = z.object({
   itemlist: z.string(),
 });
 const updateWarehouseImageSchema = z.object({
-  imgBase64: z.string()
-})
+  imgBase64: z.string(),
+});
 
 const warehousesResponseSchema = z.array(warehouseResponseSchema);
 
@@ -45,7 +46,7 @@ const models = {
   warehouseResponseSchema,
   warehousesResponseSchema,
   updateWarehouseItemlist,
-  updateWarehouseImageSchema
+  updateWarehouseImageSchema,
 };
 
 export const { schemas: warehouseSchemas, $ref } = buildJsonSchemas(models, {
