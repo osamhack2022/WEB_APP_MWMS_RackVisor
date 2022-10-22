@@ -40,7 +40,7 @@ export default function ContentPlusModal({open, setOpen, title, setTitle, conten
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
-                  className="bg-primary-900 rounded-md text-gray-400 hover:text-gray-500"
+                  className="bg-[#323232] rounded-md text-gray-400 hover:text-gray-500"
                   onClick={() => setOpen(false)}
                 >
                   <span className="sr-only">Close</span>
