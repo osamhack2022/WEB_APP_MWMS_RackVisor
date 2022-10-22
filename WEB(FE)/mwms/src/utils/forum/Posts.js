@@ -52,14 +52,14 @@ function Posts({ posting, total, setPosting }) {
       await axiosDel("/posts/delete-post", deleteItem);
       setPosting(total.filter(post => post.id != e.target.id));
     } catch (e) {
-
+      alert("글을 삭제하는 중 오류가 발생했습니다")
     }
   }
 
   const makePost = async () => {
     let itemToAdd = {
       title : plusTitle,
-      authorId : 2,
+      authorId : Number(localStorage.getItem("id")),
       postingUnitId : Number(currUnit.id),
       content : plusContent
     }
@@ -67,7 +67,7 @@ function Posts({ posting, total, setPosting }) {
       const itemResponse = await axiosPost("/posts", itemToAdd);
       setPosting(total.concat(itemResponse));
     } catch (e) {
-
+      alert("글을 올리는 중 오류가 발생했습니다");
     }
     setPlusTitle("");
     setPlusContent("");

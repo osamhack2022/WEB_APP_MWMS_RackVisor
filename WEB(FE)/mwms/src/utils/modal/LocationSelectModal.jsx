@@ -39,7 +39,7 @@ export default function LocationSelectModal({open, setOpen, setLocation}) {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left max-w-full overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
@@ -55,7 +55,7 @@ export default function LocationSelectModal({open, setOpen, setLocation}) {
 
                 <div className="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   {/* {boxSelect && <div>{boxSelect} 선택된 박스</div>} */}
-                  <BoxSelect setBoxSelect={handle}/>
+                  <BoxSelect setBoxSelect={handle} popup={true}/>
 
                 </div>
               </div>

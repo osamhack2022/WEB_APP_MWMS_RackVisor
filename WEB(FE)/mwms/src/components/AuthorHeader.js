@@ -11,7 +11,7 @@ import styles from '../style.js'
 import close from '../assets/close.svg'
 import menu from '../assets/menu.svg'
 
-function AuthorHeader() {
+function AuthorHeader() {  
   const [alarm, setAlarm] = useState(false);
   const [setting, setSetting] = useState(false);
   const [toggle, setToggle] = useState(false);

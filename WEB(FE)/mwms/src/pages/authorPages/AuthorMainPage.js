@@ -13,15 +13,14 @@ import styles from '../../style';
 function AuthorMainPage() {
   let auth = useAuth();
   const navigate = useNavigate();
-  const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
-  const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
+  const korList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
+  const valList = ['name', 'type', 'specipicType', 'amount', 'comment', 'expirationDate']
+  const data = [{'name' : '휴지', 'type' : '2종', 'specipicType' : '기타물자류', 'amount':1000, 'comment':'좋음', 'expirationDate':'2022/10/27'}]
   useEffect(() => {
-    /*
     if(!auth.unitSelected) {
       alert("부대를 선택해주세요");
       navigate("/");
     }
-    */
   }, []);
 
   return (
@@ -51,12 +50,14 @@ function AuthorMainPage() {
             </div>
           </div>
 
-          <div class="justify-center">
-            <div class="text-white text-xl font-semibold m-3">간단 검색 🔍<br/></div>
+          <div class="">
+            <div class="flex justify-center">
+              <div class="text-white text-xl font-semibold mt-5">간단 검색 🔍</div>
+            </div>
             <div class="px-4 py-3 w-[40rem] drop-shadow-xl">
               <div class="bg-[#323232] rounded-2xl">
                 <SearchInput />
-                <SimpleSearch defaultList={valList} data={data}/>
+                <SimpleSearch defaultList={valList} data={data} korList={korList}/>
               </div>
             </div>
           </div>

@@ -21,6 +21,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     super(props);
 
     this.state = {
+      popup: this.props.popup,
       currUnit: this.props.unitSelected,
       currHouse: this.props.houseSelected,
       items: [],
@@ -168,7 +169,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   render() {
     return (
-      <div style={{transform: 'scale(0.7) translate(0%, 0%)'}}>
+      <div style={{transform: this.state.popup ? '' : 'scale(0.7) translate(0%, -10%)'}}>
         <ReactGridLayout 
           {...this.props}
           layout={this.state.gridLayout}

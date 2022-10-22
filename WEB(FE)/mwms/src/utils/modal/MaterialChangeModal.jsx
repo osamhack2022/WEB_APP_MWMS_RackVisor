@@ -7,25 +7,29 @@ import "../search/datapicker.css";
 import {detailType} from '../search/typeList'
 import { ko } from "date-fns/esm/locale";
 import DatePicker, { registerLocale } from 'react-datepicker';
+import { useAuth } from '../../routes/AuthContext';
+import { axiosPost, axiosPut } from '../../api';
 
 export default function MaterialChangeModal({open, setOpen, materialInfo, setMaterialInfo}) {
+  const auth = useAuth();
+  const currUnit = auth.unitSelected;
   const [locationOpen, setLocationOpen] = useState(false);
   const [loc, setLoc] = useState("");
-  const [Content, setContent] = useState(materialInfo['종류'] == "" ? "없음" : materialInfo['종류']);
-  const [type, setType] = useState(materialInfo['세부분류'] == "" ? "없음" : materialInfo['세부분류']);
-  const [minCnt, setMinCnt] = useState(materialInfo['수량']);
+  const [Content, setContent] = useState(materialInfo['type'] == "" ? "없음" : materialInfo['type']);
+  const [type, setType] = useState(materialInfo['specipicType'] == "" ? "없음" : materialInfo['specipicType']);
+  const [minCnt, setMinCnt] = useState(materialInfo['amount']);
   const [people, setPeople] = useState(localStorage.getItem("계급") + " " + localStorage.getItem("이름"));
-  const [name, setName] = useState(materialInfo['이름']);
-  const [good, setGood] = useState(materialInfo['상태']);
+  const [name, setName] = useState(materialInfo['name']);
+  const [good, setGood] = useState(materialInfo['comment']);
   const [startDate, setStartDate] = useState(new Date()); //날짜 형식에 맞춰서 파싱해야함
 
   useEffect(() => {
-    setContent(materialInfo['종류']);
-    setType(materialInfo['세부분류']);
-    setMinCnt(materialInfo['수량']);
+    setContent(materialInfo['type']);
+    setType(materialInfo['specipicType']);
+    setMinCnt(materialInfo['amount']);
     setPeople(localStorage.getItem("계급") + " " + localStorage.getItem("이름"));
-    setName(materialInfo['이름']);
-    setGood(materialInfo['상태']);
+    setName(materialInfo['name']);
+    setGood(materialInfo['comment']);
   }, [materialInfo]);
 
   const chgMinCnt = (e) => {
@@ -47,7 +51,46 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
     setType(e.currentTarget.value);
   }
 
+  const onSaveHandle = async () => {
+    let itemToAdd = {
+      name : name,
+      type : "TYPE_NULL", //content
+      specipicType : type,
+      amount : Number(minCnt),
+      barcode : "string", //id 를 받아오면 이걸 토대로 만들어주는게 맞다고 봄
+      comment : good,
+      expirationDate : (startDate.getFullYear()).toString() + "-" + (startDate.getMonth() + 1).toString() + "-" + (startDate.getDate()).toString(),
+      storedBoxId : Number(loc),
+    }
 
+    let itemToHistory = {
+      content : name + " " + (minCnt).toString() + " " + "plus",
+      unitId : Number(currUnit.id)
+    }
+
+    try {
+      let response = await axiosPost("/stocks/", itemToAdd);
+      response.barcode = "m" + (response.id).toString();
+      await axiosPut("/stocks/stock-update", response);
+
+
+      await axiosPost("/historys/", itemToHistory);
+
+      alert("물품이 추가되었습니다");
+    } catch(e) {
+      alert("오류가 발생했습니다")
+    }
+    setLoc("");
+    setContent("없음")
+    setType("없음");
+    setMinCnt(0);
+    setPeople("");
+    setName("");
+    setGood("");
+    setStartDate(new Date());
+    setOpen(false);
+  }
+  
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
@@ -77,7 +120,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-black-gradient rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-black-gradient rounded-lg px-4 pt-5 pb-4 text-left overflow-x-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
@@ -152,10 +195,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-[#7A5EA6] hover:bg-[#9d79d4] text-white text-base font-medium  sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => {
-                    setOpen(false);
-                    alert("물품이 추가되었습니다");
-                  }}
+                  onClick={onSaveHandle}
                 >
                   저장
                 </button>

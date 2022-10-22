@@ -4,7 +4,7 @@ import { axiosGet, axiosPost, axiosPut } from "../../api";
 import { useAuth } from "../../routes/AuthContext";
 import DropDown from "../DropDown";
 
-const CreateList = ({boxSelec, setBoxSelec, cabSelec}) => {
+const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify}) => {
   const auth = useAuth();
   const currHouse = auth.houseSelected;
   const currUnit = auth.unitSelected;
@@ -13,10 +13,15 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec}) => {
 
   const handleBoxSelec = (e) => {
     setBoxSelec(e.currentTarget.getAttribute('value'));
+    e.currentTarget.className = e.currentTarget.className.replace("bg-[#706F6F]", " ") + " bg-[#7A5EA6]";
+    const past = document.getElementById(boxSelec);
+    if (past) {
+      past.className = past.className.replace(" bg-[#7A5EA6]", "") + " bg-[#706F6F]";
+    }
   }
 
   const fetchBoxList = async () => {
-    const data = await axiosGet("/boxesbox-in-rack/" + cabSelec.toString());
+    const data = await axiosGet("/boxes/box-in-rack/" + cabSelec.toString());
     console.log(JSON.stringify(data));
     
     if (!data) {
@@ -62,7 +67,7 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec}) => {
     copyFloorList.push(newListInput);
     setFloorList(copyFloorList);
     setRend(Math.random());
-    const data = await axiosGet("/boxesbox-in-rack/" + cabSelec.toString());
+    const data = await axiosGet("/boxes/box-in-rack/" + cabSelec.toString());
     console.log(JSON.stringify(data));
   }
 
@@ -84,26 +89,30 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec}) => {
     setFloorList(copyFloorList);
     setRend(Math.random());
 
-    const data = await axiosGet("/boxesbox-in-rack/" + cabSelec.toString());
+    const data = await axiosGet("/boxes/box-in-rack/" + cabSelec.toString());
     console.log(JSON.stringify(data));
   }
 
   return (
-    <div>
-      <button className="border" onClick={floorAdd}>
+    <div class="">
+      {modify && (<button className="text-[#5AB0AD] font-semibold ml-3 mb-3 w-30 h-10  rounded p-2" onClick={floorAdd}>
         층 추가
-      </button>
+      </button>)}
       <div className="hidden">{rend}</div>
       {floorList != [] && (Array.from(floorList).reverse()).map((floor, idx) => (
-        <div class="min-w-max min-h-max">
-          <div>{floorList.length - idx} 층</div>
-          <div class="flex border">
-            {floor != [] && floor.map((item) => (
-              <button value={item.id} onClick={handleBoxSelec} class="w-24 h-12 border">
-                {item.name.split('-')[1]}
-              </button>
-            ))}
-            <button value={floorList.length - idx} onClick={addItem}>추가하기</button>
+        <div class="min-w-max min-h-max flex justify-center mt-2 mb-2">
+          <div class="flex">
+            <div>
+              <div class={"text-center font-lg " + (modify ? "text-white" : " ")}>{floorList.length - idx} 층</div>
+              <div class="flex justify-center">
+                {floor != [] && floor.map((item) => (
+                  <button value={item.id} id={item.id} onClick={handleBoxSelec} class="w-24 h-12 border bg-[#706F6F] m-1 rounded-lg text-white">
+                    {item.name.split('-')[1]}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {modify && (<button class="text-[#5AB0AD] font-base ml-3 mt-7 mb-3 w-30 h-10  rounded p-2" value={floorList.length - idx} onClick={addItem}>추가하기</button>)}
           </div>
         </div>
       ))}

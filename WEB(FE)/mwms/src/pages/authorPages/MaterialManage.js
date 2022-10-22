@@ -1,23 +1,16 @@
   import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Footer from '../../components/Footer'
 import AuthorHeader from '../../components/AuthorHeader'
-import { AuthorContext } from '../../routes/Author'
-import {Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
 import SearchInput from '../../utils/search/SearchInput'
 import WarehouseGridLayout from '../../utils/grid/WarehouseMaterial'
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import { getLSUnitList } from './UnitSelect'
-import { vi } from 'date-fns/locale'
-import SelectBoxModal from '../../utils/modal/SelectBoxModal'
 import CreateList from '../../utils/cabinet/Cabinet'
 import ExcelModal from '../../utils/modal/ExcelModal'
 import ManageList from '../../components/ManageList'
 import MaterialManageModal from '../../utils/modal/MaterialManageModal'
 import MaterialChangeModal from '../../utils/modal/MaterialChangeModal'
-import LocationSelectModal from '../../utils/modal/LocationSelectModal'
 import Tabs from '../../components/Tabs'
 import { axiosGet } from '../../api'
 
@@ -31,9 +24,10 @@ function MaterialManage() {
   const [cabSelec, setCabSelec] = useState("");
   const [boxSelec, setBoxSelec] = useState("");
   const [open, setOpen] = useState(false);
-  const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
-  const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
-  const [material, setMaterial] = useState({'이름' : "", "종류" : "없음", "세부분류" : "없음", "수량" : "", "상태" : "", "기한" : ""});
+  const valList = ['name', 'type', 'specipicType', 'amount', 'comment', 'expirationDate']
+  const korList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
+  const [ data, setData] = useState([])
+  const [material, setMaterial] = useState({'name' : "", "type" : "없음", "specipicType" : "없음", "amount" : "", "comment" : "", "expirationDate" : ""});
   const [openPlus, setOpenPlus] = useState(false);
   const [materialChangeOpen, setMaterialChangeModal] = useState(false);
   const [loc, setLoc] = useState({});
@@ -42,15 +36,27 @@ function MaterialManage() {
 
   const fetchHouseList = useCallback(async () => {
     try {
-      const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
+      const currData = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
       let visualJ = {};
-      data.map((da) => {
+      currData.map((da) => {
         visualJ[da.name] = false;
       })
       setVisual(visualJ);
-      setHouList(data);
+      setHouList(currData);
     } catch (error) {
       alert("Error on feching house");
+    }
+  }, []);
+
+  const fetchData = useCallback(async (num) => {
+    try {
+      const response = await axiosGet("/stocks/stocks-in-box/" + (num).toString());
+      console.log("RESPONSE : " + JSON.stringify(response));
+      if (response) {
+        setData(response);
+      }
+    } catch (error) {
+      alert("rack 별 물품의 리스트를 받아오던 도중 오류가 발생했습니다");
     }
   }, []);
 
@@ -62,6 +68,13 @@ function MaterialManage() {
     fetchHouseList();
     }
   }, []);
+
+  useEffect(() => {
+    if (boxSelec.toString() != "") {
+      console.log("boxNum : " + JSON.stringify(boxSelec));
+      fetchData(boxSelec);
+    }
+  }, [boxSelec])
 
   const onSelHouse = (e) => {
     setSelHouse(houList.find((hou) => (hou.name == e.currentTarget.value)));
@@ -75,7 +88,6 @@ function MaterialManage() {
 
   const testClick = (i) => {
     setCabSelec(i);
-    alert(" 추가된 거  " + i);
   }
 
   const materialHandle = (e) => {
@@ -85,7 +97,7 @@ function MaterialManage() {
 
   const closeChangeModalClose = () => {
     setMaterialChangeModal(false);
-    setMaterial({'이름' : "", "종류" : "없음", "세부분류" : "없음", "수량" : "", "상태" : "", "기한" : ""});
+    setMaterial({'name' : "", "type" : "없음", "specipicType" : "없음", "amount" : "", "comment" : "", "expirationDate" : ""});
   }
 
   const defaultTabs = [
@@ -101,20 +113,27 @@ function MaterialManage() {
         <div class="flex-1 bg-[#323232]">
           <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div class="flex-1">
+              <div class="flex mb-4">
+                <button class="-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-[#7A5EA6] hover:bg-[#9d79d4] text-white text-base font-medium  sm:ml-3 sm:w-auto sm:text-sm" onClick={() => setOpen(true)}>excel로 업로드</button>
+                <ExcelModal open={open} setOpen={setOpen}/>
+                <button class="-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-[#7A5EA6] hover:bg-[#9d79d4] text-white text-base font-medium  sm:ml-3 sm:w-auto sm:text-sm" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
+                <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
+              </div>
               <Tabs defaultTabs={defaultTabs} setTabType={setTabType}/>
               <div>
                 {tabType == "material" && <><SearchInput/></>}
-                {boxSelec ? ( <> {tabType == "box" && <div>창고 : {selHouse.id} - 선반 : {cabSelec} -  박스 : {boxSelec}</div>} </> ) : ("")}
+                {/* {boxSelec ? ( <> {tabType == "box" && <div>창고 : {selHouse.id} - 선반 : {cabSelec} -  박스 : {boxSelec}</div>} </> ) : ("")} */}
                 {tabType == "box" && 
                   <div class="flex-1 gap-2 overflow-x-auto">
                     {cabSelec ? (<>
                       <button onClick={() => {
                         setCabSelec("");
-                        setBoxSelec("")}}>뒤로가기</button>
-                      <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec} cabSelec={cabSelec} />
+                        setBoxSelec("")}}
+                        class="text-white ml-2 mt-2">{'<-'}뒤로가기</button>
+                      <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec} cabSelec={cabSelec} modify={true}/>
                       </>)
                     : (<div class="my-6">
-                      <span class="m-2 p-2 font-bold text-white">위치 기반 물자 관리</span> <br/> 
+                      <span class="m-2 p-2 font-bold text-white text-lg">위치 기반 물자 관리</span> <br/> 
                       <select class="bg-gray-700 text-white mx-6 my-4" onChange={onSelHouse} value={selHouse.name}>
                         <option value={""} key={"none"}>
                           없음
@@ -126,23 +145,19 @@ function MaterialManage() {
                         ))}
                       </select>
                       {houList.map((hou) => (
-                        visual[hou.name] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={selHouse} setClick={testClick}/>
+                        visual[hou.name] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={selHouse} setClick={testClick} popup={false}/>
                       ))}
                     </div>)
                     }
                   </div>
                 }
-                <button class="text-[#5AB0AD] font-semibold ml-3 mb-3 w-30 h-10  rounded p-2" onClick={() => setOpen(true)}>excel로 업로드</button>
-                <ExcelModal open={open} setOpen={setOpen}/>
-                <button class="text-[#5AB0AD]  font-semibold ml-3 mb-3 w-30 h-10 rounded p-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
-                <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
               </div>
             </div>
             { (boxSelec || tabType == "material") && 
-                (<>
-                  <ManageList defaultList={valList} data={data} setSelect={materialHandle}/>
+                (<div class="pt-10">
+                  <ManageList korList={korList} defaultList={valList} data={data} setSelect={materialHandle}/>
                   <MaterialChangeModal open={materialChangeOpen} setOpen={closeChangeModalClose} materialInfo={material}/>
-                </>)}
+                </div>)}
           </div>
         </div>
       </div>

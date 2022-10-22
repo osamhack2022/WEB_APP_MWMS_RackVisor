@@ -179,7 +179,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
         await axiosPut("/racks/update-name/" + (nameUp.iid).toString(), itemToAdd);
       }
       
-    alert("새로이 저장 " + JSON.stringify(rackInServer1));
     });
 
     //추가된 rack 만들기
@@ -209,8 +208,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
     alert("저장되었습니다")
 
-    let rackInServer1 = await axiosGet("/racks/racks-in-warehouse/" + (this.state.currHouse.id).toString());
-    alert("새로이 저장 " + JSON.stringify(rackInServer1));
   }
 
   onAddCabinet() {

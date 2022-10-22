@@ -6,26 +6,24 @@ import CreateList from '../utils/cabinet/Cabinet';
 import { useAuth } from '../routes/AuthContext';
 import { axiosGet } from '../api';
 
-function BoxSelect({setBoxSelect}) {
-  const navigate = useNavigate();
-  const [selHouse, setSelHouse] = useState("");
-  const [visual, setVisual] = useState({});
+function BoxSelect({setBoxSelect, popup}) {
+  const auth = useAuth();
   const [houList, setHouList] = useState([]);
+  const [selHouse, setSelHouse] = useState({ id : -1, name : ""});
+  const [visual, setVisual] = useState({});
   const [cabSelec, setCabSelec] = useState("");
   const [boxSelec, setBoxSelec] = useState("");
-  const auth = useAuth();
   const currUnit = auth.unitSelected;
-  const currHouse = auth.houseSelected;
-
 
   const fetchHouseList = useCallback(async () => {
     try {
-      const data = await axiosGet("/warehouse/my-warehouses" + (currUnit.id).toString());
+      const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
       let visualJ = {};
       data.map((da) => {
-        visualJ[da.id] = false;
+        visualJ[da.name] = false;
       })
       setVisual(visualJ);
+      setHouList(data);
     } catch (error) {
       alert("Error on feching house");
     }
@@ -34,19 +32,23 @@ function BoxSelect({setBoxSelect}) {
   useEffect(() => {
     if(!currUnit) {
       alert("부대를 선택해주세요");
-      navigate("/");
+    } else {
+      fetchHouseList();
     }
-
-    fetchHouseList();
   }, []);
 
-  const onSelHouse = (e) => {
-    setSelHouse(houList.find((hou) => (hou.id == e.currentTarget.value)));
+  useEffect(() => {
+    if (boxSelec != "") {
+      setBoxSelect(boxSelec);
+    }
+  }, [boxSelec]);
 
+  const onSelHouse = (e) => {
+    setSelHouse(houList.find((hou) => (hou.name == e.currentTarget.value)));
+    auth.houseSelect(houList.find((hou) => (hou.name == e.currentTarget.value)));
     let viCopy = visual;
-    viCopy[selHouse.id] = false;
+    viCopy[selHouse.name] = false;
     viCopy[e.currentTarget.value] = true;
-    
     setVisual(viCopy);
   }
 
@@ -54,38 +56,33 @@ function BoxSelect({setBoxSelect}) {
     setCabSelec(i);
   }
 
-  useEffect(() => {
-    let newLocation = selHouse.toString() + " " +  cabSelec.toString() + " " + boxSelec.toString();
-    setBoxSelect({위치 : newLocation});
-  }, [boxSelec]);
-
   return (
-    <>
-      {cabSelec ? 
-        (<>
-          <button onClick={() => {
-            setCabSelec("");
-            setBoxSelec("")}}>뒤로가기</button>
-          <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec}/>
-          </>
-        ) 
-        : (<>
-        <span class="m-2 p-2 font-bold">위치 기반 물자 관리</span> <br/> 
-        <select onChange={onSelHouse} value={selHouse}>
+    <div class={"flex-1 gap-2 " + (popup ? "" : "overflow-x-auto")}>
+      {cabSelec ? (<>
+        <button onClick={() => {
+          setCabSelec("");  
+          setBoxSelec("")}}
+          class={"ml-2 mt-2 " + (popup ? " " : "text-white") }>{'<-'}뒤로가기</button>
+        <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec} cabSelec={cabSelec} modify={false} />
+        </>)
+      : (<div class="my-6">
+        <span class={"m-2 p-2 font-bold text-lg" + (popup ? "" : " text-white")}>위치 기반 물자 관리</span> <br/> 
+        <select class="bg-gray-700 text-white mx-6 my-4" onChange={onSelHouse} value={selHouse.name}>
           <option value={""} key={"none"}>
             없음
           </option>
           {houList.map((hou) => (
-            <option value={hou.id} key={hou.name}>
+            <option value={hou.name} key={hou.name}>
               {hou.name}
             </option>
           ))}
         </select>
         {houList.map((hou) => (
-          visual[hou.id] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={selHouse} setClick={testClick}/>
+          visual[hou.name] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={selHouse} setClick={testClick} popup={popup}/>
         ))}
-      </>)}
-    </>
+      </div>)
+      }
+      </div>
   )
 }
 

@@ -1,4 +1,4 @@
-export default function SimpleSearch({defaultList, data}) {
+export default function SimpleSearch({defaultList, data, korList}) {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -7,7 +7,7 @@ export default function SimpleSearch({defaultList, data}) {
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
-                  {defaultList.map((de) => (
+                  {korList.map((de) => (
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider"

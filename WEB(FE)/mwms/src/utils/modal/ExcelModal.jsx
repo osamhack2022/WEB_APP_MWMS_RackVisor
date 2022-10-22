@@ -12,8 +12,9 @@ import LocationSelectModal from './LocationSelectModal'
 export default function ExcelModal({open, setOpen}) {
   const [data, setData] = useState([]);
   const [open1, setOpen1] = useState(false);
-  const [loc, setLoc] = useState({위치 : ""});
-  const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
+  const [loc, setLoc] = useState();
+  const valList = ['name', 'type', 'specipicType', 'amount', 'comment', 'expirationDate']
+  const korList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
 
   const inputFile = (file) => {
     readXlsxFile(file).then((rows) => {
@@ -28,6 +29,7 @@ export default function ExcelModal({open, setOpen}) {
         }
       })
       setData(newInput)
+      console.log(newInput);
     });
   }
 
@@ -37,9 +39,11 @@ export default function ExcelModal({open, setOpen}) {
 
   const save = async () => {
     
+
+
     setOpen(false)
     setData([]);
-    setLoc({위치 : ""});
+    setLoc();
   }
 
   return (
@@ -71,7 +75,7 @@ export default function ExcelModal({open, setOpen}) {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-black-gradient rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:p-6">
+            <div className="inline-block align-bottom bg-black-gradient rounded-lg px-4 pt-5 pb-4 text-left overflow-x-auto shadow-xl transform transition-all sm:align-middle sm:p-6">
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
@@ -103,12 +107,13 @@ export default function ExcelModal({open, setOpen}) {
                     className="my-2 mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-[#706f6f] text-base font-medium text-gray-400 hover:text-gray-300  sm:mt-0 sm:w-auto sm:text-sm"
                     type="file" 
                     onChange={(e) => inputFile(e.target.files[0])}/>
-                  <div>
+                  <div class="flex">
+                    
                     <button class="border text-gray-200 rounded-lg my-2 p-2" onClick={() => setOpen1(true)}>위치 선택하기</button>
                     <LocationSelectModal open={open1} setOpen={setOpen1} setLocation={setLoc}/>
-                    {loc['위치'] && <div>{loc['위치']}</div>}
+                    {loc && <div class="text-[#5AB0AD] text-sm ml-5 mt-5">위치 선택됨</div>}
                   </div>
-                    <SimpleSearch defaultList={valList} data={data}/>
+                    <SimpleSearch defaultList={valList} data={data} korList={korList}/>
                 </div>
               </div>
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
@@ -124,7 +129,7 @@ export default function ExcelModal({open, setOpen}) {
                   className="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-gray-800 hover:bg-gray-600 text-base font-medium text-white hover:text-gray-500 sm:mt-0 sm:w-auto sm:text-sm"
                   onClick={() => {setOpen(false)
                     setData([]);
-                    setLoc({위치 : ""});
+                    setLoc();
                   }}
                 >
                   취소

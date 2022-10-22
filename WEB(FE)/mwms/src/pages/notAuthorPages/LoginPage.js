@@ -29,20 +29,19 @@ function LoginPage() {
   };
 
   const login = async () => {
-    const response = await axiosPost("/users/login", {
-      militarySerialNumber: id,
-      password: pw,
-    });
-    alert(JSON.stringify(response));
-
-    localStorage.setItem("token", "123");
-    localStorage.setItem("id", IdleDeadline);
-    //서버와 통신 로직 추가 필요
-
-    // // ? Login
-    localStorage.setItem("이름", "홍길동");
-    localStorage.setItem("직책", "행정보급관");
-    localStorage.setItem("계급", "상사");
+    try {
+      const response = await axiosPost("/users/login", {
+        militarySerialNumber: id,
+        password: pw,
+      });
+      localStorage.setItem("이름", response.name);
+      localStorage.setItem("직책", response.position);
+      localStorage.setItem("계급", response.rank);
+      localStorage.setItem("id", response.id);
+      localStorage.setItem("token", "isLogin");
+    } catch (e) {
+      alert("로그인 실패");
+    }
 
     window.location.replace("/");
   };

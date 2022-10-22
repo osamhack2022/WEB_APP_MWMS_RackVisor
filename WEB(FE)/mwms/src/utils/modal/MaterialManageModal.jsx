@@ -7,8 +7,13 @@ import "../search/datapicker.css";
 import {detailType} from '../search/typeList'
 import { ko } from "date-fns/esm/locale";
 import DatePicker, { registerLocale } from 'react-datepicker';
+import { axiosPost, axiosPut } from '../../api';
+import SettingModal from './SettingModal';
+import { useAuth } from '../../routes/AuthContext';
 
 export default function MaterialManageModal({open, setOpen}) {
+  const auth = useAuth();
+  const currUnit = auth.unitSelected;
   const [locationOpen, setLocationOpen] = useState(false);
   const [loc, setLoc] = useState("");
   const [Content, setContent] = useState("없음");
@@ -39,7 +44,46 @@ export default function MaterialManageModal({open, setOpen}) {
     setType(e.currentTarget.value);
   }
 
+  const onSaveHandle = async () => {
+    let itemToAdd = {
+      name : name,
+      type : "TYPE_NULL", //content
+      specipicType : type,
+      amount : Number(minCnt),
+      barcode : "string", //id 를 받아오면 이걸 토대로 만들어주는게 맞다고 봄
+      comment : good,
+      expirationDate : (startDate.getFullYear()).toString() + "-" + (startDate.getMonth() + 1).toString() + "-" + (startDate.getDate()).toString(),
+      storedBoxId : Number(loc),
+    }
 
+    let itemToHistory = {
+      content : name + " " + (minCnt).toString() + " " + "plus",
+      unitId : Number(currUnit.id)
+    }
+
+    try {
+      let response = await axiosPost("/stocks/", itemToAdd);
+      response.barcode = "m" + (response.id).toString();
+      await axiosPut("/stocks/stock-update", response);
+
+
+      await axiosPost("/historys/", itemToHistory);
+
+      alert("물품이 추가되었습니다");
+    } catch(e) {
+      alert("오류가 발생했습니다")
+    }
+    setLoc("");
+    setContent("없음")
+    setType("없음");
+    setMinCnt(0);
+    setPeople("");
+    setName("");
+    setGood("");
+    setStartDate(new Date());
+    setOpen(false);
+  }
+  
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
@@ -83,14 +127,16 @@ export default function MaterialManageModal({open, setOpen}) {
 
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-white mx-2">
-                    물품 수정
+                    물품 추가
                   </Dialog.Title>
                   <div className="mt-2 text-white">
+                    <div class="flex">
                     <button class="my-1" onClick={() => setLocationOpen(true)}>위치 선정하기</button>
-                    {loc && <div>선정된 위치 {loc['위치']}</div>}
+                    {loc && <div class="text-[#5AB0AD] text-sm ml-5 mt-5">위치 선택됨</div>}
                     {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
-
+                    </div>
                     <div>
                       <div class="flex">
                         <div>속성 : </div>
@@ -144,10 +190,7 @@ export default function MaterialManageModal({open, setOpen}) {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-[#7A5EA6] hover:bg-[#9d79d4] text-white text-base font-medium  sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => {
-                    setOpen(false);
-                    alert("물품이 추가되었습니다");
-                  }}
+                  onClick={onSaveHandle}
                 >
                   저장
                 </button>

@@ -172,13 +172,13 @@ function BarcodeManage() {
 
   useEffect(() => {
     if (item != "" && tabType == "material") {
-      alert("물품이 선택됨 : " + item["이름"]);
-      setText(item['이름']);
-      generateQrCode(item['이름']);
+      alert("물품이 선택됨 : " + item);
+      // setText(item['이름']);
+      // generateQrCode(item['이름']);
     } else if (item != "" && tabType == "box") {
-      alert("박스가 선택됨 : " + item['위치']);
-      setText(item['위치']);
-      generateQrCode(item['위치']);
+      alert("박스가 선택됨 : " + item);
+      // setText(item['위치']);
+      // generateQrCode(item['위치']);
     } else {
       setImageUrl();
     }
@@ -198,7 +198,7 @@ function BarcodeManage() {
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
-        <div class="flex-1">
+        <div class="flex-1 ml-5 mt-5">
         <Tabs setTabType={setTabType} defaultTabs={defaultTabs}/>
         { tabType == "material" ? 
         (<>
@@ -206,7 +206,7 @@ function BarcodeManage() {
           <Example defaultList={valList} data={data} setSelect={setItem}/>
         </>) : 
         (<>
-          <BoxSelect setBoxSelect={setItem}/>
+          <BoxSelect setBoxSelect={setItem} popup={false}/>
         </>
         )
         }

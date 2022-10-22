@@ -54,8 +54,11 @@ function SignupPage() {
       position: pos,
       password: pw
     }
-
-    await axiosPost('/users', itemToAdd);
+    try {
+      await axiosPost('/users', itemToAdd);
+    } catch (e) {
+      alert("회원가입 오류");
+    }
     alert("회원가입이 되었습니다. 로그인해주세요");
     navigate("/login");
   };
