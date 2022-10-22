@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  String message = ''; 
 
 
   LoginModel? loginModel;
@@ -61,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
 
               // 소개글
               Text(                                                         
-                "국방 물자 관리 체계를 통해서 \n 여러 물품과 자재들을 효과적으로\n 보관  및 관리를 할 수 있습니다.",
+                "Military Warehouse \n Management System",
                 style: TextStyle(
                   fontSize: 24.sp,
                 ),
@@ -145,24 +146,9 @@ class _LoginPageState extends State<LoginPage> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: InkWell(
+                child: GestureDetector(
                   onTap: () async { 
-                    if(_formKey.currentState!.validate()){
-                      var password = passwordController.text;
-                      var militarySerialNumber = emailController.text;
-                      setState(() {
-
-                      });
-                      var rsp = await logingUser(militarySerialNumber, password);
-                      print(rsp);
-                      if(rsp.containsKey('Status')) {
-                        if(rsp['Status'] == 200) {
-                          Get.toNamed("/unitPage");
-                        }
-                      } 
-                    }
-                  
-  
+                    logingUser(emailController.text.toString(), passwordController.text.toString());
                   },
                   child: Container(
                     height: 50,
