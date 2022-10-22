@@ -66,7 +66,6 @@ export async function updateWarehouseImageController(
   return reply.code(200).send(result);
 }
 
-
 export async function findWarehousesOnUnit(
   request: FastifyRequest<{
     Params: { storedUnitId: string };

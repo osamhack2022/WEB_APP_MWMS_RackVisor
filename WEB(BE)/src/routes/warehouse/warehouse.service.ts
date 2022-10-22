@@ -100,5 +100,9 @@ export async function readWarehouseOnId(id: number) {
     },
   });
 
-  return warehouse;
+  return {
+    ...warehouse,
+    imgBase64: warehouse?.warehouseImageBinary?.toString('base64'),
+    warehouseImageBinary: undefined,
+  };
 }
