@@ -67,14 +67,14 @@ export default function ContentPlusModal({open, setOpen, title, setTitle, conten
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-blue-gradient text-base font-medium text-black hover:text-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-[#7A5EA6] hover:bg-[#9d79d4] text-white text-base font-medium  sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => makePost()}
                 >
                   저장
                 </button>
                 <button
                   type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:text-gray-500 sm:mt-0 sm:w-auto sm:text-sm"
+                  className="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-gray-800 text-base hover:bg-gray-600 font-medium text-white sm:mt-0 sm:w-auto sm:text-sm"
                   onClick={() => {
                     setOpen(false)}}
                 >
