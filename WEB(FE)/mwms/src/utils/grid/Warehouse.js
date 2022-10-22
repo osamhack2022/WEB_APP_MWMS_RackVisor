@@ -40,17 +40,14 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   async componentDidMount() {
-    const response = await axiosGet("/warehouses" + (this.state.currHouse.id).toString());
-    const newItems = response.itemlist ? JSON.parse(response.itemList) : []   // id -> 현재 부대의 정보
+    const response = await axiosGet("/warehouses/" + (this.state.currHouse.id).toString());
+    const newItems = response.itemlist ? JSON.parse(response.itemlist) : []   // id -> 현재 부대의 정보
     const newLayout = response.layout ? JSON.parse(response.layout) : [] // id -> 현재 창고의 정보
-
+    console.log(JSON.stringify(response));
     this.setState({
       items: newItems,
       layout: newLayout,
     });
-
-    console.log("item : " + newItems);
-    console.log("layout : " + newLayout);
   }
 
   createElement(el)
@@ -180,16 +177,18 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
 
   onAddDoor() {
+    let newRandNum = (parseInt*(Math.random() * 1000)).toString();
+    
     this.setState({
       // Add a new door. It must have a unique key!
       items: this.state.items.concat({
         type: "door",
-        i: "door" + this.state.newDoorCounter,
+        i: ("door" + newRandNum),
         x: (this.state.items.length * 4) % (this.state.cols || 12),
         y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
         w: 2,
         h: 1,
-        iid: this.state.iid + 1,
+        iid: Number(newRandNum),
       }),
       // Increment the counter to ensure key is always unique.
       newDoorCounter: this.state.newDoorCounter + 1,
@@ -198,6 +197,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   async onLocalSave() {
+    
     //API
     //this.state.currHouse / this.state.currUnit ->  과 관련해서 정보를 받아서 body를 구성해서 여기서 뿌리면 된다
     // this.state.items.filter(item => item.type == "cabinet") //캐비넷 하나씩 만들어서 array 하나씩 추가해줘야 한다 -> cabinet 원소 하나씩 넣어주면 된다
@@ -205,43 +205,43 @@ export default class WarehouseGridLayout extends React.PureComponent {
     // //그걸 서버에 업로드 해주거나 서버에서 return 을 해줘야 한다 그니까 cabinet 에 고유한 id 가 박혀있는 걸 줘야 함.  서버에서 나중에 불러올 때
     // alert(this.state.currHouse.id);
 
-    // let cpyItem = [...this.state.items];
-    // const rackInServer = await axiosGet("/racks/racks-in-warehouse/" + (this.state.currHouse.id).toString());
+    let cpyItem = [...this.state.items];
+    const rackInServer = await axiosGet("/racks/racks-in-warehouse/" + (this.state.currHouse.id).toString());
+    console.log("서버 rack : " + JSON.stringify(rackInServer));
+    //이름 update 용 리스트 업
+    rackInServer.map(async (rack) => {
+      let nameUp = cpyItem.find((item) => ((item.iid == rack.name) && (item.id != rack.name)));
+      if (nameUp) {
+        await axiosPut("/racks/update-name/" + (nameUp.iid).toString(), {
+          name : nameUp.id
+        });
+      }
+    });
 
-    // //이름 update 용 리스트 업
-    // rackInServer.map(async (rack) => {
-    //   let nameUp = cpyItem.find((item) => ((item.iid == rack.name) && (item.id != rack.name)));
-    //   if (nameUp) {
-    //     await axiosPut("/racks/update-name/" + (nameUp.iid).toString(), {
-    //       name : nameUp.id
-    //     });
-    //   }
-    // });
+    //추가된 rack 만들기
+    cpyItem.map(async (item) => {
+      if ((!rackInServer.find((rack) => (rack.id == item.iid))) && (item.type != "door")) {
+        console.log("못찾음 : " + JSON.stringify(item));
+        let newItem = {
+          name : (item.i),
+          storedWarehouseId : Number(this.state.currHouse.id)
+        }
+        const response = await axiosPost("/racks/", newItem);
+        item.iid = response.id;
+      }
+    });
 
-    // //추가된 rack 만들기
-    // cpyItem.map(async (item) => {
-    //   if (!rackInServer.find((rack) => (rack.id == item.iid))) {
-    //     let newItem = {
-    //       name : item.id,
-    //       storedWarehouseId : Number(this.state.currHouse.id)
-    //     }
-    //     const response = await axiosPost("/racks/", newItem);
-    //     newItem.id = response.id;
-    //     item.iid = newItem.id;
-    //   }
-    // });
+    this.setState({
+      items: cpyItem
+    })
 
-    // this.setState({
-    //   items: cpyItem
-    // })
-
-    await axiosPut("/warehouses/update-layout" + (this.state.currHouse.id).toString(), {
+    await axiosPut("/warehouses/update-layout/" + (this.state.currHouse.id).toString(), {
       layout: JSON.stringify(this.state.layout)
     })
     
 
-    await axiosPut("/warehouses/update-itemlist" + (this.state.currHouse.id).toString(), {
-      itemlist : JSON.stringify(this.state.items)
+    await axiosPut("/warehouses/update-itemlist/" + (this.state.currHouse.id).toString(), {
+      itemlist : JSON.stringify(cpyItem)
     })
 
     //update rack
@@ -276,19 +276,24 @@ export default class WarehouseGridLayout extends React.PureComponent {
     // });
 
     alert("저장되었습니다")
+
+    let rackInServer1 = await axiosGet("/racks/racks-in-warehouse/" + (this.state.currHouse.id).toString());
+    alert("새로이 저장 " + JSON.stringify(rackInServer1));
   }
 
   onAddCabinet() {
+    let newRandNum = (parseInt*(Math.random() * 1000)).toString();
+
     this.setState({
       // Add a new door. It must have a unique key!
       items: this.state.items.concat({
         type: "cabinet",
-        i: "Cabinet" + this.state.newCabinetCounter,
+        i: "Cabinet" + newRandNum,
         x: (this.state.items.length * 4) % (this.state.cols || 12),
         y: (this.state.items.length * 4) % (this.state.rowHeight || 12),
         w: 4,
         h: 4,
-        iid: this.state.iid + 1,
+        iid: Number(newRandNum),
       }),
       // Increment the counter to ensure key is always unique.
       newCabinetCounter: this.state.newCabinetCounter + 1,

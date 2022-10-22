@@ -38,7 +38,6 @@ function UnitSelect() {
     //TODO _ API
     const itemResponse = await axiosPost("/units", itemToAdd);
     itemToAdd.id = itemResponse.id;
-    itemToAdd.id = 1;
 
     setUnitList((prev) => [...prev, itemToAdd]);
   };
