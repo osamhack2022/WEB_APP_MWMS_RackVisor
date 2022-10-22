@@ -1,53 +1,91 @@
+import { arMA } from "date-fns/locale";
 import React, { useState, useEffect } from "react";
+import { axiosGet, axiosPost, axiosPut } from "../../api";
 import { useAuth } from "../../routes/AuthContext";
+import DropDown from "../DropDown";
 
-const CreateList = ({boxSelec, setBoxSelec}) => {
+const CreateList = ({boxSelec, setBoxSelec, cabSelec}) => {
   const auth = useAuth();
   const currHouse = auth.houseSelected;
   const currUnit = auth.unitSelected;
-
+  const [floorList, setFloorList] = useState([]);
   const [rend, setRend] = useState(true);
+
   const handleBoxSelec = (e) => {
     setBoxSelec(e.currentTarget.getAttribute('value'));
   }
 
-  const defaultFloorList = 
-        {totCnt: 1, 
-         floorList: [{floor : 1, list : [{id : 1, iid: 1}], iid : 1}]}
-  const [floorList, setFloorList] = useState( defaultFloorList );
+  const fetchBoxList = async () => {
+    const data = await axiosGet("/boxesbox-in-rack/" + cabSelec.toString());
+    console.log(JSON.stringify(data));
+    
+    if (!data) {
+      let itemToAdd = {
+        name : "1-1",
+        storedRackId : cabSelec
+      }
+      const response = await axiosPost("/boxes/", itemToAdd);
+      console.log(JSON.stringify(response));
 
-  
-
-  const floorAdd = () => {
-    let newFloor = {};
-    let newFloorList = floorList;
-    newFloorList.floorList.reverse();
-    newFloor.floor = newFloorList.totCnt + 1;
-    newFloor.list = [{id : 1, iid: 1}];
-    newFloor.iid = 1;
-    newFloorList.totCnt += 1;
-    newFloorList.floorList.push(newFloor);
-    newFloorList.floorList.reverse();
-    setFloorList(newFloorList);
-    setRend(Math.random());
-
-    //층 하나 추가 와 box 한개 추가하는 로직
-
+      let newList = [ [response] ];
+      setFloorList(newList);
+    } else {
+      let floorIter = {};
+      data.map((da) => {
+        if (floorIter[da.name.split('-')[0]]) {
+          floorIter[da.name.split('-')[0]].push(da);
+        } else {
+          floorIter[da.name.split('-')[0]] = [ da ]
+        }
+      });
+      let newFloorList = [];
+      Object.keys(floorIter).map((key) => {
+        newFloorList.push(floorIter[key]);
+      });
+      setFloorList(newFloorList);
+    }
   }
 
-  const addItem = (e) => {
-    let currFloor = e.currentTarget.getAttribute('value');
-    let copyFloorList = floorList;
-    let newId = copyFloorList.floorList.find(floor => floor.floor == currFloor).iid + 1;
-    let floorIdx = copyFloorList.floorList.findIndex(floor => floor.floor == currFloor);
-    let newBox = {id : newId, iid : newId};
-    //박스 추가하기
-    
-    copyFloorList.floorList[floorIdx].list.push(newBox);
-    copyFloorList.floorList[floorIdx].iid += 1;
-    
+  useEffect(() => {
+    fetchBoxList();
+  }, []);
+
+  const floorAdd = async () => {
+    let itemToAdd = {
+      name : ((floorList.length + 1).toString() + "-1"),
+      storedRackId : cabSelec
+    }
+    const response = await axiosPost("/boxes/", itemToAdd);
+    console.log(JSON.stringify(response));
+    const newListInput = [response];
+    let copyFloorList = [...floorList];
+    copyFloorList.push(newListInput);
     setFloorList(copyFloorList);
     setRend(Math.random());
+    const data = await axiosGet("/boxesbox-in-rack/" + cabSelec.toString());
+    console.log(JSON.stringify(data));
+  }
+
+  const addItem = async (e) => {
+    let currFloor = e.currentTarget.getAttribute('value');
+
+    let cpyFloor = [... floorList[currFloor - 1]];
+    let itemToAdd = {
+      name : currFloor.toString() + "-" + (cpyFloor.length + 1).toString(),
+      storedRackId : cabSelec
+    }
+    const response = await axiosPost("/boxes/", itemToAdd);
+    console.log(JSON.stringify(response));
+    cpyFloor.push(response);
+
+    let copyFloorList = [...floorList];
+    copyFloorList[currFloor - 1] = cpyFloor;
+
+    setFloorList(copyFloorList);
+    setRend(Math.random());
+
+    const data = await axiosGet("/boxesbox-in-rack/" + cabSelec.toString());
+    console.log(JSON.stringify(data));
   }
 
   return (
@@ -56,20 +94,19 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
         층 추가
       </button>
       <div className="hidden">{rend}</div>
-      {floorList.floorList.map((floor) => (
+      {floorList != [] && (Array.from(floorList).reverse()).map((floor, idx) => (
         <div class="min-w-max min-h-max">
-          <div>{floor.floor} 층</div>
+          <div>{floorList.length - idx} 층</div>
           <div class="flex border">
-            {floor.list.map((item) => (
-              <button value={(floor.floor).toString() + "층 "  + (item.id).toString()} class="w-24 h-12 border" onClick={handleBoxSelec}>
-                {item.id}
+            {floor != [] && floor.map((item) => (
+              <button value={item.id} onClick={handleBoxSelec} class="w-24 h-12 border">
+                {item.name.split('-')[1]}
               </button>
             ))}
-            <button value={floor.floor} onClick={addItem}>추가하기</button>
+            <button value={floorList.length - idx} onClick={addItem}>추가하기</button>
           </div>
         </div>
       ))}
-
     </div>
   )
 }
