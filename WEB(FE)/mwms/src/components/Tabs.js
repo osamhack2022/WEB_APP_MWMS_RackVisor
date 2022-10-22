@@ -39,7 +39,7 @@ export default function Tabs({setTabType, defaultTabs}) {
         </select>
       </div>
       <div className="hidden sm:block">
-        <nav className="relative z-0 rounded-lg shadow flex divide-x-2 divide-[#7A5EA6]" aria-label="Tabs">
+        <nav className="relative z-0 rounded-lg shadow flex divide-x-2 divide-[#706f6f]" aria-label="Tabs">
           {tabs.map((tab, tabIdx) => (
             <button
               key={tab.name}
