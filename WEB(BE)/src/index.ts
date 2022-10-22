@@ -23,9 +23,13 @@ import { boxSchemas } from './routes/box/box.schema';
 import { stockSchemas } from './routes/stock/stock.schema';
 import { postSchemas } from './routes/post/post.schema';
 import { historySchemas } from './routes/history/history.schema';
+import { readFileSync } from 'fs';
+import path from 'path';
 
 const prisma = new PrismaClient();
-const app = fastify();
+const app = fastify({
+  
+});
 
 declare module '@fastify/jwt' {
   interface FastifyJWT {

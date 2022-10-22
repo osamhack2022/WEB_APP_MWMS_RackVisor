@@ -64,7 +64,7 @@ export async function loginHandler(
         sameSite: true, // alternative CSRF protection
       })
       .code(200)
-      .send('Cookie sent');
+      .send(payload);
   }
 
   return reply.code(401).send({
