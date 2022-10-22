@@ -84,7 +84,7 @@ export default function DetailSearch() {
 
       <div class="flex">
         <input class="m-2" id = "duration" type="checkbox" checked={ch2} onChange={onChkBox}/>
-        <div class="text-white font-bold mx-2">기한 : </div>
+        <div class="text-white font-bold mx-8">기한 : </div>
         <DatePicker 
           locale={ko}
           dateFormat="yyyy년 MM월 dd일"
@@ -94,7 +94,7 @@ export default function DetailSearch() {
           startDate={startDate}
           endDate={endDate}
         />
-        <div class="text-white font-semibold mx-2"> 부터 ~ </div>
+        <div class="text-white font-semibold ml-8 mr-2"> 부터 ~ </div>
         <DatePicker 
           locale={ko}
           dateFormat="yyyy년 MM월 dd일"
@@ -105,7 +105,7 @@ export default function DetailSearch() {
           endDate={endDate}
           minDate={startDate}
         />
-        <div class="text-white font-semibold mx-2"> 까지 </div>
+        <div class="text-white font-semibold mx-5"> 까지 </div>
       </div>
 
       <div class="flex">
