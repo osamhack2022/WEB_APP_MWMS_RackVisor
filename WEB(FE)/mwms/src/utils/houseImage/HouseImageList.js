@@ -12,48 +12,42 @@ function HouseImageList() {
   const currUnit = auth.unitSelected;
 
   const fetchImgList = useCallback(async () => {
-    try {
+    // try {
       const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
       let newImgList = [];
+
       data.map((da) => {
         let newDa = {}; 
         newDa.id = da.id;
         newDa.name = da.name;
-        newDa.img = da.imgBase64 ? da.imgBase64 : "";
+        newDa.img = da.warehouseImageBinary ? (da.warehouseImageBinary.data)  : "";
         newImgList.push(newDa);
       });
-      console.log("홖인 : " + JSON.stringify(newImgList));
       setImageList(newImgList);
       if (newImgList) {
         setImageSrc(newImgList[0]);
+        console.log(JSON.stringify(newImgList[0]));
       }
-      console.log(JSON.stringify(newImgList));
+      console.log(JSON.stringify(data));
       setHouseList(data);
-    } catch (error) {
-      alert("Error on fetching unit");
-    }
+
+    // } catch (error) {
+    //   alert("Error on fetching unit");
+    // }
   }, []);
 
   useEffect(() => {
     fetchImgList();
   }, []);
 
-  useEffect(() => {
-    //imageList 중 index 가 currhouse 인 id 를 가진 house의 img 를 변경하는 로직을 작성해주기 
-    fetchImg();
-  }, [imageSrc, imageList]);
-
-  const fetchImg = async () => {
-    if (imageSrc.img != "") {
-      let copyOne = imageList[currHouse];
-      let itemToAdd = {
-        imgBase64 : copyOne.img
-      }
-      console.log("chg : " + JSON.stringify(copyOne));
-      await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
-      const response = await axiosGet("/warehouses/" + (copyOne.id).toString())
-      alert("이미지 업로드 완료" + JSON.stringify(response));
+  const fetchImg = async (src) => {
+    let copyOne = imageList[currHouse];
+    let itemToAdd = {
+      imgBase64 : src
     }
+    await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
+    const response = await axiosGet("/warehouses/" + (copyOne.id).toString())
+    alert("이미지 업로드 완료" + JSON.stringify(response));
   }
 
   const onLeft = () => {
@@ -69,20 +63,20 @@ function HouseImageList() {
       setImageSrc(imageList[currHouse]);
     }
     setFileInput([]);
-    console.log("여기 " + JSON.stringify(imageList[currHouse]));
   }, [currHouse]);
 
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
+    reader.readAsBinaryString(fileBlob);
     return new Promise((resolve) => {
       reader.onload = () => {
         let cpy = imageSrc;
-        cpy.img = reader.result;
+        cpy.img = btoa(reader.result);
         setImageSrc(cpy);
         let copyArray = [...imageList];
-        copyArray[currHouse].img = reader.result;
+        copyArray[currHouse].img = btoa(reader.result);
         setImageList(copyArray);
+        fetchImg(btoa(reader.result));
         resolve();
       };
     });
@@ -100,7 +94,7 @@ function HouseImageList() {
       {   
       <main className="container px-3">
         <div className="preview flex justify-center">
-          {imageSrc && imageSrc.img != "" && <img src={imageSrc.img} alt="preview-img" />}
+          {imageSrc && imageSrc.img != "" && <img src={`data:image;base64,${imageSrc.img}`} alt="preview-img" />}
         </div>
         <input type="file" onChange={(e) => {
           setFileInput(e.target.files[0]);

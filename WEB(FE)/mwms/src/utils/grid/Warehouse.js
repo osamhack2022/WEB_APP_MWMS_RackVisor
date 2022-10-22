@@ -43,7 +43,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const response = await axiosGet("/warehouses/" + (this.state.currHouse.id).toString());
     const newItems = response.itemlist ? JSON.parse(response.itemlist) : []   // id -> 현재 부대의 정보
     const newLayout = response.layout ? JSON.parse(response.layout) : [] // id -> 현재 창고의 정보
-    console.log(JSON.stringify(response));
     this.setState({
       items: newItems,
       layout: newLayout,
@@ -170,21 +169,22 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
     let cpyItem = [...this.state.items];
     const rackInServer = await axiosGet("/racks/racks-in-warehouse/" + (this.state.currHouse.id).toString());
-    console.log("서버 rack : " + JSON.stringify(rackInServer));
     //이름 update 용 리스트 업
     rackInServer.map(async (rack) => {
-      let nameUp = cpyItem.find((item) => ((item.iid == rack.name) && (item.id != rack.name)));
+      let nameUp = cpyItem.find((item) => ((item.iid == rack.id) && (item.i != rack.name) && (item.type != "door")));
       if (nameUp) {
-        await axiosPut("/racks/update-name/" + (nameUp.iid).toString(), {
-          name : nameUp.id
-        });
+        let itemToAdd = {
+          name : nameUp.i
+        }
+        await axiosPut("/racks/update-name/" + (nameUp.iid).toString(), itemToAdd);
       }
+      
+    alert("새로이 저장 " + JSON.stringify(rackInServer1));
     });
 
     //추가된 rack 만들기
     cpyItem.map(async (item) => {
       if ((!rackInServer.find((rack) => (rack.id == item.iid))) && (item.type != "door")) {
-        console.log("못찾음 : " + JSON.stringify(item));
         let newItem = {
           name : (item.i),
           storedWarehouseId : Number(this.state.currHouse.id)
@@ -264,8 +264,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
   onLayoutChange(layout) {
     this.props.onLayoutChange(layout);
-    console.log("변경1 : " + JSON.stringify(layout));
-    console.log("변경2 : " + JSON.stringify(this.state.items));
     let newItems = [];
     let updateLayout = [...layout];
     let newLayout = [];
