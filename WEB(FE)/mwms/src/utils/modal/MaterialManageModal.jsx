@@ -69,11 +69,11 @@ export default function MaterialManageModal({open, setOpen}) {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-black-gradient rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
-                  className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="bg-[#323232] rounded-md text-gray-400 hover:text-gray-500"
                   onClick={() => setOpen(false)}
                 >
                   <span className="sr-only">Close</span>
@@ -83,11 +83,11 @@ export default function MaterialManageModal({open, setOpen}) {
 
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                  <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-white mx-2">
                     물품 수정
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <button onClick={() => setLocationOpen(true)}>위치 선정하기</button>
+                  <div className="mt-2 text-white">
+                    <button class="my-1" onClick={() => setLocationOpen(true)}>위치 선정하기</button>
                     {loc && <div>선정된 위치 {loc['위치']}</div>}
                     {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
 
@@ -95,12 +95,12 @@ export default function MaterialManageModal({open, setOpen}) {
                       <div class="flex">
                         <div>속성 : </div>
                         <div>
-                          <select onChange={onChangeHanlder} value={Content}>
+                          <select class="bg-[#706f6f] mx-2 my-1" onChange={onChangeHanlder} value={Content}>
                             {Object.keys(detailType).map((type) => (
                               <option key={type}>{type}</option>
                             ))}
                           </select>
-                          <select onChange={onChangeType} value={type}>
+                          <select class="bg-[#706f6f] mx-2 my-1" onChange={onChangeType} value={type}>
                             {Object.keys(detailType[Content]).map((ty) => (
                               <option key={ty}>{ty}</option>
                             ))}
@@ -109,7 +109,7 @@ export default function MaterialManageModal({open, setOpen}) {
                         </div>
                       </div>
                       <div class="flex">
-                        <div>기한 : </div>
+                        <div class="mr-2">기한 : </div>
                         <DatePicker 
                           locale={ko}
                           dateFormat="yyyy/MM/dd"
@@ -122,18 +122,18 @@ export default function MaterialManageModal({open, setOpen}) {
                       </div>
                       <div class="flex">
                         <div>이름 : </div>
-                        <input type="string" class="border" value={name} onChange={chgName}/>
+                        <input type="string" class="border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={name} onChange={chgName}/>
                       </div>
                       <div class="flex">
                         <div>상태 : </div>
-                        <input type="string" class="border" value={good} onChange={chgGood}/>
+                        <input type="string" class="border rounded-md bg-[#706f6f] mx-2 my-1" value={good} onChange={chgGood}/>
                       </div>
                       <div class="flex">
-                        <div>담당자 : {people}</div>
+                        <div class="my-1">담당자 : {people}</div>
                       </div>
                       <div class="flex">
                         <div>{'수량 : '}</div>
-                        <input type="number" class="border" value={minCnt} onChange={chgMinCnt}/>
+                        <input type="number" class="border rounded-md bg-[#706f6f] mx-2 my-1" value={minCnt} onChange={chgMinCnt}/>
                       </div>
                     </div>
 
@@ -143,7 +143,7 @@ export default function MaterialManageModal({open, setOpen}) {
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-blue-gradient text-base font-medium text-black hover:text-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => {
                     setOpen(false);
                     alert("물품이 추가되었습니다");
@@ -153,7 +153,7 @@ export default function MaterialManageModal({open, setOpen}) {
                 </button>
                 <button
                   type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+                  className="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-white hover:text-gray-500 sm:mt-0 sm:w-auto sm:text-sm"
                   onClick={() => setOpen(false)}
                 >
                   취소
