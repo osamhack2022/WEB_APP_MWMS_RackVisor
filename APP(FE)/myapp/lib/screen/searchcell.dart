@@ -4,7 +4,7 @@ import 'package:myapp/model/unit_page_model.dart';
 class SearchCell extends StatelessWidget {
   const SearchCell(this.album, {super.key});
   @required
-  final Album album;
+  final UnitModel album;
 
   void searchAlbum(String query) {
       
@@ -31,7 +31,7 @@ class SearchCell extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   child: FadeInImage(
                     placeholder: const AssetImage("images/no_image.png"),
-                    image: NetworkImage(album.thumbnailUrl),
+                    image: NetworkImage(album.name),
                     width: 100,
                     height: 100,
                    ),
@@ -40,7 +40,7 @@ class SearchCell extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  album.title,
+                  album.name,
                   maxLines: 1,
                   softWrap: true,
                   textAlign: TextAlign.center,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/model/unit_page_model.dart';
 
-class AlbumCell extends StatelessWidget {
-  const AlbumCell(this.album, {super.key});
+class UnitCell extends StatelessWidget {
+  const UnitCell(this.unitModel, {super.key});
   @required
-  final Album album;
+  final UnitModel unitModel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +25,8 @@ class AlbumCell extends StatelessWidget {
                 Flexible(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
-                  child: FadeInImage(
-                    placeholder: const AssetImage("images/no_image.png"),
-                    image: NetworkImage(album.thumbnailUrl),
-                    width: 100,
-                    height: 100,
-                   ),
-                  ) 
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  album.title,
+                  child: Text(
+                  unitModel.name,
                   maxLines: 1,
                   softWrap: true,
                   textAlign: TextAlign.center,
@@ -44,7 +34,13 @@ class AlbumCell extends StatelessWidget {
                     fontSize: 20.0, 
                     fontWeight: FontWeight.w500
                     ),
-                ),)
+                ),
+                  ) 
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+
+                )
             ]),
           ),
         ),

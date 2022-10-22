@@ -1,29 +1,41 @@
+import 'dart:html';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:myapp/controller/login_page_controller.dart';
-import 'package:myapp/controller/registar_page_controller.dart';
 import 'package:myapp/utils/global_colors.dart';
+import '../model/login_model.dart';
+import '../services/login_service.dart';
+import '../utils/constants.dart';
 
-//import 'package:myapp/controller/login_page_controller.dart';
-//import 'package:myapp/controller/registar_page_controller.dart';
-//import 'package:myapp/utils/global_colors.dart';
+class LoginPage extends StatefulWidget {
 
-class LoginPage extends StatelessWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
 
-  LoginPage({key}) : super(key: key);
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  LoginPageController loginPageController = Get.put(LoginPageController());
+
+  LoginModel? loginModel;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginPageController());
+    ScreenUtil.init(context, designSize: const Size(896, 414));
     return Scaffold(
-
-      backgroundColor: GlobalColors.mainColor,
 
       body: SafeArea(
         child: Form(
-          key: loginPageController.loginFormKey,
+          key: _formKey,
           child: SingleChildScrollView(
             child: Column(children: [
 
@@ -37,27 +49,27 @@ class LoginPage extends StatelessWidget {
               ),
 
               // 국방물자관리체계
-              const Text(
+              Text(
                 '국방물자관리체계',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 24,
+                  fontSize: 36.sp,
                 ),
               ),
 
               const SizedBox(height: 10),
 
-              // 환영합니다.
-              const Text(
-                "물자관리를 빠르고 편리하게 \n누구든 간단하게",
+              // 소개글
+              Text(                                                         
+                "국방 물자 관리 체계를 통해서 \n 여러 물품과 자재들을 효과적으로\n 보관  및 관리를 할 수 있습니다.",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 24.sp,
                 ),
               ),
 
               const SizedBox(height: 40),
 
-              // 이메일 입력필드
+              // 군번 입력필드
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
@@ -71,18 +83,22 @@ class LoginPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 20.0),
 
                     child: TextFormField(
-                      controller: loginPageController.loginEmailController,
-
-                      onSaved: (value) {
-                        loginPageController.email = value!;
-                      },
+                      
+                      style: const TextStyle(color: Color(0xFF373737)),
+                      controller: emailController,
+                      onSaved: (input) => loginModel?.militarySerialNumber = input!,
 
                       validator: (value) {
-                        return loginPageController.validateEmail(value!);
+                        if(value!.isEmpty) {
+                          return '군번을 입력하세요';
+                        }
+                        return null;
                       },
+
+
                       decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: '이메일을 입력하세요',
+                        hintText: '군번을 입력하세요',
                       ),
                     ),
                   ),
@@ -104,13 +120,14 @@ class LoginPage extends StatelessWidget {
                     // 입력값 왼쪽 띄우기
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextFormField(
-                      controller: loginPageController.loginPasswordController,
-                      onSaved: (value) {
-                        loginPageController.password = value!;
-                      },
-
+                      style: const TextStyle(color: Color(0xFF373737)),
+                      onSaved: (input) => loginModel?.password = input!,
+                      controller: passwordController,
                       validator: (value) {
-                        return loginPageController.validatePassword(value!);
+                        if(value!.isEmpty) {
+                          return '군번을 입력하세요';
+                        }
+                        return null;
                       },
 
                       // 비밀번호 숨기기
@@ -129,11 +146,28 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: InkWell(
-                  onTap: () => loginPageController.checkLogin(),
+                  onTap: () async { 
+                    if(_formKey.currentState!.validate()){
+                      var password = passwordController.text;
+                      var militarySerialNumber = emailController.text;
+                      setState(() {
+
+                      });
+                      var rsp = await logingUser(militarySerialNumber, password);
+                      print(rsp);
+                      if(rsp.containsKey('Status')) {
+                        if(rsp['Status'] == 200) {
+                          Get.toNamed("/unitPage");
+                        }
+                      } 
+                    }
+                  
+  
+                  },
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
-                      color: Colors.deepPurple,
+                      color: kAccentColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Center(
@@ -155,23 +189,10 @@ class LoginPage extends StatelessWidget {
               // 회원가입 부분
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    '회원이 아니신가요?',
+                children: const [
+                  Text(
+                    '회원이 아니시라면 웹에서 회원가입을 진행해주세요.',
                     style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.put(RegistarPageController());
-                      Get.toNamed("/registarPage");
-                    },
-                    child: const Text(
-                      ' 가입하기',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -180,5 +201,7 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+
+
   }
 }

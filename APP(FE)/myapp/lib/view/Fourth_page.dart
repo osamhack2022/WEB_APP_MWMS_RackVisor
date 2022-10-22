@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:myapp/model/login_model.dart';
+import 'package:myapp/model/front_model.dart';
 import '../model/profile_list_item.dart';
 import '../utils/constants.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class FourthPage extends StatelessWidget {
-  LoginModel loginModel = Get.put(LoginModel());
+  FrontModel frontModel = Get.put(FrontModel());
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(896, 414));
@@ -35,7 +35,7 @@ class FourthPage extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   radius: kSpacingUnit.w * 5,
-                  backgroundImage: NetworkImage(loginModel.unitPhotos),
+                  backgroundImage: NetworkImage(frontModel.unitPhotos),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -62,7 +62,7 @@ class FourthPage extends StatelessWidget {
           ),
           SizedBox(height: kSpacingUnit.w * 2),
           Text(
-            loginModel.unitName,
+            frontModel.unitName,
             style: kTitleTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 0.5),

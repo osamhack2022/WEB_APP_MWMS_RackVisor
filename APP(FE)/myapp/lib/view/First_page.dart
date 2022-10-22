@@ -101,11 +101,12 @@ class _FirstPage extends State<FirstPage> {
       body: CustomScrollView(
         slivers: [ 
           SliverAppBar(
-          elevation: 5,
-          backgroundColor: Colors.white,
-          expandedHeight: 220.h,
-          flexibleSpace: FlexibleSpaceBar(
-            
+            //백버튼 막기
+            automaticallyImplyLeading: false,
+            elevation: 5,
+            backgroundColor: Colors.white,
+            expandedHeight: 220.h,
+            flexibleSpace: FlexibleSpaceBar(
                   //이미지
                   background:  
                   Stack(
@@ -128,7 +129,7 @@ class _FirstPage extends State<FirstPage> {
                 child: InkWell(
                   child: Icon(Icons.camera_alt,
                   color: GlobalColors.brightGrey,
-                  size: 36.h,
+                  size: 24.h,
                   ),
                   onTap: () {
                     showModalBottomSheet(

@@ -1,24 +1,25 @@
+class LoginModel{
+  String militarySerialNumber = '';
+  String password = '';
 
-import 'package:get/get.dart';
+  LoginModel({
+    militarySerialNumber,
+    password,
+  });
 
-class LoginModel extends GetxController{
-  String unitName = '';
-  String unitPhotos = '';
-
-  //부대 이름 업데이트
-  unitNameUpdate(var index) {
-    unitName = index;
-    update();
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = {
+      'militarySerialNumber' : militarySerialNumber.trim(),
+      'password' : password.trim(),
+    };
+    return map;
   }
 
-  //부대 이미지 업데이트
-  unitPhotosUpdate(var index) {
-    unitPhotos = index;
-    update();
+  factory LoginModel.fromJson(Map<String, dynamic> json) {
+    return LoginModel(
+      militarySerialNumber: json['militarySerialNumber'] as String,
+      password: json['name'] as String,
+    );
   }
 
 }
-
-
-
-

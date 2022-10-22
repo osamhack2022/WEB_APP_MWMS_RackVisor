@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controller/bottom_nav_controller.dart';
-import 'package:myapp/model/login_model.dart';
+import 'package:myapp/model/front_model.dart';
 import 'package:myapp/utils/global_colors.dart';
-
 import 'package:myapp/view/Fourth_page.dart';
+import 'package:myapp/view/third_page.dart';
 import 'package:myapp/view/twice_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
-
 import 'First_page.dart';
 
 class FrontPage extends StatefulWidget {
@@ -22,7 +21,7 @@ class FrontPage extends StatefulWidget {
 
 class _FrontPage extends State<FrontPage> {
   BottomNavigationBarController c = Get.put(BottomNavigationBarController());
-  LoginModel loginModel = Get.put(LoginModel());
+  FrontModel frontModel = Get.put(FrontModel());
 
   @override
   void initState() {
@@ -41,13 +40,13 @@ class _FrontPage extends State<FrontPage> {
 
   //부대이름 업데이트
   updateName() {
-    loginModel.unitNameUpdate(value.title.toString());
+    frontModel.unitNameUpdate(value.title.toString());
   }
 
   //이미지 업데이트
-  updateImage() {
-    loginModel.unitPhotosUpdate(value.thumbnailUrl.toString());
-  }
+  /*updateImage() {
+    frontModel.unitPhotosUpdate(value.thumbnailUrl.toString());
+  }*/
   
 
   @override
@@ -55,14 +54,14 @@ class _FrontPage extends State<FrontPage> {
 
 
     updateName();
-    updateImage();
+    //updateImage();
 
 
     return Scaffold(
       extendBody: true, 
       appBar:  AppBar(
         backgroundColor: GlobalColors.backgroundColor,
-          title: Text(loginModel.unitName),
+          title: Text(frontModel.unitName),
         ),
       bottomNavigationBar: StylishBottomBar(
         items: [
@@ -106,8 +105,8 @@ class _FrontPage extends State<FrontPage> {
         controller: c.controller,
         children: [
           FirstPage(),
-          TwicePage(),
-          Center(child: Text('Add')),
+          TwicePage(eventKeyword: '실험'),
+          ThirdPage(),
           FourthPage()
         ],
       )

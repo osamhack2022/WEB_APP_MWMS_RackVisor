@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/model/unit_page_model.dart';
-import 'package:myapp/utils/global_colors.dart';
+import '../view/serachResult_page.dart';
+
 class SearchBarController extends GetxController {
 
 
@@ -12,6 +13,8 @@ class SearchBarController extends GetxController {
 
   searchBar() {
     return InkWell(
+      onTap: () => Get.toNamed("/searchPage"),
+
       child: Container(
       decoration: BoxDecoration(
         
@@ -38,11 +41,16 @@ class SearchBarController extends GetxController {
           ),
 
           //검색하세요
-          const Expanded(
-            flex: 4,
-            child: Text("검색하세요",
-            style: TextStyle(color: Colors.grey),),
-          ),
+           
+            Expanded(
+              flex: 4,
+              child: Text("검색하세요",
+              style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            
+
+          
 
           Divider(thickness: 1,),
 
@@ -62,7 +70,7 @@ class SearchBarController extends GetxController {
     );
   }
 
-  searchResultList(Album album) {
+  searchResultList(UnitModel unitModel) {
     return Card(
       elevation: 5.0,
       shape: RoundedRectangleBorder(
@@ -72,7 +80,7 @@ class SearchBarController extends GetxController {
           width: 200,
           height: 100,
           child: Center(
-            child: Text(album.title),
+            child: Text(unitModel.name),
           ),
         ),
     );
@@ -80,7 +88,7 @@ class SearchBarController extends GetxController {
 
 
 
-  searchResultListView(AsyncSnapshot<List<Album>> snapshot) {
+  searchResultListView(AsyncSnapshot<List<UnitModel>> snapshot) {
     return Expanded(
       child: GestureDetector(
           child: GridView.count(
@@ -90,10 +98,10 @@ class SearchBarController extends GetxController {
             crossAxisSpacing: 4.0,
             children: snapshot.data!
             .map(
-          (album) {
+          (unitModel) {
             return GestureDetector(
               child: GridTile(
-                child: searchResultList(album),
+                child: searchResultList(unitModel),
                 
               ),
               onTap: () {

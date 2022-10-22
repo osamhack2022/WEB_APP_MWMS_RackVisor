@@ -1,19 +1,15 @@
-class Album {
-  int albumId;
+class UnitModel {
   int id;
-  String title;
-  String url;
-  String thumbnailUrl;
+  String name;
+  String comment;
 
-  Album({required this.albumId, required this.id, required this.title, required this.url, required this.thumbnailUrl});
+  UnitModel({required this.id,required this.name, required this.comment});
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      albumId: json['albumId'] as int,
+  factory UnitModel.fromJson(Map<String, dynamic> json) {
+    return UnitModel(
       id: json['id'] as int,
-      title: json['title'] as String,
-      url: json['url'] as String,
-      thumbnailUrl :json['thumbnailUrl'] as String,
+      name: json['name'] as String,
+      comment :json['comment'] as String,
     );
   }
 }
