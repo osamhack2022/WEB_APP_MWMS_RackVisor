@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../routes/AuthContext";
 
 const CreateList = ({boxSelec, setBoxSelec}) => {
+  const auth = useAuth();
+  const currHouse = auth.houseSelected;
+  const currUnit = auth.unitSelected;
+
   const [rend, setRend] = useState(true);
   const handleBoxSelec = (e) => {
     setBoxSelec(e.currentTarget.getAttribute('value'));
@@ -10,6 +15,8 @@ const CreateList = ({boxSelec, setBoxSelec}) => {
         {totCnt: 1, 
          floorList: [{floor : 1, list : [{id : 1, iid: 1}], iid : 1}]}
   const [floorList, setFloorList] = useState( defaultFloorList );
+
+  
 
   const floorAdd = () => {
     let newFloor = {};

@@ -22,6 +22,7 @@ function HouseImageList() {
         newDa.img = da.imgBase64 ? da.imgBase64 : "";
         newImgList.push(newDa);
       });
+      console.log("홖인 : " + JSON.stringify(newImgList));
       setImageList(newImgList);
       if (newImgList) {
         setImageSrc(newImgList[0]);
@@ -40,7 +41,7 @@ function HouseImageList() {
   useEffect(() => {
     //imageList 중 index 가 currhouse 인 id 를 가진 house의 img 를 변경하는 로직을 작성해주기 
     fetchImg();
-  }, [imageSrc]);
+  }, [imageSrc, imageList]);
 
   const fetchImg = async () => {
     if (imageSrc.img != "") {
@@ -50,6 +51,8 @@ function HouseImageList() {
       }
       console.log("chg : " + JSON.stringify(copyOne));
       await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
+      const response = await axiosGet("/warehouses/" + (copyOne.id).toString())
+      alert("이미지 업로드 완료" + JSON.stringify(response));
     }
   }
 

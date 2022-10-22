@@ -29,20 +29,17 @@ function LoginPage() {
   };
 
   const login = async () => {
-    localStorage.setItem("token", "123");
-    localStorage.setItem("id", IdleDeadline);
-    //서버와 통신 로직 추가 필요
-
-    // // ? Login
     const response = await axiosPost("/users/login", {
       militarySerialNumber: id,
       password: pw,
     });
     alert(JSON.stringify(response));
 
-    const way = await axiosGet("/users/all-users");
-    console.log(JSON.stringify(way));
+    localStorage.setItem("token", "123");
+    localStorage.setItem("id", IdleDeadline);
+    //서버와 통신 로직 추가 필요
 
+    // // ? Login
     localStorage.setItem("이름", "홍길동");
     localStorage.setItem("직책", "행정보급관");
     localStorage.setItem("계급", "상사");
