@@ -121,7 +121,8 @@ function Posts({ posting, total, setPosting }) {
           )}
         </tbody>
       </table>
-      <Button
+      <div class="content-end">
+        <Button
         class="text-[#5AB0AD] font-semibold ml-3 mb-3"
         handleClick={() => {
           setPlus(true);
@@ -130,8 +131,8 @@ function Posts({ posting, total, setPosting }) {
         }}
         text="추가하기"
       />
-      <ContentPlusModal open={plus} setOpen={setPlus} title={plusTitle} setTitle={titleChange} content={plusContent} setContent={contentChange} makePost={makePost}/>
-
+        <ContentPlusModal open={plus} setOpen={setPlus} title={plusTitle} setTitle={titleChange} content={plusContent} setContent={contentChange} makePost={makePost}/>
+      </div>
     </div>
     </div>
     </div>

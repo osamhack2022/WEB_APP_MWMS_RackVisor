@@ -71,7 +71,7 @@ export default function ExcelModal({open, setOpen}) {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:p-6">
+            <div className="inline-block align-bottom bg-black-gradient rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:p-6">
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
@@ -89,7 +89,7 @@ export default function ExcelModal({open, setOpen}) {
               <div className="sm:flex sm:items-start">
 
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                  <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-white my-2">
                     엑셀 파일 업로드
                   </Dialog.Title>
                   <div className="mt-2 flex">
@@ -100,11 +100,11 @@ export default function ExcelModal({open, setOpen}) {
                   </div>
                   <input 
                     accept=".xlsx" 
-                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+                    className="my-2 mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-[#706f6f] text-base font-medium text-gray-400 hover:text-gray-300  sm:mt-0 sm:w-auto sm:text-sm"
                     type="file" 
                     onChange={(e) => inputFile(e.target.files[0])}/>
                   <div>
-                    <button class="border" onClick={() => setOpen1(true)}>위치 선택하기</button>
+                    <button class="border text-gray-200 rounded-lg my-2 p-2" onClick={() => setOpen1(true)}>위치 선택하기</button>
                     <LocationSelectModal open={open1} setOpen={setOpen1} setLocation={setLoc}/>
                     {loc['위치'] && <div>{loc['위치']}</div>}
                   </div>
