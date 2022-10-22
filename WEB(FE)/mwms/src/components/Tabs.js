@@ -30,7 +30,7 @@ export default function Tabs({setTabType, defaultTabs}) {
         <select
           id="tabs"
           name="tabs"
-          className="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+          className="block w-full focus:ring-[#7A5EA6] focus:border-[#7A5EA6] border-gray-300 rounded-md"
           defaultValue={tabs.find((tab) => tab.current).name}
         >
           {tabs.map((tab) => (
@@ -39,17 +39,17 @@ export default function Tabs({setTabType, defaultTabs}) {
         </select>
       </div>
       <div className="hidden sm:block">
-        <nav className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
+        <nav className="relative z-0 rounded-lg shadow flex divide-x divide-gray-500" aria-label="Tabs">
           {tabs.map((tab, tabIdx) => (
             <button
               key={tab.name}
               onClick={setType}
               value={tab.value}
               className={classNames(
-                tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
+                tab.current ? 'text-white bg-[#706F6F]' : 'text-gray-300 bg-[#706F6F] hover:text-white',
                 tabIdx === 0 ? 'rounded-l-lg' : '',
                 tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '',
-                'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10'
+                'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-[#7A5EA6] focus:z-10'
               )}
             >
               <span>{tab.name}</span>

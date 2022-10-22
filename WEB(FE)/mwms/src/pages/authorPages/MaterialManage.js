@@ -21,6 +21,7 @@ import LocationSelectModal from '../../utils/modal/LocationSelectModal'
 import Tabs from '../../components/Tabs'
 import { axiosGet } from '../../api'
 
+
 function MaterialManage() {
   const auth =useAuth();
   const navigate = useNavigate();
@@ -54,8 +55,8 @@ function MaterialManage() {
 
   useEffect(() => {
     if(!currUnit) {
-      alert("부대를 선택해주세요");
-      navigate("/");
+      //alert("부대를 선택해주세요");
+      //navigate("/");
     }
 
     //fetchHouseList();
@@ -95,7 +96,7 @@ function MaterialManage() {
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
-        <div class="flex-1">
+        <div class="flex-1 bg-[#323232]">
           <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div class="flex-1">
               <Tabs defaultTabs={defaultTabs} setTabType={setTabType}/>
@@ -128,10 +129,10 @@ function MaterialManage() {
                     </>)
                     }
                   </div>
-                } 
-                <button class="w-30 h-10 mb-2 text-sm font-medium border-2" onClick={() => setOpen(true)}>excel로 업로드</button>
+                }
+                <button class="text-[#5AB0AD] font-semibold ml-3 mb-3 w-30 h-10  rounded p-2" onClick={() => setOpen(true)}>excel로 업로드</button>
                 <ExcelModal open={open} setOpen={setOpen}/>
-                <button class="w-30 h-10 mb-2 text-sm font-medium border-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
+                <button class="text-[#5AB0AD]  font-semibold ml-3 mb-3 w-30 h-10 rounded p-2" onClick={() => setOpenPlus(true)}>물자 추가 +</button>
                 <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
               </div>
             </div>

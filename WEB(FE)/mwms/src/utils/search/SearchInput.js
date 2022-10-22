@@ -25,10 +25,10 @@ function SearchInput({search, setSearch}) {
         </div>
       </div>
       {!detail && (
-        <button class="ml-4 mt-2 text-[#5AB0AD] font-poppins font-semibold " onClick={() => setDetail(true)}>상세검색</button>
+        <button class="ml-4 mt-2 text-[#5AB0AD] font-poppins font-semibold mb-4" onClick={() => setDetail(true)}>상세검색</button>
       )}
       {detail && (
-        <button class="ml-4 mt-2 text-white font-poppins rounded-lg p-1 font-semibold bg-[#5AB0AD] mb-2" onClick={() => setDetail(false)}>상세검색</button>
+        <button class="ml-4 mt-2 text-white font-poppins rounded-lg p-1 font-semibold bg-[#5AB0AD] mb-4" onClick={() => setDetail(false)}>상세검색</button>
       )}
       {detail && (
         <DetailSearch/>
