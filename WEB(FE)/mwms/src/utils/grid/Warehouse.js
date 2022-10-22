@@ -177,7 +177,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
 
 
   onAddDoor() {
-    let newRandNum = (parseInt*(Math.random() * 1000)).toString();
+    let newRandNum = (parseInt(Math.random() * 1000)).toString();
     
     this.setState({
       // Add a new door. It must have a unique key!
@@ -282,7 +282,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   onAddCabinet() {
-    let newRandNum = (parseInt*(Math.random() * 1000)).toString();
+    let newRandNum = (parseInt(Math.random() * 1000)).toString();
 
     this.setState({
       // Add a new door. It must have a unique key!

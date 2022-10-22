@@ -77,7 +77,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const i = el.i;
     const iid = el.iid;
     return (
-      <div onClick={this.onCabinetClick.bind(this, i)} key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
+      <div onClick={this.onCabinetClick.bind(this, iid)} key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
         <div value={i} className="text-xl align-middle text-center text-slate-100" color="white">{i}</div>
       </div>
     );

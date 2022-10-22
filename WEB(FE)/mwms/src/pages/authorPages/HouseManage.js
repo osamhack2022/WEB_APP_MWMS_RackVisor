@@ -36,7 +36,7 @@ function HouseManage() {
           <button class="absolute top-47 right-5 m-2 p-1 content-end border-2 border-slate-500 rounded-md text-xs" onClick={onToHouseSelect}>{"<"}창고선택</button>
           <h1 class="border-b-2 m-1 pl-8 pb-4 font-bold text-2xl">{currHouse.name}<br/></h1>
           <div>
-          <WarehouseGridLayout unitSelected={currUnit} houseSelected={currHouse}/>
+            <WarehouseGridLayout unitSelected={currUnit} houseSelected={currHouse}/>
           </div>
         </div>
       </div>

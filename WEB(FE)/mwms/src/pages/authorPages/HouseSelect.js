@@ -62,7 +62,6 @@ function HouseSelect() {
     //TODO _ api
     const itemResponse = await axiosPost("/warehouses", itemToAdd);
     itemToAdd.id = itemResponse.id;
-    itemToAdd.id = 1;
 
     setHouseList((prev) => [...prev, itemToAdd]);
   }
