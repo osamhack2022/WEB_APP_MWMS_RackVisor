@@ -3,6 +3,7 @@ import Posts from './Posts';
 import Pagination from './Pagination';
 import ForumList from './ForumList';
 import { axiosGet } from '../../api';
+import { useAuth } from '../../routes/AuthContext';
 //https://chanhuiseok.github.io/posts/react-12/
 
 function Forum() {
@@ -10,13 +11,14 @@ function Forum() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
   const [currPostList, setCurrPostList] = useState([]);
+  let auth = useAuth();
 
   const fetchPostList = useCallback(async () => {
     try {
-      const data = await axiosGet("/posts");
+      const data = await axiosGet("/posts/unit-posts/" + (auth.unitSelected.id).toString());
       setPosts(data);
     } catch (error) {
-      alert("Fetch error on post");
+      // setPosts([]);
     }
   });
 

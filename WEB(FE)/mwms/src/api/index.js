@@ -16,3 +16,8 @@ export const axiosPut = async (targetApiUrl, body) => {
   const { data } = await axios.put(baseUrl + targetApiUrl, body);
   return data;
 };
+
+export const axiosDel = async (targetApiUrl, body) => {
+  const { data } = await axios.delete(baseUrl + targetApiUrl, { data : body });
+  return data;
+}

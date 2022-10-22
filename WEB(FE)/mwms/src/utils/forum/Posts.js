@@ -4,7 +4,7 @@ import SettingModal from '../modal/SettingModal';
 import DetailContent from '../modal/DetailContent';
 import ContentPlusModal from '../modal/contentPlusModal';
 import Button from '../../components/Button';
-import { axiosPost } from '../../api';
+import { axiosDel, axiosPost } from '../../api';
 import { useAuth } from '../../routes/AuthContext';
 
 //https://binaryjourney.tistory.com/20 [Binary Journey:티스토리]
@@ -42,24 +42,33 @@ function Posts({ posting, total, setPosting }) {
     e.stopPropagation();
   }
 
-  const erasePost = (e) => {
+  const erasePost = async (e) => {
     //삭제 구현 필요
-  
-    setPosting(total.filter(post => post.id != e.target.id))
-  
-  
+    try {
+      let deleteItem = {
+        id : Number(e.target.id)
+      }
+
+      await axiosDel("/posts/deletePost", deleteItem);
+      setPosting(total.filter(post => post.id != e.target.id));
+    } catch (e) {
+
+    }
   }
 
   const makePost = async () => {
     let itemToAdd = {
       title : plusTitle,
-      authorId : localStorage.getItem("id"),
+      authorId : 2,
       postingUnitId : Number(currUnit.id),
       content : plusContent
     }
-  
-    const itemResponse = await axiosPost("/posts", itemToAdd);
-    setPosting(total.concat(itemResponse));
+    try {
+      const itemResponse = await axiosPost("/posts", itemToAdd);
+      setPosting(total.concat(itemResponse));
+    } catch (e) {
+
+    }
     setPlusTitle("");
     setPlusContent("");
     setPlus(false);
@@ -101,9 +110,9 @@ function Posts({ posting, total, setPosting }) {
             <tr key={article.id}>
               <td className="text-center px-4 py-4 whitespace-nowrap text-base font-medium text-white">{article.id}</td>
               <td className=" px-5 py-4 whitespace-nowrap text-base text-white">{article.author.rank} {article.author.name}</td>
-              <button className=" absolute px-7 py-4 z-[0] whitespace-nowrap text-base text-white" id={article.id} onClick={openModal}>{article.title}</button>
-              <td  className="px-6 py-4 whitespace-nowrap text-right text-base font-medium" >
-                <div id={article.id} onClick={erasePost} className="text-white cursor-pointer hover:text-[#7A5EA6]">X</div>
+              <button className=" absolute px-7 py-4  whitespace-nowrap text-base text-white" id={article.id} onClick={openModal}>{article.title}</button>
+              <td className="px-6 py-4 whitespace-nowrap text-right text-base font-medium  z-[0]" >
+                <div id={article.id} onClick={erasePost} className="text-white cursor-pointer hover:text-[#7A5EA6] z-[0]">X</div>
               </td>
             </tr>
           ))}

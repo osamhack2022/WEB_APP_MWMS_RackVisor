@@ -7,6 +7,7 @@ function HouseImage({imageList, setImageList, currHouse}) {
   useEffect(() => {
     setImageSrc(imageList[currHouse]);
     setFileInput([]);
+    console.log("여기 " + JSON.stringify(imageList[currHouse]));
   }, [currHouse]);
 
   const encodeFileToBase64 = (fileBlob) => {
@@ -16,7 +17,7 @@ function HouseImage({imageList, setImageList, currHouse}) {
       reader.onload = () => {
         setImageSrc(reader.result);
         let copyArray = [...imageList];
-        copyArray[currHouse] = reader.result;
+        copyArray[currHouse].img = reader.result;
         setImageList(copyArray);
         resolve();
       };
