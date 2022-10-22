@@ -285,10 +285,10 @@ function StaticsPage() {
     <AuthorHeader/>
     <div className="flex">
       <Sidebar/>
-      <div className="flex-1">
-        <div>통계 보여주기용 검색</div>
+      <div className="flex-1 bg-[#323232]">
+        <div class="text-white">통계 보여주기용 검색</div>
         <DetailSearch/>
-        <div>통계 내용</div>
+        <div class="text-white">통계 내용</div>
         <div style={{ display: "grid", height: 400 }}>
           <div>
             <Graph data={data}/>

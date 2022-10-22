@@ -56,7 +56,7 @@ export default function HistoryList() {
           <li key={event.id}>
             <div className="relative pb-8">
               {eventIdx !== timeline.length - 1 ? (
-                <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
+                <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-[#706F6F] text-white" aria-hidden="true" />
               ) : null}
               <div className="relative flex space-x-3">
                 <div>
@@ -71,14 +71,14 @@ export default function HistoryList() {
                 </div>
                 <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                   <div>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-white">
                       {event.content}{' '}
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-gray-400">
                         {event.target}
                       </p>
                     </p>
                   </div>
-                  <div className="text-right text-sm whitespace-nowrap text-gray-500">
+                  <div className="text-right text-sm whitespace-nowrap text-gray-300">
                     <time dateTime={event.datetime}>{event.datetime}</time>
                   </div>
                 </div>

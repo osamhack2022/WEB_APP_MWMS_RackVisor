@@ -49,7 +49,7 @@ export default function Tabs({setTabType, defaultTabs}) {
                 tab.current ? 'text-white bg-[#706F6F]' : 'text-gray-300 bg-[#706F6F] hover:text-white',
                 tabIdx === 0 ? 'rounded-l-lg' : '',
                 tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '',
-                'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-[#7A5EA6] focus:z-10'
+                'group relative min-w-0 flex-1 overflow-hidden py-4 px-4 text-sm font-medium text-center hover:bg-[#7A5EA6] focus:z-10'
               )}
             >
               <span>{tab.name}</span>

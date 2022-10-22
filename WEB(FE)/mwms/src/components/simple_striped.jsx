@@ -17,7 +17,7 @@ export default function Example({defaultList, data, setSelect}) {
                   {defaultList.map((de) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
                     >
                       {de}
                     </th>
@@ -31,11 +31,11 @@ export default function Example({defaultList, data, setSelect}) {
                 {data.map((person, personIdx) => (
                   <tr key={personIdx} className={personIdx}>
                     {defaultList.map((de, deIndex) => (
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{person[de]}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{person[de]}</td>
 
                     ))}
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button onClick={selecting} value={personIdx} className="text-indigo-600 hover:text-indigo-900">
+                      <button onClick={selecting} value={personIdx} className="text-indigo-300 hover:text-indigo-400">
                         선택
                       </button>
                     </td>

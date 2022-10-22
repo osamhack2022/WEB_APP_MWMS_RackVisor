@@ -63,28 +63,28 @@ export default function DetailSearch() {
   }
 
   return (
-    <div>
+    <div class="p-2 text-[12px] border border-gray-300 rounded rounded-lg m-2 max-w-[600px]">
       <div class="flex">
-        <input class="m-2" id = "property" type="checkbox" checked={ch1} onChange={onChkBox}/>
+        <input class="mx-2 bg-[#706F6F] accent-pink-500" id = "property" type="checkbox" checked={ch1} onChange={onChkBox}/>
         <div class="text-white font-bold mx-2">속성 : </div>
         <div>
-          <select class="bg-gray-700 text-white rounded" onChange={onChangeHanlder} value={Content}>
+          <select class="bg-[#706F6F] text-white rounded" onChange={onChangeHanlder} value={Content}>
             {Object.keys(detailType).map((type) => (
               <option key={type}>{type}</option>
             ))}
           </select>
-          <select class="bg-gray-700 text-white rounded" onChange={onChangeType} value={type}>
+          <select class="bg-[#706F6F] text-white rounded" onChange={onChangeType} value={type}>
             {Object.keys(detailType[Content]).map((ty) => (
               <option key={ty}>{ty}</option>
             ))}
           </select>
-          <div>{detailType[Content][type]}</div>
+          <div class="text-white">{detailType[Content][type]}</div>
         </div>
       </div>
 
       <div class="flex">
-        <input class="m-2" id = "duration" type="checkbox" checked={ch2} onChange={onChkBox}/>
-        <div class="text-white font-bold mx-8">기한 : </div>
+        <input class="mx-2 my-2 bg-[#706F6F] accent-pink-500" id = "duration" type="checkbox" checked={ch2} onChange={onChkBox}/>
+        <div class="text-white font-bold mx-2">기한 : </div>
         <DatePicker 
           locale={ko}
           dateFormat="yyyy년 MM월 dd일"
@@ -94,7 +94,7 @@ export default function DetailSearch() {
           startDate={startDate}
           endDate={endDate}
         />
-        <div class="text-white font-semibold ml-8 mr-2"> 부터 ~ </div>
+        <div class="text-white font-semibold mx-2"> 부터 ~ </div>
         <DatePicker 
           locale={ko}
           dateFormat="yyyy년 MM월 dd일"
@@ -105,21 +105,21 @@ export default function DetailSearch() {
           endDate={endDate}
           minDate={startDate}
         />
-        <div class="text-white font-semibold mx-5"> 까지 </div>
+        <div class="text-white font-semibold mx-2"> 까지 </div>
       </div>
 
       <div class="flex">
-        <input class="m-2" id = "manager" type="checkbox" checked={ch3} onChange={onChkBox}/>
+        <input class="mx-2 my-2 bg-[#706F6F] accent-pink-500" id = "manager" type="checkbox" checked={ch3} onChange={onChkBox}/>
         <div class="text-white font-bold mx-2">담당자 : </div>
-        <input type="string" class="bg-gray-700 text-white rounded border" value={people} onChange={chgPeople}/>
+        <input type="string" class="bg-[#706F6F] h-[22px] p-2 text-white rounded border" value={people} onChange={chgPeople}/>
       </div>
 
       <div class="flex">
-        <input class="m-2 border" id = "quantity" type="checkbox" checked={ch4} onChange={onChkBox}/>
+        <input class="mx-2 my-2 border bg-[#706F6F] accent-pink-500" id = "quantity" type="checkbox" checked={ch4} onChange={onChkBox}/>
         <div class="text-white font-bold mx-2">{'수량 : '}</div>
-        <input class="m-2 border bg-gray-700 text-white rounded" type="number" value={minCnt} onChange={chgMinCnt}/>
+        <input class="mx-2 my-2 border bg-[#706F6F] text-white rounded h-[22px] p-2" type="number" value={minCnt} onChange={chgMinCnt}/>
         <div class="text-white font-bold mx-2">이상 ~ </div>
-        <input class="m-2 border bg-gray-700 text-white rounded" type="number" value={maxCnt} onChange={chgMaxCnt}/>
+        <input class="mx-2 my-2 border bg-[#706F6F] text-white rounded h-[22px] p-2" type="number" value={maxCnt} onChange={chgMaxCnt}/>
         <div class="text-white font-bold mx-2">이하</div>
       </div>
     </div>

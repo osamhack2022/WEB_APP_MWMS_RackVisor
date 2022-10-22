@@ -122,7 +122,7 @@ function Posts({ posting, total, setPosting }) {
         </tbody>
       </table>
       <Button
-        class="text-[#5AB0AD] font-poppins font-semibold ml-3 mb-3"
+        class="text-[#5AB0AD] font-semibold ml-3 mb-3"
         handleClick={() => {
           setPlus(true);
           setPlusContent("");

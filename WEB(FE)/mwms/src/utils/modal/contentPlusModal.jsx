@@ -56,10 +56,10 @@ export default function ContentPlusModal({open, setOpen, title, setTitle, conten
                   </Dialog.Title>
                   <div className="flex-1">
                     <div>
-                      <input value={title} onChange={setTitle} className="inline-flex justify-center text-sm text-gray-200 border bg-gray-700 w-[420px] m-1" placeholder='제목'/>
+                      <input value={title} onChange={setTitle} className="inline-flex justify-center text-sm text-gray-100 border bg-[#706F6F] rounded-md w-[420px] h-[40px] m-1 my-5 p-3" placeholder='제목'/>
                     </div>
                     <div>
-                      <textarea value={content} onChange={setContent} className="inline-flex justify-center text-sm text-gray-200 border bg-gray-700 w-[420px] h-[200px] m-1" placeholder='내용'></textarea>
+                      <textarea value={content} onChange={setContent} className="inline-flex justify-center text-sm text-gray-100 border bg-[#706F6F] rounded-md w-[420px] h-[200px] m-1 p-3" placeholder='내용'></textarea>
                     </div>
                   </div>
                 </div>

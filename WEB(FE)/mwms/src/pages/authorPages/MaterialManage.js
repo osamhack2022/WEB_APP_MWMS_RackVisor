@@ -111,9 +111,9 @@ function MaterialManage() {
                         setBoxSelec("")}}>뒤로가기</button>
                       <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec}/>
                       </>)
-                    : (<>
-                      <span class="m-2 p-2 font-bold">위치 기반 물자 관리</span> <br/> 
-                      <select onChange={onSelHouse} value={selHouse}>
+                    : (<div class="my-6">
+                      <span class="m-2 p-2 font-bold text-white">위치 기반 물자 관리</span> <br/> 
+                      <select class="bg-gray-700 text-white mx-6 my-4" onChange={onSelHouse} value={selHouse}>
                         <option value={""} key={"none"}>
                           없음
                         </option>
@@ -126,7 +126,7 @@ function MaterialManage() {
                       {houList.map((hou) => (
                         visual[hou.id] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={hou.name} setClick={testClick}/>
                       ))}
-                    </>)
+                    </div>)
                     }
                   </div>
                 }

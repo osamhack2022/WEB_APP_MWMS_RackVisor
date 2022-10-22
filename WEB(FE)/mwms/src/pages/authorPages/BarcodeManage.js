@@ -194,7 +194,7 @@ function BarcodeManage() {
   ]
 
   return (
-    <div>
+    <div class="bg-[#323232]">
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
@@ -211,55 +211,55 @@ function BarcodeManage() {
         )
         }
         </div>
-        <div class ="flex flex-auto border">
-          <div class="flex-auto border">
+        <div class ="flex flex-auto mb-5 px-5">
+          <div class="flex-auto ">
             {/* <input class="border" onChange={(e) => setText(e.target.value)}/>
             <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
               <br/> */}
               <div className="flex">
-                <div>사이즈 입력 {'(cm 단위)'} : </div>
-                <input type="number" value={size} onChange={handleSize} className="border"/>
+                <div class="text-white">사이즈 입력 {'(cm 단위)'} : </div>
+                <input type="number" value={size} onChange={handleSize} className="border bg-[#706f6f] p-2 mx-2 text-white h-[22px]"/>
               </div>
-              <div className="flex">
-                <div>개수 입력 : </div>
-                <input type="number" value={count} onChange={handleCount} className="border"/>
+              <div className="flex my-3">
+                <div class="text-white" >개수 입력 : </div>
+                <input type="number" value={count} onChange={handleCount} className="border bg-[#706f6f] p-2 mx-2 text-white h-[22px]"/>
               </div>
               { tabType == "material" ? 
               <>
-              <div className="flex">
-                <input type="checkbox" value={showName} onChange={() => setShowName(!showName)} className="border"/>
-                <div>이름 출력</div>
+              <div className="flex my-3">
+                <input type="checkbox" value={showName} onChange={() => setShowName(!showName)} className="border bg-[#706f6f] p-2 mx-2"/>
+                <div class="text-white">이름 출력</div>
               </div>
-              <div className="flex">
-                <input type="checkbox" value={showDue} onChange={() => setShowDue(!showDue)} className="border"/>
-                <div>유통기한 출력</div>
+              <div className="flex my-3">
+                <input type="checkbox" value={showDue} onChange={() => setShowDue(!showDue)} className="border bg-[#706f6f] p-2 mx-2"/>
+                <div class="text-white">유통기한 출력</div>
               </div>
-              <div className="flex">
-                <input type="checkbox" value={showManager} onChange={() => setShowManager(!showManager)} className="border"/>
-                <div>담당자 출력</div>
+              <div className="flex my-3">
+                <input type="checkbox" value={showManager} onChange={() => setShowManager(!showManager)} className="border bg-[#706f6f] p-2 mx-2"/>
+                <div class="text-white">담당자 출력</div>
               </div>
               </> :
               ""
               }
-              <div className="flex">
-                <input type="checkbox" value={showLocation} onChange={() => setShowLocation(!showLocation)} className="border"/>
-                <div>위치 출력</div>
+              <div className="flex my-3">
+                <input type="checkbox" value={showLocation} onChange={() => setShowLocation(!showLocation)} className="border bg-[#706f6f] p-2 mx-2"/>
+                <div class="text-white">위치 출력</div>
               </div>
               {imageUrl ? (
               <>
-              <div>
-                <img src={imageUrl} alt="img" style={{width:"100px", height:"100px"}} className="border"/>
+              <div class="text-white my-3">
+                <img src={imageUrl} alt="img" style={{width:"100px", height:"100px"}} className="border bg-[#706f6f] p-2 mx-2"/>
                 {tabType == "material" && showName && <div className="flex">휴지</div>}
                 {tabType == "material" && showDue && <div className="flex">2022-10-27</div>}
                 {tabType == "material" && showManager && <div className="flex">홍길동</div>}
                 {showLocation && <div className="flex">2종창고 - A 캐비넷</div>}
               </div>
-              <a href={imageUrl} download>QR 코드 다운로드</a>
-              <div className="hidden">  
+              <a class="text-[#5AB0AD] ml-3 mb-3" href={imageUrl} download>QR 코드 다운로드</a>
+              <div className="hidden text-white my-3">  
                 <div ref={printR} className= {cname}>
                   {printArr.map(() => (
                     <div className="">
-                      <img src={imageUrl} alt="img" style={{width: convert, height: convert}} className="border flex"/>
+                      <img src={imageUrl} alt="img" style={{width: convert, height: convert}} className="border flex bg-[#706f6f] p-2 mx-2"/>
                       {tabType == "material" && showName && <div className="flex">휴지</div>}
                       {tabType == "material" && showDue && <div className="flex">2022-10-27</div>}
                       {tabType == "material" && showManager && <div className="flex">홍길동</div>}
@@ -270,7 +270,7 @@ function BarcodeManage() {
               </div>
             </>) : null}
             <ReactToPrint
-              trigger={() => <button>프린트하기</button>}
+              trigger={() => <button class="text-[#5AB0AD] font-semibold ml-3 mb-3">프린트하기</button>}
               content={() => printR.current}
             />
           </div>
