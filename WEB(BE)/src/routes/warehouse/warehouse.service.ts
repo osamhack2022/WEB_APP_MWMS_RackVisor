@@ -51,7 +51,18 @@ export async function readWarehousesOnUnit(storedUnitId: number) {
       warehouseImageBinary: true,
     },
   });
-  return warehouses;
+
+  const returnWarehouses = [];
+
+  for (const warehouse of warehouses) {
+    returnWarehouses.push({
+      ...warehouse,
+      imgBase64: warehouse?.warehouseImageBinary?.toString('base64'),
+      warehouseImageBinary: undefined,
+    });
+  }
+
+  return returnWarehouses;
 }
 
 export async function updateItemlist(
