@@ -9,9 +9,6 @@ import 'package:myapp/view/serachResult_page.dart';
 import 'package:myapp/view/unit_page.dart';
 
 import 'stroage/**strorage_main_page.dart';
-//import 'package:myapp/view/front_page.dart';
-//import 'package:myapp/view/login_page.dart';
-//import 'package:myapp/view/registar_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: kDarkTheme,
-      home: LoginPage(),
+      home: UnitPage(),
       initialRoute: "/",
       getPages: [
         GetPage(name: "/loginPage", page: () => LoginPage()),

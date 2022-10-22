@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/model/unit_page_model.dart';
 
+import '../utils/constants.dart';
+
 class UnitCell extends StatelessWidget {
   const UnitCell(this.unitModel, {super.key});
   @required
@@ -31,6 +33,7 @@ class UnitCell extends StatelessWidget {
                   softWrap: true,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
+                    color: kDarkSecondaryColor,
                     fontSize: 20.0, 
                     fontWeight: FontWeight.w500
                     ),

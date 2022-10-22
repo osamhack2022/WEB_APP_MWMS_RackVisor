@@ -1,10 +1,9 @@
-import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:myapp/utils/global_colors.dart';
-import '../model/login_model.dart';
-import '../services/login_service.dart';
 import '../utils/constants.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,27 +14,39 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  TextEditingController militarySerialNumberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   String message = ''; 
 
+  Future logingUser(String militarySerialNumber, password) async {
+    try{
+    http.Response response = await http.post(
+      Uri.parse('https://211.37.150.202:80/api/users/login'), 
+      headers: {
+        "Content-Type": "application/json"},
+    body: jsonEncode {()
+      "militarySerialNumber": militarySerialNumber,
+      "password": password
+      });
 
-  LoginModel? loginModel;
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
+      if(response.statusCode == 200) {
+        return Get.toNamed('/unitPage');
+      } else {
+        throw Exception('Failed to load post');
+      }
+      
+    } catch(e) {
+      print(e.toString());
+    }
   }
 
+  
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(896, 414));
     return Scaffold(
 
-      body: SafeArea(
-        child: Form(
+      body: Form(
           key: _formKey,
           child: SingleChildScrollView(
             child: Column(children: [
@@ -82,23 +93,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: Padding(
                     // 입력값 왼쪽 띄우기
                     padding: const EdgeInsets.only(left: 20.0),
-
                     child: TextFormField(
-                      
                       style: const TextStyle(color: Color(0xFF373737)),
-                      controller: emailController,
-                      onSaved: (input) => loginModel?.militarySerialNumber = input!,
-
-                      validator: (value) {
-                        if(value!.isEmpty) {
-                          return '군번을 입력하세요';
-                        }
-                        return null;
-                      },
-
+                      controller: militarySerialNumberController,
 
                       decoration: const InputDecoration(
+                        hintStyle: TextStyle(color: Colors.white),
                         border: InputBorder.none,
+                        
                         hintText: '군번을 입력하세요',
                       ),
                     ),
@@ -122,18 +124,13 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextFormField(
                       style: const TextStyle(color: Color(0xFF373737)),
-                      onSaved: (input) => loginModel?.password = input!,
+                      
                       controller: passwordController,
-                      validator: (value) {
-                        if(value!.isEmpty) {
-                          return '군번을 입력하세요';
-                        }
-                        return null;
-                      },
 
                       // 비밀번호 숨기기
                       obscureText: true,
                       decoration: const InputDecoration(
+                        hintStyle: TextStyle(color: Colors.white),
                         border: InputBorder.none,
                         hintText: '비밀번호를 입력하세요',
                       ),
@@ -146,10 +143,9 @@ class _LoginPageState extends State<LoginPage> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: GestureDetector(
-                  onTap: () async { 
-                    logingUser(emailController.text.toString(), passwordController.text.toString());
-                  },
+                child: InkWell(
+                  onTap: () => logingUser(militarySerialNumberController.text.toString(), passwordController.text.toString()),
+                  
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
@@ -185,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
             ]),
           ),
         ),
-      ),
+      
     );
 
 

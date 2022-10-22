@@ -68,6 +68,8 @@ dependencies:
   #carousel_slider
   carousel_slider: ^4.1.1
   
+  modal_progress_hud_nsn: ^0.3.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

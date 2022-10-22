@@ -9,13 +9,15 @@ class UnitService {
     try {
       final response = await http
           .get(uri);
+          List<UnitModel> list = parsePhotos(response.body);
+        return list;
 
-      if (response.statusCode == 201) {
+      /*if (response.statusCode == 201) {
         List<UnitModel> list = parsePhotos(response.body);
         return list;
       } else {
         throw Exception("Error");
-      }
+      }*/
     } catch (e) {
       throw Exception(e.toString());
     }
