@@ -24,14 +24,14 @@ export default function UserDropDown({milClass, name}) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute w-40 rounded-md shadow-lg bg-black-gradient ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute rounded-md shadow-lg bg-black-gradient">
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
                 <a
                   href="#"
                   className={classNames(
-                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium' : 'text-gray-200',
+                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium rounded-md' : 'text-gray-200',
                     'block px-4 py-2 text-sm font-medium'
                   )}
                 >
@@ -44,7 +44,7 @@ export default function UserDropDown({milClass, name}) {
                 <Link
                   to="/logout"
                   className={classNames(
-                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium' : 'text-gray-200 font-medium',
+                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium rounded-md' : 'text-gray-200 font-medium',
                     'block px-4 py-2 text-sm'
                   )}
                 >

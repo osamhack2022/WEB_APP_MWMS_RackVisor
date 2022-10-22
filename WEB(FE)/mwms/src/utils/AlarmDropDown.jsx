@@ -30,7 +30,7 @@ export default function AlarmDropDown() {
               {({ active }) => (
                 <div
                   className={classNames(
-                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium' : 'text-gray-200',
+                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium rounded-md' : 'text-gray-200',
                     'block px-4 py-2 text-sm font-medium'
                   )}
                 >
@@ -42,7 +42,7 @@ export default function AlarmDropDown() {
               {({ active }) => (
                 <div
                   className={classNames(
-                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium' : 'text-gray-200 font-medium',
+                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium rounded-md' : 'text-gray-200 font-medium',
                     'block px-4 py-2 text-sm'
                   )}
                 >
