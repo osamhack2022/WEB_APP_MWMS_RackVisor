@@ -23,10 +23,10 @@ import { axiosGet } from '../../api'
 
 
 function MaterialManage() {
-  const auth =useAuth();
+  const auth = useAuth();
   const navigate = useNavigate();
   const [houList, setHouList] = useState([]);
-  const [selHouse, setSelHouse] = useState("");
+  const [selHouse, setSelHouse] = useState({ id : -1, name : ""});
   const [visual, setVisual] = useState({});
   const [cabSelec, setCabSelec] = useState("");
   const [boxSelec, setBoxSelec] = useState("");
@@ -48,6 +48,7 @@ function MaterialManage() {
         visualJ[da.id] = false;
       })
       setVisual(visualJ);
+      setHouList(data);
     } catch (error) {
       alert("Error on feching house");
     }
@@ -59,12 +60,13 @@ function MaterialManage() {
       //navigate("/");
     }
 
-    //fetchHouseList();
+    fetchHouseList();
   }, []);
 
   const onSelHouse = (e) => {
     setSelHouse(houList.find((hou) => (hou.id == e.currentTarget.value)));
-
+    auth.houseSelect(houList.find((hou) => (hou.id == e.currentTarget.value)));
+    
     let viCopy = visual;
     viCopy[selHouse.id] = false;
     viCopy[e.currentTarget.value] = true;
@@ -124,7 +126,7 @@ function MaterialManage() {
                         ))}
                       </select>
                       {houList.map((hou) => (
-                        visual[hou.id] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={hou.name} setClick={testClick}/>
+                        visual[hou.id] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={selHouse} setClick={testClick}/>
                       ))}
                     </div>)
                     }

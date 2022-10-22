@@ -49,7 +49,7 @@ function Posts({ posting, total, setPosting }) {
         id : Number(e.target.id)
       }
 
-      await axiosDel("/posts/deletePost", deleteItem);
+      await axiosDel("/posts/delete-post", deleteItem);
       setPosting(total.filter(post => post.id != e.target.id));
     } catch (e) {
 

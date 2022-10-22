@@ -73,51 +73,21 @@ export default class WarehouseGridLayout extends React.PureComponent {
  
 
   createDoorElement(el) {
-    const removeStyle = {
-      position: "absolute",
-      right: "2px",
-      top: 0,
-      cursor: "pointer",
-      fontSize: "30px",
-      color: "white"
-    };
     const i = el.i;
     const iid = el.iid;
     return (
       <div key={i} data-grid={el} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}}>
         <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="white"></EditableText>
-        <span
-          className="remove"
-          style={removeStyle}
-          onClick={this.onRemoveDoor.bind(this, i)}
-        >
-          x
-        </span>
       </div>
     );
   }
 
   createCabinetElement(el) {
-    const removeStyle = {
-      position: "absolute",
-      right: "2px",
-      top: 0,
-      cursor: "pointer", 
-      fontSize: "30px",
-      color: "white"
-    };
     const i = el.i;
     const iid = el.iid;
     return (
       <div key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
         <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="white"></EditableText>
-        <span
-          className="remove"
-          style={removeStyle}
-          onClick={this.onRemoveCabinet.bind(this, i)}
-        >
-          x
-        </span>
       </div>
     );
   }
@@ -141,13 +111,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
     return (
       <div key={i} data-grid={el} style={{backgroundColor: "#F9C38A", alignItems:"center", justifyContent:"center"}}>
         <EditableText value={i} iid={iid} handleChange={this.onNewName.bind(this, iid)}></EditableText>
-        <span
-          className="remove"
-          style={removeStyle}
-          onClick={this.onRemoveBox.bind(this, i)}
-        >
-          x
-        </span>
       </div>
     );
   }
@@ -243,37 +206,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
     await axiosPut("/warehouses/update-itemlist/" + (this.state.currHouse.id).toString(), {
       itemlist : JSON.stringify(cpyItem)
     })
-
-    //update rack
-    // const rackInServer = await axiosGet("/racks/racks-in-warehouse/" + (this.state.currHouse.id).toString());
-    // let newUpdate = [];
-    // let nameUpdate = [];
-
-    // rackInServer.map((rack) => {
-    //   this.state.items.filter((item) => (item.iid == rack.id)).map((item) => {
-        
-    //   });
-    // })
-
-    // [{"w":2,"h":1,"x":0,"y":0,"i":"door0","moved":false,"static":false},
-    // {"w":4,"h":4,"x":4,"y":4,"i":"Cabinet0","moved":false,"static":false},
-    // {"w":4,"h":4,"x":8,"y":8,"i":"Cabinet1","moved":false,"static":false},
-    // {"w":4,"h":4,"x":0,"y":1,"i":"Cabinet2","moved":false,"static":false}]
-    
-    // [{"type":"door","i":"door0","x":0,"y":0,"w":2,"h":1,"iid":1},
-    // {"type":"cabinet","i":"Cabinet0","x":4,"y":4,"w":4,"h":4,"iid":2},
-    // {"type":"cabinet","i":"Cabinet1","x":8,"y":8,"w":4,"h":4,"iid":3},
-    // {"type":"cabinet","i":"Cabinet2","x":0,"y":0,"w":4,"h":4,"iid":4}]
-    
-    // this.state.items.filter((item) => (item.type == "cabinet")).map(async (item) => {
-    //   let newRack = {
-    //     name : item.name,
-    //     storedWarehouseId : Number(this.state.currHouse.id)
-    //   }
-    //   const response = await axiosPost("/rack/", newRack);
-    //   newRack.id = response.id;
-    //   rackList.push(newRack);
-    // });
 
     alert("저장되었습니다")
 
@@ -372,34 +304,6 @@ export default class WarehouseGridLayout extends React.PureComponent {
   }
 
   render() {
-
-    // // TODO: 서버로부터 unit(부대) 불러와야함...
-    // let unitName = this.props.unitSelected;
-    // if(unitName === null)
-    // {
-    //   return (<div></div>);
-    // }
-    // let lsUnitList=  getLSUnitList();
-    // let lsUnit = lsUnitList.find( (e) => (e.name === unitName) );
-    // let hl;
-    // if(lsUnit === undefined)
-    // {
-    //   hl = []
-    // }
-    // else
-    // {
-    //   hl = lsUnit.houseList;
-    // }
-    // let house = hl.find( (e) => (e.name === this.props.houseSelected) );
-    // if(house === undefined)
-    // {
-    //   return (<div></div>);
-    // }
-    
-    // house.gridLayout = this.state.layout;
-    // house.items = this.state.items;
-    // house.iidCnt = this.state.iid;
-
     return (
       <div className="w-[100rem]"style={{transform: 'scale(0.7) translate(0%, -20%)'}}>
         <div>
