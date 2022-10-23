@@ -7,15 +7,15 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:myapp/controller/searchbar_controller.dart';
-import 'package:myapp/model/warehouse_model.dart';
 import 'package:myapp/utils/global_colors.dart';
-
+import '../model/front_model.dart';
 import '../model/notice_screen_model.dart';
+import '../model/warehouse_model.dart';
 import '../screen/noticeCell.dart';
-import '../services/Image_service.dart';
+
 import '../services/Image_service.dart';
 import '../services/front_service.dart';
-import 'front_page.dart';
+
 
  
 class FirstPage extends StatefulWidget {
@@ -29,33 +29,65 @@ class FirstPage extends StatefulWidget {
 class _FirstPage extends State<FirstPage> {
  
   SearchBarController searchBarController = Get.put(SearchBarController());
-  int countme = 0;
+  
  
   final ImagePicker _picker = ImagePicker();
   XFile? _imageFile;
+  Future<WarehouseImage>? warehousesImage;
 
 
-
-
-  /*FutureBuilder<List<WarehouseImage>> (
-      future: ImageService.ImageService2(),
-      builder: (context, snapshot) {
-        return solve(snapshot);
-      };
-  )
-
-  solve(AsyncSnapshot<List<WarehouseImage>> snapshot) {
-
-  }*/
+  @override
+	void initstate() {
+		super.initState();
+		warehousesImage = ImageService.ImageService2();
+	}
 
   
+  @override
+	void dispose() {
+		super.dispose();
+		build(context);
+	}
+
+
+  
+
+
+
+  Future uploadImage() async {
+    final uri = Uri.parse("https://211.37.150.202:80/api/warehouses/house-image/2");
+    var request = http.MultipartRequest('POST',uri);
+    //request.fields['name'] = nameController.text;
+    var pic = await http.MultipartFile.fromPath("images", _imageFile!.path);
+    request.files.add(pic);
+    var response = await request.send();
+
+    if(response.statusCode == 200) {
+
+    }
+  }
+
+ getImage() {
+        return FutureBuilder<WarehouseImage>  (
+          future: warehousesImage,
+          builder: (context, snapshot)  {
+            if (snapshot.hasData) {
+              return Image.network(snapshot.data!.imgBase64);
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            } return const CircularProgressIndicator();
+          }
+        );
+      }
+
+
 
 
   noticeGridview(AsyncSnapshot<List<NoticeScreenModel>> snapshot) {
       return Padding(
           padding: const EdgeInsets.all(5.0),
-          child: GridView.count(
-            crossAxisCount: 1,
+          child: ListView(
+            
             children: snapshot.data!
             .map(
               (noticeScreenModel) {
@@ -81,6 +113,7 @@ class _FirstPage extends State<FirstPage> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(896, 414));
   
+   
 
     
     
@@ -93,6 +126,7 @@ class _FirstPage extends State<FirstPage> {
       );
       setState(() {
         _imageFile = pickedFile!;
+        uploadImage();
       });
     }
 
@@ -146,9 +180,7 @@ class _FirstPage extends State<FirstPage> {
    
 
 
- 
- 
- 
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [ 
@@ -164,16 +196,11 @@ class _FirstPage extends State<FirstPage> {
                   Stack(
                     children: [
                       
-                      if (_imageFile == null) 
+                       
                       Center(
-                        child: Image.asset("images/no_image.png",
-                      width: double.maxFinite,
-                      fit: BoxFit.cover,) 
-                      )
-                      else Image.network(_imageFile!.path,
-                      width: double.maxFinite,
-                      fit: BoxFit.cover,),
-                     
+                        child: getImage(),
+                      ),
+                      
 
                   Positioned(
                 bottom: 50.0.h,
@@ -218,12 +245,10 @@ class _FirstPage extends State<FirstPage> {
                   mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
 
-                  Column(
-                    children: [
+         
                       Container(
                         height: 150.h,
                         padding: EdgeInsets.only(top: 20.w,left: 40.w,right: 40.w),
-                        child: Flexible(
                         child: FutureBuilder<List<NoticeScreenModel>>(
                         future: FrontService.noticeScreenService(),
                         builder: (context, snapshot) {
@@ -235,10 +260,10 @@ class _FirstPage extends State<FirstPage> {
                           }
                           return circularProgress();
                         }
-                )     ),
+                )  
                       ),
-                    ],
-                  ),
+             
+                 
 
 
 

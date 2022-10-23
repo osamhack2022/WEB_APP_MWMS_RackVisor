@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 
@@ -56,7 +57,7 @@ class _TwicePageState extends State<TwicePage> {
       if (event.code != null) {
         if (event.code!.contains(widget.eventKeyword)) {
           this.controller!.dispose();
-          Navigator.pop(context, event.code);
+          Get.toNamed("/searchPage", arguments:event.code);
         }
       }
     });

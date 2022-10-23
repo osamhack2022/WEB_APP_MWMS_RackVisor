@@ -1,11 +1,11 @@
 class WarehouseImage {
-  final String warehouseImageBinary;
+  final String imgBase64;
 
-  WarehouseImage({required this.warehouseImageBinary});
+  WarehouseImage({required this.imgBase64});
 
   factory WarehouseImage.fromJson(Map<String, dynamic> json) {
     return WarehouseImage(
-      warehouseImageBinary: json['warehouseImageBinary'] as String,
+      imgBase64: json['imgBase64'] as String,
     );
   }
 }

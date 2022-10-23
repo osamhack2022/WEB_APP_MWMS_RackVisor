@@ -5,10 +5,10 @@ import '../model/front_model.dart';
 import '../model/notice_screen_model.dart';
 
 class FrontService{
-FrontModel frontModel = Get.put(FrontModel());
+  static FrontModel frontModel = Get.put(FrontModel());
 
   static Future<List<NoticeScreenModel>> noticeScreenService() async {
-      var uri = Uri.parse("https://211.37.150.202:80/api/posts/unit-posts/1");
+      var uri = await Uri.parse("https://211.37.150.202:80/api/posts/unit-posts/${frontModel.selectId}");
 
         final response = await http.get(
         (uri), 

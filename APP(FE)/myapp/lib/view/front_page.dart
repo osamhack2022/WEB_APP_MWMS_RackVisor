@@ -11,6 +11,8 @@ import 'package:myapp/view/third_page.dart';
 import 'package:myapp/view/twice_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 import '../model/notice_screen_model.dart';
+import '../model/warehouse_model.dart';
+import '../services/Image_service.dart';
 import 'First_page.dart';
 
 
@@ -27,8 +29,6 @@ class _FrontPage extends State<FrontPage> {
   BottomNavigationBarController c = Get.put(BottomNavigationBarController());
   FrontModel frontModel = Get.put(FrontModel());
 
-
-
   @override
   void initState() {
     super.initState();
@@ -40,28 +40,37 @@ class _FrontPage extends State<FrontPage> {
     c.dispose();
     super.dispose();
   }
+  
 
-  //login model에 데이터 저장.
-  var value = Get.arguments;
-
-  //부대이름 업데이트
-  updateName() {
+  @override
+  didChangeDependencies() {
+    var value = Get.arguments;
+    super.didChangeDependencies();
+    //부대이름 업데이트
+    updateName() {
     frontModel.unitNameUpdate(value.name.toString());
+    } 
+
+    //부대 아이디 업데이트
+    unitNoticeUpdate() {
+      frontModel.unitSelectIdUpdate(value.id);
+    }
+    updateName();
+    unitNoticeUpdate();
   }
 
-  //부대 아이디 업데이트
-  unitNoticeUpdate() {
-    frontModel.unitSelectIdUpdate(value.id);
-  }
+ 
+
+
 
   
 
   @override
   Widget build(BuildContext context) {
-
-
-    updateName();
-    unitNoticeUpdate();
+ 
+    
+    
+    
     //updateImage();
 
 

@@ -70,51 +70,6 @@ class SearchBarController extends GetxController {
     );
   }
 
-  searchResultList(UnitModel unitModel) {
-    return Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Container(
-          width: 200,
-          height: 100,
-          child: Center(
-            child: Text(unitModel.name),
-          ),
-        ),
-    );
-  }
-
-
-
-  searchResultListView(AsyncSnapshot<List<UnitModel>> snapshot) {
-    return Expanded(
-      child: GestureDetector(
-          child: GridView.count(
-            crossAxisCount: 1,
-            childAspectRatio: 1.0,
-            mainAxisSpacing: 4.0,
-            crossAxisSpacing: 4.0,
-            children: snapshot.data!
-            .map(
-          (unitModel) {
-            return GestureDetector(
-              child: GridTile(
-                child: searchResultList(unitModel),
-                
-              ),
-              onTap: () {
-                //itemClick(snapshot);
-              },
-            );
-          },
-            ).toList(),
-        ),
-      ), 
-      );
-  }
-
 
 
 }

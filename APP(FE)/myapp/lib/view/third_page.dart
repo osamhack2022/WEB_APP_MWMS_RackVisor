@@ -13,6 +13,63 @@ class ThirdPage extends StatelessWidget {
 
     StorageController s = Get.put(StorageController());
 
+
+/*
+  StorageListView(AsyncSnapshot<List<NoticeScreenModel>> snapshot) {
+      return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: ListView(
+            
+            children: snapshot.data!
+            .map(
+              (noticeScreenModel) {
+                return GridTile(
+                    child: NoticeCell(noticeScreenModel),
+                );
+              },
+            ).toList(),
+          ),
+      );
+    }
+
+
+  circularProgress() {
+    return const Center(child: CircularProgressIndicator());
+  }
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return Obx(
       () => RefreshIndicator(
         key: refreshKey,

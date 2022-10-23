@@ -84,7 +84,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                                     ])
                               ],
                             ),
-                            // trailing: Text('More Info'),
+                            
                           ),
                         ),
                       );

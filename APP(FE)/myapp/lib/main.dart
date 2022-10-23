@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:myapp/utils/constants.dart';
-import 'package:myapp/view/examplePage.dart';
 import 'package:myapp/view/front_page.dart';
 import 'package:myapp/view/login_page.dart';
 import 'package:myapp/view/notice_page.dart';
@@ -34,7 +33,6 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/frontPage", page: () => const FrontPage()),
         GetPage(name: "/unitPage", page: () => UnitPage()),
         GetPage(name: "/searchPage", page: () => SearchResultPage()),
-        
       ]
     );
   }
