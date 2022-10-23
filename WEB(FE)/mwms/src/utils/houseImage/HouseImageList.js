@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { axiosGet, axiosPut } from '../../api';
 import { useAuth } from '../../routes/AuthContext';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+
 
 function HouseImageList() {
   const [imageList, setImageList] = useState([]);
@@ -83,12 +85,14 @@ function HouseImageList() {
   };
 
   return (
-    <div class="text-center">
+    <div class="text-center bg-[#323232] w-[42rem] rounded-2xl pb-3">
       <div class="flex justify-center">
-        <p class="flex text-center text-white">
-          {(currHouse > 0) && (<button onClick={onLeft}>{'<-'}</button>)}
+        <p class="flex text-center text-white  mt-3 mb-5">
+          <ChevronLeftIcon className={"mt-1 rounded-full h-5 w-5 hover:text-[#7A5EA6] " + ((currHouse > 0 ? ("") : (" text-[#323232]")))} aria-hidden="true" onClick={onLeft}/>
+          <div class="ml-2 mr-2 text-xl">
           {imageSrc && imageSrc.name}
-          {(currHouse < houseList.length - 1) && (<button onClick={onRight}>{'->'}</button>)}
+          </div>
+          <ChevronRightIcon className={"mt-1 rounded-full h-5 w-5 hover:text-[#7A5EA6] " + (((houseList.length - 1 > currHouse) ? ("") : (" text-[#323232]")))} aria-hidden="true" onClick={onRight}/>
         </p>
       </div>
       {   
@@ -96,7 +100,8 @@ function HouseImageList() {
         <div className="preview flex justify-center">
           {imageSrc && imageSrc.img != "" && <img src={`data:image;base64,${imageSrc.img}`} alt="preview-img" />}
         </div>
-        <input type="file" onChange={(e) => {
+        <label class=" text-[#5AB0AD] pb-3 mb-3 hover:text-white" for="file-input">도면 업로드</label>
+        <input class="hidden" id="file-input" type="file" onChange={(e) => {
           setFileInput(e.target.files[0]);
           encodeFileToBase64(e.target.files[0]);
         }} files={fileInput} />

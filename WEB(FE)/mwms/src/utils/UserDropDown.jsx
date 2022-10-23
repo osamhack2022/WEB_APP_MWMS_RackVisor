@@ -26,7 +26,7 @@ export default function UserDropDown({milClass, name}) {
       >
         <Menu.Items className="absolute rounded-md shadow-lg bg-black-gradient">
           <div className="py-1">
-            <Menu.Item>
+            {/* <Menu.Item>
               {({ active }) => (
                 <a
                   href="#"
@@ -38,7 +38,7 @@ export default function UserDropDown({milClass, name}) {
                   개인정보
                 </a>
               )}
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item>
               {({ active }) => (
                 <Link

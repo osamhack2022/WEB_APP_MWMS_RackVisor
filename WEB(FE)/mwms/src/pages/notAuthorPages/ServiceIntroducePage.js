@@ -1,14 +1,20 @@
 import React from 'react'
 import Header from '../../components/Header';
 import Footer from "../../components/Footercopy";
+import styles from "../../style.js";
+import Title from "../../utils/with_description";
 
 function ServiceIntroducePage() {
   return (
     <body>
-      <div>
-        <Header/>
-        <h1 class="border-b-2 m-6 ml-40 pl-8 pb-6 font-bold text-4xl">서비스 소개</h1>  
-        <div class="m-6 ml-40">
+      <div class="bg-primary-900 w-full overflow-hidden">
+        <div class={`bg-primary-900 ${styles.flexCenter}`}>
+          <div class={`${styles.boxWidth}`}>
+            <Header />
+          </div>
+        </div>
+        <Title title={"서비스 소개"} />
+        <div class="flex justify-center m-6 ml-40 text-white">
           <ul>
             <li>부대 창고별 모양에 맞춘 저장 공간 뷰어 & 에디터</li>
             <li>입 • 출고 기능</li>

@@ -13,9 +13,9 @@ import styles from '../../style';
 function AuthorMainPage() {
   let auth = useAuth();
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
   const korList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
   const valList = ['name', 'type', 'specipicType', 'amount', 'comment', 'expirationDate']
-  const data = [{'name' : '휴지', 'type' : '2종', 'specipicType' : '기타물자류', 'amount':1000, 'comment':'좋음', 'expirationDate':'2022/10/27'}]
   useEffect(() => {
     if(!auth.unitSelected) {
       alert("부대를 선택해주세요");
@@ -43,7 +43,7 @@ function AuthorMainPage() {
             <div class="absolute pointer-events-none z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" /> */}
             {/* gradient end */}
             <div class="justify-center flex">
-            <div class="text-white text-xl font-semibold ml-11 mt-6">공지 사항 🔔</div>
+            <div class="text-white text-xl font-semibold ml-8 mt-6">공지 사항 🔔</div>
             </div>
             <div class="flex justify-center">
             <Forum/>
@@ -51,12 +51,12 @@ function AuthorMainPage() {
           </div>
 
           <div class="">
-            <div class="flex justify-center">
-              <div class="text-white text-xl font-semibold mt-5">간단 검색 🔍</div>
-            </div>
-            <div class="px-4 py-3 w-[40rem] drop-shadow-xl">
+            <div class="w-[40rem] drop-shadow-xl">
+              <div class="px-4 py-3 flex justify-center">
+                <div class="text-white text-xl font-semibold mt-3">간단 검색 🔍</div>
+              </div>
               <div class="bg-[#323232] rounded-2xl">
-                <SearchInput />
+                <SearchInput setData={setData}/>
                 <SimpleSearch defaultList={valList} data={data} korList={korList}/>
               </div>
             </div>
@@ -64,9 +64,13 @@ function AuthorMainPage() {
           
           <div class = "flex-1">
           <div class="flex justify-center">
-            <div class="text-white text-xl font-semibold ml-11 m-3">창고 배치도 🖽</div>
+            <div>
+              <div class="flex justify-center">
+                <div class="text-white text-xl font-semibold ml-6 m-3">창고 배치도 🖽</div>
+              </div>
+              <HouseImageList/>
             </div>
-            <HouseImageList/>
+          </div>
           </div>
         </div>
       </div>

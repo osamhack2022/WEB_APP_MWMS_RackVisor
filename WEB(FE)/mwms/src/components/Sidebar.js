@@ -7,15 +7,15 @@ const sidebarButtonList = [
   {link : "/houseSelect", name : "창고 관리", index:2,},
   {link : "/history", name : "히스토리", index:3,},
   {link : "/barcode", name : "QR코드 관리", index:4,},
-  {link : "/static", name : "통계", index:5,},
-  {link : "/", name : "< 부대 선택", index:5,},
+  // {link : "/static", name : "통계", index:5,},
+  {link : "/", name : `<-${' '}돌아가기`, index:5,},
 ]
 
 function Sidebar() {
 
 
   return (
-    <aside class="w-48 h-screen" aria-label="Sidebar">
+    <aside class="w-48 max-h-max h-screen" aria-label="Sidebar">
       <div class="overflow-y-auto h-full py-4 px-3 bg-[#202020] drop-shadow-2xl">
           <ul class="space-y-2">
             {

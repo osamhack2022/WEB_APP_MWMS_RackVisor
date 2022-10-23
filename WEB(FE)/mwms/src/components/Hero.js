@@ -20,9 +20,9 @@ function Hero()
                 국방물자관리체계 <br class="sm:block hidden" />{" "}
               <span class="text-gradient">Military Warehouse</span>{" "}
             </h1>
-            <div className="ss:flex hidden md:mr-2 mr-0">
+            {/* <div className="ss:flex hidden md:mr-2 mr-0">
               <GetStarted />
-            </div>
+            </div> */}
           </div>
   
           <h1 class="font-poppins font-semibold ss:text-[56px] text-[48px] text-white ss:leading-[100.8px] leading-[75px] w-full">

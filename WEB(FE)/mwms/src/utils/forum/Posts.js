@@ -123,7 +123,7 @@ function Posts({ posting, total, setPosting }) {
       </table>
       <div class="content-end">
         <Button
-        class="text-[#5AB0AD] font-semibold ml-3 mb-3"
+        class="text-[#5AB0AD] font-semibold ml-3 mb-3 hover:text-white"
         handleClick={() => {
           setPlus(true);
           setPlusContent("");

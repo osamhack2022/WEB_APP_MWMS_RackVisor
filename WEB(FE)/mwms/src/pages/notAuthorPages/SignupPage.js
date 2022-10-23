@@ -4,6 +4,9 @@ import Footer from "../../components/Footercopy";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosPost } from '../../api';
+import styles from "../../style.js";
+import Title from '../../utils/with_description';
+import Button from '../../components/Button';
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -73,52 +76,63 @@ function SignupPage() {
   };
 
   return (
-    <div>
+    <div class="bg-primary-900 w-full overflow-hidden">
       <body>
-        <Header/>
-        <h1 class="border-b-2 m-6 ml-40 pl-8 pb-6 font-bold text-4xl">회원가입</h1>  
+        <div class={`bg-primary-900 mb-4 ${styles.flexCenter}`}>
+          <div class={`${styles.boxWidth}`}>
+            <Header />
+          </div>
+        </div>
+        <Title title={"회원가입"}/>
         <section>
           <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="w-full max-w-[600px] bg-[#0c161f] rounded mx-auto p-8 px-8 sm:max-w-md">
               <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h2 class="text-xl font-bold leading-tight text-center tracking-tight text-white md:text-xl">
+                  국방물자관리체계
+                  <br />
+                  <span class="text-gradient">Military Warehouse </span>
+                  <br />
+                  Management System
+                </h2>
                 <div class="space-y-4 md:space-y-6">
                   <div>
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이름</label>
+                    <label for="name" class="block mb-2 text-sm font-medium text-white">이름</label>
                     <input 
                       type="text" 
                       name="name" 
                       id="name" 
-                      class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                      class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
                       placeholder="이름"
                       value={name} 
                       onChange={onNameHandler}
                     />
                   </div>
                   <div>
-                    <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">군번</label>
+                    <label for="id" class="block mb-2 text-sm font-medium text-white">군번</label>
                     <input 
                       type="text" 
                       name="id" 
                       id="id" 
-                      class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                      class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
                       placeholder="군번"
                       value={id} 
                       onChange={onIdHandler}
                     />
                   </div>
                   <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
+                    <label for="password" class="block mb-2 text-sm font-medium text-white">비밀번호</label>
                     <input 
                       type="password" 
                       name="password" 
                       id="password" 
                       placeholder="비밀번호" 
-                      class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                      class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
                       value={pw}
                       onChange={onPasswordHandler}/>
                   </div>
                   <div>
-                    <label for="milClass" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">계급</label>
+                    <label for="milClass" class="block mb-2 text-sm font-medium text-white">계급</label>
                     <div>
                       <select
                         id="location"
@@ -136,41 +150,39 @@ function SignupPage() {
                     </div>
                   </div>
                   <div>
-                    <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">소속</label>
+                    <label for="id" class="block mb-2 text-sm font-medium text-white">소속</label>
                     <input 
                       type="text" 
                       name="id" 
                       id="id" 
-                      class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                      class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
                       placeholder="소속"
                       value={unit} 
                       onChange={onUnit}
                     />
                   </div>
                   <div>
-                    <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">직책</label>
+                    <label for="id" class="block mb-2 text-sm font-medium text-white">직책</label>
                     <input 
                       type="text" 
                       name="id" 
                       id="id" 
-                      class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                      class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
                       placeholder="직책"  
                       value={pos} 
                       onChange={onPos}
                     />
                   </div>
-                  <button 
-                    class="w-full border-2 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  <Button 
+                    class="w-full text-primary-900 bg-secondary hover:bg-cyan-600 font-semibold rounded-lg px-5 py-2.5 text-center"
                     onClick={register}
-                  >
-                    회원가입
-                  </button>
-                  <button 
-                    class="w-full border-2 text-black bg-white-600 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    text={"회원가입"}
+                  />
+                  <Button 
+                    class="w-full text-white bg-gray-600 hover:bg-black font-semibold rounded-lg px-5 py-2.5 text-center"
                     onClick={cancel}
-                  >
-                    취소
-                  </button>
+                    text={"취소"}
+                  />
                 </div>
               </div>
             </div>

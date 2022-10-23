@@ -90,6 +90,11 @@ function LoginPage() {
                     id="password"
                     placeholder="비밀번호"
                     class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700"
+                    onKeyDown={(e) => {
+                      if (e.key == "Enter") {
+                        login();
+                      }
+                    }}
                     value={pw}
                     onChange={onPasswordHandler}
                   />

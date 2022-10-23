@@ -28,33 +28,25 @@ export default function ForumList({ postsPerPage, totalPosts, paginate, currentP
   }
 
   const moveLeft = () => {
-    if (currentPage != 1) {
-      paginate(currentPage - 1);
+    console.log(currentPage)
+    if (Number(currentPage) > 1) {
+      paginate(Number(currentPage) - 1);
+    } else {
+      paginate(1);
     }
   }
 
   const moveRight = () => {
-    if (currentPage != pageNumbers.length) {
-      paginate(currentPage + 1);
+    console.log(currentPage)
+    if (Number(currentPage) < Number(pageNumbers.length)) {
+      paginate(Number(currentPage) + 1);
+    } else {
+      paginate(pageNumbers.length);
     }
   }
 
   return (
     <div className={`${backgroundColor} px-4 py-3 flex items-center justify-center rounded-br-2xl rounded-bl-2xl sm:px-6`}>
-      <div className="flex-1 flex justify-between sm:hidden">
-        <div
-          onClick={moveLeft}
-          className={`${backgroundColor} relative inline-flex items-center px-4 py-2   text-sm font-medium rounded-md text-white ${hoverBackgroundColor}`}
-        >
-          Previous
-        </div>
-        <div
-          onClick={moveRight}
-          className={`${backgroundColor} ml-3 relative inline-flex items-center px-4 py-2   text-sm font-medium rounded-md text-white ${hoverBackgroundColor}`}
-        >
-          Next
-        </div>
-      </div>
       <div className="hidden justify-center text-center sm:flex-1 sm:flex sm:items-center sm:justify-items-center">
         <div>
           <div className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">

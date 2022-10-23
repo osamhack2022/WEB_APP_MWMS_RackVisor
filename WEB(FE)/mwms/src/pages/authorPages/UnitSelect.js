@@ -59,28 +59,28 @@ function UnitSelect() {
   }, []);
 
   return (
-    <div class="bg-primary-900 w-full">
-      <div class={`bg-primary-900 ${styles.flexCenter}`}>
+    <div class="bg-[#202020] w-full">
+      <div class={`bg-[#323232] ${styles.flexCenter}`}>
         <div class={`${styles.boxWidth}`}>
           <AuthorHeader />
         </div>
       </div>
-
+      <div class="mt-5"></div>
       <Title title={"부대 선택"} />
       <div class={`h-screen mx-48 px-32 `}>
-        <div class="grid grid-cols-4 gap-4 px-4 py-3">
+        <div class="grid grid-cols-4 gap-4 mt-5">
           {unitList.map((un) => (
             <Button
               id={un.id}
               text={un.name}
               handleClick={onSelectUnit}
-              class="hover:border-green-500 py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-blue-gradient border-2 border-white rounded-[10px]"
+              class="hover:border-[#7A5EA6] hover:bg-[#7A5EA6] hover:text-white py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-[#706F6F] rounded-[10px]"
             />
           ))}
           <Button
             text={"+ 부대 추가"}
             handleClick={addUnit}
-            class="hover:border-green-500 py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-blue-gradient border-2 border-white rounded-[10px]"
+            class="hover:border-[#7A5EA6] hover:bg-[#7A5EA6] hover:text-white py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-[#706F6F] rounded-[10px]"
           />
         </div>
       </div>

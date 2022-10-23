@@ -5,10 +5,10 @@ import close from '../assets/close.svg'
 import menu from '../assets/menu.svg'
 
 const loginButtonList = [
-  {link : "/", name : "홈", index: 0,},
-  {link : "/introduction", name : "서비스 소개", index:1,},
-  {link : "/signup", name : "회원가입", index:2,},
-  {link : "/login", name : "로그인", index:3,},
+  {link : "/", name : "홈", index: 0, outSide : false},
+  {link : "https://github.com/osamhack2022-v2/WEB_APP_MWMS_RackVisor", name : "서비스 소개", index:1, outSide : true},
+  {link : "/signup", name : "회원가입", index:2, outSide : false},
+  {link : "/login", name : "로그인", index:3, outSide : false},
 ]
 
 function Header() {
@@ -26,9 +26,13 @@ function Header() {
         
         <ul class="list-none sm:flex hidden justify-end items-center flex-1">
           {loginButtonList.map(button => (
-            <li>
+            button.outSide ? 
+            (<li>
+              <a href={button.link} class={`font-poppins font-normal cursor-pointer text-[16px] ${button.index === loginButtonList.length - 1? 'mr-0' : 'mr-10'} text-white hover:text-blue-300`} target="_blank" >{button.name}</a>
+            </li>) : 
+            (<li>
               <Link to={button.link} class={`font-poppins font-normal cursor-pointer text-[16px] ${button.index === loginButtonList.length - 1? 'mr-0' : 'mr-10'} text-white hover:text-blue-300`}>{button.name}</Link>
-            </li>
+            </li>)
           ))}
         </ul>
 

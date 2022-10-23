@@ -3,7 +3,7 @@ import DetailSearch from "./DetailSearch";
 import { SearchIcon } from "@heroicons/react/solid";
 import { axiosPost } from "../../api";
 
-function SearchInput({ search, setSearch }) {
+function SearchInput({ setData }) {
   const [name, setName] = useState();
   const [detail, setDetail] = useState(false);
   const [advancedSearchReqBody, setAdvancedSearchReqBody] = useState({});
@@ -13,12 +13,19 @@ function SearchInput({ search, setSearch }) {
   };
 
   const onSearch = async () => {
+    setData([]);
     const reqBody = {
       ...advancedSearchReqBody,
       name,
     };
     console.log(reqBody);
-    const result = await axiosPost("/stocks/advanced-search", reqBody);
+    let result = await axiosPost("/stocks/advanced-search", reqBody);
+    result.map((re) => {
+      if (re.expirationDate) {
+        re.expirationDate = re.expirationDate.substr(0, 10);
+      }
+    });
+    setData(result);
     console.log(result);
   };
 
@@ -58,13 +65,13 @@ function SearchInput({ search, setSearch }) {
         </div>
       </div>
       {!detail && (
-        <button class="ml-4 mt-2 text-[#5AB0AD] font-poppins font-semibold mb-4" onClick={() => setDetail(true)}>
+        <button class="ml-4 mt-4 text-[#5AB0AD] font-poppins font-semibold mb-4 hover:text-white" onClick={() => setDetail(true)}>
           상세검색
         </button>
       )}
       {detail && (
         <button
-          class="ml-4 mt-2 text-white font-poppins rounded-lg p-1 font-semibold bg-[#5AB0AD] mb-4"
+          class="ml-4 mt-4 text-white font-poppins rounded-lg p-1 font-semibold bg-[#5AB0AD] mb-4"
           onClick={() => setDetail(false)}>
           상세검색
         </button>

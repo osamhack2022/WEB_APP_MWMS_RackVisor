@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import logoImg from '../images/Image.jpeg'
+import logoImg from '../images/logo.png'
 import { useAuth } from '../routes/AuthContext';
 import AlarmDropDown from '../utils/AlarmDropDown';
 import DropDown from '../utils/DropDown';
