@@ -7,7 +7,6 @@ import 'package:myapp/controller/bottom_nav_controller.dart';
 import 'package:myapp/model/front_model.dart';
 import 'package:myapp/utils/global_colors.dart';
 import 'package:myapp/view/Fourth_page.dart';
-import 'package:myapp/view/third_page.dart';
 import 'package:myapp/view/twice_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 import '../model/notice_screen_model.dart';
@@ -17,6 +16,7 @@ import 'First_page.dart';
 
 
 class FrontPage extends StatefulWidget {
+
   const FrontPage({
     Key? key,
   }) : super(key: key);
@@ -28,6 +28,11 @@ class FrontPage extends StatefulWidget {
 class _FrontPage extends State<FrontPage> {
   BottomNavigationBarController c = Get.put(BottomNavigationBarController());
   FrontModel frontModel = Get.put(FrontModel());
+
+  var value = Get.arguments;
+
+
+
 
   @override
   void initState() {
@@ -44,7 +49,6 @@ class _FrontPage extends State<FrontPage> {
 
   @override
   didChangeDependencies() {
-    var value = Get.arguments;
     super.didChangeDependencies();
     //부대이름 업데이트
     updateName() {
@@ -57,6 +61,7 @@ class _FrontPage extends State<FrontPage> {
     }
     updateName();
     unitNoticeUpdate();
+
   }
 
  
@@ -72,7 +77,6 @@ class _FrontPage extends State<FrontPage> {
     
     
     //updateImage();
-
 
     return Scaffold(
       extendBody: true, 
@@ -92,13 +96,7 @@ class _FrontPage extends State<FrontPage> {
               selectedIcon: const Icon(CupertinoIcons.qrcode_viewfinder),
               selectedColor: GlobalColors.backgroundColor,
               title: const Text('스캐너')),
-          AnimatedBarItems(
-              icon: const Icon(
-                CupertinoIcons.rectangle_stack,
-              ),
-              selectedIcon: const Icon(CupertinoIcons.rectangle_stack),
-              selectedColor: GlobalColors.backgroundColor,
-              title: const Text('창고관리')),
+ 
           AnimatedBarItems(
               icon: const Icon(CupertinoIcons.person),
               selectedIcon: const Icon(CupertinoIcons.person),
@@ -123,7 +121,6 @@ class _FrontPage extends State<FrontPage> {
         children: [
           FirstPage(),
           TwicePage(eventKeyword: '실험'),
-          ThirdPage(),
           FourthPage()
         ],
       )

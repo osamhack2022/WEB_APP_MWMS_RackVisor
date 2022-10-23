@@ -5,13 +5,7 @@ class FrontModel extends GetxController{
   String unitName = '';
   String unitPhotos = '';
   int selectId = 0;
-  var unitarg;
 
-  //부대 알규먼트 업데이트
-  unitargUpdate(var index) {
-    unitarg = index;
-    update();
-  }
 
   //부대 이름 업데이트
   unitNameUpdate(var index) {
@@ -30,7 +24,7 @@ class FrontModel extends GetxController{
     selectId = index;
     update();
   }
-
+  
 
 
 }

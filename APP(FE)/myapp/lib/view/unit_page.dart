@@ -62,7 +62,11 @@ class UnitPageState extends State<UnitPage> {
               child: Text("추가하기",
               ),
               onPressed: () {
-
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(builder: (context) {
+                    
+                //   })
+                // )
               },
             ),
 
@@ -92,7 +96,7 @@ class UnitPageState extends State<UnitPage> {
   });
 
     cellClick(UnitModel unitModel) {
-    Get.offNamed("/frontPage", arguments: unitModel);
+    Get.toNamed("/frontPage", arguments: unitModel);
   }
 
     gridview(AsyncSnapshot<List<UnitModel>> snapshot) {

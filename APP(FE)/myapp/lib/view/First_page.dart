@@ -113,8 +113,28 @@ class _FirstPage extends State<FirstPage> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(896, 414));
   
-   
 
+      
+  FrontModel frontModel = Get.put(FrontModel());
+
+  List<NoticeScreenModel> parseNotice(String responsebody) {
+      final parsed = json.decode(responsebody).cast<Map<String, dynamic>>();
+      return parsed.map<NoticeScreenModel>((json) => NoticeScreenModel.fromJson(json)).toList();
+  }
+
+  
+   Future<List<NoticeScreenModel>> noticeScreenService() async {
+      var uri = await Uri.parse("https://211.37.150.202:80/api/posts/unit-posts/${frontModel.selectId}");
+
+        final response = await http.get(
+        (uri), 
+        headers: {"Content-Type": "application/json"},);
+
+        List<NoticeScreenModel> list = parseNotice(response.body);
+
+        return list;
+  }
+      
     
     
     //부대 이미지 변경 카메라 클릭시 발생
@@ -250,7 +270,7 @@ class _FirstPage extends State<FirstPage> {
                         height: 150.h,
                         padding: EdgeInsets.only(top: 20.w,left: 40.w,right: 40.w),
                         child: FutureBuilder<List<NoticeScreenModel>>(
-                        future: FrontService.noticeScreenService(),
+                        future: noticeScreenService(),
                         builder: (context, snapshot) {
                            if (snapshot.hasError) {
                             return Text('Error ${snapshot.error}');
