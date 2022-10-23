@@ -40,24 +40,24 @@ export async function advancedStockSearchController(
 
 export async function findStocksOnWarehouse(
   request: FastifyRequest<{
-    Params: number;
+    Params: { storedWarehouseId: string };
   }>,
   reply: FastifyReply
 ) {
-  const params = request.params;
-  const stocks = await readStocksOnWarehouse(params);
+  const { storedWarehouseId } = request.params;
+  const stocks = await readStocksOnWarehouse(+storedWarehouseId);
 
   return reply.code(201).send(stocks);
 }
 
 export async function findStocksOnBox(
   request: FastifyRequest<{
-    Params: number;
+    Params: { storedBoxId: string };
   }>,
   reply: FastifyReply
 ) {
-  const params = request.params;
-  const stocks = await readStocksOnBox(params);
+  const { storedBoxId } = request.params;
+  const stocks = await readStocksOnBox(+storedBoxId);
 
   return reply.code(200).send(stocks);
 }
