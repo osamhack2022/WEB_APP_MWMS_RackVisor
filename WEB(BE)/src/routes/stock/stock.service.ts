@@ -52,8 +52,8 @@ export const advancedStockSearchService = async (
       },
       barcode: body.barcode,
       expirationDate: {
-        gte: body.minExpDate && new Date(body.minExpDate),
-        lte: body.maxExpDate && new Date(body.maxExpDate),
+        gte: (body.minExpDate && new Date(body.minExpDate)) || undefined,
+        lte: (body.maxExpDate && new Date(body.maxExpDate)) || undefined,
       },
       storedBoxId: body.storedBoxId,
     },
