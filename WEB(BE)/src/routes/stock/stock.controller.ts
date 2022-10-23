@@ -87,12 +87,12 @@ export async function deleteStocks(
 
 export async function getStocksOnExpirationDate(
   request: FastifyRequest<{
-    Params: { storedWarehouseId: string };
+    Params: { storedUnitId: string };
   }>,
   reply: FastifyReply
 ) {
-  const { storedWarehouseId } = request.params;
-  const stocks = await readStocksOnExpirationDate(+storedWarehouseId);
+  const { storedUnitId } = request.params;
+  const stocks = await readStocksOnExpirationDate(+storedUnitId);
 
   return reply.code(201).send(stocks);
 }

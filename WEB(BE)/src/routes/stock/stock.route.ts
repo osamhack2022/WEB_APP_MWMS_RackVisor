@@ -96,7 +96,7 @@ async function stockRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/by-expiration-date/:storedWarehouseId',
+    '/by-expiration-date/:storedUnitId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {

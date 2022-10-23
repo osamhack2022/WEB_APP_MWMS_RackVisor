@@ -91,7 +91,7 @@ export async function deleteStock(stockId: deleteStockInput) {
   return stock;
 }
 
-export async function readStocksOnExpirationDate(warehouseId: number) {
+export async function readStocksOnExpirationDate(unitId: number) {
   const nowDate = new Date();
   nowDate.setDate(nowDate.getDate() + 7);
 
@@ -99,7 +99,9 @@ export async function readStocksOnExpirationDate(warehouseId: number) {
     where: {
       storedBox: {
         storedRack: {
-          storedWarehouseId: warehouseId,
+          storedWarehouse: {
+            storedUnitId: unitId,
+          },
         },
       },
       expirationDate: {
