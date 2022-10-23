@@ -1,10 +1,13 @@
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:myapp/utils/global_colors.dart';
 import '../utils/constants.dart';
+
 
 class LoginPage extends StatefulWidget {
 
@@ -16,28 +19,37 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController militarySerialNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  String message = ''; 
+  String message = '';
+
+  
 
   Future logingUser(String militarySerialNumber, password) async {
-    try{
-    http.Response response = await http.post(
-      Uri.parse('https://211.37.150.202:80/api/users/login'), 
-      headers: {
-        "Content-Type": "application/json"},
-    body: jsonEncode {()
-      "militarySerialNumber": militarySerialNumber,
-      "password": password
-      });
+    var url = "https://211.37.150.202:80/api/users/login";
+
+    try {
+      Map data = {"militarySerialNumber": militarySerialNumber,
+      "password": password};
+
+      var body = json.encode(data);
+
+      final response = await http.post(
+      Uri.parse(url), 
+      headers: {"Content-Type": "application/json"},
+    body: body);
 
       if(response.statusCode == 200) {
-        return Get.toNamed('/unitPage');
+        setState(() {
+          Get.toNamed("/unitPage");
+        });
+
       } else {
         throw Exception('Failed to load post');
-      }
-      
-    } catch(e) {
-      print(e.toString());
+      }   
+
+    } catch(e){
+      print(e);
     }
+
   }
 
   

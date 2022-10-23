@@ -61,30 +61,35 @@ class UnitPageState extends State<UnitPage> {
       barrierDismissible: false,
       builder: (BuildContext ctx) {
         return AlertDialog(
-          content: Column(children: [
-            Text("부대 추가하기"),
+          content: Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            height: 200,
+            child: Column(children: [
+              const Text("부대 추가하기"),
 
-            //부대이름 추가하기
-            TextFormField(
-              style: const TextStyle(color: Color(0xFF373737)),
+              //부대이름 추가하기
+              TextFormField(
+                style: const TextStyle(color: Color(0xFF373737)),
+                decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: '부대를 입력하세요',
+                hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  
+              ),
 
-              decoration: const InputDecoration(
-              border: InputBorder.none,
-              hintText: '부대를 입력하세요',
-                ),
-            ),
 
+              TextFormField(
+                style: const TextStyle(color: Color(0xFF373737)),
+                decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: '내용을 입력하세요',
+                hintStyle: TextStyle(color: Colors.white),
+                  ),
+              ),
+            ],),
+          ),
 
-            TextFormField(
-              style: const TextStyle(color: Color(0xFF373737)),
-              
-
-              decoration: const InputDecoration(
-              border: InputBorder.none,
-              hintText: '내용을 입력하세요',
-                ),
-            ),
-          ],),
           actions: [
             TextButton(
               child: Text("추가하기"),
@@ -113,9 +118,10 @@ class UnitPageState extends State<UnitPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
         backgroundColor: Colors.white,
         onPressed: () {
-          _showUnitaddDialog;
+          _showUnitaddDialog(context);
         },
       ),
 

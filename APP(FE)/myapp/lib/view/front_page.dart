@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +10,9 @@ import 'package:myapp/view/Fourth_page.dart';
 import 'package:myapp/view/third_page.dart';
 import 'package:myapp/view/twice_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
+import '../model/notice_screen_model.dart';
 import 'First_page.dart';
+
 
 class FrontPage extends StatefulWidget {
   const FrontPage({
@@ -23,10 +27,12 @@ class _FrontPage extends State<FrontPage> {
   BottomNavigationBarController c = Get.put(BottomNavigationBarController());
   FrontModel frontModel = Get.put(FrontModel());
 
+
+
   @override
   void initState() {
     super.initState();
-  
+    //notice_screen_model = noticeScreenService();
   }
 
   @override
@@ -40,13 +46,14 @@ class _FrontPage extends State<FrontPage> {
 
   //부대이름 업데이트
   updateName() {
-    frontModel.unitNameUpdate(value.title.toString());
+    frontModel.unitNameUpdate(value.name.toString());
   }
 
-  //이미지 업데이트
-  /*updateImage() {
-    frontModel.unitPhotosUpdate(value.thumbnailUrl.toString());
-  }*/
+  //부대 아이디 업데이트
+  unitNoticeUpdate() {
+    frontModel.unitSelectIdUpdate(value.id);
+  }
+
   
 
   @override
@@ -54,6 +61,7 @@ class _FrontPage extends State<FrontPage> {
 
 
     updateName();
+    unitNoticeUpdate();
     //updateImage();
 
 

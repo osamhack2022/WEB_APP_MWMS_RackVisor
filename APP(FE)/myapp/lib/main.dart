@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:myapp/utils/constants.dart';
+import 'package:myapp/view/examplePage.dart';
 import 'package:myapp/view/front_page.dart';
 import 'package:myapp/view/login_page.dart';
 import 'package:myapp/view/notice_page.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: kDarkTheme,
-      home: UnitPage(),
+      home: LoginPage(),
       initialRoute: "/",
       getPages: [
         GetPage(name: "/loginPage", page: () => LoginPage()),

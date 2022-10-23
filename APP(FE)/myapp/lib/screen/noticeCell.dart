@@ -1,68 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:myapp/utils/constants.dart';
+import 'package:myapp/model/notice_screen_model.dart';
 import 'package:myapp/utils/global_colors.dart';
+import '../utils/constants.dart';
 
+class NoticeCell extends StatelessWidget {
+  const NoticeCell(this.noticeScreenModel, {super.key});
+  @required
+  final NoticeScreenModel noticeScreenModel;
 
-
-class NoticeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    ScreenUtil.init(context, designSize: const Size(896, 414));
-
     return Container(
-        padding: const EdgeInsets.all(25),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.white
-          ),
-        child: Column(
-          children: [
-    
-            // 공지사항틀 제목
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
-                Text("공지사항",
-                style: kTextBlackTitle,
-                ),
-
-                //공지사항 3개 screen에 more
-                const Icon(Icons.more_horiz,
-                color: Color(0xFF373737),
-                ),
-              ],
-            ),
-
-            const SizedBox(
-              height: 20,
-            ),
-    
-  
-            NoticeScreenTile(
-              icon: Icons.favorite,
-              noticeName: "제목 1",
-              subtitle: "1내용입니다",
-            ),
-            NoticeScreenTile(
-              icon: Icons.favorite,
-              noticeName: "제목 2",
-              subtitle: "2내용입니다",
-            ),
-            NoticeScreenTile(
-              icon: Icons.favorite,
-              noticeName: "제목 3",
-              subtitle: "3내용입니다",
-            ),
-    
-          ],
-        ),
+      child: NoticeScreenTile(
+        icon: Icons.favorite,
+        noticeName: noticeScreenModel.title,
+        subtitle: noticeScreenModel.content,
+      ),
     );
   }
-
 }
-
 
 
 class NoticeScreenTile extends StatelessWidget {
@@ -81,9 +37,9 @@ class NoticeScreenTile extends StatelessWidget {
     Widget build(BuildContext context) {
       return Container(
         child: Padding(
-      padding: EdgeInsets.only(bottom: 12.0),
+      padding: const EdgeInsets.only(bottom: 12.0),
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
@@ -106,13 +62,14 @@ class NoticeScreenTile extends StatelessWidget {
                     ),
                 ),
 
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
 
                 Column(
                   children: [
                     //title 게시물 제목입니다.
                     Text(noticeName,
-                    style: TextStyle(
+                    style: const TextStyle(
+                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),),
@@ -120,8 +77,8 @@ class NoticeScreenTile extends StatelessWidget {
                     SizedBox(height: 5),
                     //subtitle 게시물 내용
                     Text(subtitle,
-                    style: TextStyle(
-                      color: GlobalColors.brightGrey,
+                    style: const TextStyle(
+                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
@@ -130,10 +87,6 @@ class NoticeScreenTile extends StatelessWidget {
                 ),      
               ],
             ),
-            // noticeScreen 점 3개 more
-                Icon(Icons.more_horiz),
-
-
           ],
         )
       ),

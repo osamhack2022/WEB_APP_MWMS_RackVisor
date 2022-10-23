@@ -49,7 +49,7 @@ class _TwicePageState extends State<TwicePage> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((event) {
-      print('QRCheckScreen_onQRViewCreated.listen : result=${event.code}');
+      
 
       //스캔된 QR 코드에 특정 키워드가 들어있다면
       //QR 스캔을 정지하고 이 화면을 닫으면서 QR 결과값을 보내주도록한다.

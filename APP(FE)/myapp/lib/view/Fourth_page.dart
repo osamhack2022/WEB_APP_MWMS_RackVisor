@@ -62,29 +62,17 @@ class FourthPage extends StatelessWidget {
           ),
           SizedBox(height: kSpacingUnit.w * 2),
           Text(
-            frontModel.unitName,
+            // 이름 들어올자리
+            "이름",
             style: kTitleTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 0.5),
+          // 선택 부대 들어올 자리
           Text(
-            'nicolasadams@gmail.com',
+            frontModel.unitName,
             style: kCaptionTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 2),
-          Container(
-            height: kSpacingUnit.w * 4,
-            width: kSpacingUnit.w * 20,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
-              color: Theme.of(context).accentColor,
-            ),
-            child: Center(
-              child: Text(
-                'Upgrade to PRO',
-                style: kButtonTextStyle,
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -95,10 +83,6 @@ class FourthPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(width: kSpacingUnit.w * 3),
-        Icon(
-          Icons.arrow_left,
-          size: ScreenUtil().setSp(kSpacingUnit.w * 3),
-        ),
         profileInfo,
         SizedBox(width: kSpacingUnit.w * 3),
       ],
@@ -115,30 +99,24 @@ class FourthPage extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.user_shield,
-                        text: 'Privacy',
-                      ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.history,
-                        text: 'Purchase History',
-                      ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.question_circle,
-                        text: 'Help & Support',
-                      ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.cog,
-                        text: 'Settings',
-                      ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.user_plus,
-                        text: 'Invite a Friend',
-                      ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.alternate_sign_out,
-                        text: 'Logout',
-                        hasNavigation: false,
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text("서비스 소개"),
+
+                              Text('국방 물자 관리 체계를 통해서 군 부대의 여러 물품과 자재들을 /n 효과적으로 보관 및 관리를 할 수 있습니다.'),
+
+                              Text('부대 창고별 모양에 맞춘 저장 공간 뷰어 & 에디터 /n 입 • 출고 기능 /n 히스토리 기능검색 /n 기능유통기한 알림 /n 기능QR코드 제작 기능')
+
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),

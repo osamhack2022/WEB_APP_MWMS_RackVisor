@@ -1,17 +1,26 @@
  
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:myapp/controller/searchbar_controller.dart';
-import 'package:myapp/screen/noticeScreen.dart';
+import 'package:myapp/model/warehouse_model.dart';
 import 'package:myapp/utils/global_colors.dart';
+
+import '../model/notice_screen_model.dart';
+import '../screen/noticeCell.dart';
+import '../services/Image_service.dart';
+import '../services/Image_service.dart';
+import '../services/front_service.dart';
+import 'front_page.dart';
 
  
 class FirstPage extends StatefulWidget {
+ FirstPage() : super();
 
- 
   @override
   State<FirstPage> createState() => _FirstPage();
 }
@@ -20,16 +29,59 @@ class FirstPage extends StatefulWidget {
 class _FirstPage extends State<FirstPage> {
  
   SearchBarController searchBarController = Get.put(SearchBarController());
- 
+  int countme = 0;
  
   final ImagePicker _picker = ImagePicker();
   XFile? _imageFile;
- 
+
+
+
+
+  /*FutureBuilder<List<WarehouseImage>> (
+      future: ImageService.ImageService2(),
+      builder: (context, snapshot) {
+        return solve(snapshot);
+      };
+  )
+
+  solve(AsyncSnapshot<List<WarehouseImage>> snapshot) {
+
+  }*/
+
+  
+
+
+  noticeGridview(AsyncSnapshot<List<NoticeScreenModel>> snapshot) {
+      return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: GridView.count(
+            crossAxisCount: 1,
+            children: snapshot.data!
+            .map(
+              (noticeScreenModel) {
+                return GridTile(
+                    child: NoticeCell(noticeScreenModel),
+                );
+              },
+            ).toList(),
+          ),
+      );
+    }
+
+
+  circularProgress() {
+    return const Center(child: CircularProgressIndicator());
+  }
+
+  
+
  
  
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(896, 414));
+  
+
     
     
     //부대 이미지 변경 카메라 클릭시 발생
@@ -145,28 +197,64 @@ class _FirstPage extends State<FirstPage> {
 
           //메인 밑
           SliverToBoxAdapter(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+            child: Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
 
-                SizedBox(
-                  height: 20.h,
-                ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
 
-                Container(
-                  padding: EdgeInsets.only(left: 40.w,right: 40.w),
-                  height: 30.h,
-                  child: searchBarController.searchBar(),
-                ),
-              
-              Container(
-                padding: EdgeInsets.all(40.w),
-                child: NoticeScreen(),
-              )
-              // 공지사항
-              
+                  Container(
+                    padding: EdgeInsets.only(left: 40.w,right: 40.w),
+                    height: 30.h,
+                    child: searchBarController.searchBar(),
+                  ),
+
+                  Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+
+                  Column(
+                    children: [
+                      Container(
+                        height: 150.h,
+                        padding: EdgeInsets.only(top: 20.w,left: 40.w,right: 40.w),
+                        child: Flexible(
+                        child: FutureBuilder<List<NoticeScreenModel>>(
+                        future: FrontService.noticeScreenService(),
+                        builder: (context, snapshot) {
+                           if (snapshot.hasError) {
+                            return Text('Error ${snapshot.error}');
+                          }
+                          if (snapshot.hasData) {
+                            return noticeGridview(snapshot);
+                          }
+                          return circularProgress();
+                        }
+                )     ),
+                      ),
+                    ],
+                  ),
+
+
+
+                  
+                ]
+      )
+
+                  
+
+
+                
+                
+                
    
-            ]),
+              ]),
+            ),
           )
         ],
       ),
