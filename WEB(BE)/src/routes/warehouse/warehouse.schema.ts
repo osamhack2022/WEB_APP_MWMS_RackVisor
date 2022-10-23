@@ -18,7 +18,7 @@ const warehouseResponseSchema = z.object({
   layout: z.string(),
   itemlist: z.string(),
   warehouseImageBinary: z.string().optional(),
-  imgBase64: z.string(),
+  imgBase64: z.string().optional(),
 });
 
 const updateWarehouseLayoutSchema = z.object({
