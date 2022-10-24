@@ -7,12 +7,12 @@ export default function ManageList({korList, defaultList, data, setSelect}) {
     });
   }
   return (
-    <div className="flex flex-col mt-12">
+    <div className="flex flex-col mt-12 px-6">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead>
+              <thead class="bg-[#706F6F]">
                 <tr>
                   {korList.map((de) => (
                     <th
@@ -27,7 +27,7 @@ export default function ManageList({korList, defaultList, data, setSelect}) {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class=" bg-[#323232]">
                 {data.map((person, personIdx) => (
                   <tr key={personIdx} className={personIdx}>
                     {defaultList.map((de, deIndex) => (

@@ -14,15 +14,23 @@ function SearchInput({ setData }) {
 
   const onSearch = async () => {
     setData([]);
-    const reqBody = {
+    let reqBody = {
       ...advancedSearchReqBody,
       name,
     };
+
+    if (reqBody.name == '') {
+      delete reqBody.name;
+    }
+
     console.log(reqBody);
     let result = await axiosPost("/stocks/advanced-search", reqBody);
     result.map((re) => {
       if (re.expirationDate) {
         re.expirationDate = re.expirationDate.substr(0, 10);
+      }
+      if (re.type) {
+        re.type = re.type.substr(5) == "NULL" ? "없음" : re.type.substr(5) + "종";
       }
     });
     setData(result);

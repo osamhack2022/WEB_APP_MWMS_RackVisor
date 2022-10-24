@@ -35,22 +35,35 @@ function AuthorMainPage() {
       <div class={`${styles.flexStart}`}>  
         <Sidebar/>
 
-        <div class="flex-1 grid grid-cols-2 gap-4 ">
-          <div class={`md:my-0 my-10 relative mt-6`}>
-            {/* gradient start */}
-            {/* <div class="absolute pointer-events-none z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
-            <div class="absolute pointer-events-none z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" />
-            <div class="absolute pointer-events-none z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" /> */}
-            {/* gradient end */}
-            <div class="justify-center flex">
-            <div class="text-white text-xl font-semibold ml-8 mt-6">공지 사항 🔔</div>
+        <div class="flex-1 flex">
+          <div class="flex-1">
+            <div class={`md:my-0 my-10 relative mt-6`}>
+              {/* gradient start */}
+              {/* <div class="absolute pointer-events-none z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
+              <div class="absolute pointer-events-none z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" />
+              <div class="absolute pointer-events-none z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" /> */}
+              {/* gradient end */}
+              <div class="justify-center flex">
+              <div class="text-white text-xl font-semibold ml-8 mt-6">공지 사항 🔔</div>
+              </div>
+              <div class="flex justify-center">
+              <Forum/>
+              </div>
             </div>
-            <div class="flex justify-center">
-            <Forum/>
+
+            <div class = "mt-[40px] flex-1">
+              <div class="flex justify-center">
+                <div>
+                  <div class="flex justify-center">
+                    <div class="text-white text-xl font-semibold ml-6 m-3">창고 배치도 🖽</div>
+                  </div>
+                  <HouseImageList/>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="">
+          <div class="flex-1">
             <div class="w-[40rem] drop-shadow-xl">
               <div class="px-4 py-3 flex justify-center">
                 <div class="text-white text-xl font-semibold mt-3">간단 검색 🔍</div>
@@ -62,16 +75,8 @@ function AuthorMainPage() {
             </div>
           </div>
           
-          <div class = "flex-1">
-          <div class="flex justify-center">
-            <div>
-              <div class="flex justify-center">
-                <div class="text-white text-xl font-semibold ml-6 m-3">창고 배치도 🖽</div>
-              </div>
-              <HouseImageList/>
-            </div>
-          </div>
-          </div>
+
+
         </div>
       </div>
 

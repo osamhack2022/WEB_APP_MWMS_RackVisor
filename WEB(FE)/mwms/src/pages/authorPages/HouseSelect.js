@@ -8,6 +8,7 @@ import { useAuth } from '../../routes/AuthContext'
 import Sidebar from '../../components/Sidebar'
 import { getLSUnitList } from './UnitSelect'
 import { axiosGet, axiosPost } from '../../api'
+import Title from '../../utils/with_description'
 
 function HouseSelect() {
   let auth = useAuth();
@@ -67,20 +68,20 @@ function HouseSelect() {
   }
   
   return (
-    <div>
+    <div class="bg-[#202020] w-full">
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
         <div class="flex-1">
-          <div> 창고 관리 </div>
-          <div class="grid grid-cols-4 gap-4 px-4 py-3 border-gray-200 bg-gray">
+          <div class="sm:flex hidden border-b-2 border-[#706F6F] mb-7 mx-16 pb-6 font-bold text-2xl text-white mt-5">창고 선택</div>
+          <div class="grid grid-cols-4 gap-4 px-4 py-3 border-gray-200 bg-gray mx-16">
             {houseList.map((h) => (
-              <button id={h.id} onClick={onSelectHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div id = {h.id} onClick={onSelectHouse}  class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{h.name}</div>
+              <button id={h.id} onClick={onSelectHouse} class="hover:border-[#7A5EA6] hover:bg-[#7A5EA6] hover:text-white py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-[#706F6F] rounded-[10px]">
+                <div id = {h.id} onClick={onSelectHouse} >{h.name}</div>
               </button> 
             ))}
-            <button onClick={addHouse} class="items-center justify-center block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <span class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">+ 창고 추가</span>
+            <button onClick={addHouse} class="hover:border-[#7A5EA6] hover:bg-[#7A5EA6] hover:text-white py-4 px-6 font-poppins font-bold text-[24px] text-primary-900 bg-[#706F6F] rounded-[10px]">
+                <span >+ 창고 추가</span>
             </button> 
           </div>
         </div>

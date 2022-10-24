@@ -53,6 +53,15 @@ function MaterialManage() {
       const response = await axiosGet("/stocks/stocks-in-box/" + (num).toString());
       console.log("RESPONSE : " + JSON.stringify(response));
       if (response) {
+        response.map((re) => {
+          if (re.expirationDate) {
+            re.expirationDate = (re.expirationDate).substr(0, 10);
+          }
+          if (re.type) {
+            re.type = re.type.substr(5) == "NULL" ? "없음" : re.type.substr(5) + "종";
+          }    
+        });
+
         setData(response);
       }
     } catch (error) {
@@ -105,12 +114,16 @@ function MaterialManage() {
     { name: '위치 기반 탐색', value: 'box', current: false },
   ]
 
+  useEffect(() => {
+    setData([]);
+  }, [tabType]);
+
   return (
     <div>
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
-        <div class="flex-1 bg-[#323232]">
+        <div class="flex-1 bg-[#202020]">
           <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div class="flex-1">
               <div class="flex mb-4">
@@ -120,7 +133,7 @@ function MaterialManage() {
                 <MaterialManageModal open={openPlus} setOpen={setOpenPlus} />
               </div>
               <Tabs defaultTabs={defaultTabs} setTabType={setTabType}/>
-              <div>
+              <div class="bg-[#323232] rounded-2xl ">
                 {tabType == "material" && <><SearchInput/></>}
                 {/* {boxSelec ? ( <> {tabType == "box" && <div>창고 : {selHouse.id} - 선반 : {cabSelec} -  박스 : {boxSelec}</div>} </> ) : ("")} */}
                 {tabType == "box" && 
@@ -153,8 +166,8 @@ function MaterialManage() {
                 }
               </div>
             </div>
-            { (boxSelec || tabType == "material") && 
-                (<div class="pt-10">
+            { (tabType == "box" || tabType == "material") && 
+                (<div class="pt-3">
                   <ManageList korList={korList} defaultList={valList} data={data} setSelect={materialHandle}/>
                   <MaterialChangeModal open={materialChangeOpen} setOpen={closeChangeModalClose} materialInfo={material}/>
                 </div>)}

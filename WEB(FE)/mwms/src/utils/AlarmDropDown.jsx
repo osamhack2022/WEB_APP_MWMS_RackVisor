@@ -17,14 +17,34 @@ export default function AlarmDropDown() {
     const response = await axiosGet("/stocks/by-expiration-date/" + (currUnit.id).toString());
     let resultData = [];
     response.map((res) => {
-      let newSentence = "🔔 " + (res.name) + " 사용기한 "+ (res.expirationDate) + " 까지"
+      let newSentence = "🔔 " + (res.name);
+      var now = new Date();
+      var year = now.getFullYear();// 연도
+      var month = now.getMonth()+1;// 월    
+      var day = now.getDate();
+
+      var exYear = (res.expirationDate).substr(0, 10).split("-")[0];
+      var exMonth = (res.expirationDate).substr(0, 10).split("-")[1];
+      var exDay = (res.expirationDate).substr(0, 10).split("-")[2];
+      
+      var endDate=new Date(Number(exYear), Number(exMonth), Number(exDay));
+      var stDate = new Date(year, month, day);
+      var btMs=endDate.getTime()-stDate.getTime();
+      var btDay=btMs/(1000*60*60*24);
+      
+      if (btDay < 0 || (endDate.getTime() < stDate.getTime())) {
+        newSentence += " 사용기한이 지났습니다."
+      } else {
+        newSentence += " " + btDay.toString() + "일 남았습니다."
+      }
+
       resultData.push(newSentence);
     });
     setData(resultData);
   }, []);
 
   useEffect(() => {
-    //fetchAlarm(); -> 이거 여기서 확인해보면 된다
+    fetchAlarm();
   }, []);
 
   return (

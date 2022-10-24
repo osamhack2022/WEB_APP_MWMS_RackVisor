@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const sidebarButtonList = [
   {link : "/main", name : "메인", index: 0,},
-  {link : "/materialManage", name : "물자 관리", index:1,},
   {link : "/houseSelect", name : "창고 관리", index:2,},
+  {link : "/materialManage", name : "물자 관리", index:1,},
   {link : "/history", name : "히스토리", index:3,},
   {link : "/barcode", name : "QR코드 관리", index:4,},
   // {link : "/static", name : "통계", index:5,},

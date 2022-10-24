@@ -95,7 +95,7 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify}) => {
 
   return (
     <div class="">
-      {modify && (<button className="text-[#5AB0AD] font-semibold ml-3 mb-3 w-30 h-10  rounded p-2" onClick={floorAdd}>
+      {modify && (<button className="text-[#5AB0AD] hover:text-white font-semibold ml-3 mb-3 w-30 h-10  rounded p-2" onClick={floorAdd}>
         층 추가
       </button>)}
       <div className="hidden">{rend}</div>
@@ -104,15 +104,15 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify}) => {
           <div class="flex">
             <div>
               <div class={"text-center font-lg " + (modify ? "text-white" : " ")}>{floorList.length - idx} 층</div>
-              <div class="flex justify-center">
+              <div class="flex justify-center ">
                 {floor != [] && floor.map((item) => (
-                  <button value={item.id} id={item.id} onClick={handleBoxSelec} class="w-24 h-12 border bg-[#706F6F] m-1 rounded-lg text-white">
+                  <button value={item.id} id={item.id} onClick={handleBoxSelec} class="w-24 h-12 border bg-[#706F6F] m-1 rounded-lg text-white ">
                     {item.name.split('-')[1]}
                   </button>
                 ))}
               </div>
             </div>
-            {modify && (<button class="text-[#5AB0AD] font-base ml-3 mt-7 mb-3 w-30 h-10  rounded p-2" value={floorList.length - idx} onClick={addItem}>추가하기</button>)}
+            {modify && (<button class="text-[#5AB0AD] font-base ml-3 mt-7 mb-3 w-30 h-10  rounded p-2 hover:text-white " value={floorList.length - idx} onClick={addItem}>추가하기</button>)}
           </div>
         </div>
       ))}

@@ -1,9 +1,9 @@
 export default function SimpleSearch({defaultList, data, korList}) {
   return (
-    <div className="flex flex-col px-2 py-2">
+    <div className="flex flex-col px-2 py-2 ">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden sm:rounded-lg">
+          <div className="drop-shadow-2xl border-[0.5px] border-neutral-700 overflow-hidden sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200 drop-shadow-lg">
               <thead class="bg-[#706F6F] ">
                 <tr>
@@ -17,7 +17,7 @@ export default function SimpleSearch({defaultList, data, korList}) {
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="">
                 {data.map((person, personIdx) => (
                   <tr key={personIdx} className={personIdx}>
                     {defaultList.map((de, deIndex) => (

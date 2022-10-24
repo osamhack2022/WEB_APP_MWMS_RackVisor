@@ -28,13 +28,15 @@ function HouseManage() {
   }
 
   return (
-    <div>
+    <div class="bg-[#202020]">
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
         <div class="flex-1">
-          <button class="absolute top-47 right-5 m-2 p-1 content-end border-2 border-slate-500 rounded-md text-xs" onClick={onToHouseSelect}>{"<"}창고선택</button>
-          <h1 class="border-b-2 m-1 pl-8 pb-4 font-bold text-2xl">{currHouse.name}<br/></h1>
+          <div class="px-6 mt-3">
+            <button class="absolute top-47 right-5 m-2 p-1 content-end rounded-md text-base text-white hover:text-[#7A5EA6]" onClick={onToHouseSelect}>{"<- "} 창고선택</button>
+            <h1 class="border-b-2 m-1 pl-8 pb-4 font-bold text-2xl text-white">{currHouse.name}<br/></h1>
+          </div>
           <div>
             <WarehouseGridLayout unitSelected={currUnit} houseSelected={currHouse}/>
           </div>

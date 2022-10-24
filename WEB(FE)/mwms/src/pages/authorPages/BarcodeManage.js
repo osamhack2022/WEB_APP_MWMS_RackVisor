@@ -194,7 +194,7 @@ function BarcodeManage() {
   ]
 
   return (
-    <div class="bg-[#323232]">
+    <div class="bg-[#202020]">
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>

@@ -62,7 +62,7 @@ function BoxSelect({setBoxSelect, popup}) {
         <button onClick={() => {
           setCabSelec("");  
           setBoxSelec("")}}
-          class={"ml-2 mt-2 " + (popup ? " " : "text-white") }>{'<-'}뒤로가기</button>
+          class={"ml-2 mt-2 " + (popup ? " " : "text-white") }>{'<- '} 뒤로가기</button>
         <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec} cabSelec={cabSelec} modify={false} />
         </>)
       : (<div class="my-6">

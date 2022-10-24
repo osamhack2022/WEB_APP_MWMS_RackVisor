@@ -9,8 +9,8 @@ export default function DetailSearch(props) {
   const { setAdvancedSearchReqBody } = props;
   const [Content, setContent] = useState("없음");
   const [type, setType] = useState("없음");
-  const [minCnt, setMinCnt] = useState(1);
-  const [maxCnt, setMaxCnt] = useState(1);
+  const [minCnt, setMinCnt] = useState();
+  const [maxCnt, setMaxCnt] = useState();
   const [people, setPeople] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -65,7 +65,7 @@ export default function DetailSearch(props) {
     }
 
     setAdvancedSearchReqBody(itemToAdd);
-  }, [startDate, endDate, people, minCnt, maxCnt, setAdvancedSearchReqBody, type, Content]);
+  }, [startDate, endDate, people, minCnt, maxCnt, setAdvancedSearchReqBody, type, Content, ch1, ch2, ch3, ch4]);
 
   const chgPeople = (e) => {
     setPeople(e.currentTarget.value);

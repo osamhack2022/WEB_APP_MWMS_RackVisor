@@ -78,7 +78,7 @@ export default function ExcelExampleFile () {
     	<>
         <button 
           type="button"
-          className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+          className="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-2 py-1 text-base font-medium text-[#5AB0AD] hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
           onClick={() => excelDownload(data)}>예시 다운로드</button>
       </>
     );

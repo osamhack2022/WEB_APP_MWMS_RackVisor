@@ -102,16 +102,19 @@ export default function ExcelModal({open, setOpen}) {
                     </p>
                     <ExcelExampleFile/>
                   </div>
+                  <label 
+                    for = "file-upload"
+                  > </label>
                   <input 
                     accept=".xlsx" 
                     className="my-2 mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-[#706f6f] text-base font-medium text-gray-400 hover:text-gray-300  sm:mt-0 sm:w-auto sm:text-sm"
                     type="file" 
-                    onChange={(e) => inputFile(e.target.files[0])}/>
+                    onChange={(e) => inputFile(e.target.files[0])}
+                    id="file-upload"/>
                   <div class="flex">
-                    
-                    <button class="border text-gray-200 rounded-lg my-2 p-2" onClick={() => setOpen1(true)}>위치 선택하기</button>
+                    <button class="text-[#5AB0AD] hover:text-white my-1 text-sm " onClick={() => setOpen1(true)}>위치 선택하기</button>
                     <LocationSelectModal open={open1} setOpen={setOpen1} setLocation={setLoc}/>
-                    {loc && <div class="text-[#5AB0AD] text-sm ml-5 mt-5">위치 선택됨</div>}
+                    {loc && <div class="text-white ml-5 mt-[4px] text-sm ">{' - '}&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
                   </div>
                     <SimpleSearch defaultList={valList} data={data} korList={korList}/>
                 </div>

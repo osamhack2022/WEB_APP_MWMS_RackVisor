@@ -28,9 +28,7 @@ function HouseImageList() {
       setImageList(newImgList);
       if (newImgList) {
         setImageSrc(newImgList[0]);
-        console.log(JSON.stringify(newImgList[0]));
       }
-      console.log(JSON.stringify(data));
       setHouseList(data);
 
     // } catch (error) {
