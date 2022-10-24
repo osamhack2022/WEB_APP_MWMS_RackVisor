@@ -206,7 +206,7 @@ function BarcodeManage() {
           <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div class="flex-1 mt-5">
               <Tabs setTabType={setTabType} defaultTabs={defaultTabs}/>
-              <div class="bg-[#323232] rounded-xl">
+              <div class="bg-[#323232] rounded-xl mt-2">
               { tabType == "material" ? 
               (<>
                 <SearchInput setData={setData}/>
@@ -220,7 +220,7 @@ function BarcodeManage() {
               </div>
             </div>
             <div class ="flex flex-auto mb-5 px-5 pt-2 px-2 ">
-              <div class="flex-1 mt-6  bg-[#323232] rounded-2xl px-3 pt-2 ">
+              <div class="flex-1 mt-4  bg-[#323232] rounded-2xl px-3 pt-2 ">
                 {/* <input class="border" onChange={(e) => setText(e.target.value)}/>
                 <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
                   <br/> */}

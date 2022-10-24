@@ -33,9 +33,9 @@ function HouseSelect() {
     if(!currUnit) {
       alert("부대를 선택해주세요");
       navigate("/");
+    } else {
+      fetchHouseList();
     }
-    //TODO _ api
-    fetchHouseList();
   }, []);
 
   // houseList 예시: [{name : "1종창고", gridLayout: [], items: []}, {name : "2종창고", gridLayout: [], items: []}, {name : "3종창고", gridLayout: [], items: []} ] <- DB 설계에 따라 형식 바뀔 수 있음
