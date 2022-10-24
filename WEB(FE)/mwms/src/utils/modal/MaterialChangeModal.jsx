@@ -27,7 +27,6 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
   const [id, setId] = useState(materialInfo.id ? materialInfo.id : -1);
 
   useEffect(() => {
-    alert(JSON.stringify(materialInfo));
     setContent(materialInfo.type  ? materialInfo.type : "없음");
     setType(materialInfo.specipicType ? materialInfo.specipicType : "없음");
     setMinCnt(materialInfo.amount ? materialInfo.amount : "");
@@ -57,6 +56,14 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
     setType(e.currentTarget.value);
   }
 
+  function numFormat(variable) {
+    variable = Number(variable).toString();
+    if(Number(variable) < 10 && variable.length == 1)
+      variable = "0" + variable;
+    return variable;
+  }
+
+
   const onSaveHandle = async () => {
     let itemToAdd = {
       name : name,
@@ -65,11 +72,10 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
       amount : Number(minCnt),
       barcode : "m" + (id).toString(), //id 를 받아오면 이걸 토대로 만들어주는게 맞다고 봄
       comment : good,
-      expirationDate : (startDate.getFullYear()).toString() + "-" + (startDate.getMonth() + 1).toString() + "-" + (startDate.getDate()).toString() + "T00:00:00.000Z",
+      expirationDate : (startDate.getFullYear()).toString() + "-" + (numFormat(startDate.getMonth() + 1)).toString() + "-" + (numFormat(startDate.getDate())).toString() + "T00:00:00.000Z",
       storedBoxId : Number(loc),
       id : Number(id),
     }
-    alert(JSON.stringify(itemToAdd));
 
     let itemToHistory = {
       content : name + " " + (minCnt).toString() + " " + "change",
@@ -77,12 +83,13 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
     }
 
     try {
-      await axiosPut("/stocks/stock-update", itemToAdd);
-
-      await axiosPost("/historys/", itemToHistory);
-
-      alert("물품이 변경되었습니다");
-      
+      if (!loc) {
+        alert("저장될 위치를 선정해주세요")
+      } else {
+        await axiosPut("/stocks/stock-update", itemToAdd);
+        await axiosPost("/historys/", itemToHistory);
+        alert("물품이 변경되었습니다");
+      }
     } catch(e) {
       alert("오류가 발생했습니다")
     }

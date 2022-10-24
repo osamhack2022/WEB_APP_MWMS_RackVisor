@@ -47,7 +47,6 @@ function HouseImageList() {
     }
     await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
     const response = await axiosGet("/warehouses/" + (copyOne.id).toString())
-    alert("이미지 업로드 완료" + JSON.stringify(response));
   }
 
   const onLeft = () => {

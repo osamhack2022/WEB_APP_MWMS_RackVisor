@@ -11,6 +11,7 @@ import SearchInput from '../../utils/search/SearchInput';
 import Example from '../../components/simple_striped';
 import Tabs from '../../components/Tabs';
 import BoxSelect from '../../components/BoxSelect';
+import { isSameMinute, set } from 'date-fns';
 
 //함수 내부 주석 -> 바코드 리더 부분을 일단 주석처리
 /*
@@ -165,7 +166,7 @@ function BarcodeManage() {
   }
   
   useEffect(() => {
-    if (localStorage.getItem("부대") === "") {
+    if (auth.unitSelected === "") {
       alert("부대를 다시 선택해주세요");
       navigate("/");
     }
@@ -173,13 +174,15 @@ function BarcodeManage() {
 
   useEffect(() => {
     if (item != "" && tabType == "material") {
-      alert("물품이 선택됨 : " + item);
-      // setText(item['이름']);
-      // generateQrCode(item['이름']);
+      if (item.barcode) {
+        setText(item.barcode);
+        generateQrCode(item.barcode);  
+      }
     } else if (item != "" && tabType == "box") {
-      alert("박스가 선택됨 : " + item);
-      // setText(item['위치']);
-      // generateQrCode(item['위치']);
+      if (item) {
+        setText(item.toString());
+        generateQrCode(item.toString());
+      }
     } else {
       setImageUrl();
     }
@@ -199,83 +202,95 @@ function BarcodeManage() {
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
-        <div class="flex-1 ml-5 mt-5">
-        <Tabs setTabType={setTabType} defaultTabs={defaultTabs}/>
-        <div class="bg-[#323232] rounded-xl">
-        { tabType == "material" ? 
-        (<>
-          <SearchInput setData={setData}/>
-          <Example korList={korList} defaultList={valList} data={data} setSelect={setItem}/>
-        </>) : 
-        (<>
-          <BoxSelect setBoxSelect={setItem} popup={false}/>
-        </>
-        )
-        }
-        </div>
-        </div>
-        <div class ="flex flex-auto mb-5 px-5">
-          <div class="flex-auto ">
-            {/* <input class="border" onChange={(e) => setText(e.target.value)}/>
-            <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
-              <br/> */}
-              <div className="flex">
-                <div class="text-white">사이즈 입력 {'(cm 단위)'} : </div>
-                <input type="number" value={size} onChange={handleSize} className="border bg-[#706f6f] p-2 mx-2 text-white h-[22px]"/>
-              </div>
-              <div className="flex my-3">
-                <div class="text-white" >개수 입력 : </div>
-                <input type="number" value={count} onChange={handleCount} className="border bg-[#706f6f] p-2 mx-2 text-white h-[22px]"/>
-              </div>
+        <div class="flex-1 bg-[#202020]">
+          <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
+            <div class="flex-1 mt-5">
+              <Tabs setTabType={setTabType} defaultTabs={defaultTabs}/>
+              <div class="bg-[#323232] rounded-xl">
               { tabType == "material" ? 
-              <>
-              <div className="flex my-3">
-                <input type="checkbox" value={showName} onChange={() => setShowName(!showName)} className="border bg-[#706f6f] p-2 mx-2"/>
-                <div class="text-white">이름 출력</div>
-              </div>
-              <div className="flex my-3">
-                <input type="checkbox" value={showDue} onChange={() => setShowDue(!showDue)} className="border bg-[#706f6f] p-2 mx-2"/>
-                <div class="text-white">유통기한 출력</div>
-              </div>
-              <div className="flex my-3">
-                <input type="checkbox" value={showManager} onChange={() => setShowManager(!showManager)} className="border bg-[#706f6f] p-2 mx-2"/>
-                <div class="text-white">담당자 출력</div>
-              </div>
-              </> :
-              ""
+              (<>
+                <SearchInput setData={setData}/>
+                <Example korList={korList} defaultList={valList} data={data} setSelect={setItem}/>
+              </>) : 
+              (<>
+                <BoxSelect setBoxSelect={setItem} popup={false} qr={true}/>
+              </>
+              )
               }
-              <div className="flex my-3">
-                <input type="checkbox" value={showLocation} onChange={() => setShowLocation(!showLocation)} className="border bg-[#706f6f] p-2 mx-2"/>
-                <div class="text-white">위치 출력</div>
               </div>
-              {imageUrl ? (
-              <>
-              <div class="text-white my-3">
-                <img src={imageUrl} alt="img" style={{width:"100px", height:"100px"}} className="border bg-[#706f6f] p-2 mx-2"/>
-                {tabType == "material" && showName && <div className="flex">휴지</div>}
-                {tabType == "material" && showDue && <div className="flex">2022-10-27</div>}
-                {tabType == "material" && showManager && <div className="flex">홍길동</div>}
-                {showLocation && <div className="flex">2종창고 - A 캐비넷</div>}
-              </div>
-              <a class="text-[#5AB0AD] ml-3 mb-3" href={imageUrl} download>QR 코드 다운로드</a>
-              <div className="hidden text-white my-3">  
-                <div ref={printR} className= {cname}>
-                  {printArr.map(() => (
-                    <div className="">
-                      <img src={imageUrl} alt="img" style={{width: convert, height: convert}} className="border flex bg-[#706f6f] p-2 mx-2"/>
-                      {tabType == "material" && showName && <div className="flex">휴지</div>}
-                      {tabType == "material" && showDue && <div className="flex">2022-10-27</div>}
-                      {tabType == "material" && showManager && <div className="flex">홍길동</div>}
-                      {showLocation && <div className="flex">2종창고 - A 캐비넷</div>}
+            </div>
+            <div class ="flex flex-auto mb-5 px-5 pt-2 px-2 ">
+              <div class="flex-1 mt-6  bg-[#323232] rounded-2xl px-3 pt-2 ">
+                {/* <input class="border" onChange={(e) => setText(e.target.value)}/>
+                <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
+                  <br/> */}
+                  <div className="flex">
+                    <div class="text-white">사이즈 입력 {'(cm 단위)'} : </div>
+                    <input type="number" value={size} onChange={handleSize} className="ml-2 accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2 text-white h-[22px]"/>
+                  </div>
+                  <div className="flex my-3">
+                    <div class="text-white" >개수 입력 : </div>
+                    <input type="number" value={count} onChange={handleCount} className="ml-[95px] accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2 text-white h-[22px]"/>
+                  </div>
+                  { tabType == "material" ? 
+                  <>
+                  <div className="flex my-3">
+                    <input type="checkbox" value={showName} onChange={() => setShowName(!showName)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2"/>
+                    <div class="text-white">이름 출력</div>
+                  </div>
+                  <div className="flex my-3">
+                    <input type="checkbox" value={showDue} onChange={() => setShowDue(!showDue)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2"/>
+                    <div class="text-white">유통기한 출력</div>
+                  </div>
+                  {/* <div className="flex my-3">
+                    <input type="checkbox" value={showManager} onChange={() => setShowManager(!showManager)} className="border bg-[#706f6f] p-2 mx-2"/>
+                    <div class="text-white">담당자 출력</div>
+                  </div> */}
+                  </> :
+                  ""
+                  }
+                  <div className="flex my-3">
+                    <input type="checkbox" value={showLocation} onChange={() => setShowLocation(!showLocation)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2"/>
+                    <div class="text-white">고유 식별번호 출력</div>
+                  </div>
+                  {imageUrl ? (
+                  <>
+                  <div class="text-white my-3 flex justify-center">
+                    <div>
+                      <img src={imageUrl} alt="img" style={{width:"100px", height:"100px"}} className="border bg-[#706f6f] p-2 mx-2"/>
+                      {tabType == "material" && showName && <div className="flex-1 text-center">{item.name ? item.name : ""}</div>}
+                      {tabType == "material" && showDue && <div className="flex-1 text-center text-sm">{item.expirationDate ? item.expirationDate : ""}</div>}
+                      {/* {tabType == "material" && showManager && <div className="flex-1 text-center">{item.manager ? item.manager : ""}</div>} */}
+                      {showLocation && <div className="flex-1 text-center">{item.id ? "물품 : " + (item.id).toString() : "박스 : " + item}</div>}
                     </div>
-                  ))}
+                  </div>
+                  <div className="hidden text-white my-3">  
+                    <div ref={printR} className= {cname}>
+                      {printArr.map(() => (
+                        <div className="border flex justify-center">
+                          <div className="">
+                            <div className = "flex-1 flex justify-center">
+                            <img src={imageUrl} alt="img" style={{width: convert, height: convert}} className=""/>
+                            </div>
+                            {tabType == "material" && showName && <div className="flex-1 text-sm text-center">{item.name ? item.name : ""}</div>}
+                            {tabType == "material" && showDue && <div className="flex-1 text-xs text-center">{item.expirationDate ? item.expirationDate : ""}</div>}
+                            {/* {tabType == "material" && showManager && <div className="flex-1 text-xs text-center">{item.manager ? item.manager : ""}</div>} */}
+                            {showLocation && <div className="flex-1 text-sm text-center">{item.id ? "물품 : " + (item.id).toString() : "박스 : " + item}</div>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>) : null}
+                <div class="flex-1 flex justify-center pr-3">
+                <a class="text-[#5AB0AD] ml-3 mb-3" href={imageUrl} download>QR 코드 다운로드</a>
+                <ReactToPrint
+                  trigger={() => <button class="text-[#5AB0AD] font-semibold ml-3 mb-3">프린트하기</button>}
+                  content={() => printR.current}
+                />
                 </div>
               </div>
-            </>) : null}
-            <ReactToPrint
-              trigger={() => <button class="text-[#5AB0AD] font-semibold ml-3 mb-3">프린트하기</button>}
-              content={() => printR.current}
-            />
+            </div>
           </div>
         </div>
       </div>

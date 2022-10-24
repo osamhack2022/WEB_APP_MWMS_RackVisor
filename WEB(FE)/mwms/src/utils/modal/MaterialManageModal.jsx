@@ -66,7 +66,6 @@ export default function MaterialManageModal({open, setOpen}) {
     try {
       let response = await axiosPost("/stocks/", itemToAdd);
       response.barcode = "m" + (response.id).toString();
-      alert("여기인가 " + JSON.stringify(response));
       await axiosPut("/stocks/stock-update", response);
 
 

@@ -42,6 +42,7 @@ export default function DetailSearch(props) {
 
     let itemToAdd = {
       type: "TYPE_" + (parseInt(Content) || "NULL"),
+      specipicType: type,
       minExpDate: startDate && getYYYYMMDDFromDate(startDate),
       maxExpDate: endDate && getYYYYMMDDFromDate(endDate),
       manager: people,
@@ -51,6 +52,7 @@ export default function DetailSearch(props) {
 
     if (!ch1) {
       delete itemToAdd.type
+      delete itemToAdd.specipicType
     }
     if (!ch2) {
       delete itemToAdd.minExpDate; 
