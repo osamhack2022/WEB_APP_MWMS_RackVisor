@@ -11,7 +11,7 @@ class AramCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: NoticeScreenTile(
-        icon: Icons.favorite,
+        icon: Icons.alarm,
         noticeName: aramModel.name,
         subtitle: aramModel.expirationDate,
       ),

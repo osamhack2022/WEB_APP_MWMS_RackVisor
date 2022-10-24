@@ -51,15 +51,17 @@ class _FirstPage extends State<FirstPage> {
       return Padding(
           padding: const EdgeInsets.all(5.0),
           child: PageView(
+            controller: PageController(
+              initialPage: 0
+            ),
+            //컴퓨터로 확인할떄만 쓰기 컴터 좌우스크롤안됨.
+            scrollDirection: Axis.vertical,
             children: snapshot.data!
             .map(
               (noticeScreenModel) {
-                return PageView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
+                return 
+                     Container(
                       child: NoticeCell(noticeScreenModel),
-                    );
-                  }
                   );
               },
             ).toList(),
@@ -166,12 +168,9 @@ class _FirstPage extends State<FirstPage> {
             elevation: 5,
             backgroundColor: Colors.white,
             expandedHeight: 220.h,
-            flexibleSpace: FlexibleSpaceBar(
+            flexibleSpace: 
                   //이미지
-                  background:  
-           
                       Container(
-                        height: 150.h,
                         padding: EdgeInsets.only(top: 20.w,left: 40.w,right: 40.w),
                         child: FutureBuilder<List<NoticeScreenModel>>(
                         future: noticeScreenService(),
@@ -187,7 +186,6 @@ class _FirstPage extends State<FirstPage> {
                 )  
                       ),
 
-        ),
         ),
 
           //메인 밑

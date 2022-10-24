@@ -35,7 +35,8 @@ class UnitCell extends StatelessWidget {
                   style: const TextStyle(
                     color: kDarkSecondaryColor,
                     fontSize: 20.0, 
-                    fontWeight: FontWeight.w500
+                    fontWeight: FontWeight.bold
+
                     ),
                 ),
                   ) 

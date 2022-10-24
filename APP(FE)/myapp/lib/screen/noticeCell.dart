@@ -75,9 +75,8 @@ class NoticeScreenTile extends StatelessWidget {
                     //아이디
                     color: Colors.orange,
                     //아이디?
-                    child: Icon(id,
-                    color: Colors.white,)
-                    ),
+                    child: Text(id.toString()),
+                  )
                 ),
 
                 const SizedBox(width: 12),
