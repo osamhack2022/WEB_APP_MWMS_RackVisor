@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../model/aram_model.dart';
 
 
-class PageCell extends StatelessWidget {
-  const PageCell(this.aramModel, {super.key});
+class AramCell extends StatelessWidget {
+  const AramCell(this.aramModel, {super.key});
   @required
   final AramModel aramModel;
 

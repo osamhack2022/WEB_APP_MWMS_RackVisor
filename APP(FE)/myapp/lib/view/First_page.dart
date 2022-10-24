@@ -1,22 +1,14 @@
- 
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import 'package:myapp/controller/searchbar_controller.dart';
 import 'package:myapp/model/aram_model.dart';
-import 'package:myapp/utils/global_colors.dart';
 import '../model/front_model.dart';
 import '../model/notice_screen_model.dart';
-import '../model/warehouse_model.dart';
 import '../screen/noticeCell.dart';
-
-import '../screen/pageCell.dart';
-import '../services/Image_service.dart';
-import '../services/front_service.dart';
+import '../screen/aramCell.dart';
 
 
  
@@ -32,16 +24,11 @@ class _FirstPage extends State<FirstPage> {
   FrontModel frontModel = Get.put(FrontModel());
   SearchBarController searchBarController = Get.put(SearchBarController());
   
- 
-  final ImagePicker _picker = ImagePicker();
-  XFile? _imageFile;
-  Future<WarehouseImage>? warehousesImage;
 
 
   @override
 	void initstate() {
 		super.initState();
-		warehousesImage = ImageService.ImageService2();
 	}
 
   
@@ -59,7 +46,7 @@ class _FirstPage extends State<FirstPage> {
 
 
 
-
+  //공지사항 page 전환
   noticeGridview(AsyncSnapshot<List<NoticeScreenModel>> snapshot) {
       return Padding(
           padding: const EdgeInsets.all(5.0),
@@ -81,20 +68,16 @@ class _FirstPage extends State<FirstPage> {
     }
 
 
-
+      // 알람 그리드뷰로 만듬.
       AramGridview(AsyncSnapshot<List<AramModel>> snapshot) {
       return Padding(
           padding: const EdgeInsets.all(5.0),
-          child: PageView(
+          child: ListView(
             children: snapshot.data!
             .map(
               (aramModel) {
-                return PageView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      child: PageCell(aramModel),
-                    );
-                  }
+                return GridTile(
+                      child: AramCell(aramModel),               
                   );
               },
             ).toList(),
@@ -174,10 +157,6 @@ class _FirstPage extends State<FirstPage> {
     
     
   
-   
-
-
-
     return Scaffold(
       body: CustomScrollView(
         slivers: [ 
@@ -262,11 +241,6 @@ class _FirstPage extends State<FirstPage> {
 
                   
 
-
-                
-                
-                
-   
               ]),
             ),
           )

@@ -56,9 +56,6 @@ dependencies:
   #screnn_util
   flutter_screenutil: ^5.5.4
 
-  #image_picker
-  image_picker: ^0.8.6
-
   #icon
   line_awesome_flutter: ^2.0.0
 

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +8,6 @@ import 'package:myapp/utils/global_colors.dart';
 import 'package:myapp/view/Fourth_page.dart';
 import 'package:myapp/view/twice_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
-import '../model/notice_screen_model.dart';
-import '../model/warehouse_model.dart';
-import '../services/Image_service.dart';
 import 'First_page.dart';
 
 
