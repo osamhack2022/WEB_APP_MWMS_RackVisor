@@ -10,7 +10,7 @@ export default function ExcelExampleFile () {
       detail: '기타물자류',
       cnt: 100,
       status: '좋음',
-      due: '2022/10/27' ,
+      due: '2022-10-27' ,
       des: ''
     },{
       id: 2,
@@ -19,7 +19,7 @@ export default function ExcelExampleFile () {
       detail: '주식',
       cnt: 1000,
       status: '나쁨',
-      due: '2022/11/27' ,
+      due: '2022-11-27' ,
       des: ''
     }, {
       id: 3,

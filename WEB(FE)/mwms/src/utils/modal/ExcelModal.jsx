@@ -8,8 +8,12 @@ import readXlsxFile from 'read-excel-file'
 import { useEffect } from 'react'
 import SimpleSearch from '../../components/SimpleSearchList'
 import LocationSelectModal from './LocationSelectModal'
+import { useAuth } from '../../routes/AuthContext'
+import { axiosPost, axiosPut } from '../../api'
 
 export default function ExcelModal({open, setOpen}) {
+  const auth = useAuth();
+  const currUnit = auth.unitSelected;
   const [data, setData] = useState([]);
   const [open1, setOpen1] = useState(false);
   const [loc, setLoc] = useState();
@@ -37,9 +41,45 @@ export default function ExcelModal({open, setOpen}) {
     setData([]);
   }, [open]);
 
-  const save = async () => {
-    
 
+  const onSaveHandle = async (da) => {    
+    let itemToAdd = {
+      name : da.name,
+      type : "TYPE_" + (da.type == "없" ? "NULL" : (da.type[0])),
+      specipicType : da.specipicType,
+      amount : Number(da.amount),
+      barcode : "string",
+      comment : da.comment,
+      expirationDate : da.expirationDate,
+      storedBoxId : Number(loc),
+    }
+
+    let itemToHistory = {
+      content : da.name + " " + (da.amount).toString() + " " + "plus",
+      unitId : Number(currUnit.id)
+    }
+    try {
+      let response = await axiosPost("/stocks/", itemToAdd);
+      response.barcode = "m" + (response.id).toString();
+      await axiosPut("/stocks/stock-update", response);
+
+
+      await axiosPost("/historys/", itemToHistory);
+
+    } catch(e) {
+      alert("오류가 발생했습니다")
+    }
+  }
+
+  const save = () => {
+    try {
+      data.map((da) => {
+          if (da.name && da.type && da.specipicType && da.amount && da.comment && da.expirationDate && loc) onSaveHandle(da);
+      });
+      alert("물품이 추가되었습니다");
+    } catch (e) {
+      alert("오류가 발생했습니다");
+    }
 
     setOpen(false)
     setData([]);

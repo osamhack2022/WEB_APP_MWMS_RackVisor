@@ -111,8 +111,9 @@ function BarcodeManage() {
   const [text, setText] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const printR = useRef(null);
-  const valList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
-  const data = [{'이름' : '휴지', '종류' : '2종', '세부분류' : '기타물자류', '수량':1000, '상태':'좋음', '기한':'2022/10/27'}]
+  const valList = ['name', 'type', 'specipicType', 'amount', 'comment', 'expirationDate']
+  const korList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
+  const [ data, setData] = useState([]);
   const [ item, setItem ] = useState("");
   const [size, setSize] = useState(0);
   const [count, setCount] = useState(0);
@@ -200,16 +201,18 @@ function BarcodeManage() {
         <Sidebar/>
         <div class="flex-1 ml-5 mt-5">
         <Tabs setTabType={setTabType} defaultTabs={defaultTabs}/>
+        <div class="bg-[#323232] rounded-xl">
         { tabType == "material" ? 
         (<>
-          <SearchInput className = "flex-auto" />
-          <Example defaultList={valList} data={data} setSelect={setItem}/>
+          <SearchInput setData={setData}/>
+          <Example korList={korList} defaultList={valList} data={data} setSelect={setItem}/>
         </>) : 
         (<>
           <BoxSelect setBoxSelect={setItem} popup={false}/>
         </>
         )
         }
+        </div>
         </div>
         <div class ="flex flex-auto mb-5 px-5">
           <div class="flex-auto ">

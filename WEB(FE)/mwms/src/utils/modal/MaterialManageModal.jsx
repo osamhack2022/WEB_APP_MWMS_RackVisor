@@ -10,9 +10,11 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import { axiosPost, axiosPut } from '../../api';
 import SettingModal from './SettingModal';
 import { useAuth } from '../../routes/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function MaterialManageModal({open, setOpen}) {
   const auth = useAuth();
+  const navigate = useNavigate();
   const currUnit = auth.unitSelected;
   const [locationOpen, setLocationOpen] = useState(false);
   const [loc, setLoc] = useState("");
@@ -47,7 +49,7 @@ export default function MaterialManageModal({open, setOpen}) {
   const onSaveHandle = async () => {
     let itemToAdd = {
       name : name,
-      type : "TYPE_NULL", //content
+      type : "TYPE_" + (Content[0] == "없" ? "NULL" : (Content[0]).toString()) , //content
       specipicType : type,
       amount : Number(minCnt),
       barcode : "string", //id 를 받아오면 이걸 토대로 만들어주는게 맞다고 봄
@@ -64,12 +66,14 @@ export default function MaterialManageModal({open, setOpen}) {
     try {
       let response = await axiosPost("/stocks/", itemToAdd);
       response.barcode = "m" + (response.id).toString();
+      alert("여기인가 " + JSON.stringify(response));
       await axiosPut("/stocks/stock-update", response);
 
 
       await axiosPost("/historys/", itemToHistory);
 
       alert("물품이 추가되었습니다");
+
     } catch(e) {
       alert("오류가 발생했습니다")
     }
@@ -77,11 +81,12 @@ export default function MaterialManageModal({open, setOpen}) {
     setContent("없음")
     setType("없음");
     setMinCnt(0);
-    setPeople("");
     setName("");
     setGood("");
     setStartDate(new Date());
     setOpen(false);
+    navigate("/materialManage");
+
   }
   
   return (

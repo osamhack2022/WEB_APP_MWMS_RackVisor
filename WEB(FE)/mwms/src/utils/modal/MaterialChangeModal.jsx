@@ -9,27 +9,33 @@ import { ko } from "date-fns/esm/locale";
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { useAuth } from '../../routes/AuthContext';
 import { axiosPost, axiosPut } from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function MaterialChangeModal({open, setOpen, materialInfo, setMaterialInfo}) {
   const auth = useAuth();
+  const navigate = useNavigate();
   const currUnit = auth.unitSelected;
   const [locationOpen, setLocationOpen] = useState(false);
   const [loc, setLoc] = useState("");
-  const [Content, setContent] = useState(materialInfo['type'] == "" ? "없음" : materialInfo['type']);
-  const [type, setType] = useState(materialInfo['specipicType'] == "" ? "없음" : materialInfo['specipicType']);
-  const [minCnt, setMinCnt] = useState(materialInfo['amount']);
+  const [Content, setContent] = useState(materialInfo.type  ? materialInfo.type : "없음");
+  const [type, setType] = useState(materialInfo.specipicType ? materialInfo.specipicType : "없음");
+  const [minCnt, setMinCnt] = useState(materialInfo.amount ? materialInfo.amount : "");
   const [people, setPeople] = useState(localStorage.getItem("계급") + " " + localStorage.getItem("이름"));
-  const [name, setName] = useState(materialInfo['name']);
-  const [good, setGood] = useState(materialInfo['comment']);
-  const [startDate, setStartDate] = useState(new Date()); //날짜 형식에 맞춰서 파싱해야함
+  const [name, setName] = useState(materialInfo.name ? materialInfo.name : "");
+  const [good, setGood] = useState(materialInfo.comment ? materialInfo.comment : "");
+  const [startDate, setStartDate] = useState(materialInfo.expirationDate ? new Date(Number(((materialInfo.expirationDate).split("-"))[0]), Number(((materialInfo.expirationDate).split("-"))[1] - 1), Number(((materialInfo.expirationDate).split("-"))[2])) : new Date()); //날짜 형식에 맞춰서 파싱해야함
+  const [id, setId] = useState(materialInfo.id ? materialInfo.id : -1);
 
   useEffect(() => {
-    setContent(materialInfo['type']);
-    setType(materialInfo['specipicType']);
-    setMinCnt(materialInfo['amount']);
+    alert(JSON.stringify(materialInfo));
+    setContent(materialInfo.type  ? materialInfo.type : "없음");
+    setType(materialInfo.specipicType ? materialInfo.specipicType : "없음");
+    setMinCnt(materialInfo.amount ? materialInfo.amount : "");
     setPeople(localStorage.getItem("계급") + " " + localStorage.getItem("이름"));
-    setName(materialInfo['name']);
-    setGood(materialInfo['comment']);
+    setName(materialInfo.name ? materialInfo.name : "");
+    setGood(materialInfo.comment ? materialInfo.comment : "");
+    setStartDate(materialInfo.expirationDate ? new Date(Number((materialInfo.expirationDate).split('-')[0]), Number((materialInfo.expirationDate).split('-')[1] - 1), Number((materialInfo.expirationDate).split('-')[2])) : new Date());
+    setId(materialInfo.id ? materialInfo.id : -1);
   }, [materialInfo]);
 
   const chgMinCnt = (e) => {
@@ -54,41 +60,43 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
   const onSaveHandle = async () => {
     let itemToAdd = {
       name : name,
-      type : "TYPE_NULL", //content
+      type : ("TYPE_" + (Content ? (Content[0] == "없" ? "NULL" : (Content[0]).toString()) : "NULL")) , //content
       specipicType : type,
       amount : Number(minCnt),
-      barcode : "string", //id 를 받아오면 이걸 토대로 만들어주는게 맞다고 봄
+      barcode : "m" + (id).toString(), //id 를 받아오면 이걸 토대로 만들어주는게 맞다고 봄
       comment : good,
-      expirationDate : (startDate.getFullYear()).toString() + "-" + (startDate.getMonth() + 1).toString() + "-" + (startDate.getDate()).toString(),
+      expirationDate : (startDate.getFullYear()).toString() + "-" + (startDate.getMonth() + 1).toString() + "-" + (startDate.getDate()).toString() + "T00:00:00.000Z",
       storedBoxId : Number(loc),
+      id : Number(id),
     }
+    alert(JSON.stringify(itemToAdd));
 
     let itemToHistory = {
-      content : name + " " + (minCnt).toString() + " " + "plus",
+      content : name + " " + (minCnt).toString() + " " + "change",
       unitId : Number(currUnit.id)
     }
 
     try {
-      let response = await axiosPost("/stocks/", itemToAdd);
-      response.barcode = "m" + (response.id).toString();
-      await axiosPut("/stocks/stock-update", response);
-
+      await axiosPut("/stocks/stock-update", itemToAdd);
 
       await axiosPost("/historys/", itemToHistory);
 
-      alert("물품이 추가되었습니다");
+      alert("물품이 변경되었습니다");
+      
     } catch(e) {
       alert("오류가 발생했습니다")
     }
     setLoc("");
     setContent("없음")
     setType("없음");
-    setMinCnt(0);
+    setMinCnt("");
     setPeople("");
     setName("");
     setGood("");
     setStartDate(new Date());
+    setId(-1);
     setOpen(false);
+    navigate("/materialManage");
   }
   
   return (
@@ -163,7 +171,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
                         <div class="text-white mr-2 mb-1">기한 : </div>
                         <DatePicker 
                           locale={ko}
-                          dateFormat="yyyy/MM/dd"
+                          dateFormat="yyyy-MM-dd"
                           selected={startDate}
                           onChange={(date) => {
                             setStartDate(date);

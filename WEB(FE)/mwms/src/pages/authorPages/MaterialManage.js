@@ -27,7 +27,7 @@ function MaterialManage() {
   const valList = ['name', 'type', 'specipicType', 'amount', 'comment', 'expirationDate']
   const korList = ['이름', '종류', '세부분류', '수량', '상태', '기한']
   const [ data, setData] = useState([])
-  const [material, setMaterial] = useState({'name' : "", "type" : "없음", "specipicType" : "없음", "amount" : "", "comment" : "", "expirationDate" : ""});
+  const [material, setMaterial] = useState({id : -1, name : " ", type : "없음", specipicType : "없음", amount : " ", comment : " ", expirationDate : "2222-10-10"});
   const [openPlus, setOpenPlus] = useState(false);
   const [materialChangeOpen, setMaterialChangeModal] = useState(false);
   const [loc, setLoc] = useState({});
@@ -74,12 +74,12 @@ function MaterialManage() {
       alert("부대를 선택해주세요");
       navigate("/");
     } else {
-    fetchHouseList();
+      fetchHouseList();
     }
   }, []);
 
   useEffect(() => {
-    if (boxSelec.toString() != "") {
+    if (boxSelec.toString() != "" && currUnit) {
       console.log("boxNum : " + JSON.stringify(boxSelec));
       fetchData(boxSelec);
     }
@@ -106,7 +106,7 @@ function MaterialManage() {
 
   const closeChangeModalClose = () => {
     setMaterialChangeModal(false);
-    setMaterial({'name' : "", "type" : "없음", "specipicType" : "없음", "amount" : "", "comment" : "", "expirationDate" : ""});
+    setMaterial({id : -1, name : " ", type : "없음", specipicType : "없음", amount : " ", comment : " ", expirationDate : "2222-10-10"});
   }
 
   const defaultTabs = [

@@ -1,4 +1,4 @@
-export default function Example({defaultList, data, setSelect}) {
+export default function Example({korList, defaultList, data, setSelect}) {
   const selecting = (e) => {
     data.map((dt, idx) => {
       if (idx == e.currentTarget.value) {
@@ -12,9 +12,9 @@ export default function Example({defaultList, data, setSelect}) {
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead>
+              <thead class="bg-[#706F6F] rounded-xl">
                 <tr>
-                  {defaultList.map((de) => (
+                  {korList.map((de) => (
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
@@ -35,7 +35,7 @@ export default function Example({defaultList, data, setSelect}) {
 
                     ))}
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button onClick={selecting} value={personIdx} className="text-indigo-300 hover:text-indigo-400">
+                      <button onClick={selecting} value={personIdx} className="text-[#5AB0AD] hover:text-indigo-400">
                         선택
                       </button>
                     </td>
