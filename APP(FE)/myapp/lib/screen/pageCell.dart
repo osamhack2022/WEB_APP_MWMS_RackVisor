@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/model/notice_screen_model.dart';
-import 'package:myapp/utils/global_colors.dart';
-import '../utils/constants.dart';
+import '../model/aram_model.dart';
+
 
 class PageCell extends StatelessWidget {
-  const PageCell(this.noticeScreenModel, {super.key});
+  const PageCell(this.aramModel, {super.key});
   @required
-  final NoticeScreenModel noticeScreenModel;
+  final AramModel aramModel;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: NoticeScreenTile(
         icon: Icons.favorite,
-        noticeName: noticeScreenModel.title,
-        subtitle: noticeScreenModel.content,
+        noticeName: aramModel.name,
+        subtitle: aramModel.expirationDate,
       ),
     );
   }

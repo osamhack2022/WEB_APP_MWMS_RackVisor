@@ -117,7 +117,7 @@ class _FrontPage extends State<FrontPage> {
         controller: c.controller,
         children: [
           FirstPage(),
-          TwicePage(eventKeyword: '실험'),
+          TwicePage(),
           FourthPage()
         ],
       )

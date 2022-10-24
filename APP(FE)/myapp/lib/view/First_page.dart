@@ -7,12 +7,14 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:myapp/controller/searchbar_controller.dart';
+import 'package:myapp/model/aram_model.dart';
 import 'package:myapp/utils/global_colors.dart';
 import '../model/front_model.dart';
 import '../model/notice_screen_model.dart';
 import '../model/warehouse_model.dart';
 import '../screen/noticeCell.dart';
 
+import '../screen/pageCell.dart';
 import '../services/Image_service.dart';
 import '../services/front_service.dart';
 
@@ -51,31 +53,9 @@ class _FirstPage extends State<FirstPage> {
 
 
 
-  Future uploadImage() async {
-    final uri = Uri.parse("https://211.37.150.202:80/api/warehouses/house-image/2");
-    var request = http.MultipartRequest('POST',uri);
-    //request.fields['name'] = nameController.text;
-    var pic = await http.MultipartFile.fromPath("images", _imageFile!.path);
-    request.files.add(pic);
-    var response = await request.send();
+ 
 
-    if(response.statusCode == 200) {
 
-    }
-  }
-
- getImage() {
-        return FutureBuilder<WarehouseImage>  (
-          future: warehousesImage,
-          builder: (context, snapshot)  {
-            if (snapshot.hasData) {
-              return Image.network(snapshot.data!.imgBase64);
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            } return const CircularProgressIndicator();
-          }
-        );
-      }
 
 
 
@@ -91,6 +71,28 @@ class _FirstPage extends State<FirstPage> {
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       child: NoticeCell(noticeScreenModel),
+                    );
+                  }
+                  );
+              },
+            ).toList(),
+          ),
+      );
+    }
+
+
+
+      AramGridview(AsyncSnapshot<List<AramModel>> snapshot) {
+      return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: PageView(
+            children: snapshot.data!
+            .map(
+              (aramModel) {
+                return PageView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      child: PageCell(aramModel),
                     );
                   }
                   );
@@ -127,12 +129,12 @@ class _FirstPage extends State<FirstPage> {
     ScreenUtil.init(context, designSize: const Size(896, 414)); 
   
 
+  // 공지사항 관련 service 2개
   List<NoticeScreenModel> parseNotice(String responsebody) {
       final parsed = json.decode(responsebody).cast<Map<String, dynamic>>();
       return parsed.map<NoticeScreenModel>((json) => NoticeScreenModel.fromJson(json)).toList();
   }
 
-  
    Future<List<NoticeScreenModel>> noticeScreenService() async {
       var uri = await Uri.parse("https://211.37.150.202:80/api/posts/unit-posts/${frontModel.selectId}");
 
@@ -144,69 +146,34 @@ class _FirstPage extends State<FirstPage> {
 
         return list;
   }
+
+
+
+  //알림 관련 service 2개
+  List<AramModel> parseAram(String responsebody) {
+      final parsed = json.decode(responsebody).cast<Map<String, dynamic>>();
+      return parsed.map<AramModel>((json) => AramModel.fromJson(json)).toList();
+  }
+
+   Future<List<AramModel>> AramService() async {
+      var uri = await Uri.parse("https://211.37.150.202:80/api/stocks/by-expiration-date/${frontModel.selectId}");
+
+        final response = await http.get(
+        (uri), 
+        headers: {"Content-Type": "application/json"},);
+
+        List<AramModel> list = parseAram(response.body);
+
+        return list;
+  }
+
+
+
+
       
     
     
-    //부대 이미지 변경 카메라 클릭시 발생
-    Widget bottomSheet() {
-
-      void takePhoto(ImageSource source) async {
-      final pickedFile = await _picker.pickImage(
-        source: source
-      );
-      setState(() {
-        _imageFile = pickedFile!;
-        uploadImage();
-      });
-    }
-
-      return Container(
-        height: 100.h,
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 20,
-        ),
-        child: Column(
-          children: <Widget>[
-            Text(
-              "사진을 선택하세요",
-              style: TextStyle(
-                fontSize: 20.0.sp,
-              ),
-            ),
-            //구분 여백
-            SizedBox(
-              height: 20.0.h,
-            ),
- 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget> [
-                TextButton.icon(
-                  icon: Icon(Icons.camera),
-                  onPressed: () {
-                   takePhoto(ImageSource.camera);
-                  },
-                  label: Text("카메라",
-                  style: TextStyle(color: Colors.black),
-                  ),
- 
-                ),
- 
-                TextButton.icon(
-                  icon: Icon(Icons.image),
-                  onPressed: () {
-                   takePhoto(ImageSource.gallery);
-                  },
-                  label: Text("갤러리")
-                ),
-              ]
-            )
-          ]
-        ),
-      );
-    }
+  
    
 
 
@@ -223,32 +190,24 @@ class _FirstPage extends State<FirstPage> {
             flexibleSpace: FlexibleSpaceBar(
                   //이미지
                   background:  
-                  Stack(
-                    children: [
-                      
-                       
-                      Center(
-                        child: getImage(),
+           
+                      Container(
+                        height: 150.h,
+                        padding: EdgeInsets.only(top: 20.w,left: 40.w,right: 40.w),
+                        child: FutureBuilder<List<NoticeScreenModel>>(
+                        future: noticeScreenService(),
+                        builder: (context, snapshot) {
+                           if (snapshot.hasError) {
+                            return Text('Error ${snapshot.error}');
+                          }
+                          if (snapshot.hasData) {
+                            return noticeGridview(snapshot);
+                          }
+                          return circularProgress();
+                        }
+                )  
                       ),
-                      
 
-                  Positioned(
-                bottom: 50.0.h,
-                right: 50.0.w,
-                child: InkWell(
-                  child: Icon(Icons.camera_alt,
-                  color: GlobalColors.brightGrey,
-                  size: 24.h,
-                  ),
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: ((builder) => bottomSheet()));
-                  },
-                ),
-              ), 
-            ],
-          )
         ),
         ),
 
@@ -279,14 +238,14 @@ class _FirstPage extends State<FirstPage> {
                       Container(
                         height: 150.h,
                         padding: EdgeInsets.only(top: 20.w,left: 40.w,right: 40.w),
-                        child: FutureBuilder<List<NoticeScreenModel>>(
-                        future: noticeScreenService(),
+                        child: FutureBuilder<List<AramModel>>(
+                        future: AramService(),
                         builder: (context, snapshot) {
                            if (snapshot.hasError) {
                             return Text('Error ${snapshot.error}');
                           }
                           if (snapshot.hasData) {
-                            return noticeGridview(snapshot);
+                            return AramGridview(snapshot);
                           }
                           return circularProgress();
                         }
