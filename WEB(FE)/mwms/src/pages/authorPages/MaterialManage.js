@@ -119,7 +119,7 @@ function MaterialManage() {
   }, [tabType]);
 
   return (
-    <div>
+    <div class="bg-[#202020]">
       <AuthorHeader/>
       <div class="flex">
         <Sidebar/>
@@ -134,7 +134,7 @@ function MaterialManage() {
               </div>
               <Tabs defaultTabs={defaultTabs} setTabType={setTabType}/>
               <div class="bg-[#323232] rounded-2xl ">
-                {tabType == "material" && <><SearchInput/></>}
+                {tabType == "material" && <><SearchInput setData={ setData }/></>}
                 {/* {boxSelec ? ( <> {tabType == "box" && <div>창고 : {selHouse.id} - 선반 : {cabSelec} -  박스 : {boxSelec}</div>} </> ) : ("")} */}
                 {tabType == "box" && 
                   <div class="flex-1 gap-2 overflow-x-auto">
@@ -144,6 +144,7 @@ function MaterialManage() {
                         setBoxSelec("")}}
                         class="text-white ml-2 mt-2">{'<-'}뒤로가기</button>
                       <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec} cabSelec={cabSelec} modify={true}/>
+                      <br class="m-3"/>
                       </>)
                     : (<div class="my-6">
                       <span class="m-2 p-2 font-bold text-white text-lg">위치 기반 물자 관리</span> <br/> 

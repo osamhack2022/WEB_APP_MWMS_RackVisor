@@ -44,7 +44,7 @@ export default function UserDropDown({milClass, name}) {
                 <Link
                   to="/logout"
                   className={classNames(
-                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium rounded-md' : 'text-gray-200 font-medium',
+                    active ? 'bg-gray-100 bg-[#7A5EA6] font-medium rounded-md text-[#000000] ' : 'text-gray-200 text-white font-medium',
                     'block px-4 py-2 text-sm'
                   )}
                 >

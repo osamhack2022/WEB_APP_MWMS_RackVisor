@@ -93,28 +93,26 @@ export default function ExcelModal({open, setOpen}) {
               <div className="sm:flex sm:items-start">
 
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <div class="flex justify-between">
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-white my-2">
                     엑셀 파일 업로드
                   </Dialog.Title>
-                  <div className="mt-2 flex">
-                    <p className="text-md text-gray-500">
-                      엑셀 파일을 업로드해주세요.
-                    </p>
-                    <ExcelExampleFile/>
+                  <ExcelExampleFile/>
                   </div>
-                  <label 
-                    for = "file-upload"
-                  > </label>
+                  <div class="flex">
+                  <label for = "file-upload" class="text-[#5AB0AD] hover:text-white my-1 text-sm"> 엑셀 업로드하기</label>
+                  {(data.length == 0) ? "" : <div class="text-white ml-5 mt-[4px] text-sm ">{' - '}&nbsp;&nbsp;&nbsp;파일 선택됨</div> }
+                  </div>
                   <input 
                     accept=".xlsx" 
-                    className="my-2 mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-[#706f6f] text-base font-medium text-gray-400 hover:text-gray-300  sm:mt-0 sm:w-auto sm:text-sm"
+                    className="hidden my-2 mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-[#706f6f] text-base font-medium text-gray-400 hover:text-gray-300  sm:mt-0 sm:w-auto sm:text-sm"
                     type="file" 
                     onChange={(e) => inputFile(e.target.files[0])}
                     id="file-upload"/>
                   <div class="flex">
                     <button class="text-[#5AB0AD] hover:text-white my-1 text-sm " onClick={() => setOpen1(true)}>위치 선택하기</button>
                     <LocationSelectModal open={open1} setOpen={setOpen1} setLocation={setLoc}/>
-                    {loc && <div class="text-white ml-5 mt-[4px] text-sm ">{' - '}&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
+                    {loc && <div class="text-white ml-5 mt-[4px] text-sm ">&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
                   </div>
                     <SimpleSearch defaultList={valList} data={data} korList={korList}/>
                 </div>

@@ -133,8 +133,8 @@ export default function MaterialManageModal({open, setOpen}) {
                   </Dialog.Title>
                   <div className="mt-2 text-white">
                     <div class="flex">
-                    <button class="my-1" onClick={() => setLocationOpen(true)}>위치 선정하기</button>
-                    {loc && <div class="text-[#5AB0AD] text-sm ml-5 mt-5">위치 선택됨</div>}
+                    <button class="my-1 text-[#5AB0AD] hover:text-white my-1 text-sm " onClick={() => setLocationOpen(true)}>위치 선택하기</button>
+                    {loc && <div class="text-white ml-5 mt-[4px] text-sm ">&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
                     {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
                     </div>
                     <div>

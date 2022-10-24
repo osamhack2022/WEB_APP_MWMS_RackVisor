@@ -35,7 +35,7 @@ export default function ManageList({korList, defaultList, data, setSelect}) {
 
                     ))}
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button onClick={selecting} value={personIdx} className="text-indigo-300 hover:text-indigo-400">
+                      <button onClick={selecting} value={personIdx} className="text-[#5AB0AD] hover:text-white">
                         수정
                       </button>
                     </td>

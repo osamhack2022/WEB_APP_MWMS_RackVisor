@@ -48,40 +48,42 @@ export default function AlarmDropDown() {
   }, []);
 
   return (
-    <Menu as="div" className="text-slate-900 z-50">
-      <div>
-        <Menu.Button className="font-bold inline-flex justify-center rounded-md text-sm text-white hover:text-blue-300 xs:mr-10 ss:mr-0 sm:mr-10 md:mr-0">
-          알람
-        </Menu.Button>
-      </div>
+    <>
+    {(data.length != 0) ?  (<Menu as="div" className="text-slate-900 z-50">
+        <div>
+          <Menu.Button className="font-bold inline-flex justify-center rounded-md text-sm text-white hover:text-blue-300 xs:mr-10 ss:mr-0 sm:mr-10 md:mr-0">
+            알람
+          </Menu.Button>
+        </div>
 
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute rounded-md shadow-lg bg-black-gradient ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            {data.map((da) => 
-            (<Menu.Item>
-              {({ active }) => (
-                <div
-                  className={classNames(
-                    active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium rounded-md' : 'text-gray-200',
-                    'block px-4 py-2 text-sm font-medium'
-                  )}
-                >
-                  {da}
-                </div>
-              )}
-            </Menu.Item>))}
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="absolute rounded-md shadow-lg bg-black-gradient ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="py-1">
+              {data.map((da) => 
+              (<Menu.Item>
+                {({ active }) => (
+                  <div
+                    className={classNames(
+                      active ? 'bg-gray-100 text-white bg-[#7A5EA6] font-medium rounded-md' : 'text-gray-200',
+                      'block px-4 py-2 text-sm font-medium'
+                    )}
+                  >
+                    {da}
+                  </div>
+                )}
+              </Menu.Item>))}
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>) : ""}
+    </>
   )
 }

@@ -78,7 +78,7 @@ export default function ExcelExampleFile () {
     	<>
         <button 
           type="button"
-          className="w-full inline-flex justify-center rounded-md shadow-smmy-2 mb-2 mx-1 h-[22px] font-medium text-[#5AB0AD] hover:text-white text-[14px] w-[100px]"
+          className="w-full mt-3 mr-4 inline-flex justify-center bg-[#7A5EA6] rounded-md shadow-smmy-2 mb-2 mx-1 h-[22px] font-medium text-white hover:text-white text-[14px] w-[100px]"
           onClick={() => excelDownload(data)}>예시 다운로드</button>
       </>
     );
