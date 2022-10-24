@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../model/aram_model.dart';
 
 
 class AramCell extends StatelessWidget {
-  const AramCell(this.aramModel, {super.key});
+  AramCell(this.aramModel, {super.key});
   @required
   final AramModel aramModel;
+
+  var today = DateTime.now();
+
+  DateFormat('yyyy/MM/dd').format(DateTime.parse(aramModel.expirationDate.substring(aramModel.expirationDate.lastIndexOf("T")+1)).toString)
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: NoticeScreenTile(
-        icon: Icons.alarm,
+      child: AramScreenTile(
+        icon: Icons.notifications,
         noticeName: aramModel.name,
         subtitle: aramModel.expirationDate,
       ),
@@ -20,12 +25,12 @@ class AramCell extends StatelessWidget {
 }
 
 
-class NoticeScreenTile extends StatelessWidget {
+class AramScreenTile extends StatelessWidget {
   final icon;
   final String noticeName;
   final String subtitle;
 
-  const NoticeScreenTile({
+  const AramScreenTile({
     required this.icon,
     required this.noticeName,
     required this.subtitle,
