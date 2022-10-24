@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../model/user_model.dart';
-import '../services/Api_service.dart';
+import '../model/stock_model.dart';
+import '../services/stock_service.dart';
 
 class SearchUser extends SearchDelegate {
   FetchUserList _userList = FetchUserList();
@@ -29,7 +29,7 @@ class SearchUser extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return FutureBuilder<List<Userlist>>(
+    return FutureBuilder<List<StockModel>>(
         future: _userList.getuserList(query: query),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -37,7 +37,7 @@ class SearchUser extends SearchDelegate {
               child: CircularProgressIndicator(),
             );
           }
-          List<Userlist>? data = snapshot.data;
+          List<StockModel>? data = snapshot.data;
           return ListView.builder(
               itemCount: data?.length,
               itemBuilder: (context, index) {
@@ -73,7 +73,7 @@ class SearchUser extends SearchDelegate {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              '${data?[index].email}',
+                              '${data?[index].barcode}',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,

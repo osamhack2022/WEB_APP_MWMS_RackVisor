@@ -61,7 +61,6 @@ class _FrontPage extends State<FrontPage> {
     }
     updateName();
     unitNoticeUpdate();
-
   }
 
  
@@ -72,9 +71,7 @@ class _FrontPage extends State<FrontPage> {
 
   @override
   Widget build(BuildContext context) {
- 
-    
-    
+
     
     //updateImage();
 

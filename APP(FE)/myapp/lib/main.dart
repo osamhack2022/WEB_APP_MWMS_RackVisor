@@ -5,10 +5,10 @@ import 'package:myapp/utils/constants.dart';
 import 'package:myapp/view/front_page.dart';
 import 'package:myapp/view/login_page.dart';
 import 'package:myapp/view/notice_page.dart';
+import 'package:myapp/view/qrsearchPage.dart';
 import 'package:myapp/view/serachResult_page.dart';
 import 'package:myapp/view/unit_page.dart';
-
-import 'stroage/**strorage_main_page.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/frontPage", page: () => const FrontPage()),
         GetPage(name: "/unitPage", page: () => UnitPage()),
         GetPage(name: "/searchPage", page: () => SearchResultPage()),
+        GetPage(name: "/qrSearchResultPage", page: () => QrSearchResultPage()),
       ]
     );
   }

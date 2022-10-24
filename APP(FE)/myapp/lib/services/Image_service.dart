@@ -8,7 +8,7 @@ class ImageService{
 static FrontModel frontModel = Get.put(FrontModel());
 
    static Future<WarehouseImage> ImageService2() async {
-      var uri = Uri.parse("https://211.37.150.202:80/api/warehouses/2");
+      var uri = Uri.parse("https://211.37.150.202:80/api/warehouses/");
 
         final response = await http.get(
         (uri), 

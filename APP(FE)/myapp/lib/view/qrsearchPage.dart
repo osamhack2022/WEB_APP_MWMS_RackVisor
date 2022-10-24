@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../model/stock_model.dart';
 import '../screen/search.dart';
-import '../services/stock_service.dart';
+import '../services/qrsearch_service.dart';
 
-class SearchResultPage extends StatefulWidget {
+class QrSearchResultPage extends StatefulWidget {
   @override
-  _SearchResultPageState createState() => _SearchResultPageState();
+  _QrSearchResultPageState createState() => _QrSearchResultPageState();
 }
 
-class _SearchResultPageState extends State<SearchResultPage> {
-  FetchUserList _userList = FetchUserList();
+class _QrSearchResultPageState extends State<QrSearchResultPage> {
+  QrSearchList _qrSearchList = QrSearchList();
+
+  var barcode = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('UserList'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: SearchUser());
-              },
-              icon: Icon(Icons.search_sharp),
-            )
-          ],
+          title: const Text("BarCodeScan 결과"),
         ),
         body: Container(
           padding: EdgeInsets.all(20),
           child: FutureBuilder<List<StockModel>>(
-              future: _userList.getuserList(),
+              future: _qrSearchList.getSearchList(barcode),
               builder: (context, snapshot) {
                 var data = snapshot.data;
                 return ListView.builder(

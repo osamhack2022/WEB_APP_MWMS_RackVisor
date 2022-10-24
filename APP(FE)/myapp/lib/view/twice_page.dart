@@ -54,10 +54,11 @@ class _TwicePageState extends State<TwicePage> {
 
       //스캔된 QR 코드에 특정 키워드가 들어있다면
       //QR 스캔을 정지하고 이 화면을 닫으면서 QR 결과값을 보내주도록한다.
+      // 여기서 m이 들어있고 없고를 판단해서 보내주면될듯
       if (event.code != null) {
         if (event.code!.contains(widget.eventKeyword)) {
           this.controller!.dispose();
-          Get.toNamed("/searchPage", arguments:event.code);
+          Get.toNamed("/qrSearchResultPage", arguments:event.code);
         }
       }
     });

@@ -3,8 +3,8 @@ import 'package:myapp/model/notice_screen_model.dart';
 import 'package:myapp/utils/global_colors.dart';
 import '../utils/constants.dart';
 
-class NoticeCell extends StatelessWidget {
-  const NoticeCell(this.noticeScreenModel, {super.key});
+class PageCell extends StatelessWidget {
+  const PageCell(this.noticeScreenModel, {super.key});
   @required
   final NoticeScreenModel noticeScreenModel;
 
@@ -12,42 +12,24 @@ class NoticeCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: NoticeScreenTile(
-        id: noticeScreenModel.id,
-        title: noticeScreenModel.title,
-        content: Text("미구현"),
+        icon: Icons.favorite,
+        noticeName: noticeScreenModel.title,
         subtitle: noticeScreenModel.content,
-        authorId: Text("미구현"),
-        postingUnitId: Text("미구현"),
-        createdAt: Text("미구현"),
       ),
     );
   }
 }
 
 
-
-  
-
-
 class NoticeScreenTile extends StatelessWidget {
-  final id;
-  final content;
-  final title;
-  final subtitle;
-  final authorId;
-  final postingUnitId;
-  final createdAt;
-  
+  final icon;
+  final String noticeName;
+  final String subtitle;
 
   const NoticeScreenTile({
-    required this.id, // 아이디
-    required this.title, //제목
-    required this.content, // 내용
-
-    required this.subtitle,  // 부제목
-    required this.authorId,
-    required this.postingUnitId,
-    required this.createdAt,
+    required this.icon,
+    required this.noticeName,
+    required this.subtitle,
   });
 
 
@@ -72,10 +54,10 @@ class NoticeScreenTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: Container(
                     padding: EdgeInsets.all(16),
-                    //아이디
+                    //아이콘테두리 색깔
                     color: Colors.orange,
-                    //아이디?
-                    child: Icon(id,
+                    //아이콘 색깔밑 아이콘 모양
+                    child: Icon(icon,
                     color: Colors.white,)
                     ),
                 ),
@@ -85,7 +67,7 @@ class NoticeScreenTile extends StatelessWidget {
                 Column(
                   children: [
                     //title 게시물 제목입니다.
-                    Text(title,
+                    Text(noticeName,
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

@@ -95,7 +95,7 @@ class UnitPageState extends State<UnitPage> {
     
   });
 
-    cellClick(UnitModel unitModel) {
+  cellClick(UnitModel unitModel) {
     Get.toNamed("/frontPage", arguments: unitModel);
   }
 

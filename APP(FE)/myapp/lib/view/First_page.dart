@@ -27,7 +27,7 @@ class FirstPage extends StatefulWidget {
  
  
 class _FirstPage extends State<FirstPage> {
- 
+  FrontModel frontModel = Get.put(FrontModel());
   SearchBarController searchBarController = Get.put(SearchBarController());
   
  
@@ -48,9 +48,6 @@ class _FirstPage extends State<FirstPage> {
 		super.dispose();
 		build(context);
 	}
-
-
-  
 
 
 
@@ -86,19 +83,30 @@ class _FirstPage extends State<FirstPage> {
   noticeGridview(AsyncSnapshot<List<NoticeScreenModel>> snapshot) {
       return Padding(
           padding: const EdgeInsets.all(5.0),
-          child: ListView(
-            
+          child: PageView(
             children: snapshot.data!
             .map(
               (noticeScreenModel) {
-                return GridTile(
-                    child: NoticeCell(noticeScreenModel),
-                );
+                return PageView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      child: NoticeCell(noticeScreenModel),
+                    );
+                  }
+                  );
               },
             ).toList(),
           ),
       );
     }
+
+
+
+
+
+
+
+
 
 
   circularProgress() {
@@ -107,15 +115,17 @@ class _FirstPage extends State<FirstPage> {
 
   
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    super.setState(fn);
+  }
  
  
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(896, 414));
+    ScreenUtil.init(context, designSize: const Size(896, 414)); 
   
-
-      
-  FrontModel frontModel = Get.put(FrontModel());
 
   List<NoticeScreenModel> parseNotice(String responsebody) {
       final parsed = json.decode(responsebody).cast<Map<String, dynamic>>();
