@@ -76,6 +76,7 @@ app.register(import('@fastify/cookie'), {
 });
 app.register(import('@fastify/cors'), {
   origin: true
+  // origin: 'https://211.37.150.202/'
 });
 
 // ! [Register] Swagger
@@ -117,7 +118,7 @@ app.register(historyRoutes, { prefix: 'api/historys' });
 app.setErrorHandler(errorHandlers);
 
 // ! [Server] Start Listening
-app.listen({ port: 80, host: '0.0.0.0' }, (err, address) => {
+app.listen({ port: 3001, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
