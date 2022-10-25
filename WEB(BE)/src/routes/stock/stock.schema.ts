@@ -25,6 +25,7 @@ const stockCore = {
   comment: z.string(),
   expirationDate: z.date().or(z.any()),
   storedBoxId: z.number(),
+  createdUserId: z.number(),
 };
 
 // ? Request
