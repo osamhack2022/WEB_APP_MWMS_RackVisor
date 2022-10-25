@@ -1,23 +1,26 @@
 import axios from "axios";
 
-const baseUrl = "https://211.37.150.202:80/api";
+const axiosInstance = axios.create({
+  withCredentials: true,
+  baseURL: "https://211.37.150.202:80/api",
+});
 
 export const axiosGet = async (targetApiUrl) => {
-  const { data } = await axios.get(baseUrl + targetApiUrl);
+  const { data } = await axiosInstance.get(targetApiUrl);
   return data;
 };
 
 export const axiosPost = async (targetApiUrl, body) => {
-  const { data } = await axios.post(baseUrl + targetApiUrl, body);
+  const { data } = await axiosInstance.post(targetApiUrl, body);
   return data;
 };
 
 export const axiosPut = async (targetApiUrl, body) => {
-  const { data } = await axios.put(baseUrl + targetApiUrl, body);
+  const { data } = await axiosInstance.put(targetApiUrl, body);
   return data;
 };
 
 export const axiosDel = async (targetApiUrl, body) => {
-  const { data } = await axios.delete(baseUrl + targetApiUrl, { data : body });
+  const { data } = await axiosInstance.delete(targetApiUrl, { data: body });
   return data;
-}
+};
