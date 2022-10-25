@@ -22,16 +22,16 @@ function HouseImageList() {
         let newDa = {}; 
         newDa.id = da.id;
         newDa.name = da.name;
-        newDa.img = da.warehouseImageBinary ? (da.warehouseImageBinary.data)  : "";
+        newDa.img = da.imgBase64;
         newImgList.push(newDa);
-        console.log(newDa.img);
       });
       setImageList(newImgList);
+
       if (newImgList) {
         setImageSrc(newImgList[0]);
       }
-      setHouseList(data);
 
+      setHouseList(data);
     // } catch (error) {
     //   alert("Error on fetching unit");
     // }
@@ -49,7 +49,7 @@ function HouseImageList() {
     console.log(src);
     try {
       await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
-      const response = await axiosGet("/warehouses/" + (copyOne.id).toString());
+      await axiosGet("/warehouses/" + (copyOne.id).toString());
       console.log("문제없음")
     } catch (e) {
       console.log("문제있음")
@@ -73,16 +73,18 @@ function HouseImageList() {
 
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
-    reader.readAsBinaryString(fileBlob);
+    reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
       reader.onload = () => {
         let cpy = imageSrc;
-        cpy.img = btoa(reader.result);
+        cpy.img = reader.result;
         setImageSrc(cpy);
+
         let copyArray = [...imageList];
         copyArray[currHouse].img = btoa(reader.result);
         setImageList(copyArray);
-        fetchImg(btoa(reader.result));
+        
+        fetchImg(reader.result);
         resolve();
       };
     });
@@ -102,7 +104,7 @@ function HouseImageList() {
       {   
       <main className="container px-3">
         <div className="preview flex justify-center">
-          {imageSrc && imageSrc.img != "" && <img src={`data:image;base64,${imageSrc.img}`} alt="preview-img" />}
+          {imageSrc && imageSrc.img && <img src={imageSrc.img ? imageSrc.img : ""} alt="preview-img" />}
         </div>
         <label class=" text-[#5AB0AD] pb-3 mb-3 hover:text-white" for="file-input">도면 업로드</label>
         <input class="hidden" id="file-input" type="file" onChange={(e) => {
