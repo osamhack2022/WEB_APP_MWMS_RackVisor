@@ -24,12 +24,20 @@ import { stockSchemas } from './routes/stock/stock.schema';
 import { postSchemas } from './routes/post/post.schema';
 import { historySchemas } from './routes/history/history.schema';
 import { readFileSync } from 'fs';
-import path from 'path';
+import path, { join } from 'path';
 
 const prisma = new PrismaClient();
+
+// ! HTTPS
 const app = fastify({
-  
-});
+  https: {
+    key: readFileSync(join(__dirname, 'cert', 'private.key')),
+    cert: readFileSync(join(__dirname, 'cert', 'certificate.crt'))
+  }
+})
+
+// ! HTTP
+// const app = fastify({})
 
 declare module '@fastify/jwt' {
   interface FastifyJWT {
@@ -67,7 +75,7 @@ app.register(import('@fastify/cookie'), {
   secret: 'SECRET_HERE_COOKIE', // for cookies signature
 });
 app.register(import('@fastify/cors'), {
-  origin: '*',
+  origin: true
 });
 
 // ! [Register] Swagger
