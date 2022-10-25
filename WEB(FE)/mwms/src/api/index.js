@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
   withCredentials: true,
-  baseURL: "https://211.37.150.202:80/api",
+  baseURL: "https://211.37.150.202/api",
 });
 
 export const axiosGet = async (targetApiUrl) => {
