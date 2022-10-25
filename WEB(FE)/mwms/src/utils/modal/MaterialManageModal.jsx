@@ -56,6 +56,7 @@ export default function MaterialManageModal({open, setOpen}) {
       comment : good,
       expirationDate : (startDate.getFullYear()).toString() + "-" + (startDate.getMonth() + 1).toString() + "-" + (startDate.getDate()).toString(),
       storedBoxId : Number(loc),
+      createdUserId: localStorage.getItem('id')
     }
 
     let itemToHistory = {
