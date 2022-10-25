@@ -15,7 +15,8 @@
 
 ---
 
-라이센스 추가(MIT) / 컨트리뷰터 추가(몇명) / ?? 보여주기(???)<br/>
+<a href=''><img src='https://img.shields.io/badge/VIDEO-red?style=for-the-badge'></a> <a href=''><img src='https://img.shields.io/badge/DOCS-white?style=for-the-badge'></a>
+
 서비스 소개 영상 링크 / 서비스 소개(가능하다면 깃북) / 개발 및 기획 (노션 페이지)<br/>
 
 </div>
