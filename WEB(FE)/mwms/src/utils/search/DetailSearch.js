@@ -48,7 +48,7 @@ export default function DetailSearch(props) {
       manager: people,
       minAmount: minCnt,
       maxAmount: maxCnt,
-      createdUserName: people,
+      createdUserName: people || undefined,
     };
 
     if (!ch1) {
