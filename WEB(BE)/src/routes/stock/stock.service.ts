@@ -59,6 +59,9 @@ export const advancedStockSearchService = async (
         lte: (body.maxExpDate && new Date(body.maxExpDate)) || undefined,
       },
       storedBoxId: body.storedBoxId,
+      createdUser: {
+        name: body.createdUserName
+      }
     },
   });
   console.log('@@@@ Advanced Search Result')
