@@ -41,6 +41,9 @@ export async function readStocksOnBox(storedBoxId: number) {
 export const advancedStockSearchService = async (
   body: AdvanedSearchStockInput
 ) => {
+  console.log('@@@@ Advanced Search Start')
+  console.log(body)
+
   const searchResult = await prisma.stock.findMany({
     where: {
       id: body.id,
@@ -58,6 +61,9 @@ export const advancedStockSearchService = async (
       storedBoxId: body.storedBoxId,
     },
   });
+  console.log('@@@@ Advanced Search Result')
+  console.log(searchResult)
+  console.log('@@@@ Advanced Search End')
   return searchResult;
 };
 
