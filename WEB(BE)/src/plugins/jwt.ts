@@ -15,8 +15,8 @@ export default fp(async function (fastify, opts) {
     'authenticateWithJWT',
     async function (request: FastifyRequest, reply: FastifyReply) {
       try {
-        // FIXME: JWT Connect
-        await request.jwtVerify();
+        // TODO: Uncomment line for production
+        // await request.jwtVerify();
       } catch (err: any) {
         switch (err.statusCode) {
           case 401:

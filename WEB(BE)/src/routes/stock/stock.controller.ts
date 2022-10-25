@@ -22,6 +22,7 @@ export async function registerStock(
   }>,
   reply: FastifyReply
 ) {
+  // request.jwtDecode()
   const body = request.body;
   const stock = await createStock(body);
   return reply.code(201).send(stock);

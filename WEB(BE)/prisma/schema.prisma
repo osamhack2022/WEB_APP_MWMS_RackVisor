@@ -80,8 +80,8 @@ model Stock {
   expirationDate DateTime?
   storedBox      Box       @relation(fields: [storedBoxId], references: [id])
   storedBoxId    Int
-  createdUser    User?      @relation(fields: [createdUserId], references: [id])
-  createdUserId  Int?
+  createdUser    User      @relation(fields: [createdUserId], references: [id])
+  createdUserId  Int
 }
 
 model Post {
