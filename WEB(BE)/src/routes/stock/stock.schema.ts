@@ -58,11 +58,11 @@ const stockResponseSchema = z.object({
   id: z.number(),
   ...stockCore,
 });
-const stockSearchResultResponseSchema = z.object({
-  // id: z.number(),
+const stockSearchResultResponseSchema = z.array(z.object({
+  id: z.number(),
   createdUserName: z.string(),
   ...stockCore,
-})
+}))
 const stocksResponseSchema = z.array(stockResponseSchema);
 
 export type CreateStockInput = z.infer<typeof createStockSchema>;
