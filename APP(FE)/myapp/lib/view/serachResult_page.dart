@@ -16,7 +16,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('UserList'),
+          title: Text('검색결과'),
           actions: [
             IconButton(
               onPressed: () {

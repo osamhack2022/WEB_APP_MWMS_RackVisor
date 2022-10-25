@@ -10,7 +10,7 @@ class AramCell extends StatelessWidget {
 
   var today = DateTime.now();
 
-  DateFormat('yyyy/MM/dd').format(DateTime.parse(aramModel.expirationDate.substring(aramModel.expirationDate.lastIndexOf("T")+1)).toString)
+  //DateFormat('yyyy/MM/dd').format(DateTime.parse(aramModel.expirationDate.substring(aramModel.expirationDate.lastIndexOf("T")+1)).toString)
 
   @override
   Widget build(BuildContext context) {

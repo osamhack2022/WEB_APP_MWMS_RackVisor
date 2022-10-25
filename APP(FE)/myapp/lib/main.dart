@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:myapp/utils/constants.dart';
 import 'package:myapp/view/front_page.dart';
 import 'package:myapp/view/login_page.dart';
-import 'package:myapp/view/notice_page.dart';
 import 'package:myapp/view/qrsearchPage.dart';
 import 'package:myapp/view/serachResult_page.dart';
 import 'package:myapp/view/unit_page.dart';
@@ -38,3 +39,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

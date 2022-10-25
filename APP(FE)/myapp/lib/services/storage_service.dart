@@ -8,7 +8,7 @@ class StorageService{
   FrontModel frontModel = Get.put(FrontModel());
 
   Future<WarehouseImage> StorageService2() async {
-      var uri = Uri.parse("https://211.37.150.202:80/api/warehouses/my-warehouses/${frontModel.selectId}");
+      var uri = Uri.parse("https://211.37.150.202/api/warehouses/my-warehouses/${frontModel.selectId}");
 
         final response = await http.get(
         (uri), 

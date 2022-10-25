@@ -6,7 +6,7 @@ import '../model/unit_add_page_model.dart';
 
 class UnitService {
   static Future<List<UnitaddModel>> unitPageAdd(String name,String comment) async {
-    var uri = Uri.parse('https://211.37.150.202:80/api/units/');
+    var uri = Uri.parse('https://211.37.150.202/api/units/');
     
     try {
       final response = await http.post(

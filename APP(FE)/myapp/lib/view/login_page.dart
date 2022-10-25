@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   
 
   Future logingUser(String militarySerialNumber, password) async {
-    var url = "https://211.37.150.202:80/api/users/login";
+    var url = "https://211.37.150.202/api/users/login";
 
     try {
       Map data = {"militarySerialNumber": militarySerialNumber,

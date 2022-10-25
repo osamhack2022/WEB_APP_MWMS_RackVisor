@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class UnitService {
   static Future<List<UnitModel>> getPhotos() async {
-    var uri = Uri.parse('https://211.37.150.202:80/api/units/all-units');
+    var uri = Uri.parse('https://211.37.150.202/api/units/all-units');
 
     try {
       final response = await http
