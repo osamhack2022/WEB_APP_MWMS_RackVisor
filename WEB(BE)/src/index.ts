@@ -67,7 +67,8 @@ app.register(import('@fastify/cookie'), {
   secret: 'SECRET_HERE_COOKIE', // for cookies signature
 });
 app.register(import('@fastify/cors'), {
-  origin: '*',
+  origin: ['http://localhost:3000'],
+  
 });
 
 // ! [Register] Swagger
