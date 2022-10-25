@@ -28,7 +28,7 @@ import path from 'path';
 
 const prisma = new PrismaClient();
 const app = fastify({
-  
+
 });
 
 declare module '@fastify/jwt' {
@@ -67,8 +67,7 @@ app.register(import('@fastify/cookie'), {
   secret: 'SECRET_HERE_COOKIE', // for cookies signature
 });
 app.register(import('@fastify/cors'), {
-  origin: ['http://localhost:3000'],
-  
+  origin: true
 });
 
 // ! [Register] Swagger
