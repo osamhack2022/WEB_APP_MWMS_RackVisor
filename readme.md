@@ -1,62 +1,211 @@
-### 본 페이지는 샘플입니다. 아래의 *[샘플 양식에 포함되어 있는 항목은 필수 기재사항]*   입니다.
-해당 내용은 모두 예시이며 설명이 부족하거나 추가하고싶은 부분이 있으면 개발자님이 추가해서 작성하셔도 무관합니다. (동영상, 이미지, 텍스트 적용 전부 자유)
+# MWMS - 국방물자관리체계
 
+<br/>
 
-# Project name or Logo
-![Logo](https://logosbynick.com/wp-content/uploads/2018/03/final-logo-example.png)
+<div align='center'>
 
-프로젝트명 또는 프로젝트 로고 이미지 **(택1)**
+![Logo](<https://raw.githubusercontent.com/osamhack2022/WEB_APP_MWMS_RackVisor/master/WEB(FE)/mwms/src/images/logo.png>)
 
-## 프로잭트 소개
-- 설명 기입
+---
 
+<img src='https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge&logo'>
+<a href="https://github.com/osamhack2022-v2/WEB_APP_MWMS_RackVisor/blob/master/license.md"><img src='https://img.shields.io/badge/License-MIT-black?style=for-the-badge&logo'></a>
 
-## 기능 설명
- - 설명 기입
+<a href="https://github.com/osamhack2022-v2/WEB_APP_MWMS_RackVisor/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/osamhack2022-v2/WEB_APP_MWMS_RackVisor?color=success"></a> <a href="https://github.com/osamhack2022-v2/WEB_APP_MWMS_RackVisor/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/osamhack2022-v2/WEB_APP_MWMS_RackVisor"></a> <a href="https://github.com/osamhack2022-v2/WEB_APP_MWMS_RackVisor/network/members"><img alt="GitHub forks" src="https://img.shields.io/github/forks/osamhack2022-v2/WEB_APP_MWMS_RackVisor"></a> <a href="https://github.com/osamhack2022-v2/WEB_APP_MWMS_RackVisor/search?l=JavaScript&type=code"><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/osamhack2022-v2/WEB_APP_MWMS_RackVisor"></a>
 
-## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
-* ECMAScript 6 지원 브라우저 사용
-* 권장: Google Chrome 버젼 77 이상
+---
 
-## 기술 스택 (Technique Used) 
-### Server(back-end)
- -  nodejs, php, java 등 서버 언어 버전 
- - express, laravel, sptring boot 등 사용한 프레임워크 
- - DB 등 사용한 다른 프로그램 
- 
-### Front-end
- -  react.js, vue.js 등 사용한 front-end 프레임워크 
- -  UI framework
- - 기타 사용한 라이브러리
+라이센스 추가(MIT) / 컨트리뷰터 추가(몇명) / ?? 보여주기(???)<br/>
+서비스 소개 영상 링크 / 서비스 소개(가능하다면 깃북) / 개발 및 기획 (노션 페이지)<br/>
 
-## 설치 안내 (Installation Process)
+</div>
+
+> 군인**의**, 군인을 **위한**, 군인에 **의한** <br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 창고 관리 시스템, &#160;&#160; **"국방물자관리체계"**
+
+## <br/> 목차
+
+<details open="open">
+  <ol>
+    <li><a href="#introduction-project"> 프로젝트 소개 (Intro)</a></li>
+    <li><a href="#introduction-function"> 기능설명 </a></li>
+    <li><a href="#how-to-install"> 설치 안내 </a></li>
+    <li><a href="#how-to-use"> 프로젝트 사용법 </a></li>
+    <li><a href="#prerequisites"> 컴퓨터 구성 / 필수 조건 안내</a></li>
+    <li><a href="#techniques"> 기술 스택</a></li>
+    <li><a href="#team"> 팀 정보</a></li>
+    <li><a href="#license"> 저작권 및 정보</a></li>
+  </ol>
+</details>
+
+<br/>
+
+<h2 id='introduction-project'>프로잭트 소개</h2>
+
+- 배경 상황
+  > 창고? 어땠냐고? 지옥 같았지...<br/>
+  > 창고 물자 관리를 어떻게 하냐고? 그냥 그때그때마다 세고 있어 <br/>
+  > 창고 항상 그거 난장판이야 그거 <br/>
+  > 혹시 XX 어디있는지 아십니까? 그거는 이제 창고 저어쪽 구석에 ... <br/>
+
+군부대의 수많은 군수품들을 관리하는 창고, 각 창고는 모두 올바르게 관리되고 있을까요? <br/>
+상급제대로부터 받은 군수품 혹은 필요할 때마다 그때그때 받은 모든 물품들은 창고에 저장되는데요 <br/>
+그렇다면 저장된 물품들의 상태와 수량, 종류, 위치를 모두 정확하게 최신화 하고 있을까요? <br/>
+수많은 부대에서 아직도 보급담당 계원들만 골머리를 앓는채 그대로 유지되는게 맞을까요? <br/>
+더이상 그때그때 정리하고 보여주기를 위해서만 창고정리는 그만 <br/>
+한번 정리하고 앞으로 쭉 관리하기 위한, **국방물자관리체계** <br/>
+<br/>
+
+- 특징
+
+**단순한 UI**, 기능적으로 복잡하지 않고, 기존의 창고를 있는 그대로 본뜨기 위한 간단한 **창고 관리**<br/>
+일괄 추가 일괄 제거, 그리고 세부적인 검색이 가능한 물자 관리<br/>
+검색은 이젠 그만! **QR 코드**를 통한 간편한 인식과 재고 확인<br/>
+이거 벌써 유통기한 지났네? **알람기능**을 통한 유통기한 임박 물품 리스트 확인<br/>
+이걸 언제 다쓴거지? **히스토리** 확인과 **통계** 확인<br/>
+
+<br/>
+
+<h2 id="introduction-function">기능 설명</h2>
+
+- 주요 기능 - **창고 관리** <br/>
+  기존 부대의 각 창고의 모양을 본뜨기 위해서 간단한 UI 를 통해 창고의 모양을 본뜰 뿐더러, <br/> 창고 속 층과 구역을 간단히 나눠 그 누구든 검색한 위치로 쉽게 찾아갈 수 있도록 하는 기능 - **물자 관리** <br/>
+  사용 가능 기한, 담당자 등을 바탕으로 하여 세부 특성에 맞춘 검색 기능<br>창고와 창고별 위치를 바탕으로 위치별 물자 검색<br>기존의 델리스 체계와의 호환을 위한 엑셀 맞춤형 물자 추가 - **바코드 생성과 인식** <br/>
+  특정 물품에 가시성 있도록 하는 바코드를 부착한 간단한 관리<br>물자가 보관된 박스에 이를 조회하여 들어있어야 하는 물품을 조회하거나 혹은 박스 이름을 조회할 수 있도록 하는 기능 - **히스토리** <br/>
+  부대 물품이 변동된 기록을 확인하여 사용처와 사용량을 확인할 수 있음 -**앱 제공**<br/>
+  단순 웹사이트만 제공하는 체계들과 달리 휴대폰을 활용하여 창고에 직접 방문하여 물품의 리스트를 확인하고, QR 코드를 인식하여 조회할 수 있는 기능을 지니고 있음
+
+- 세부 기능 - **권한 설정**<br/>
+  부대별 접속 가능한 권한을 설정하여 권한을 바탕으로 부대에 접근할 수 있도록 한다 - **알람과 공지사항 기능**<br/>
+  부대에 속한 물품들이 유통기한이 임박했을 경우 이를 확인할 수 있음, 또한 부대 내 전파사항이 있을 경우 공지사항 게시판을 통해 서로에게 전파할 수 있음 - **통계 기능**<br/>
+  특정 기간동안 사용된 물품의 수와 추가로 들어온 물품의 수를 비교하며, 특정 물품의 사용량을 확인하여 부대 운영 시 적절한 양의 물품을 받고 사용할 수 있도록 함
+
+<br/>
+
+<h2 id="how-to-install">설치 안내 (Installation Process)</h2>
+
+다른 서버쪽 앱쪽 나오는대로 앱 / 웹 만 나누고 나머지는 동시에 해서 보여주도록 하기
+
 ```bash
 $ git clone git주소
-$ yarn or npm install
+$ yarn install
 $ yarn start or npm run start
 ```
 
-## 프로젝트 사용법 (Getting Started)
-**마크다운 문법을 이용하여 자유롭게 기재**
+<br/>
 
-잘 모를 경우
-구글 검색 - 마크다운 문법
-[https://post.naver.com/viewer/postView.nhn?volumeNo=24627214&memberNo=42458017](https://post.naver.com/viewer/postView.nhn?volumeNo=24627214&memberNo=42458017)
+<h2 id="how-to-use">프로젝트 사용법 (Getting Started)</h2>
 
- 편한 마크다운 에디터를 찾아서 사용
- 샘플 에디터 [https://stackedit.io/app#](https://stackedit.io/app#)
- 
-## 팀 정보 (Team Information)
-- hong gil dong (hong999@gmail.com), Github Id: gildong999
-- kim su ji (suji999@gmail.com), Github Id: suji999
+-> 이걸 깃북으로 해서 넘기는 것도 좋을 거 같은데
+이거는 프로젝트를 최대한 빨리 완성시키고 나서 생각해봐야 한다
 
-## 저작권 및 사용권 정보 (Copyleft / End User License)
- * [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
+<br/>
+
+<h2 id="prerequisites">컴퓨터 구성 / 필수 조건 안내 (Prerequisites)</h2>
+
+- ECMAScript 6 지원 브라우저 사용
+- 권장: Google Chrome 버젼 77 이상
+
+표 형식으로 만들어서 보기 좋게 하기 (웹사이트 다른 웹사이트도 가능한지 확인하고 로고 넣어서 가시성 올려주기)
+
+<br/>
+
+<h2 id="techniques">기술 스택 (Technique Used)</h2>
+
+이 부분도 마찬가지로 그림으로 해서 넣기! 묶어서 보여주기 방식 ... 뭐라해야지..? 하여튼 그렇게 깔끔하게 보여주기
+
+### Server(back-end)
+
+- nodejs, php, java 등 서버 언어 버전
+- express, laravel, sptring boot 등 사용한 프레임워크
+- DB 등 사용한 다른 프로그램
+
+### Front-end
+
+- react.js, vue.js 등 사용한 front-end 프레임워크
+- UI framework
+- 기타 사용한 라이브러리
+
+<h2 id="team">:runner: :runner: 팀 정보 (Team Information)</h2>
+
+> **RackVisor** <br>가상 현실(VM) 속 창고(RACK) 을 다루는 프로그램(HYPERVISOR) 처럼 군대 속 창고들을 쉽게 다룰 수 있는
+>
+> -> 표 형식으로 해서 넣어주기
+
+<table width="900">
+
+<thead>
+
+<tr>
+
+<th width="100" align="center">Name</th>
+
+<th width="250" align="center">Role</th>
+
+<th width="150" align="center">Github</th>
+
+<th width="300" align="center">E-mail</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td width="100" height="55" align="center">제태호<br>(팀장)</td>
+<td width="250">Product Manager<br>FrontEnd Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/stpcoder">
+<img src="https://img.shields.io/badge/stpcoder-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:thbrian@postech.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=thbrian@postech.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+<tr>
+<td width="100" height="55" align="center">조영현</td>
+<td width="250">BackEnd Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/poxios">
+<img src="https://img.shields.io/badge/poxios-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:poxios0310@gmail.com"><img src="https://img.shields.io/static/v1?label=&message=poxios0310@gmail.com&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+<tr>
+<td width="100" height="55" align="center">이현우</td>
+<td width="250">BackEnd Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/lhw414">
+<img src="https://img.shields.io/badge/lhw414-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:dlgusdn0414@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=dlgusdn0414@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+<tr>
+<td width="100" height="55" align="center">이원형</td>
+<td width="250">App Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/codingle2">
+<img src="https://img.shields.io/badge/codingle2-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:5292k@naver.com"><img src="https://img.shields.io/static/v1?label=&message=5292k@naver.com&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+<tr>
+<td width="100" height="55" align="center">여호영</td>
+<td width="250">App Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/codingle2">
+<img src="https://img.shields.io/badge/codingle2-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:hoyeong3273@naver.com"><img src="https://img.shields.io/static/v1?label=&message=hoyeong3273@naver.com&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+<tr>
+<td width="100" height="55" align="center">정유환</td>
+<td width="250">Designer</td>
+<td width="150" align="center">
+<a href="https://github.com/yh2369">
+<img src="https://img.shields.io/badge/yh2369-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:yuhwan012@gmail.com"><img src="https://img.shields.io/static/v1?label=&message=yuhwan012@gmail.com&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+
+</table>
+
+</br>
+
+<h2 id="license">저작권 및 사용권 정보 (Copyleft / End User License)</h2>
+
+- [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
 
 This project is licensed under the terms of the MIT license.
-
-※ [라이선스 비교표(클릭)](https://olis.or.kr/license/compareGuide.do)
-
-※ [Github 내 라이선스 키워드(클릭)](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/licensing-a-repository)
-
-※ [\[참조\] Github license의 종류와 나에게 맞는 라이선스 선택하기(클릭)](https://flyingsquirrel.medium.com/github-license%EC%9D%98-%EC%A2%85%EB%A5%98%EC%99%80-%EB%82%98%EC%97%90%EA%B2%8C-%EB%A7%9E%EB%8A%94-%EB%9D%BC%EC%9D%B4%EC%84%A0%EC%8A%A4-%EC%84%A0%ED%83%9D%ED%95%98%EA%B8%B0-ae29925e8ff4)
