@@ -24,6 +24,7 @@ function HouseImageList() {
         newDa.name = da.name;
         newDa.img = da.warehouseImageBinary ? (da.warehouseImageBinary.data)  : "";
         newImgList.push(newDa);
+        console.log(newDa.img);
       });
       setImageList(newImgList);
       if (newImgList) {
@@ -45,8 +46,14 @@ function HouseImageList() {
     let itemToAdd = {
       imgBase64 : src
     }
-    await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
-    const response = await axiosGet("/warehouses/" + (copyOne.id).toString())
+    console.log(src);
+    try {
+      await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
+      const response = await axiosGet("/warehouses/" + (copyOne.id).toString());
+      console.log("문제없음")
+    } catch (e) {
+      console.log("문제있음")
+    }
   }
 
   const onLeft = () => {
