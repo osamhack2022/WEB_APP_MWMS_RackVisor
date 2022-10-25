@@ -72,6 +72,9 @@
 <h2 id="introduction-function"> :page_with_curl: 기능 설명</h2>
 
 <a href="https://app.gitbook.com/o/Jw07u3aojPWZwNszVDiX/s/sEadZzLRcypJiDENQUQw/undefined-2/undefined"><img src="docs\gitbook-function.png"></a>
+상단 GITBOOk을 클릭하여 자세한 정보를 확인할 수 있습니다.
+
+<br/>
 
 - 주요 기능 - **창고 관리** <br/>
   기존 부대의 각 창고의 모양을 본뜨기 위해서 간단한 UI 를 통해 창고의 모양을 본뜰 뿐더러, <br/> 창고 속 층과 구역을 간단히 나눠 그 누구든 검색한 위치로 쉽게 찾아갈 수 있도록 하는 기능 - **물자 관리** <br/>
@@ -237,3 +240,11 @@ $ yarn start or npm run start
 - [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
 
 This project is licensed under the terms of the MIT license.
+
+<br/>
+
+---
+
+<h2>더 자세한 정보...</h2>
+
+더 자세한 정보는 [GIT-BOOK]()을 통해 확인하세요!
