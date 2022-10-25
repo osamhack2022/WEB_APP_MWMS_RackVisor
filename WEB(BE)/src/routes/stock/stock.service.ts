@@ -63,6 +63,13 @@ export const advancedStockSearchService = async (
         name: body.createdUserName
       }
     },
+    include: {
+      createdUser: {
+        select: {
+          name: true
+        }
+      }
+    }
   });
   console.log('@@@@ Advanced Search Result')
   console.log(searchResult)
