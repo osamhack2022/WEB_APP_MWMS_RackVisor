@@ -71,10 +71,16 @@ export const advancedStockSearchService = async (
       }
     }
   });
+  const invoices = searchResult.map((e) => ({
+    ...e,
+    createdUserId: undefined,
+    createdUser: undefined,
+    createdUserName: e.createdUser.name
+  }))
   console.log('@@@@ Advanced Search Result')
-  console.log(searchResult)
+  console.log(invoices)
   console.log('@@@@ Advanced Search End')
-  return searchResult;
+  return invoices;
 };
 
 export async function updateStock(data: updateStockInput) {
