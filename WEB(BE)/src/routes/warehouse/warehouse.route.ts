@@ -3,6 +3,10 @@ import { DecoratedFastifyInstance } from '../../index';
 import {
   registerWarehouse,
   findWarehousesOnUnit,
+  updateLayoutOfWarehouse,
+  updateWarehouseItemlist,
+  getWarehouseOnId,
+  updateWarehouseImageController,
 } from './warehouse.controller';
 import { $ref } from './warehouse.schema';
 
@@ -22,7 +26,7 @@ async function warehouseRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/:storedUnitId/',
+    '/my-warehouses/:storedUnitId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
@@ -32,6 +36,58 @@ async function warehouseRoutes(server: FastifyInstance) {
       },
     },
     findWarehousesOnUnit
+  );
+
+  server.put(
+    '/update-layout/:warehouseId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateWarehouseLayoutSchema'),
+        response: {
+          200: $ref('updateWarehouseLayoutSchema'),
+        },
+      },
+    },
+    updateLayoutOfWarehouse
+  );
+
+  server.put(
+    '/house-image/:warehouseId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateWarehouseImageSchema'),
+      },
+    },
+    updateWarehouseImageController
+  );
+
+  server.put(
+    '/update-itemlist/:warehouseId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        body: $ref('updateWarehouseItemlist'),
+        response: {
+          201: $ref('updateWarehouseItemlist'),
+        },
+      },
+    },
+    updateWarehouseItemlist
+  );
+
+  server.get(
+    '/:warehouseId',
+    {
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+      schema: {
+        response: {
+          201: $ref('warehouseResponseSchema'),
+        },
+      },
+    },
+    getWarehouseOnId
   );
 }
 

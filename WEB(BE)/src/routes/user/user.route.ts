@@ -32,7 +32,7 @@ async function userRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/',
+    '/all-users',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
     },

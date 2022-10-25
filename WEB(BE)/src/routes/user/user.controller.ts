@@ -49,6 +49,9 @@ export async function loginHandler(
     const payload = {
       id: user.id,
       msn: user.militarySerialNumber,
+      rank: user.rank,
+      position: user.position,
+      name: user.name
     };
     const accessToken = await reply.jwtSign(payload, {
       iss: 'MWMS',
@@ -56,13 +59,10 @@ export async function loginHandler(
     });
     return reply
       .setCookie('token', accessToken, {
-        path: '/api',
-        secure: true, // send cookie over HTTPS only
-        httpOnly: true,
-        sameSite: true, // alternative CSRF protection
+        domain: '211.37.150.202'
       })
       .code(200)
-      .send('Cookie sent');
+      .send(payload);
   }
 
   return reply.code(401).send({

@@ -11,6 +11,8 @@ import warehouseRoutes from './routes/warehouse/warehouse.route';
 import rackRoutes from './routes/rack/rack.route';
 import boxRoutes from './routes/box/box.route';
 import stockRoutes from './routes/stock/stock.route';
+import postRoutes from './routes/post/post.route';
+import historyRoutes from './routes/history/history.route';
 
 // ! [Import] Schemas
 import { userSchemas } from './routes/user/user.schema';
@@ -19,9 +21,15 @@ import { warehouseSchemas } from './routes/warehouse/warehouse.schema';
 import { rackSchemas } from './routes/rack/rack.schema';
 import { boxSchemas } from './routes/box/box.schema';
 import { stockSchemas } from './routes/stock/stock.schema';
+import { postSchemas } from './routes/post/post.schema';
+import { historySchemas } from './routes/history/history.schema';
+import { readFileSync } from 'fs';
+import path from 'path';
 
 const prisma = new PrismaClient();
-const app = fastify();
+const app = fastify({
+
+});
 
 declare module '@fastify/jwt' {
   interface FastifyJWT {
@@ -46,6 +54,8 @@ for (const schema of [
   ...rackSchemas,
   ...boxSchemas,
   ...stockSchemas,
+  ...postSchemas,
+  ...historySchemas,
 ]) {
   app.addSchema(schema);
 }
@@ -55,6 +65,9 @@ app.register(jwt);
 app.register(import('fastify-bcrypt'));
 app.register(import('@fastify/cookie'), {
   secret: 'SECRET_HERE_COOKIE', // for cookies signature
+});
+app.register(import('@fastify/cors'), {
+  origin: true
 });
 
 // ! [Register] Swagger
@@ -89,16 +102,17 @@ app.register(warehouseRoutes, { prefix: 'api/warehouses' });
 app.register(rackRoutes, { prefix: 'api/racks' });
 app.register(boxRoutes, { prefix: 'api/boxes' });
 app.register(stockRoutes, { prefix: 'api/stocks' });
+app.register(postRoutes, { prefix: 'api/posts' });
+app.register(historyRoutes, { prefix: 'api/historys' });
 
 // ! Error Handler
 app.setErrorHandler(errorHandlers);
 
 // ! [Server] Start Listening
-app.listen({ port: 3003 }, (err, address) => {
+app.listen({ port: 80, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
   }
   console.log(`[DEV] Server Started at ${address}`);
-  console.log(`[DEV] 🚀 Server ready at: http://localhost:3003`);
 });

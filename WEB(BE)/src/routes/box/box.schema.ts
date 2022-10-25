@@ -3,21 +3,17 @@ import { buildJsonSchemas } from 'fastify-zod';
 
 const boxCore = {
   name: z.string(),
-  locationX: z.number(),
-  locationY: z.number(),
-  width: z.number(),
-  height: z.number(),
-  storedRackId: z.number(),
 };
 
 const createBoxSchema = z.object({
   ...boxCore,
+  storedRackId: z.number(),
 });
 
 const boxResponseSchema = z.object({
   id: z.number(),
   ...boxCore,
-});
+}).describe('TEST_DESCRIBE');
 
 const boxesResponseSchema = z.array(boxResponseSchema);
 
