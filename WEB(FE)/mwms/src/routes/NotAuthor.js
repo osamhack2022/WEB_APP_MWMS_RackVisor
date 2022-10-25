@@ -1,9 +1,9 @@
 import React from 'react'
 import {Routes, Route} from 'react-router-dom';
-import MainPage from '../pages/MainPage';
-import LoginPage from '../pages/LoginPage';
-import SignupPage from '../pages/SignupPage';
-import ServiceIntroducePage from '../pages/ServiceIntroducePage';
+import MainPage from '../pages/notAuthorPages/MainPage';
+import LoginPage from '../pages/notAuthorPages/LoginPage';
+import ServiceIntroducePage from '../pages/notAuthorPages/ServiceIntroducePage';
+import SignupPage from '../pages/notAuthorPages/SignupPage';
 
 function NotAuthor() {
   return (

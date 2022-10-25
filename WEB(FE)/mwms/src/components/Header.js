@@ -1,29 +1,62 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { Link } from 'react-router-dom'
 import logoImg from '../images/logo.png'
+import close from '../assets/close.svg'
+import menu from '../assets/menu.svg'
 
-function Header({buttonList}) {
+const loginButtonList = [
+  {link : "/", name : "홈", index: 0, outSide : false},
+  {link : "https://github.com/osamhack2022-v2/WEB_APP_MWMS_RackVisor", name : "서비스 소개", index:1, outSide : true},
+  {link : "/signup", name : "회원가입", index:2, outSide : false},
+  {link : "/login", name : "로그인", index:3, outSide : false},
+]
+
+function Header() {
+
+  const [toggle, setToggle] = useState(false)
+
   return (
     <div>
-      <nav class="p-5 bg-gray-50 rounded border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div class="container flex flex-wrap justify-between items-center mx-auto">
-          <a href="./" class="flex items-center">
-              <img src= {logoImg} class="mr-9 h-9 sm:h-9" alt="logo image" />
-          </a>
-          <button data-collapse-toggle="navbar-solid-bg" type="button" class="inline-flex justify-center items-center ml-3 text-gray-400 rounded-lg md:hidden hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-500" aria-controls="navbar-solid-bg" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-          </button>
-          <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
-            <ul class="flex flex-col mt-4 bg-gray-50 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-bold md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-              {buttonList.map(button => (
+      <nav class="bg-primary-900 w-full flex py-6 justify-between items-center navbar">
+        
+        <a href="./" class="flex items-center">
+          <img src= {logoImg} class="w-[124px] h-[48px]" alt="logo image" />
+        </a>
+
+        
+        <ul class="list-none sm:flex hidden justify-end items-center flex-1">
+          {loginButtonList.map(button => (
+            button.outSide ? 
+            (<li>
+              <a href={button.link} class={`font-poppins font-normal cursor-pointer text-[16px] ${button.index === loginButtonList.length - 1? 'mr-0' : 'mr-10'} text-white hover:text-blue-300`} target="_blank" >{button.name}</a>
+            </li>) : 
+            (<li>
+              <Link to={button.link} class={`font-poppins font-normal cursor-pointer text-[16px] ${button.index === loginButtonList.length - 1? 'mr-0' : 'mr-10'} text-white hover:text-blue-300`}>{button.name}</Link>
+            </li>)
+          ))}
+        </ul>
+
+        <div class="sm:hidden flex flex-1 justify-end items-center">
+          <img
+            src={toggle? close: menu}
+            alt="menu"
+            class="w-[28px] h-[28px]
+            object-contain"
+            onClick={() => setToggle((prev) => !prev)}
+          />
+          <div
+            class={`${toggle ? 'flex' : 'hidden'} p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
+          >
+            <ul class="list-none flex flex-col justify-end items-center flex-1">
+              {loginButtonList.map(button => (
                 <li>
-                  <Link to={button.link} class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{button.name}</Link>
+                  <Link to={button.link} class={`font-poppins font-normal cursor-pointer text-[16px] ${button.index === loginButtonList.length - 1? 'mr-0' : 'mb-4'} text-white hover:text-blue-300`}>{button.name}</Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+
       </nav>
     </div>
   )

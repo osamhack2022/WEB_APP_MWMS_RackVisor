@@ -4,12 +4,12 @@ import logoImg from '../images/logo.png'
 function Footer() {
   return (
     <div>
-      <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+      <footer class="p-4 bg-[#202020] shadow">
         <div class="sm:flex sm:items-center sm:justify-between">
             <a href="./" class="flex items-center mb-4 sm:mb-0">
-                <span class = "text-black-600 text-2xl font-bold">MWMS</span>
+                <span class = "text-2xl text-white font-bold">MWMS</span>
             </a>
-            <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
+            <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500">
                 <li>
                     <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
                 </li>
@@ -24,8 +24,8 @@ function Footer() {
                 </li>
             </ul>
         </div>
-        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="./" class="hover:underline">MWMS</a>. All Rights Reserved.
+        
+        <span class="block text-sm text-gray-500 sm:text-center">© 2022 <a href="./" class="hover:underline">MWMS</a>. All Rights Reserved.
         </span>
      </footer>
     </div>
