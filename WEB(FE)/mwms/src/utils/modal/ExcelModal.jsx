@@ -52,6 +52,7 @@ export default function ExcelModal({open, setOpen}) {
       comment : da.comment,
       expirationDate : da.expirationDate,
       storedBoxId : Number(loc),
+      createdUserId: localStorage.getItem('id')
     }
 
     let itemToHistory = {

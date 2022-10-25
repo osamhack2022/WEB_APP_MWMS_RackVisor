@@ -75,6 +75,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
       expirationDate : (startDate.getFullYear()).toString() + "-" + (numFormat(startDate.getMonth() + 1)).toString() + "-" + (numFormat(startDate.getDate())).toString() + "T00:00:00.000Z",
       storedBoxId : Number(loc),
       id : Number(id),
+      createdUserId : Number(localStorage.getItem('id'))
     }
 
     let itemToHistory = {
@@ -86,6 +87,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
       if (!loc) {
         alert("저장될 위치를 선정해주세요")
       } else {
+        alert(JSON.stringify(itemToAdd));
         await axiosPut("/stocks/stock-update", itemToAdd);
         await axiosPost("/historys/", itemToHistory);
         alert("물품이 변경되었습니다");
