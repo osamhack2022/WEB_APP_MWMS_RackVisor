@@ -73,7 +73,6 @@ export const advancedStockSearchService = async (
   });
   const invoices = searchResult.map((e) => ({
     ...e,
-    createdUserId: undefined,
     createdUser: undefined,
     createdUserName: e.createdUser.name
   }))
