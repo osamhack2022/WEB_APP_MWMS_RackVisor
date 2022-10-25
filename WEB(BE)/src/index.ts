@@ -75,7 +75,8 @@ app.register(import('@fastify/cookie'), {
   secret: 'SECRET_HERE_COOKIE', // for cookies signature
 });
 app.register(import('@fastify/cors'), {
-  origin: true
+  origin: '*'
+  // TODO: Uncomment line for production
   // origin: 'https://211.37.150.202/'
 });
 
