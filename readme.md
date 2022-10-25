@@ -15,17 +15,15 @@
 
 ---
 
-<a href=''><img src='https://img.shields.io/badge/VIDEO-red?style=for-the-badge'></a> <a href=''><img src='https://img.shields.io/badge/DOCS-white?style=for-the-badge'></a>
-
-서비스 소개 영상 링크 / 서비스 소개(가능하다면 깃북) / 개발 및 기획 (노션 페이지)<br/>
+<a href=''><img src='https://img.shields.io/badge/VIDEO-red?style=for-the-badge'></a> <a href=''><img src='https://img.shields.io/badge/GIT BOOK-blue?style=for-the-badge'></a> <a href=''><img src='https://img.shields.io/badge/DOCS-gray?style=for-the-badge'></a>
+<br/>
 
 </div>
 
 > 군인**의**, 군인을 **위한**, 군인에 **의한** <br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 창고 관리 시스템, &#160;&#160; **"국방물자관리체계"**
 
-## <br/> 목차
+## <br/> :book: 목차
 
-<details open="open">
   <ol>
     <li><a href="#introduction-project"> 프로젝트 소개 (Intro)</a></li>
     <li><a href="#introduction-function"> 기능설명 </a></li>
@@ -36,7 +34,6 @@
     <li><a href="#team"> 팀 정보</a></li>
     <li><a href="#license"> 저작권 및 정보</a></li>
   </ol>
-</details>
 
 <br/>
 
@@ -110,7 +107,9 @@ $ yarn start or npm run start
 
 <br/>
 
-<h2 id="techniques">기술 스택 (Technique Used)</h2>
+<h2 id="techniques">:hammer: 기술 스택 (Technique Used)</h2>
+
+<img src="docs\tech-stack.png">
 
 이 부분도 마찬가지로 그림으로 해서 넣기! 묶어서 보여주기 방식 ... 뭐라해야지..? 하여튼 그렇게 깔끔하게 보여주기
 
@@ -160,6 +159,7 @@ $ yarn start or npm run start
 <img src="https://img.shields.io/badge/stpcoder-655ced?style=social&logo=github"/></a>
 <td width="300" align="center"><a href="mailto:thbrian@postech.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=thbrian@postech.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
 </tr>
+
 <tr>
 <td width="100" height="55" align="center">조영현</td>
 <td width="250">BackEnd Developer</td>
@@ -168,6 +168,7 @@ $ yarn start or npm run start
 <img src="https://img.shields.io/badge/poxios-655ced?style=social&logo=github"/></a>
 <td width="300" align="center"><a href="mailto:poxios0310@gmail.com"><img src="https://img.shields.io/static/v1?label=&message=poxios0310@gmail.com&color=lightgray&style=flat-square&logo=gmail"></a></td>
 </tr>
+
 <tr>
 <td width="100" height="55" align="center">이현우</td>
 <td width="250">BackEnd Developer</td>
@@ -176,6 +177,7 @@ $ yarn start or npm run start
 <img src="https://img.shields.io/badge/lhw414-655ced?style=social&logo=github"/></a>
 <td width="300" align="center"><a href="mailto:dlgusdn0414@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=dlgusdn0414@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
 </tr>
+
 <tr>
 <td width="100" height="55" align="center">이원형</td>
 <td width="250">App Developer</td>
@@ -184,6 +186,7 @@ $ yarn start or npm run start
 <img src="https://img.shields.io/badge/codingle2-655ced?style=social&logo=github"/></a>
 <td width="300" align="center"><a href="mailto:5292k@naver.com"><img src="https://img.shields.io/static/v1?label=&message=5292k@naver.com&color=lightgray&style=flat-square&logo=gmail"></a></td>
 </tr>
+
 <tr>
 <td width="100" height="55" align="center">여호영</td>
 <td width="250">App Developer</td>
@@ -192,6 +195,7 @@ $ yarn start or npm run start
 <img src="https://img.shields.io/badge/codingle2-655ced?style=social&logo=github"/></a>
 <td width="300" align="center"><a href="mailto:hoyeong3273@naver.com"><img src="https://img.shields.io/static/v1?label=&message=hoyeong3273@naver.com&color=lightgray&style=flat-square&logo=gmail"></a></td>
 </tr>
+
 <tr>
 <td width="100" height="55" align="center">정유환</td>
 <td width="250">Designer</td>
