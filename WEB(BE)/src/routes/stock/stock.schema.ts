@@ -59,7 +59,7 @@ const stockResponseSchema = z.object({
   ...stockCore,
 });
 const stockSearchResultResponseSchema = z.object({
-  id: z.number(),
+  // id: z.number(),
   createdUserName: z.string(),
   ...stockCore,
 })
