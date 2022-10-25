@@ -22,6 +22,8 @@
 
 > 군인**의**, 군인을 **위한**, 군인에 **의한** <br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 창고 관리 시스템, &#160;&#160; **"국방물자관리체계"**
 
+---
+
 ## <br/> :book: 목차
 
   <ol>
@@ -37,7 +39,9 @@
 
 <br/>
 
-<h2 id='introduction-project'>프로잭트 소개</h2>
+---
+
+<h2 id='introduction-project'> :books: 프로잭트 소개</h2>
 
 - 배경 상황
   > 창고? 어땠냐고? 지옥 같았지...<br/>
@@ -63,7 +67,11 @@
 
 <br/>
 
-<h2 id="introduction-function">기능 설명</h2>
+---
+
+<h2 id="introduction-function"> :page_with_curl: 기능 설명</h2>
+
+<a href="https://app.gitbook.com/o/Jw07u3aojPWZwNszVDiX/s/sEadZzLRcypJiDENQUQw/undefined-2/undefined"><img src="docs\gitbook-function.png"></a>
 
 - 주요 기능 - **창고 관리** <br/>
   기존 부대의 각 창고의 모양을 본뜨기 위해서 간단한 UI 를 통해 창고의 모양을 본뜰 뿐더러, <br/> 창고 속 층과 구역을 간단히 나눠 그 누구든 검색한 위치로 쉽게 찾아갈 수 있도록 하는 기능 - **물자 관리** <br/>
@@ -79,7 +87,9 @@
 
 <br/>
 
-<h2 id="how-to-install">설치 안내 (Installation Process)</h2>
+---
+
+<h2 id="how-to-install"> :wrench: 설치 안내 (Installation Process)</h2>
 
 다른 서버쪽 앱쪽 나오는대로 앱 / 웹 만 나누고 나머지는 동시에 해서 보여주도록 하기
 
@@ -91,14 +101,15 @@ $ yarn start or npm run start
 
 <br/>
 
-<h2 id="how-to-use">프로젝트 사용법 (Getting Started)</h2>
+---
 
--> 이걸 깃북으로 해서 넘기는 것도 좋을 거 같은데
-이거는 프로젝트를 최대한 빨리 완성시키고 나서 생각해봐야 한다
+<h2 id="how-to-use"> :mag_right: 프로젝트 사용법 (Getting Started)</h2>
 
-<br/>
+<a href="https://app.gitbook.com/o/Jw07u3aojPWZwNszVDiX/s/sEadZzLRcypJiDENQUQw/undefined-3/undefined"><img src="docs\gitbook-how-to-use.png"></a>
 
-<h2 id="prerequisites">컴퓨터 구성 / 필수 조건 안내 (Prerequisites)</h2>
+---
+
+<h2 id="prerequisites">:computer: 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)</h2>
 
 - ECMAScript 6 지원 브라우저 사용
 - 권장: Google Chrome 버젼 77 이상
@@ -106,6 +117,8 @@ $ yarn start or npm run start
 표 형식으로 만들어서 보기 좋게 하기 (웹사이트 다른 웹사이트도 가능한지 확인하고 로고 넣어서 가시성 올려주기)
 
 <br/>
+
+---
 
 <h2 id="techniques">:hammer: 기술 스택 (Technique Used)</h2>
 
@@ -115,15 +128,23 @@ $ yarn start or npm run start
 
 ### Server(back-end)
 
-- nodejs, php, java 등 서버 언어 버전
-- express, laravel, sptring boot 등 사용한 프레임워크
-- DB 등 사용한 다른 프로그램
+- Mysql을 이용한 서버에 데이터 저장
+  - [MySQL]("https://www.mysql.com/"): SQL 기반 DB 생성 및 이용
+  - [Prisma]("https://www.prisma.io/"): Mysql 쿼리 생성 및 여러 DB 접근 기능 제공
+    <br/>
+- Fastify를 이용한 REST API 작성 후 nodejs로 실행
+  - [Fastify]("https://www.fastify.io/"): TypeScript 이용한 REST API 작성
+  - [NodeJs]("https://nodejs.org/ko/"): 작성된 BACKEND 코드 실행
 
 ### Front-end
 
 - react.js, vue.js 등 사용한 front-end 프레임워크
-- UI framework
-- 기타 사용한 라이브러리
+
+### App
+
+<br/>
+
+---
 
 <h2 id="team">:runner: :runner: 팀 정보 (Team Information)</h2>
 
@@ -207,7 +228,9 @@ $ yarn start or npm run start
 
 </table>
 
-</br>
+<br/>
+
+---
 
 <h2 id="license">저작권 및 사용권 정보 (Copyleft / End User License)</h2>
 
