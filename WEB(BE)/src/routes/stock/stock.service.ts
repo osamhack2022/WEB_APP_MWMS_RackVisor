@@ -59,12 +59,27 @@ export const advancedStockSearchService = async (
         lte: (body.maxExpDate && new Date(body.maxExpDate)) || undefined,
       },
       storedBoxId: body.storedBoxId,
+      createdUser: {
+        name: body.createdUserName
+      }
     },
+    include: {
+      createdUser: {
+        select: {
+          name: true
+        }
+      }
+    }
   });
+  const invoices = searchResult.map((e) => ({
+    ...e,
+    createdUser: undefined,
+    createdUserName: e.createdUser.name
+  }))
   console.log('@@@@ Advanced Search Result')
-  console.log(searchResult)
+  console.log(invoices)
   console.log('@@@@ Advanced Search End')
-  return searchResult;
+  return invoices;
 };
 
 export async function updateStock(data: updateStockInput) {

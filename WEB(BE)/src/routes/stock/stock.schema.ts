@@ -49,6 +49,7 @@ const searchStockSchema = z.object({
   minExpDate: z.string().optional(),
   maxExpDate: z.string().optional(),
   storedBoxId: z.number().optional(),
+  createdUserName: z.string().optional(),
 });
 
 
@@ -57,6 +58,11 @@ const stockResponseSchema = z.object({
   id: z.number(),
   ...stockCore,
 });
+const stockSearchResultResponseSchema = z.array(z.object({
+  id: z.number(),
+  createdUserName: z.string(),
+  ...stockCore,
+}))
 const stocksResponseSchema = z.array(stockResponseSchema);
 
 export type CreateStockInput = z.infer<typeof createStockSchema>;
@@ -69,6 +75,7 @@ export type AdvanedSearchStockInput = z.infer<typeof searchStockSchema>;
 const models = {
   createStockSchema,
   stockResponseSchema,
+  stockSearchResultResponseSchema,
   stocksResponseSchema,
   updateStockSchema,
   deleteStockSchema,

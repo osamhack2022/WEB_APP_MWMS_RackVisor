@@ -60,7 +60,7 @@ async function stockRoutes(server: FastifyInstance) {
       schema: {
         body: $ref('searchStockSchema'),
         response: {
-          200: $ref('stocksResponseSchema'),
+          200: $ref('stockSearchResultResponseSchema'),
         },
       },
     },
