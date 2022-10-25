@@ -29,15 +29,15 @@ import path, { join } from 'path';
 const prisma = new PrismaClient();
 
 // ! HTTPS
-// const app = fastify({
-//   https: {
-//     key: readFileSync(join(__dirname, '..', 'cert', 'private.key')),
-//     cert: readFileSync(join(__dirname, '..', 'cert', 'certificate.crt'))
-//   }
-// })
+const app = fastify({
+  https: {
+    key: readFileSync(join(__dirname, 'cert', 'private.key')),
+    cert: readFileSync(join(__dirname, 'cert', 'certificate.crt'))
+  }
+})
 
 // ! HTTP
-const app = fastify({})
+// const app = fastify({})
 
 declare module '@fastify/jwt' {
   interface FastifyJWT {
