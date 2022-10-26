@@ -38,6 +38,28 @@ function HouseManage() {
             <h1 class="border-b-2 m-1 pl-8 pb-4 font-bold text-2xl text-white">{currHouse.name}<br/></h1>
           </div>
           <div>
+            <div class="grid grid-cols-20 divide-x divide-dashed divide-gray-700  absolute left-[432px] top-[246px] w-[70rem] h-[30rem] z-[1000] pointer-events-none">
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+              <div class="opacity-100">{' '}</div>
+            </div>
             <WarehouseGridLayout unitSelected={currUnit} houseSelected={currHouse}/>
           </div>
         </div>

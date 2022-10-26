@@ -64,7 +64,15 @@ export default function ExcelModal({open, setOpen}) {
       response.barcode = "m" + (response.id).toString();
       await axiosPut("/stocks/stock-update", response);
 
-
+      let newHistory = {
+        manager : localStorage.getItem("이름"),
+        name : response.name,
+        id : response.id,
+        oriCount : response.amount,
+        location : "",
+        type : "추가",
+      }
+      itemToHistory.content = JSON.stringify(newHistory);
       await axiosPost("/historys/", itemToHistory);
 
     } catch(e) {

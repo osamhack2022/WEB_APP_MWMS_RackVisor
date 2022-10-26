@@ -13,29 +13,29 @@ function HouseImageList() {
   const currUnit = auth.unitSelected;
 
   const fetchImgList = useCallback(async () => {
-    console.log("실행됨14");
     const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
     if (data.length > 0) {
-      console.log("여기는?");
       setHouseList(data);
-      setImgBase64(data[0].imgBase64);
+      setImgBase64(`${decodeURIComponent((data[0].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
+      console.log("get : " + `${decodeURIComponent((data[0].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
       setName(data[0].name);
-      console.log(data[0].imgBase64);
+      setIdx(0);
+
+    } else {
+      fetchImgList();
     }
   }, []);
 
   useEffect(() => {
-    console.log("실행됨13");
     fetchImgList();
   }, []);
 
-  const fetchImg = async (src) => {
-    console.log("실행됨12");
+  const fetchImg = async (img) => {
     let copyOne = houseList[idx];
     let itemToAdd = {
-      imgBase64 : src
+      imgBase64 : img
     }
-
+    console.log("input : " + img);
     try {
       await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
       await axiosGet("/warehouses/" + (copyOne.id).toString());
@@ -46,41 +46,37 @@ function HouseImageList() {
   }
 
   const onLeft = () => {
-    setIdx(idx > 0 ? idx - 1 : idx)
+    let newIdx = idx > 0 ? idx - 1 : idx;
+    setIdx(newIdx);
+    setName(houseList[newIdx].name);
+    setImgBase64(`${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString())}`.replace(/=/g, ""));
+    console.log("new : " + `${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString())}`.replace(/=/g, ""))
   }
 
   const onRight = () => {
-    setIdx(idx < houseList.length - 1 ? idx + 1 : idx)
+    let newIdx = idx < houseList.length - 1 ? idx + 1 : idx;
+    setIdx(newIdx);
+    setName(houseList[newIdx].name);
+    setImgBase64(`${decodeURIComponent((houseList[newIdx].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
+    console.log("new : " + `${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString().replace(/=/g, ""))}`.splice(0, -1));
   }
-
-  // useEffect(() => {
-  //   console.log("실행됨1");
-  //   if (idx != -1) {
-  //     console.log("실행됨15");
-
-  //     if (houseList.length >= idx && houseList[idx].name && houseList[idx].imgBase64) {
-  //       console.log("실행됨16");
-  //       console.log(houseList[idx].name);
-  //       console.log(houseList[idx].imgBase64);
-  //       setName(houseList[idx].name);
-  //       setImgBase64(houseList[idx].imgBase64);
-  //     }
-  //   }
-  //   setFileInput([]);
-  // }, [idx]);
 
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
       reader.onload = () => {
-        
         let copyArray = [...houseList];
-        copyArray[idx].imgBase64 = reader.result;
+        copyArray[idx].imgBase64 = `${encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')}`;
+        console.log("update : " + `${encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')}`);
+
         setHouseList(copyArray);
+
         setImgBase64(reader.result);
-        console.log(reader.result);
-        fetchImg(reader.result);
+
+        let newStr = encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')    
+        fetchImg(newStr);
+
         resolve();
       };
     });

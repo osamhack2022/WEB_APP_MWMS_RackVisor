@@ -70,7 +70,15 @@ export default function MaterialManageModal({open, setOpen}) {
       alert(JSON.stringify(response));
       await axiosPut("/stocks/stock-update", response);
 
-
+      let newHistory = {
+        manager : localStorage.getItem("이름"),
+        name : response.name,
+        id : response.id,
+        oriCount : response.amount,
+        location : "",
+        type : "추가",
+      }
+      itemToHistory.content = JSON.stringify(newHistory);
       await axiosPost("/historys/", itemToHistory);
 
       alert("물품이 추가되었습니다");

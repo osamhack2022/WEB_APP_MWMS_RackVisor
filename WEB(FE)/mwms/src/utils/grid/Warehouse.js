@@ -14,7 +14,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     onLayoutChange: function() {},
     cols: 20,
     transformScale: 0.7,
-    style:{backgroundColor: "#f4a460"},
+    style:{backgroundColor: "#c8e7fb"},
   };
 
   constructor(props) {
@@ -75,7 +75,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const i = el.i;
     const iid = el.iid;
     return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}}>
+      <div key={i} data-grid={el} style={{backgroundColor: "#b8b9b4", justifyContent:"center"}}>
         <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="white"></EditableText>
       </div>
     );
@@ -85,8 +85,8 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const i = el.i;
     const iid = el.iid;
     return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
-        <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="white"></EditableText>
+      <div key={i} data-grid={el} style={{zIndex: 10000, backgroundColor: "#ffffff", alignItems:"center",justifyContent:"center"}}>
+        <EditableText value={i} iid={iid} handleChange={this.onChangeItemName} color="black"></EditableText>
       </div>
     );
   }
@@ -108,7 +108,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const i =el.i;
     const iid = el.iid;
     return (
-      <div key={i} data-grid={el} style={{backgroundColor: "#F9C38A", alignItems:"center", justifyContent:"center"}}>
+      <div key={i} data-grid={el} style={{zIndex: 10000 , backgroundColor: "#F9C38A", alignItems:"center", justifyContent:"center"}}>
         <EditableText value={i} iid={iid} handleChange={this.onNewName.bind(this, iid)}></EditableText>
       </div>
     );

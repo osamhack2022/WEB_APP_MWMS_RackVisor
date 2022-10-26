@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
   // TODO: Uncomment line before production
-  // withCredentials: true,
+  withCredentials: true,
   baseURL: "https://211.37.150.202/api",
 });
 
