@@ -118,14 +118,42 @@ $ yarn start or npm run start
 
 <h2 id="prerequisites">:computer: 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)</h2>
 
+<h4> :earth_asia: 브라우저 </h4>
+
 - ECMAScript 6 지원 브라우저 사용
 - 권장: Google Chrome 버젼 77 이상
 
-| <img src="docs\icons\chrome.ico" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="docs\icons\ie.ico" alt="IE" width="16px" height="16px" /> Internet Explorer | <img src="docs\icons\edge.ico" alt="Edge" width="16px" height="16px" /> Edge | <img src="docs\icons\safari.ico" alt="Safari" width="16px" height="16px" /> Safari | <img src="docs\icons\firefox.ico" alt="Firefox" width="16px" height="16px" /> Firefox |
-| :--------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
-|                                        Yes                                         |                                          11+                                          |                                     Yes                                      |                                        Yes                                         |                                          Yes                                          |
+<table width="900">
 
-표 형식으로 만들어서 보기 좋게 하기 (웹사이트 다른 웹사이트도 가능한지 확인하고 로고 넣어서 가시성 올려주기)
+<thead>
+
+<tr>
+
+<th width="180" align="center"><img src="docs\icons\chrome.ico" alt="Chrome" width="20px" height="20px" /> Chrome</th>
+
+<th width="240" align="center"><img src="docs\icons\ie.ico" alt="IE" width="20px" height="20px" /> Internet Explorer</th>
+
+<th width="180" align="center"><img src="docs\icons\edge.ico" alt="Edge" width="20px" height="20px" /> Edge</th>
+
+<th width="180" align="center"><img src="docs\icons\safari.ico" alt="Safari" width="20px" height="20px" /> Safari</th>
+
+<th width="180" align="center"><img src="docs\icons\firefox.ico" alt="Firefox" width="20px" height="20px" /> Firefox</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td align="center">YES</td>
+<td align="center">11+</td>
+<td align="center">YES</td>
+<td align="center">YES</td>
+<td align="center">YES</td>
+</tr>
+
+</table>
 
 <br/>
 
@@ -137,23 +165,23 @@ $ yarn start or npm run start
 
 ### Server(back-end)
 
-- Mysql을 이용한 서버에 데이터 저장
+- **`Mysql`** 을 이용한 서버에 데이터 저장
   - [MySQL]("https://www.mysql.com/"): SQL 기반 DB 생성 및 이용
   - [Prisma]("https://www.prisma.io/"): Mysql 쿼리 생성 및 여러 DB 접근 기능 제공
     <br/>
-- Fastify를 이용한 REST API 작성 후 nodejs로 실행
+- **`Fastify`** 를 이용한 REST API 작성 후 **`nodejs`** 로 실행
   - [Fastify]("https://www.fastify.io/"): TypeScript 이용한 REST API 작성
   - [NodeJs]("https://nodejs.org/ko/"): 작성된 BACKEND 코드 실행
 
 ### Front-end
 
-- React, Tailwind를 이용한 웹 프론트엔드 개발
+- **`React`**, **`Tailwind`** 를 이용한 웹 프론트엔드 개발
   - [React]("https://ko.reactjs.org/"): JS 기반 웹 개발
   - [TailWind]("https://tailwindcss.com/"): CSS 프레임워크
 
 ### App
 
-- Flutter를 이용한 앱 개발
+- **`Flutter`** 를 이용한 앱 개발
   - [Flutter]("https://flutter-ko.dev/"): 크로스 플랫폼 개발
 
 <br/>
@@ -162,7 +190,7 @@ $ yarn start or npm run start
 
 <h2 id="team">:runner: :runner: 팀 정보 (Team Information)</h2>
 
-> **RackVisor** <br>가상 현실(VM) 속 창고(RACK) 을 다루는 프로그램(HYPERVISOR) 처럼 군대 속 창고들을 쉽게 다룰 수 있는
+> **RackVisor** <br>가상 현실(VM) 속 창고(RACK) 을 다루는 프로그램(HYPERVISOR) 처럼 군대 속 창고들을 쉽게 다룰 수 있는 프로젝트를 만들기 위해 모인 팀입니다.
 
 <br/>
 
