@@ -120,7 +120,7 @@ export default function HistoryList({serverData, setSelect}) {
         newDataElem.icon = ArrowNarrowRightIcon
         newDataElem.iconBackground = 'bg-gray-400'
         newDataElem.content = '물품 변경'
-        newDataElem.target = server.oriCount.toString() + "개";
+        newDataElem.target = server.name;
         newDataElem.loc = server.loc;
       }
       newData.push(newDataElem);
@@ -134,16 +134,16 @@ export default function HistoryList({serverData, setSelect}) {
         {data.map((event, eventIdx) => (
           <li key={event.id}>
             <div className="relative pb-8 bg-grey-500">
-              <div className="rounded-xl bg-[#706F6F] " >
+              <div className="p-1 rounded-xl hover:bg-[#706F6F] " >
                 {eventIdx !== data.length - 1 ? (
-                  <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-[#706F6F] text-white" aria-hidden="true" />
+                  <span className="absolute top-4 left-4 ml-3 h-full w-0.5 bg-[#706F6F] text-white" aria-hidden="true" />
                 ) : null}
                 <div className="relative flex space-x-3">
                   <div>
                     <span
                       className={classNames(
                         event.iconBackground,
-                        'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
+                        'ml-2 mt-[7px] h-8 w-8 rounded-full flex items-center justify-center ring-4 ring-white'
                       )}
                     >
                       <event.icon className="h-5 w-5 text-white" aria-hidden="true" />
