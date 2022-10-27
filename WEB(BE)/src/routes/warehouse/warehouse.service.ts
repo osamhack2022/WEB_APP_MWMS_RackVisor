@@ -57,7 +57,7 @@ export async function readWarehousesOnUnit(storedUnitId: number) {
   for (const warehouse of warehouses) {
     returnWarehouses.push({
       ...warehouse,
-      imgBase64: warehouse?.warehouseImageBinary?.toString('base64'),
+      imgBase64: 'data:image/png;base64,' + warehouse?.warehouseImageBinary?.toString('base64'),
       warehouseImageBinary: undefined,
     });
   }
@@ -90,7 +90,7 @@ export const updateWarehouseImageService = async (
   await prisma.warehouse.update({
     where: { id },
     data: {
-      warehouseImageBinary: Buffer.from(data.imgBase64, 'base64'),
+      warehouseImageBinary: Buffer.from(data.imgBase64.split(',')[1], 'base64'),
     },
   });
 };
@@ -113,7 +113,7 @@ export async function readWarehouseOnId(id: number) {
 
   return {
     ...warehouse,
-    imgBase64: warehouse?.warehouseImageBinary?.toString('base64'),
+    imgBase64: 'data:image/png;base64,' + warehouse?.warehouseImageBinary?.toString('base64'),
     warehouseImageBinary: undefined,
   };
 }
