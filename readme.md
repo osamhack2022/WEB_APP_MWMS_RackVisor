@@ -166,7 +166,7 @@ $ yarn start or npm run start
 ### Server(back-end)
 
 - **`Mysql`** 을 이용한 서버에 데이터 저장
-  - [MySQL]("https://www.mysql.com/") : SQL 기반 DB 생성 및 이용
+  - **[MySQL]("https://www.mysql.com/")** : SQL 기반 DB 생성 및 이용
   - [Prisma]("https://www.prisma.io/") : Mysql 쿼리 생성 및 여러 DB 접근 기능 제공
     <br/>
 - **`Fastify`** 를 이용한 REST API 작성 후 **`nodejs`** 로 실행
