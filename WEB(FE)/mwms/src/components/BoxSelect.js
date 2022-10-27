@@ -57,7 +57,7 @@ function BoxSelect({setBoxSelect, popup, qr, addOne, setBoxString}) {
   }
 
   return (
-    <div class={"flex-1 gap-2 " + (popup ? "" : "overflow-x-auto")}>
+    <div class={"flex-1 gap-2 overflow-x-auto " + (popup ? "" : "")}>
       {cabSelec ? (<>
         <button onClick={() => {
           setCabSelec("");  

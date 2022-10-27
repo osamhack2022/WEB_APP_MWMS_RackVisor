@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { axiosGet } from '../../api'
 import AuthorHeader from '../../components/AuthorHeader'
 import Sidebar from '../../components/Sidebar'
@@ -7,6 +8,7 @@ import HistoryList from '../../utils/history/historyList'
 import SearchInput from '../../utils/search/SearchInput'
 
 function HistoryFind() {
+  const navigate = useNavigate();
   const auth = useAuth();
   const currUnit = auth.unitSelected;
   const [ data, setData ] = useState([]);
@@ -16,16 +18,20 @@ function HistoryFind() {
     try {
       const response = await axiosGet("/historys/" + (currUnit.id).toString());
       console.log(response);
-
+      setData(response);
     } catch (e) {
       alert("히스토리를 불러오는 중 오류 발생");
     } 
   } ,[]);
   
   useEffect(() => {
-    fectchHistory();
+    if (!currUnit) {
+      alert("부대를 선택해주세요");
+      navigate("/");
+    } else {
+      fectchHistory();
+    }
   }, []);
-
 
   return (
     <div class="bg-[#202020]">
@@ -36,7 +42,7 @@ function HistoryFind() {
           <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div class="flex-1 bg-[#323232] rounded-2xl">
               <SearchInput/>
-              <HistoryList data={data} setSelect={setSelect}/>
+              <HistoryList serverData={data} setSelect={setSelect}/>
             </div>
             <div class="flex-auto text-white pl-3 pt-3">
               <div class="rounded-2xl bg-[#323232] ">

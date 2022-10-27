@@ -83,39 +83,36 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
       content : name + " " + (minCnt).toString() + " " + "change",
       unitId : Number(currUnit.id)
     }
-
+    if (!loc) {
+      alert("위치를 선택해주세요");
+    } else {
     try {
-      if (!loc) {
-        alert("저장될 위치를 선정해주세요")
-      } else {
-        let searchId = {
-          barcode : itemToAdd.barcode,
-        }
-        let response = await axiosPost("/stocks/advanced-search", searchId);
-        console.log(response);
-
-        response = response[0];
-        console.log(response);
-        alert(JSON.stringify(itemToAdd));
-
-        await axiosPut("/stocks/stock-update", itemToAdd);
-
-        let typeCheck = (response.amount > itemToAdd.amount) ? "제거" : ((response.amount < itemToAdd.amount) ? "추가" : "변경");
-        let newHistory = {
-          manager : localStorage.getItem("이름"),
-          name : itemToAdd.name,
-          id : itemToAdd.id,
-          oriCount : response.amount,
-          newCount : itemToAdd.amount,
-          oriLoc : response.storedBoxId,
-          location : (itemToAdd.storedBoxId).toString(),
-          type : typeCheck,
-        }
-        itemToHistory.content = JSON.stringify(newHistory);
-
-        await axiosPost("/historys/", itemToHistory);
-        alert("물품이 변경되었습니다");
+      let searchId = {
+        barcode : itemToAdd.barcode,
       }
+      let response = await axiosPost("/stocks/advanced-search", searchId);
+      console.log(response);
+
+      response = response[0];
+      console.log(response);
+
+      await axiosPut("/stocks/stock-update", itemToAdd);
+
+      let typeCheck = (response.amount > itemToAdd.amount) ? "제거" : ((response.amount < itemToAdd.amount) ? "추가" : "변경");
+      let newHistory = {
+        manager : localStorage.getItem("이름"),
+        name : itemToAdd.name,
+        id : itemToAdd.id,
+        oriCount : response.amount,
+        newCount : itemToAdd.amount,
+        oriLoc : response.storedBoxId,
+        location : (itemToAdd.storedBoxId).toString(),
+        type : typeCheck,
+      }
+      itemToHistory.content = JSON.stringify(newHistory);
+
+      await axiosPost("/historys/", itemToHistory);
+      alert("물품이 변경되었습니다");
     } catch(e) {
       alert("오류가 발생했습니다")
     }
@@ -130,6 +127,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
     setId(-1);
     setOpen(false);
     navigate("/materialManage");
+  }
   }
   
   return (
@@ -179,9 +177,11 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
                     물품 수정
                   </Dialog.Title>
                   <div className="mt-2">
-                    <button class="text-white mb-2" onClick={() => setLocationOpen(true)}>위치 선정하기</button>
-                    {loc && <div>선정된 위치 {loc['위치']}</div>}
-                    {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
+                    <div class="flex mt-3">
+                      <button class="my-1 text-[#5AB0AD] hover:text-white text-lg " onClick={() => setLocationOpen(true)}>위치 선택하기</button>
+                      {loc && <div class="text-white ml-5 mt-[4px] text-lg ">&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
+                      {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
+                    </div>
 
                     <div>
                       <div class="flex">

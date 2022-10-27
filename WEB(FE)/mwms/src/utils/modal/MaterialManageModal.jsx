@@ -63,39 +63,41 @@ export default function MaterialManageModal({open, setOpen}) {
       content : name + " " + (minCnt).toString() + " " + "plus",
       unitId : Number(currUnit.id)
     }
+    if (!loc) {
+      alert("위치를 선택해주세요");
 
-    try {
-      let response = await axiosPost("/stocks/", itemToAdd);
-      response.barcode = "m" + (response.id).toString();
-      alert(JSON.stringify(response));
-      await axiosPut("/stocks/stock-update", response);
+    } else {
+      try {
+        let response = await axiosPost("/stocks/", itemToAdd);
+        response.barcode = "m" + (response.id).toString();
+        await axiosPut("/stocks/stock-update", response);
 
-      let newHistory = {
-        manager : localStorage.getItem("이름"),
-        name : response.name,
-        id : response.id,
-        oriCount : response.amount,
-        location : "",
-        type : "추가",
+        let newHistory = {
+          manager : localStorage.getItem("이름"),
+          name : response.name,
+          id : response.id,
+          oriCount : response.amount,
+          location : "",
+          type : "추가",
+        }
+        itemToHistory.content = JSON.stringify(newHistory);
+        await axiosPost("/historys/", itemToHistory);
+
+        alert("물품이 추가되었습니다");
+
+      } catch(e) {
+        alert("오류가 발생했습니다")
       }
-      itemToHistory.content = JSON.stringify(newHistory);
-      await axiosPost("/historys/", itemToHistory);
-
-      alert("물품이 추가되었습니다");
-
-    } catch(e) {
-      alert("오류가 발생했습니다")
+      setLoc("");
+      setContent("없음")
+      setType("없음");
+      setMinCnt(0);
+      setName("");
+      setGood("");
+      setStartDate(new Date());
+      setOpen(false);
+      navigate("/materialManage");
     }
-    setLoc("");
-    setContent("없음")
-    setType("없음");
-    setMinCnt(0);
-    setName("");
-    setGood("");
-    setStartDate(new Date());
-    setOpen(false);
-    navigate("/materialManage");
-
   }
   
   return (
@@ -146,10 +148,10 @@ export default function MaterialManageModal({open, setOpen}) {
                     물품 추가
                   </Dialog.Title>
                   <div className="mt-2 text-white">
-                    <div class="flex">
-                    <button class="my-1 text-[#5AB0AD] hover:text-white my-1 text-sm " onClick={() => setLocationOpen(true)}>위치 선택하기</button>
-                    {loc && <div class="text-white ml-5 mt-[4px] text-sm ">&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
-                    {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
+                    <div class="flex mt-3">
+                      <button class="my-1 text-[#5AB0AD] hover:text-white text-lg " onClick={() => setLocationOpen(true)}>위치 선택하기</button>
+                      {loc && <div class="text-white ml-5 mt-[4px] text-lg ">&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
+                      {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
                     </div>
                     <div>
                       <div class="flex">
