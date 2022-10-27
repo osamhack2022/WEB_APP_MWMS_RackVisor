@@ -1,4 +1,5 @@
 import fastify, { FastifyReply, FastifyRequest } from 'fastify';
+import path from 'path';
 import { REPL_MODE_SLOPPY } from 'repl';
 
 import { verifyPassword } from '../../plugins/hash';
@@ -59,7 +60,9 @@ export async function loginHandler(
     });
     return reply
       .setCookie('token', accessToken, {
-        domain: '211.37.150.202'
+        // TODO: Uncomment line for production
+        // domain: '211.37.150.202',
+        path: '/'
       })
       .code(200)
       .send(payload);

@@ -29,15 +29,15 @@ import path, { join } from 'path';
 const prisma = new PrismaClient();
 
 // ! HTTPS
-// const app = fastify({
-//   https: {
-//     key: readFileSync(join(__dirname, '..', 'cert', 'private.key')),
-//     cert: readFileSync(join(__dirname, '..', 'cert', 'certificate.crt'))
-//   }
-// })
+const app = fastify({
+  https: {
+    key: readFileSync(join(__dirname, 'cert', 'private.key')),
+    cert: readFileSync(join(__dirname, 'cert', 'certificate.crt'))
+  }
+})
 
 // ! HTTP
-const app = fastify({})
+// const app = fastify({})
 
 declare module '@fastify/jwt' {
   interface FastifyJWT {
@@ -75,7 +75,9 @@ app.register(import('@fastify/cookie'), {
   secret: 'SECRET_HERE_COOKIE', // for cookies signature
 });
 app.register(import('@fastify/cors'), {
-  origin: true
+  origin: '*'
+  // TODO: Uncomment line for production
+  // origin: 'https://211.37.150.202/'
 });
 
 // ! [Register] Swagger
@@ -117,7 +119,7 @@ app.register(historyRoutes, { prefix: 'api/historys' });
 app.setErrorHandler(errorHandlers);
 
 // ! [Server] Start Listening
-app.listen({ port: 80, host: '0.0.0.0' }, (err, address) => {
+app.listen({ port: 3001, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
