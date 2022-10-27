@@ -166,23 +166,23 @@ $ yarn start or npm run start
 ### Server(back-end)
 
 - **`Mysql`** 을 이용한 서버에 데이터 저장
-  - **[MySQL]("https://www.mysql.com/")** : SQL 기반 DB 생성 및 이용
-  - [Prisma]("https://www.prisma.io/") : Mysql 쿼리 생성 및 여러 DB 접근 기능 제공
+  - [**MySQL**](https://www.mysql.com/) : SQL 기반 DB 생성 및 이용
+  - [**Prisma**](https://www.prisma.io/) : Mysql 쿼리 생성 및 여러 DB 접근 기능 제공
     <br/>
 - **`Fastify`** 를 이용한 REST API 작성 후 **`nodejs`** 로 실행
-  - [Fastify]("https://www.fastify.io/") : TypeScript 이용한 REST API 작성
-  - [NodeJs]("https://nodejs.org/ko/") : 작성된 BACKEND 코드 실행
+  - [**Fastify**](https://www.fastify.io/) : TypeScript 이용한 REST API 작성
+  - [**NodeJs**](https://nodejs.org/ko/) : 작성된 BACKEND 코드 실행
 
 ### Front-end
 
 - **`React`**, **`Tailwind`** 를 이용한 웹 프론트엔드 개발
-  - [React]("https://ko.reactjs.org/") : JS 기반 웹 개발
-  - [TailWind]("https://tailwindcss.com/") : CSS 프레임워크
+  - [**React**](https://ko.reactjs.org/) : JS 기반 웹 개발
+  - [**TailWind**](https://tailwindcss.com/) : CSS 프레임워크
 
 ### App
 
 - **`Flutter`** 를 이용한 앱 개발
-  - [Flutter]("https://flutter-ko.dev/") : 크로스 플랫폼 개발
+  - [**Flutter**](https://flutter-ko.dev/) : 크로스 플랫폼 개발
 
 <br/>
 
