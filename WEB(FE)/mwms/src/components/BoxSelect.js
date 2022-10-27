@@ -6,7 +6,7 @@ import CreateList from '../utils/cabinet/Cabinet';
 import { useAuth } from '../routes/AuthContext';
 import { axiosGet } from '../api';
 
-function BoxSelect({setBoxSelect, popup, qr}) {
+function BoxSelect({setBoxSelect, popup, qr, addOne, setBoxString}) {
   const auth = useAuth();
   const [houList, setHouList] = useState([]);
   const [selHouse, setSelHouse] = useState({ id : -1, name : ""});
@@ -63,7 +63,7 @@ function BoxSelect({setBoxSelect, popup, qr}) {
           setCabSelec("");  
           setBoxSelec("")}}
           class={"ml-2 mt-2 " + (popup ? " " : "text-white") }>{'<- '} 뒤로가기</button>
-        <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec} cabSelec={cabSelec} modify={false} qr={true}/>
+        <CreateList boxSelec={boxSelec} setBoxSelec={setBoxSelec} cabSelec={cabSelec} modify={false} qr={qr ? true : false}/>
         </>)
       : (<div class="my-6">
         <span class={"m-2 p-2 font-bold text-lg" + (popup ? "" : " text-white")}>위치 기반 물자 관리</span> <br/> 
@@ -78,7 +78,7 @@ function BoxSelect({setBoxSelect, popup, qr}) {
           ))}
         </select>
         {houList.map((hou) => (
-          visual[hou.name] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={selHouse} setClick={testClick} popup={popup}/>
+          visual[hou.name] && <WarehouseGridLayout unitSelected={currUnit} houseSelected={selHouse} setClick={testClick} popup={popup} addOne={addOne}/>
         ))}
       </div>)
       }

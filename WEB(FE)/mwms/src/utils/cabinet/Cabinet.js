@@ -103,7 +103,7 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify, qr}) => {
         <div class="min-w-max min-h-max flex justify-center mt-2 mb-2">
           <div class="flex">
             <div>
-              <div class={"text-center font-lg " + (modify ? "text-white" : " ") + (qr ? " text-white" : " ")}>{floorList.length - idx} 층</div>
+              <div class={"text-center font-lg " + ((modify ) ? "text-white" : " ") + ((qr ) ? " text-white" : " ")}>{floorList.length - idx} 층</div>
               <div class="flex justify-center ">
                 {floor != [] && floor.map((item) => (
                   <button value={item.id} id={item.id} onClick={handleBoxSelec} class="w-24 h-12 border bg-[#706F6F] m-1 rounded-lg text-white ">

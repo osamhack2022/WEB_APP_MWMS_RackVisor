@@ -3,50 +3,39 @@ import { axiosGet, axiosPut } from '../../api';
 import { useAuth } from '../../routes/AuthContext';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 
-
 function HouseImageList() {
-  const [imageList, setImageList] = useState([]);
-  const [houseList, setHouseList] = useState([]);
-  const [currHouse, setCurrHouse] = useState(0);
-  const [imageSrc, setImageSrc] = useState({id : 0, name : "", img : ""});
   const [fileInput, setFileInput] = useState([]);
+  const [imgBase64, setImgBase64] = useState("");
+  const [idx, setIdx] = useState(0);
+  const [houseList, setHouseList] = useState([]);
+  const [name, setName] = useState("");
   const auth = useAuth();
   const currUnit = auth.unitSelected;
 
   const fetchImgList = useCallback(async () => {
-    // try {
-      const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
-      let newImgList = [];
-
-      data.map((da) => {
-        let newDa = {}; 
-        newDa.id = da.id;
-        newDa.name = da.name;
-        newDa.img = da.imgBase64;
-        newImgList.push(newDa);
-      });
-      setImageList(newImgList);
-
-      if (newImgList) {
-        setImageSrc(newImgList[0]);
-      }
-
+    const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
+    if (data.length > 0) {
       setHouseList(data);
-    // } catch (error) {
-    //   alert("Error on fetching unit");
-    // }
+      setImgBase64(`${decodeURIComponent((data[0].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
+      console.log("get : " + `${decodeURIComponent((data[0].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
+      setName(data[0].name);
+      setIdx(0);
+
+    } else {
+      fetchImgList();
+    }
   }, []);
 
   useEffect(() => {
     fetchImgList();
   }, []);
 
-  const fetchImg = async (src) => {
-    let copyOne = imageList[currHouse];
+  const fetchImg = async (img) => {
+    let copyOne = houseList[idx];
     let itemToAdd = {
-      imgBase64 : src
+      imgBase64 : img
     }
-    console.log(src);
+    console.log("input : " + img);
     try {
       await axiosPut("/warehouses/house-image/" + (copyOne.id).toString(), itemToAdd);
       await axiosGet("/warehouses/" + (copyOne.id).toString());
@@ -57,34 +46,37 @@ function HouseImageList() {
   }
 
   const onLeft = () => {
-    setCurrHouse(currHouse > 0 ? currHouse - 1 : currHouse)
+    let newIdx = idx > 0 ? idx - 1 : idx;
+    setIdx(newIdx);
+    setName(houseList[newIdx].name);
+    setImgBase64(`${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString())}`.replace(/=/g, ""));
+    console.log("new : " + `${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString())}`.replace(/=/g, ""))
   }
 
   const onRight = () => {
-    setCurrHouse(currHouse < houseList.length - 1 ? currHouse + 1 : currHouse)
+    let newIdx = idx < houseList.length - 1 ? idx + 1 : idx;
+    setIdx(newIdx);
+    setName(houseList[newIdx].name);
+    setImgBase64(`${decodeURIComponent((houseList[newIdx].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
+    console.log("new : " + `${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString().replace(/=/g, ""))}`.splice(0, -1));
   }
-
-  useEffect(() => {
-    if (imageList != []) {
-      setImageSrc(imageList[currHouse]);
-    }
-    setFileInput([]);
-  }, [currHouse]);
 
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
       reader.onload = () => {
-        let cpy = imageSrc;
-        cpy.img = reader.result;
-        setImageSrc(cpy);
+        let copyArray = [...houseList];
+        copyArray[idx].imgBase64 = `${encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')}`;
+        console.log("update : " + `${encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')}`);
 
-        let copyArray = [...imageList];
-        copyArray[currHouse].img = btoa(reader.result);
-        setImageList(copyArray);
-        
-        fetchImg(reader.result);
+        setHouseList(copyArray);
+
+        setImgBase64(reader.result);
+
+        let newStr = encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')    
+        fetchImg(newStr);
+
         resolve();
       };
     });
@@ -94,17 +86,17 @@ function HouseImageList() {
     <div class="text-center bg-[#323232] w-[42rem] rounded-2xl pb-3">
       <div class="flex justify-center">
         <p class="flex text-center text-white  mt-3 mb-5">
-          <ChevronLeftIcon className={"mt-1 rounded-full h-5 w-5 hover:text-[#7A5EA6] " + ((currHouse > 0 ? ("") : (" text-[#323232]")))} aria-hidden="true" onClick={onLeft}/>
+          <ChevronLeftIcon className={"mt-1 rounded-full h-5 w-5 hover:text-[#7A5EA6] " + ((idx > 0 ? ("") : (" text-[#323232]")))} aria-hidden="true" onClick={onLeft}/>
           <div class="ml-2 mr-2 text-xl">
-          {imageSrc && imageSrc.name}
+          {name ? name : ""}
           </div>
-          <ChevronRightIcon className={"mt-1 rounded-full h-5 w-5 hover:text-[#7A5EA6] " + (((houseList.length - 1 > currHouse) ? ("") : (" text-[#323232]")))} aria-hidden="true" onClick={onRight}/>
+          <ChevronRightIcon className={"mt-1 rounded-full h-5 w-5 hover:text-[#7A5EA6] " + (((houseList.length - 1 > idx) ? ("") : (" text-[#323232]")))} aria-hidden="true" onClick={onRight}/>
         </p>
       </div>
       {   
       <main className="container px-3">
         <div className="preview flex justify-center">
-          {imageSrc && imageSrc.img && <img src={imageSrc.img ? imageSrc.img : ""} alt="preview-img" />}
+          {imgBase64 && <img src={imgBase64} alt="preview-img" />}
         </div>
         <label class=" text-[#5AB0AD] pb-3 mb-3 hover:text-white" for="file-input">도면 업로드</label>
         <input class="hidden" id="file-input" type="file" onChange={(e) => {

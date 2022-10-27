@@ -213,7 +213,7 @@ function BarcodeManage() {
                 <Example korList={korList} defaultList={valList} data={data} setSelect={setItem}/>
               </>) : 
               (<>
-                <BoxSelect setBoxSelect={setItem} popup={false} qr={true}/>
+                <BoxSelect setBoxSelect={setItem} popup={false} qr={true} addOne={false}/>
               </>
               )
               }

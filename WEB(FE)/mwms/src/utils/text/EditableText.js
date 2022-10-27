@@ -14,20 +14,22 @@ function EditableText(props) {
     }
 
     return (
-      <div onDoubleClick={makeName} className="text-xl align-middle text-center text-slate-100">
-        {props.value}
-          {/* <EditText
-              value={fullName}
-              color={props.color}
-              handleChange={(e) => {
-                props.handleChange(e.target.value, props.iid);
-                setFullName(e.target.value);
-            }}
-              
-              handleDoubleClick={() => setShowInputEle(true)}
-              handleBlur={() => setShowInputEle(false)}
-              showInputEle={showInputEle}
-          /> */}
+      <div class="flex justify-center flex-1"> 
+        <div onDoubleClick={makeName} className="text-xl inline-block align-middle text-center text-slate-900">
+          {props.value}
+            {/* <EditText
+                value={fullName}
+                color={props.color}
+                handleChange={(e) => {
+                  props.handleChange(e.target.value, props.iid);
+                  setFullName(e.target.value);
+              }}
+                
+                handleDoubleClick={() => setShowInputEle(true)}
+                handleBlur={() => setShowInputEle(false)}
+                showInputEle={showInputEle}
+            /> */}
+        </div>
       </div>
     );
 }

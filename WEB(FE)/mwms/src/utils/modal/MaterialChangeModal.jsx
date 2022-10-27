@@ -25,6 +25,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
   const [good, setGood] = useState(materialInfo.comment ? materialInfo.comment : "");
   const [startDate, setStartDate] = useState(materialInfo.expirationDate ? new Date(Number(((materialInfo.expirationDate).split("-"))[0]), Number(((materialInfo.expirationDate).split("-"))[1] - 1), Number(((materialInfo.expirationDate).split("-"))[2])) : new Date()); //날짜 형식에 맞춰서 파싱해야함
   const [id, setId] = useState(materialInfo.id ? materialInfo.id : -1);
+  
 
   useEffect(() => {
     setContent(materialInfo.type  ? materialInfo.type : "없음");
@@ -75,6 +76,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
       expirationDate : (startDate.getFullYear()).toString() + "-" + (numFormat(startDate.getMonth() + 1)).toString() + "-" + (numFormat(startDate.getDate())).toString() + "T00:00:00.000Z",
       storedBoxId : Number(loc),
       id : Number(id),
+      createdUserId : Number(localStorage.getItem('id'))
     }
 
     let itemToHistory = {
@@ -86,7 +88,31 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
       if (!loc) {
         alert("저장될 위치를 선정해주세요")
       } else {
+        let searchId = {
+          barcode : itemToAdd.barcode,
+        }
+        let response = await axiosPost("/stocks/advanced-search", searchId);
+        console.log(response);
+
+        response = response[0];
+        console.log(response);
+        alert(JSON.stringify(itemToAdd));
+
         await axiosPut("/stocks/stock-update", itemToAdd);
+
+        let typeCheck = (response.amount > itemToAdd.amount) ? "제거" : ((response.amount < itemToAdd.amount) ? "추가" : "변경");
+        let newHistory = {
+          manager : localStorage.getItem("이름"),
+          name : itemToAdd.name,
+          id : itemToAdd.id,
+          oriCount : response.amount,
+          newCount : itemToAdd.amount,
+          oriLoc : response.storedBoxId,
+          location : (itemToAdd.storedBoxId).toString(),
+          type : typeCheck,
+        }
+        itemToHistory.content = JSON.stringify(newHistory);
+
         await axiosPost("/historys/", itemToHistory);
         alert("물품이 변경되었습니다");
       }
@@ -135,7 +161,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-black-gradient rounded-lg px-4 pt-5 pb-4 text-left overflow-x-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-black-gradient rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"

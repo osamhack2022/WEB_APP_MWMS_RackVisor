@@ -55,7 +55,7 @@ export default function LocationSelectModal({open, setOpen, setLocation}) {
 
                 <div className="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   {/* {boxSelect && <div>{boxSelect} 선택된 박스</div>} */}
-                  <BoxSelect setBoxSelect={handle} popup={true}/>
+                  <BoxSelect setBoxSelect={handle} modify={""} popup={true} qr={false} addone={true} />
 
                 </div>
               </div>

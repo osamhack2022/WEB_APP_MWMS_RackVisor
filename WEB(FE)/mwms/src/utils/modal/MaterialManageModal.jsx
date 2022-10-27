@@ -57,7 +57,6 @@ export default function MaterialManageModal({open, setOpen}) {
       expirationDate : (startDate.getFullYear()).toString() + "-" + (startDate.getMonth() + 1).toString() + "-" + (startDate.getDate()).toString(),
       storedBoxId : Number(loc),
       createdUserId: localStorage.getItem('id')
-      // storedBoxId: 
     }
 
     let itemToHistory = {
@@ -68,9 +67,18 @@ export default function MaterialManageModal({open, setOpen}) {
     try {
       let response = await axiosPost("/stocks/", itemToAdd);
       response.barcode = "m" + (response.id).toString();
+      alert(JSON.stringify(response));
       await axiosPut("/stocks/stock-update", response);
 
-
+      let newHistory = {
+        manager : localStorage.getItem("이름"),
+        name : response.name,
+        id : response.id,
+        oriCount : response.amount,
+        location : "",
+        type : "추가",
+      }
+      itemToHistory.content = JSON.stringify(newHistory);
       await axiosPost("/historys/", itemToHistory);
 
       alert("물품이 추가되었습니다");
