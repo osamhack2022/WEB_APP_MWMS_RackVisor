@@ -10,7 +10,7 @@ class AramCell extends StatelessWidget {
 
   var today = DateTime.now();
 
-  //DateFormat('yyyy/MM/dd').format(DateTime.parse(aramModel.expirationDate.substring(aramModel.expirationDate.lastIndexOf("T")+1)).toString)
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class AramCell extends StatelessWidget {
       child: AramScreenTile(
         icon: Icons.notifications,
         noticeName: aramModel.name,
-        subtitle: aramModel.expirationDate,
+        subtitle: aramModel.expirationDate.substring(0,10),
       ),
     );
   }
@@ -66,7 +66,7 @@ class AramScreenTile extends StatelessWidget {
                     ),
                 ),
 
-                const SizedBox(width: 12),
+                const SizedBox(width: 4),
 
                 Column(
                   children: [

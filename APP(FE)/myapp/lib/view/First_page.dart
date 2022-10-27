@@ -121,7 +121,7 @@ class _FirstPage extends State<FirstPage> {
   }
 
    Future<List<NoticeScreenModel>> noticeScreenService() async {
-      var uri = await Uri.parse("https://211.37.150.202/api/posts/unit-posts/${frontModel.selectId}");
+      var uri = await Uri.parse("https://rackvisor.duckdns.org/api/posts/unit-posts/${frontModel.selectId}");
 
         final response = await http.get(
         (uri), 
@@ -141,7 +141,7 @@ class _FirstPage extends State<FirstPage> {
   }
 
    Future<List<AramModel>> AramService() async {
-      var uri = await Uri.parse("https://211.37.150.202/api/stocks/by-expiration-date/${frontModel.selectId}");
+      var uri = await Uri.parse("https://rackvisor.duckdns.org/api/stocks/by-expiration-date/${frontModel.selectId}");
 
         final response = await http.get(
         (uri), 

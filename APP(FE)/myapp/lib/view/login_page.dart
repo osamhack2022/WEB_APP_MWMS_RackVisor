@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   
 
   Future logingUser(String militarySerialNumber, password) async {
-    var url = "https://211.37.150.202/api/users/login";
+    var url = "https://rackvisor.duckdns.org/api/users/login";
 
     try {
       Map data = {"militarySerialNumber": militarySerialNumber,
@@ -51,8 +51,14 @@ class _LoginPageState extends State<LoginPage> {
       print(e);
     }
 
+    return circularProgress();
+
   }
   
+    circularProgress() {
+    return const Center(child: CircularProgressIndicator());
+  }
+
   
 
   

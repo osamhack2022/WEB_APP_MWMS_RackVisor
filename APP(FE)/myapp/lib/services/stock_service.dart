@@ -12,7 +12,7 @@ class FetchUserList {
   List<StockModel> results = [];
 
   Future<List<StockModel>> getuserList({String? query}) async {
-    String urlList = 'https://211.37.150.202/api/stocks/stocks-in-warehouse/${frontModel.selectId}';
+    String urlList = 'https://rackvisor.duckdns.org/api/stocks/stocks-in-warehouse/${frontModel.selectId}';
     var url = Uri.parse(urlList);
     try {
       var response = await http.get(url);

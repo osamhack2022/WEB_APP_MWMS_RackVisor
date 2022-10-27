@@ -12,7 +12,7 @@ class QrSearchList {
   List<StockModel> results = [];
 
   Future<List<StockModel>> getSearchList(barcode) async {
-    String urlList = 'https://211.37.150.202/api/stocks/advanced-search';
+    String urlList = 'https://rackvisor.duckdns.org/api/stocks/advanced-search';
     var url = Uri.parse(urlList);
     try {
       var response = await http.post(url,
