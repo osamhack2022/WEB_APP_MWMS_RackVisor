@@ -20,7 +20,7 @@
 
 </div>
 
-> 군인**의**, 군인을 **위한**, 군인에 **의한** <br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 창고 관리 시스템, &#160;&#160; **"국방물자관리체계"**
+> 군인**의**, 군인을 **위한**, 군인에 **의한** <br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 창고 관리 시스템, &#160;&#160; **"국방물자관리체계"**
 
 ---
 
@@ -43,27 +43,28 @@
 
 <h2 id='introduction-project'> :books: 프로잭트 소개</h2>
 
-- 배경 상황
-  > 창고? 어땠냐고? 지옥 같았지...<br/>
-  > 창고 물자 관리를 어떻게 하냐고? 그냥 그때그때마다 세고 있어 <br/>
-  > 창고 항상 그거 난장판이야 그거 <br/>
-  > 혹시 XX 어디있는지 아십니까? 그거는 이제 창고 저어쪽 구석에 ... <br/>
+<h4> :bulb: 배경 상황 </h4>
+
+> 창고? 어땠냐고? 지옥 같았지...<br/>
+> 창고 물자 관리를 어떻게 하냐고? 그냥 그때그때마다 세고 있어 <br/>
+> 창고 항상 그거 난장판이야 그거 <br/>
+> 혹시 XX 어디있는지 아십니까? 그거는 이제 창고 저어쪽 구석에 ... <br/>
 
 군부대의 수많은 군수품들을 관리하는 창고, 각 창고는 모두 올바르게 관리되고 있을까요? <br/>
 상급제대로부터 받은 군수품 혹은 필요할 때마다 그때그때 받은 모든 물품들은 창고에 저장되는데요 <br/>
 그렇다면 저장된 물품들의 상태와 수량, 종류, 위치를 모두 정확하게 최신화 하고 있을까요? <br/>
 수많은 부대에서 아직도 보급담당 계원들만 골머리를 앓는채 그대로 유지되는게 맞을까요? <br/>
 더이상 그때그때 정리하고 보여주기를 위해서만 창고정리는 그만 <br/>
-한번 정리하고 앞으로 쭉 관리하기 위한, **국방물자관리체계** <br/>
+한번 정리하고 앞으로 쭉 관리하기 위한, **`국방물자관리체계`** <br/>
 <br/>
 
-- 특징
+<h4> :+1: 특징 </h4>
 
-**단순한 UI**, 기능적으로 복잡하지 않고, 기존의 창고를 있는 그대로 본뜨기 위한 간단한 **창고 관리**<br/>
+**`단순한 UI`**, 기능적으로 복잡하지 않고, 기존의 창고를 있는 그대로 본뜨기 위한 간단한 **`창고 관리`**<br/>
 일괄 추가 일괄 제거, 그리고 세부적인 검색이 가능한 물자 관리<br/>
-검색은 이젠 그만! **QR 코드**를 통한 간편한 인식과 재고 확인<br/>
-이거 벌써 유통기한 지났네? **알람기능**을 통한 유통기한 임박 물품 리스트 확인<br/>
-이걸 언제 다쓴거지? **히스토리** 확인과 **통계** 확인<br/>
+검색은 이젠 그만! **`QR 코드`** 를 통한 간편한 인식과 재고 확인<br/>
+이거 벌써 유통기한 지났네? **`알람기능`** 을 통한 유통기한 임박 물품 리스트 확인<br/>
+이걸 언제 다쓴거지? **`히스토리`** 확인과 **`통계`** 확인<br/>
 
 <br/>
 
@@ -71,7 +72,7 @@
 
 <h2 id="introduction-function"> :page_with_curl: 기능 설명</h2>
 
-<a href="https://app.gitbook.com/o/Jw07u3aojPWZwNszVDiX/s/sEadZzLRcypJiDENQUQw/undefined-2/undefined"><img src="docs\gitbook-function.png"></a>
+<a href="https://app.gitbook.com/o/Jw07u3aojPWZwNszVDiX/s/sEadZzLRcypJiDENQUQw/undefined-2/undefined"><img src="docs/image/gitbook-function.png"></a>
 상단 GITBOOk을 클릭하여 자세한 정보를 확인할 수 있습니다.
 
 <br/>
@@ -82,6 +83,8 @@
   특정 물품에 가시성 있도록 하는 바코드를 부착한 간단한 관리<br>물자가 보관된 박스에 이를 조회하여 들어있어야 하는 물품을 조회하거나 혹은 박스 이름을 조회할 수 있도록 하는 기능 - **히스토리** <br/>
   부대 물품이 변동된 기록을 확인하여 사용처와 사용량을 확인할 수 있음 -**앱 제공**<br/>
   단순 웹사이트만 제공하는 체계들과 달리 휴대폰을 활용하여 창고에 직접 방문하여 물품의 리스트를 확인하고, QR 코드를 인식하여 조회할 수 있는 기능을 지니고 있음
+
+<br/>
 
 - 세부 기능 - **권한 설정**<br/>
   부대별 접속 가능한 권한을 설정하여 권한을 바탕으로 부대에 접근할 수 있도록 한다 - **알람과 공지사항 기능**<br/>
@@ -108,7 +111,8 @@ $ yarn start or npm run start
 
 <h2 id="how-to-use"> :mag_right: 프로젝트 사용법 (Getting Started)</h2>
 
-<a href="https://app.gitbook.com/o/Jw07u3aojPWZwNszVDiX/s/sEadZzLRcypJiDENQUQw/undefined-3/undefined"><img src="docs\gitbook-how-to-use.png"></a>
+<a href="https://app.gitbook.com/o/Jw07u3aojPWZwNszVDiX/s/sEadZzLRcypJiDENQUQw/undefined-3/undefined"><img src="docs/image/gitbook-how-to-use.png"></a>
+상단 이미지를 클릭하여 `GIT-BOOK:프로젝트 사용법`으로 이동할 수 있습니다.
 
 ---
 
@@ -116,6 +120,10 @@ $ yarn start or npm run start
 
 - ECMAScript 6 지원 브라우저 사용
 - 권장: Google Chrome 버젼 77 이상
+
+| <img src="docs\icons\chrome.ico" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="docs\icons\ie.ico" alt="IE" width="16px" height="16px" /> Internet Explorer | <img src="docs\icons\edge.ico" alt="Edge" width="16px" height="16px" /> Edge | <img src="docs\icons\safari.ico" alt="Safari" width="16px" height="16px" /> Safari | <img src="docs\icons\firefox.ico" alt="Firefox" width="16px" height="16px" /> Firefox |
+| :--------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
+|                                        Yes                                         |                                          11+                                          |                                     Yes                                      |                                        Yes                                         |                                          Yes                                          |
 
 표 형식으로 만들어서 보기 좋게 하기 (웹사이트 다른 웹사이트도 가능한지 확인하고 로고 넣어서 가시성 올려주기)
 
@@ -125,9 +133,7 @@ $ yarn start or npm run start
 
 <h2 id="techniques">:hammer: 기술 스택 (Technique Used)</h2>
 
-<img src="docs\tech-stack.png">
-
-이 부분도 마찬가지로 그림으로 해서 넣기! 묶어서 보여주기 방식 ... 뭐라해야지..? 하여튼 그렇게 깔끔하게 보여주기
+<img src="docs/image/tech-stack.png">
 
 ### Server(back-end)
 
@@ -141,9 +147,14 @@ $ yarn start or npm run start
 
 ### Front-end
 
-- react.js, vue.js 등 사용한 front-end 프레임워크
+- React, Tailwind를 이용한 웹 프론트엔드 개발
+  - [React]("https://ko.reactjs.org/"): JS 기반 웹 개발
+  - [TailWind]("https://tailwindcss.com/"): CSS 프레임워크
 
 ### App
+
+- Flutter를 이용한 앱 개발
+  - [Flutter]("https://flutter-ko.dev/"): 크로스 플랫폼 개발
 
 <br/>
 
@@ -152,8 +163,8 @@ $ yarn start or npm run start
 <h2 id="team">:runner: :runner: 팀 정보 (Team Information)</h2>
 
 > **RackVisor** <br>가상 현실(VM) 속 창고(RACK) 을 다루는 프로그램(HYPERVISOR) 처럼 군대 속 창고들을 쉽게 다룰 수 있는
->
-> -> 표 형식으로 해서 넣어주기
+
+<br/>
 
 <table width="900">
 
@@ -215,8 +226,8 @@ $ yarn start or npm run start
 <td width="100" height="55" align="center">여호영</td>
 <td width="250">App Developer</td>
 <td width="150" align="center">
-<a href="https://github.com/codingle2">
-<img src="https://img.shields.io/badge/codingle2-655ced?style=social&logo=github"/></a>
+<a href="https://github.com/YEOHOYEONG">
+<img src="https://img.shields.io/badge/YEOHOYEONG-655ced?style=social&logo=github"/></a>
 <td width="300" align="center"><a href="mailto:hoyeong3273@naver.com"><img src="https://img.shields.io/static/v1?label=&message=hoyeong3273@naver.com&color=lightgray&style=flat-square&logo=gmail"></a></td>
 </tr>
 
