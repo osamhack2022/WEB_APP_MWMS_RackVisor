@@ -1,2 +1,5 @@
 * linguist-vendored
 *.javascript linguist-vendored=false
+
+demo/** linguist-documentation=false
+demo/** linguist-vendored=false
