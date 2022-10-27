@@ -64,7 +64,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const iid = el.iid;
     return (
       <div key={i} data-grid={el} value={i} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}} >
-        <div value={i} className="rotate-[-45deg] text-xl align-middle text-center text-slate-100" color="white">{i}</div>
+        <div value={i} className="text-xl align-middle text-center text-slate-100" color="white">{i}</div>
       </div>
     );
   }
@@ -78,7 +78,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const iid = el.iid;
     return (
       <div onClick={this.onCabinetClick.bind(this, iid)} key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
-        <div value={i} className="rotate-[-45deg] text-xl align-middle text-center text-slate-100" color="white">{i}</div>
+        <div value={i} className="text-xl align-middle text-center text-slate-100" color="white">{i}</div>
       </div>
     );
   }

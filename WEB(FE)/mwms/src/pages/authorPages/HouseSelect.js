@@ -15,7 +15,7 @@ function HouseSelect() {
   const currUnit = auth.unitSelected;
   const unitName = currUnit.name;
   const navigate = useNavigate();
-  const [houseList, setHouseList] = useState([{id: 1, name: "이름",}]);
+  const [houseList, setHouseList] = useState([]);
 
   const fetchHouseList = useCallback(async () => {
     try {
