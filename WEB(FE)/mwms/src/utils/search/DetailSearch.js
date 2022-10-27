@@ -45,10 +45,9 @@ export default function DetailSearch(props) {
       specipicType: type,
       minExpDate: startDate && getYYYYMMDDFromDate(startDate),
       maxExpDate: endDate && getYYYYMMDDFromDate(endDate),
-      manager: people,
       minAmount: minCnt,
       maxAmount: maxCnt,
-      createdUserName: people || undefined,
+      createdUserName: people,
     };
 
     if (!ch1) {
@@ -60,7 +59,7 @@ export default function DetailSearch(props) {
       delete itemToAdd.maxExpDate;
     }
     if (!ch3) {
-      delete itemToAdd.manager;
+      delete itemToAdd.createdUserName;
     }
     if (!ch4) {
       delete itemToAdd.minAmount;

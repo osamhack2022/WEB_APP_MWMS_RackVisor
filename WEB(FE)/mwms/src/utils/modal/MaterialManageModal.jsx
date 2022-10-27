@@ -79,6 +79,8 @@ export default function MaterialManageModal({open, setOpen}) {
           oriCount : response.amount,
           location : "",
           type : "추가",
+          type1 :  response.type,
+          specipicType : response.specipicType,
         }
         itemToHistory.content = JSON.stringify(newHistory);
         await axiosPost("/historys/", itemToHistory);

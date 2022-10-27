@@ -108,6 +108,8 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
         oriLoc : response.storedBoxId,
         location : (itemToAdd.storedBoxId).toString(),
         type : typeCheck,
+        type1 :  response.type,
+        specipicType : response.specipicType,
       }
       itemToHistory.content = JSON.stringify(newHistory);
 

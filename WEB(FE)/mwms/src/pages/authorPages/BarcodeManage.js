@@ -226,20 +226,20 @@ function BarcodeManage() {
                   <br/> */}
                   <div className="flex">
                     <div class="text-white">사이즈 입력 {'(cm 단위)'} : </div>
-                    <input type="number" value={size} onChange={handleSize} className="ml-2 accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2 text-white h-[22px]"/>
+                    <input type="number" value={size} onChange={handleSize} className="ml-2 accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2 text-white h-[22px] mt-[3px]"/>
                   </div>
                   <div className="flex my-3">
                     <div class="text-white" >개수 입력 : </div>
-                    <input type="number" value={count} onChange={handleCount} className="ml-[95px] accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2 text-white h-[22px]"/>
+                    <input type="number" value={count} onChange={handleCount} className="ml-[95px] accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2 text-white mt-[3px] h-[22px]"/>
                   </div>
                   { tabType == "material" ? 
                   <>
                   <div className="flex my-3">
-                    <input type="checkbox" value={showName} onChange={() => setShowName(!showName)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2"/>
+                    <input type="checkbox" value={showName} onChange={() => setShowName(!showName)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2 mt-[3px]"/>
                     <div class="text-white">이름 출력</div>
                   </div>
                   <div className="flex my-3">
-                    <input type="checkbox" value={showDue} onChange={() => setShowDue(!showDue)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2"/>
+                    <input type="checkbox" value={showDue} onChange={() => setShowDue(!showDue)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2 mt-[3px]"/>
                     <div class="text-white">유통기한 출력</div>
                   </div>
                   {/* <div className="flex my-3">
@@ -250,7 +250,7 @@ function BarcodeManage() {
                   ""
                   }
                   <div className="flex my-3">
-                    <input type="checkbox" value={showLocation} onChange={() => setShowLocation(!showLocation)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mx-2"/>
+                    <input type="checkbox" value={showLocation} onChange={() => setShowLocation(!showLocation)} className="accent-[#7A5EA6] border bg-[#706f6f] p-2 mt-[3px] mx-2"/>
                     <div class="text-white">고유 식별번호 출력</div>
                   </div>
                   {imageUrl ? (

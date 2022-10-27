@@ -12,7 +12,7 @@ export default class WarehouseGridLayout extends React.PureComponent {
     onLayoutChange: function() {},
     cols: 20,
     transformScale: 0.7,
-    style:{backgroundColor: "#f4a460"},
+    style:{backgroundColor: "#c8e7fb"},
     isDraggable: false,
     isResizable: false,
   };
@@ -63,8 +63,8 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const i = el.i;
     const iid = el.iid;
     return (
-      <div key={i} data-grid={el} value={i} style={{backgroundColor: "#7f1d1d", justifyContent:"center"}} >
-        <div value={i} className="text-xl align-middle text-center text-slate-100" color="white">{i}</div>
+      <div key={i} data-grid={el} value={i} style={{backgroundColor: "#b8b9b4", justifyContent:"center"}} >
+        <div value={i} className="text-lg align-middle text-center " color="white">{i}</div>
       </div>
     );
   }
@@ -77,8 +77,8 @@ export default class WarehouseGridLayout extends React.PureComponent {
     const i = el.i;
     const iid = el.iid;
     return (
-      <div onClick={this.onCabinetClick.bind(this, iid)} key={i} data-grid={el} style={{backgroundColor: "#1e3a8a", alignItems:"center",justifyContent:"center"}}>
-        <div value={i} className="text-xl align-middle text-center text-slate-100" color="white">{i}</div>
+      <div onClick={this.onCabinetClick.bind(this, iid)} key={i} data-grid={el} style={{backgroundColor: "#ffffff", alignItems:"center",justifyContent:"center"}}>
+        <div value={i} className="text-lg align-middle text-center " color="white">{i}</div>
       </div>
     );
   }
