@@ -49,6 +49,7 @@ export const advancedStockSearchService = async (
       id: body.id,
       name: body.name,
       type: body.type,
+      specipicType: body.specipicType,
       amount: {
         gte: body.minAmount,
         lte: body.maxAmount,

@@ -43,6 +43,7 @@ const searchStockSchema = z.object({
   id: z.number().optional(),
   name: z.string().optional(),
   type: EnumTypeOfStockType.optional(),
+  specipicType: z.string().optional(),
   minAmount: z.number().optional(),
   maxAmount: z.number().optional(),
   barcode: z.string().optional(),
