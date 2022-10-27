@@ -112,6 +112,7 @@ export async function getWarehouseOnId(
 ) {
   const { warehouseId } = request.params;
   const warehouse = await readWarehouseOnId(+warehouseId);
+  console.log(warehouse)
 
   return reply.code(201).send(warehouse);
 }
