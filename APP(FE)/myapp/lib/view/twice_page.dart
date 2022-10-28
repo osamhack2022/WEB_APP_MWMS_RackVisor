@@ -1,66 +1,45 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
+import 'dart:async';
 
 
 class TwicePage extends StatefulWidget {
-  static const String ROUTE_NAME = '/qr_check_screen';
-
-  final String eventKeyword; //건져올 특정 키워드
+  TwicePage({Key? key}) : super(key: key);
 
   @override
   State<TwicePage> createState() => _TwicePageState();
 }
 
 class _TwicePageState extends State<TwicePage> {
-  String qrResult = '';
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  String _output = 'Empty Scan Code';
 
-   @override
+  @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-        appBar: AppBar(title: Text('QR스캐너'),),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                child: QRView(
-                  key: qrKey,
-
-                  onQRViewCreated: this._onQRViewCreated,
-                  formatsAllowed: [
-                    BarcodeFormat.qrcode
-                  ],
-                  overlay: QrScannerOverlayShape(
-                    borderRadius: 10,
-                    borderColor: Colors.blue,
-                    borderLength: 30,
-                    borderWidth: 5,
-                    cutOutSize: screenSize.width/1.4,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ));
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.grey[300],
+        body: Builder(
+          builder: (BuildContext context) {
+            return Center( 
+              //정 가운데에 QR 스켄값 표시
+              child: Text(_output, style: TextStyle(color: Colors.black)),);
+          },
+        ),
+        //플로팅 액션 버튼으로 qr 스캔 함수 실행
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _scan(),
+          tooltip: 'scan',
+          child: const Icon(Icons.camera_alt),
+        ),
+      ),
+    );
   }
+  
+  //비동기 함수     
+  Future _scan() async {
+    //스캔 시작 - 이때 스캔 될때까지 blocking
+    String? barcode = await scanner.scan();
+    //스캔 완료하면 _output 에 문자열 저장하면서 상태 변경 요청.
+    setState(() => _output = barcode!);   
   }
-
-
-void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    controller.scannedDataStream.listen((event) {
-
-      if (event.code != null) {
-      //스캔된 QR코드에 특정 키워드가 들어있다면
-      //QR스캔을 정지하고 이 화면을 닫으면서 QR결과값을 보내주도록한다.
-        if (event.code!.contains(widget.eventKeyword)) {
-          this.controller!.dispose();
-          Navigator.pop(context, event.code);
-        }
-      }
-    });
-  }
+}

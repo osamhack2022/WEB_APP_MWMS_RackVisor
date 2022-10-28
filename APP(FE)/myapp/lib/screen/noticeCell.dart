@@ -72,36 +72,60 @@ class NoticeScreenTile extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Container(
+                        
                         padding: EdgeInsets.all(16),
                         //아이디
                         color: Colors.purple,
                         //아이디?
-                        child: Text(id.toString()),
+                        child: Text(id.toString(),
+                        overflow: TextOverflow.ellipsis,),
+                        
                       )
                     ),
 
 
 
                     //title 게시물 제목입니다.
-                    Container(
+
+
+
+ Container(
+      
                       child: Text(title,
-                      style: const TextStyle(
+                      
+                        style: TextStyle(
                         color: Color(0xFF373737),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),),
-                    ),
+                        fontWeight: FontWeight.bold,),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        
+                        softWrap: false,
+                      )),
+
 
 
 
                     //작성자
-                        Text(
+                        
+                      
+
+ Container(
+
+                      child :Text(
                         "작성자 : " + authorId.toString(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
+                        style: TextStyle(
+                        color: Color(0xFF373737),
+                        fontWeight: FontWeight.w400,),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        softWrap: false,
+                      ))
+
+
+
+
 
                   ],
                 ),

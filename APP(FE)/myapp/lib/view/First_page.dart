@@ -54,8 +54,6 @@ class _FirstPage extends State<FirstPage> {
             controller: PageController(
               initialPage: 0
             ),
-            //컴퓨터로 확인할떄만 쓰기 컴터 좌우스크롤안됨.
-            scrollDirection: Axis.vertical,
             children: snapshot.data!
             .map(
               (noticeScreenModel) {

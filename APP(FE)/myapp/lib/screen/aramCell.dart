@@ -75,7 +75,7 @@ class AramScreenTile extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      overflow: TextOverflow.ellipsis,
                     ),),
 
                     SizedBox(height: 5),
@@ -84,7 +84,7 @@ class AramScreenTile extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     ),
                   ],

@@ -9,7 +9,6 @@ import 'package:myapp/view/login_page.dart';
 import 'package:myapp/view/qrsearchPage.dart';
 import 'package:myapp/view/serachResult_page.dart';
 import 'package:myapp/view/unit_page.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
   runApp(const MyApp());
