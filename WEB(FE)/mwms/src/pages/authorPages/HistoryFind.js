@@ -48,6 +48,7 @@ function HistoryFind() {
       <div class="flex">
         <Sidebar/>
         <div class="flex-1 bg-[#202020]">
+          <div class="sm:flex hidden border-b-2 border-[#706F6F] mb-2 mr-10 ml-6 pb-2 font-bold text-2xl text-white mt-5">히스토리</div>
           <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
             <div class="flex-1 bg-[#323232] rounded-2xl">
               <SearchInput setData={setData} data={data} />

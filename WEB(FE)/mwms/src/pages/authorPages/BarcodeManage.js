@@ -203,8 +203,10 @@ function BarcodeManage() {
       <div class="flex">
         <Sidebar/>
         <div class="flex-1 bg-[#202020]">
-          <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 py-3 border-gray-200 bg-gray">
-            <div class="flex-1 mt-5">
+        <div class="sm:flex hidden border-b-2 border-[#706F6F] mb-2 mr-10 ml-6 pb-2 font-bold text-2xl text-white mt-5">QR코드 관리</div>
+
+          <div class="flex grid grid-cols-2 divide-x-2 gap-4 px-4 pb-3 pt-1 border-gray-200 bg-gray">
+            <div class="flex-1 mt-3">
               <Tabs setTabType={setTabType} defaultTabs={defaultTabs}/>
               <div class="bg-[#323232] rounded-xl mt-2">
               { tabType == "material" ? 
@@ -220,7 +222,7 @@ function BarcodeManage() {
               </div>
             </div>
             <div class ="flex flex-auto mb-5 px-5 pt-2 px-2 ">
-              <div class="flex-1 mt-4  bg-[#323232] rounded-2xl px-3 pt-2 ">
+              <div class="flex-1 mt-3  bg-[#323232] rounded-2xl px-3 pt-2 ">
                 {/* <input class="border" onChange={(e) => setText(e.target.value)}/>
                 <button class="border" onClick={() => generateQrCode()}>QR코드 생성</button>
                   <br/> */}
