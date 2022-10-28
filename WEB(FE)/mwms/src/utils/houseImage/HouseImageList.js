@@ -12,19 +12,17 @@ function HouseImageList() {
   const auth = useAuth();
   const currUnit = auth.unitSelected;
 
-  const fetchImgList = useCallback(async () => {
+  const fetchImgList = async () => {
     const data = await axiosGet("/warehouses/my-warehouses/" + (currUnit.id).toString());
-    if (data.length > 0) {
+    console.log("init" + JSON.stringify(data));
+
+    if (data) {
       setHouseList(data);
-      setImgBase64(`${decodeURIComponent((data[0].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
-      console.log("get : " + `${decodeURIComponent((data[0].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
+      setImgBase64(data[0].imgBase64);
       setName(data[0].name);
       setIdx(0);
-
-    } else {
-      fetchImgList();
     }
-  }, []);
+  };
 
   useEffect(() => {
     fetchImgList();
@@ -49,16 +47,14 @@ function HouseImageList() {
     let newIdx = idx > 0 ? idx - 1 : idx;
     setIdx(newIdx);
     setName(houseList[newIdx].name);
-    setImgBase64(`${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString())}`.replace(/=/g, ""));
-    console.log("new : " + `${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString())}`.replace(/=/g, ""))
+    setImgBase64(houseList[newIdx].imgBase64);
   }
 
   const onRight = () => {
     let newIdx = idx < houseList.length - 1 ? idx + 1 : idx;
     setIdx(newIdx);
     setName(houseList[newIdx].name);
-    setImgBase64(`${decodeURIComponent((houseList[newIdx].imgBase64).toString().replace(/jetaeho/g, '%').replace(/=/g, ""))}`.splice(0, -1));
-    console.log("new : " + `${decodeURIComponent((houseList[newIdx].imgBase64.replace(/jetaeho/g, '%')).toString().replace(/=/g, ""))}`.splice(0, -1));
+    setImgBase64(houseList[newIdx].imgBase64);
   }
 
   const encodeFileToBase64 = (fileBlob) => {
@@ -67,15 +63,13 @@ function HouseImageList() {
     return new Promise((resolve) => {
       reader.onload = () => {
         let copyArray = [...houseList];
-        copyArray[idx].imgBase64 = `${encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')}`;
-        console.log("update : " + `${encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')}`);
+        copyArray[idx].imgBase64 = reader.result;
 
         setHouseList(copyArray);
 
         setImgBase64(reader.result);
 
-        let newStr = encodeURIComponent((reader.result).toString()).toString().replace(/%/g, 'jetaeho')    
-        fetchImg(newStr);
+        fetchImg(reader.result);
 
         resolve();
       };
@@ -99,7 +93,7 @@ function HouseImageList() {
           {imgBase64 && <img src={imgBase64} alt="preview-img" />}
         </div>
         <label class=" text-[#5AB0AD] pb-3 mb-3 hover:text-white" for="file-input">도면 업로드</label>
-        <input class="hidden" id="file-input" type="file" onChange={(e) => {
+        <input class="hidden" id="file-input" type="file" accept="image/png" onChange={(e) => {
           setFileInput(e.target.files[0]);
           encodeFileToBase64(e.target.files[0]);
         }} files={fileInput} />

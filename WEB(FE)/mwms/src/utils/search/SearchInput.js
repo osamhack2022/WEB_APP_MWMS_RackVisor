@@ -38,6 +38,28 @@ function SearchInput({ setData }) {
     console.log(result);
   };
 
+  const keyPress = (e) => {
+    if (e.key === "Enter") {
+      onSearch();
+      console.log("rrr1")
+      e.preventDefault();
+    }
+  }
+
+  const handleOpen = (e) => {
+    if (e.clientX != 0) {
+      setDetail(true);
+      console.log("rrr2")
+    }
+  }
+
+  const handleClose = (e) => {
+    if (e.clientX != 0) {
+      setDetail(false);
+      console.log("rrr3")
+    }
+  }
+
   return (
     <form>
       <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">
@@ -66,6 +88,7 @@ function SearchInput({ setData }) {
             required=""
             value={name}
             onChange={onNameHandle}
+            onKeyDown={keyPress}
           />
           <SearchIcon
             className="h-9 w-9 px-1 absolute right-2 bottom-2.5 rounded-full text-white hover:bg-[#7A5EA6]"
@@ -74,14 +97,17 @@ function SearchInput({ setData }) {
         </div>
       </div>
       {!detail && (
-        <button class="ml-4 mt-4 text-[#5AB0AD] font-poppins font-semibold mb-4 hover:text-white" onClick={() => setDetail(true)}>
+        <button class="ml-4 mt-4 text-[#5AB0AD] font-poppins font-semibold mb-4 hover:text-white" 
+                onClick={handleOpen} 
+                onKeyDown={keyPress}>
           상세검색
         </button>
       )}
       {detail && (
         <button
           class="ml-4 mt-4 text-white font-poppins rounded-lg p-1 font-semibold bg-[#5AB0AD] mb-4"
-          onClick={() => setDetail(false)}>
+          onClick={handleClose}
+          onKeyDown={keyPress}>
           상세검색
         </button>
       )}

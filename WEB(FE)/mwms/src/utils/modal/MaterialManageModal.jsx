@@ -145,7 +145,6 @@ export default function MaterialManageModal({open, setOpen}) {
 
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-white mx-2">
                     물품 추가
                   </Dialog.Title>
@@ -156,24 +155,24 @@ export default function MaterialManageModal({open, setOpen}) {
                       {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
                     </div>
                     <div>
-                      <div class="flex">
-                        <div>속성 : </div>
-                        <div>
-                          <select class="bg-[#706f6f] mx-2 my-1" onChange={onChangeHanlder} value={Content}>
+                      <div class="flex mt-1 mb-2 ">
+                        <div class="text-white">속성 : </div>
+                        <div class="ml-4 ">
+                          <select class="bg-[#706f6f] mx-2 my-1 text-white " onChange={onChangeHanlder} value={Content}>
                             {Object.keys(detailType).map((type) => (
                               <option key={type}>{type}</option>
                             ))}
                           </select>
-                          <select class="bg-[#706f6f] mx-2 my-1" onChange={onChangeType} value={type}>
+                          <select class="bg-[#706f6f] mx-2 my-1 text-white " onChange={onChangeType} value={type}>
                             {Object.keys(detailType[Content]).map((ty) => (
                               <option key={ty}>{ty}</option>
                             ))}
                           </select>
-                          <div>{detailType[Content][type]}</div>
+                          <div class="text-white my-1 ml-2 mb-1 text-sm ">{detailType[Content][type]}</div>
                         </div>
                       </div>
-                      <div class="flex">
-                        <div class="mr-2">기한 : </div>
+                      <div class="flex mb-2 ">
+                        <div class=" mr-5 mb-1 ">기한 : </div>
                         <DatePicker 
                           locale={ko}
                           dateFormat="yyyy/MM/dd"
@@ -184,19 +183,22 @@ export default function MaterialManageModal({open, setOpen}) {
                           selectsStart
                         />
                       </div>
-                      <div class="flex">
-                        <div>이름 : </div>
-                        <input type="string" class="border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={name} onChange={chgName}/>
+                      <div class="flex mb-2 ">
+                        <div class=" mr-3 ">이름 : </div>
+                        <input type="string" class=" border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={name} onChange={chgName}/>
                       </div>
-                      <div class="flex">
-                        <div>상태 : </div>
-                        <input type="string" class="border rounded-md bg-[#706f6f] mx-2 my-1" value={good} onChange={chgGood}/>
+                      <div class="flex mb-2 ">
+                        <div class="mr-3 ">상태 : </div>
+                        <input type="string" class=" border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={good} onChange={chgGood}/>
                       </div>
-                      <div class="flex">
-                        <div class="my-1">담당자 : {people}</div>
+                      <div class="flex mb-2 ">
+                        <div class="flex my-1">
+                          <div>담당자 : </div>
+                          <div class="ml-2">{people}</div>
+                        </div>
                       </div>
-                      <div class="flex">
-                        <div>{'수량 : '}</div>
+                      <div class="flex mb-2 ">
+                        <div class="mr-3 ">{'수량 : '}</div>
                         <input type="number" class="border rounded-md bg-[#706f6f] mx-2 my-1" value={minCnt} onChange={chgMinCnt}/>
                       </div>
                     </div>

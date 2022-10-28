@@ -186,9 +186,9 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
                     </div>
 
                     <div>
-                      <div class="flex">
+                      <div class="flex mt-1 mb-2 ">
                         <div class="text-white">속성 : </div>
-                        <div>
+                        <div class="ml-4 ">
                           <select class="bg-[#706f6f] mx-2 my-1 text-white " onChange={onChangeHanlder} value={Content}>
                             {Object.keys(detailType).map((type) => (
                               <option key={type}>{type}</option>
@@ -199,11 +199,11 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
                               <option key={ty}>{ty}</option>
                             ))}
                           </select>
-                          <div class="text-white my-1">{detailType[Content][type]}</div>
+                          <div class="text-white my-1 ml-2 mb-1 text-sm ">{detailType[Content][type]}</div>
                         </div>
                       </div>
-                      <div class="flex">
-                        <div class="text-white mr-2 mb-1">기한 : </div>
+                      <div class="flex mb-2 ">
+                        <div class="text-white mr-5 mb-1 ">기한 : </div>
                         <DatePicker 
                           locale={ko}
                           dateFormat="yyyy-MM-dd"
@@ -214,19 +214,19 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
                           selectsStart
                         />
                       </div>
-                      <div class="flex">
-                        <div class="text-white">이름 : </div>
+                      <div class="flex mb-2 ">
+                        <div class="text-white mr-3 ">이름 : </div>
                         <input type="string" class="text-white border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={name} onChange={chgName}/>
                       </div>
-                      <div class="flex">
-                        <div class="text-white">상태 : </div>
-                        <input type="string" class="text-white border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={good} onChange={chgGood}/>
+
+                      <div class="flex mb-2 ">
+                        <div class="flex text-white my-1">
+                          <div>담당자 : </div>
+                          <div class="ml-2">{people}</div>
+                        </div>
                       </div>
                       <div class="flex">
-                        <div class="text-white my-1">담당자 : {people}</div>
-                      </div>
-                      <div class="flex">
-                        <div class="text-white">{'수량 : '}</div>
+                        <div class="text-white mr-3 ">{'수량 : '}</div>
                         <input type="number" class="text-white border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={minCnt} onChange={chgMinCnt}/>
                       </div>
                     </div>
