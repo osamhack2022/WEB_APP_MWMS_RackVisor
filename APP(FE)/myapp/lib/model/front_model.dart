@@ -1,9 +1,11 @@
 
 import 'package:get/get.dart';
 
-class LoginModel extends GetxController{
+class FrontModel extends GetxController{
   String unitName = '';
   String unitPhotos = '';
+  int selectId = 0;
+
 
   //부대 이름 업데이트
   unitNameUpdate(var index) {
@@ -16,6 +18,14 @@ class LoginModel extends GetxController{
     unitPhotos = index;
     update();
   }
+  
+  //부대 선택번호 업데이트
+  unitSelectIdUpdate(var index) {
+    selectId = index;
+    update();
+  }
+  
+
 
 }
 

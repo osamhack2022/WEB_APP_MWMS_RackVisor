@@ -1,81 +1,73 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/model/unit_page_model.dart';
-import '../model/login_model.dart';
-import '../model/searchbar_model.dart';
-import '../services/web_service.dart';
+import '../view/serachResult_page.dart';
+
 class SearchBarController extends GetxController {
-  Album album2;
+
 
   circularProgress() {
     return const Center(child: CircularProgressIndicator());
   }
 
   searchBar() {
-    return TextField(
-      style: const TextStyle(color: Colors.white),
-    decoration: InputDecoration(
-      filled: true,
-      fillColor: Colors.blueGrey,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide.none,
-        ),
-        hintText: "검색하세요",
-        prefixIcon: const Icon(Icons.search),
-        prefixIconColor: const Color.fromARGB(255, 255, 255, 255)
-    )
-  );
-  }
+    return InkWell(
+      onTap: () => Get.toNamed("/searchPage"),
 
-  searchResultList(Album album) {
-    return Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+      child: Container(
+      decoration: BoxDecoration(
+        
+        border: Border.all(
+          width: 2,
+          color: Colors.white,
         ),
-        child: Container(
-          width: 200,
-          height: 100,
-          child: Center(
-            child: Text(album.title),
+
+        color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+      ),
+
+
+      child: Row(
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          
+          //아이콘
+          const Expanded(
+            flex: 1,
+            child:  Icon(Icons.search,
+            color: Colors.grey
+            ),
           ),
-        ),
-    );
-  }
 
-    void upadateList() {
-    setState(( {
-      album.where((element) => element.title)
-    }))
-  }
-
-
-  searchResultListView(AsyncSnapshot<List<Album>> snapshot) {
-    return Expanded(
-      child: GestureDetector(
-          child: GridView.count(
-            crossAxisCount: 1,
-            childAspectRatio: 1.0,
-            mainAxisSpacing: 4.0,
-            crossAxisSpacing: 4.0,
-            children: snapshot.data!
-            .map(
-          (album) {
-            return GestureDetector(
-              child: GridTile(
-                child: searchResultList(album),
-                
+          //검색하세요
+           
+            Expanded(
+              flex: 4,
+              child: Text("검색하세요",
+              style: TextStyle(color: Colors.grey),
               ),
-              onTap: () {
-                //itemClick(snapshot);
-              },
-            );
-          },
-            ).toList(),
+            ),
+            
+
+          
+
+          Divider(thickness: 1,),
+
+          //qr 스캐너 on
+          const Expanded(
+            flex: 1,
+            child: Icon(CupertinoIcons.qrcode,
+               ),
+          ),
+       
+
+
+          ]
         ),
-      ), 
-      );
+  ),
+
+    );
   }
 
 

@@ -56,6 +56,19 @@ dependencies:
   #screnn_util
   flutter_screenutil: ^5.5.4
 
+  #icon
+  line_awesome_flutter: ^2.0.0
+
+  #qrScanner
+  qr_code_scanner: ^1.0.1
+  
+  #carousel_slider
+  carousel_slider: ^4.1.1
+
+  flutter_native_splash: ^2.2.12
+  intl: ^0.17.0
+  flutter_qr_bar_scanner: ^3.0.2
+  url_launcher: ^6.1.6
   
 dev_dependencies:
   flutter_test:

@@ -1,14 +1,19 @@
+import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controller/bottom_nav_controller.dart';
-import 'package:myapp/model/login_model.dart';
-
+import 'package:myapp/model/front_model.dart';
+import 'package:myapp/utils/global_colors.dart';
 import 'package:myapp/view/Fourth_page.dart';
+import 'package:myapp/view/qrsearchPage.dart';
+import 'package:myapp/view/twice_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
-
 import 'First_page.dart';
 
+
 class FrontPage extends StatefulWidget {
+
   const FrontPage({
     Key? key,
   }) : super(key: key);
@@ -19,12 +24,17 @@ class FrontPage extends StatefulWidget {
 
 class _FrontPage extends State<FrontPage> {
   BottomNavigationBarController c = Get.put(BottomNavigationBarController());
-  LoginModel loginModel = Get.put(LoginModel());
+  FrontModel frontModel = Get.put(FrontModel());
+
+  var value = Get.arguments;
+
+
+
 
   @override
   void initState() {
     super.initState();
-  
+    //notice_screen_model = noticeScreenService();
   }
 
   @override
@@ -32,71 +42,63 @@ class _FrontPage extends State<FrontPage> {
     c.dispose();
     super.dispose();
   }
+  
 
-  //login model에 데이터 저장.
-  var value = Get.arguments;
+  @override
+  didChangeDependencies() {
+    super.didChangeDependencies();
+    //부대이름 업데이트
+    updateName() {
+    frontModel.unitNameUpdate(value.name.toString());
+    } 
 
-  //부대이름 업데이트
-  updateName() {
-    loginModel.unitNameUpdate(value.title.toString());
+    //부대 아이디 업데이트
+    unitNoticeUpdate() {
+      frontModel.unitSelectIdUpdate(value.id);
+    }
+    updateName();
+    unitNoticeUpdate();
   }
 
-  //이미지 업데이트
-  updateImage() {
-    loginModel.unitPhotosUpdate(value.thumbnailUrl.toString());
-  }
+ 
+
+
+
   
 
   @override
   Widget build(BuildContext context) {
 
-
-    updateName();
-    updateImage();
-
+    
+    //updateImage();
 
     return Scaffold(
       extendBody: true, 
       appBar:  AppBar(
-          title: Text(loginModel.unitName),
+        backgroundColor: GlobalColors.backgroundColor,
+          title: Text(frontModel.unitName),
         ),
       bottomNavigationBar: StylishBottomBar(
         items: [
           AnimatedBarItems(
-              icon: const Icon(
-                Icons.house_outlined,
-              ),
-              selectedIcon: const Icon(Icons.house_rounded),
-              selectedColor: Colors.teal,
-              backgroundColor: Colors.tealAccent,
-              title: const Text('Home')),
+              icon: const Icon(CupertinoIcons.home),
+              selectedIcon: const Icon(CupertinoIcons.home),
+              selectedColor: GlobalColors.backgroundColor,
+              title: const Text('홈')),
           AnimatedBarItems(
-              icon: const Icon(Icons.star_border_rounded),
-              selectedIcon: const Icon(Icons.star_rounded),
-              selectedColor: Colors.green,
-              backgroundColor: Colors.lightGreenAccent,
-              title: const Text('Star')),
+              icon: const Icon(CupertinoIcons.qrcode_viewfinder),
+              selectedIcon: const Icon(CupertinoIcons.qrcode_viewfinder),
+              selectedColor: GlobalColors.backgroundColor,
+              title: const Text('스캐너')),
+ 
           AnimatedBarItems(
-              icon: const Icon(
-                Icons.style_outlined,
-              ),
-              selectedIcon: const Icon(Icons.style),
-              backgroundColor: Colors.amber,
-              selectedColor: Colors.deepOrangeAccent,
-              title: const Text('Style')),
-          AnimatedBarItems(
-              icon: const Icon(
-                Icons.person_outline,
-              ),
-              selectedIcon: const Icon(
-                Icons.person,
-              ),
-              backgroundColor: Colors.purpleAccent,
-              selectedColor: Colors.deepPurple,
-              title: const Text('Profile')),
+              icon: const Icon(CupertinoIcons.person),
+              selectedIcon: const Icon(CupertinoIcons.person),
+              selectedColor: GlobalColors.backgroundColor,
+              title: const Text('프로필')),
         ],
-        iconSize: 32,
-        iconStyle: IconStyle.animated,
+        iconSize: 30,
+        iconStyle: IconStyle.Default,
         hasNotch: true,
         opacity: 0.3,
         currentIndex: c.selected ?? 0,
@@ -112,12 +114,12 @@ class _FrontPage extends State<FrontPage> {
         controller: c.controller,
         children: [
           FirstPage(),
-          Center(child: Text('Star')),
-          Center(child: Text('Add')),
+          TwicePage(),
           FourthPage()
         ],
       )
       ),
+      backgroundColor: GlobalColors.mainBackgroundColor,
     );
   }
   
