@@ -17,14 +17,6 @@ class _SearchResultPageState extends State<SearchResultPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('검색결과'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: SearchUser());
-              },
-              icon: Icon(Icons.search_sharp),
-            )
-          ],
         ),
         body: Container(
           padding: EdgeInsets.all(20),

@@ -5,32 +5,26 @@ import 'package:myapp/model/front_model.dart';
 
 import '../model/stock_model.dart';
 
-class QrSearchList {
+class QrService {
   FrontModel frontModel = Get.put(FrontModel());
 
   var data = [];
   List<StockModel> results = [];
 
-  Future<List<StockModel>> getSearchList(barcode) async {
-    String urlList = 'https://rackvisor.duckdns.org/api/stocks/advanced-search';
+  Future<List<StockModel>> getQrList({String? query}) async {
+    String urlList = 'https://rackvisor.duckdns.org/api/stocks/stocks-in-warehouse/${frontModel.selectId}';
     var url = Uri.parse(urlList);
     try {
-      var response = await http.post(url,
-      headers: {"Content-Type": "application/json"},
-      body: <String, dynamic> {
-          'barcode' : barcode,
-        }
-      );
-      
-      if (response.statusCode == 200) {
+      var response = await http.get(url);
+      if (response.statusCode == 201) {
         data = json.decode(response.body);
         results = data.map((e) => StockModel.fromJson(e)).toList();
         
-        if (barcode!= null){
-          results = results.where((element) => element.name!.toLowerCase().contains((barcode.toLowerCase()))).toList();
+        if (query!= null){
+          results = results.where((element) => element.barcode!.toLowerCase().contains((query.toLowerCase()))).toList();
         }
       } else {
-        print("error");
+        print("fetch error");
       }
     } on Exception catch (e) {
       print('error: $e');

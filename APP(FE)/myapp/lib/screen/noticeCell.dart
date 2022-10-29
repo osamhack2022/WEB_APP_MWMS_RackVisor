@@ -149,7 +149,8 @@ class NoticeScreenTile extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w800,
-                      fontSize: 20,
+                      
+                      overflow: TextOverflow.ellipsis,
                     ),),
 
 

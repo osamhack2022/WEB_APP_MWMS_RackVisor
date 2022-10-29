@@ -66,7 +66,7 @@ class AramScreenTile extends StatelessWidget {
                     ),
                 ),
 
-                const SizedBox(width: 4),
+                const SizedBox(width: 3),
 
                 Column(
                   children: [
@@ -77,6 +77,8 @@ class AramScreenTile extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       overflow: TextOverflow.ellipsis,
                     ),),
+
+                    const SizedBox(width: 3),
 
                     SizedBox(height: 5),
                     //subtitle 게시물 내용

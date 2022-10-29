@@ -67,7 +67,7 @@ dependencies:
 
   flutter_native_splash: ^2.2.12
   intl: ^0.17.0
-
+  flutter_qr_bar_scanner: ^3.0.2
   url_launcher: ^6.1.6
   
 dev_dependencies:

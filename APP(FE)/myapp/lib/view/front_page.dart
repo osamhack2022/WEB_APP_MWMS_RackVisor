@@ -6,6 +6,7 @@ import 'package:myapp/controller/bottom_nav_controller.dart';
 import 'package:myapp/model/front_model.dart';
 import 'package:myapp/utils/global_colors.dart';
 import 'package:myapp/view/Fourth_page.dart';
+import 'package:myapp/view/qrsearchPage.dart';
 import 'package:myapp/view/twice_page.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 import 'First_page.dart';

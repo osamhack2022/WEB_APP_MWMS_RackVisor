@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../model/stock_model.dart';
 import '../screen/search.dart';
-import '../services/qrsearch_service.dart';
+import '../services/qr_service.dart';
+import '../services/stock_service.dart';
 
 class QrSearchResultPage extends StatefulWidget {
   @override
@@ -10,7 +11,8 @@ class QrSearchResultPage extends StatefulWidget {
 }
 
 class _QrSearchResultPageState extends State<QrSearchResultPage> {
-  QrSearchList _qrSearchList = QrSearchList();
+  QrService _qrService = QrService();
+  
 
   var barcode = Get.arguments;
 
@@ -19,14 +21,25 @@ class _QrSearchResultPageState extends State<QrSearchResultPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("BarCodeScan 결과"),
+          //백버튼 막기
+          automaticallyImplyLeading: false,
+          title: Text('검색결과'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: SearchUser());
+              },
+              icon: Icon(Icons.search_sharp),
+            )
+          ],
         ),
         body: Container(
           padding: EdgeInsets.all(20),
           child: FutureBuilder<List<StockModel>>(
-              future: _qrSearchList.getSearchList(barcode),
+              future: _qrService.getQrList(query: barcode),
               builder: (context, snapshot) {
                 var data = snapshot.data;
+                
                 return ListView.builder(
                     itemCount: data?.length,
                     itemBuilder: (context, index) {
