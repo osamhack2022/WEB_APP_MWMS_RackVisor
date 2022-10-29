@@ -20,7 +20,7 @@
 
 </div>
 
-<img src="docs\image\mwms-logo.PNG" align="center">
+<div  align="center"><img src="docs\image\mwms-logo.PNG"></div>
 
 <br/><br/>
 
