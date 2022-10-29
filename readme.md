@@ -175,14 +175,17 @@ $ yarn start or yarn dev
 
 <br/>
 <h4>프론트-웹 설치</h4>
+
 ```bash
 $ git clone git주소
 $ cd WEB(FE)
 $ npm i
 $ npm start
 ```
+
 <br/>
 <h4>프론트-앱 설치</h4>
+
 ```bash
 $ git clone git주소
 $ cd APP(FE)
@@ -190,6 +193,7 @@ $ flutter build apk --release --target-platform=android-arm64   (Android)
 $ ...or
 $ flutter build ipa                                              (ios)
 ```
+
 <br/>
 
 ---
