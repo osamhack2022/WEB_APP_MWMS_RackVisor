@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  // TODO: Uncomment line before production
-  // withCredentials: true,
+  withCredentials: true,
   baseURL: "https://rackvisor.duckdns.org/api",
 });
 
