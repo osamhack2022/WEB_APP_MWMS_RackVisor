@@ -90,7 +90,7 @@ export default function MaterialChangeModal({open, setOpen, materialInfo, setMat
       let searchId = {
         barcode : itemToAdd.barcode,
       }
-      let response = await axiosPost("/stocks/advanced-search", searchId);
+      let response = await axiosPost(`/stocks/advanced-search/${currUnit.id}`, searchId);
       console.log(response);
 
       response = response[0];
