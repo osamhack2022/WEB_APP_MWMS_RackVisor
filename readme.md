@@ -126,7 +126,7 @@
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\history.gif" width="100%"></td>
-<td width ="450" align="center">부대 물품이 <b>변동된 기록</b>을 확인하여<br> 사용처와 사용량을 체크할 수 있음</td>
+<td width ="450" align="center">부대 물품이 <b>변동된 기록</b>을 확인하여<br> 사용처와 사용량을 체크 가능</td>
 </tr>
 
 </table>
@@ -138,7 +138,7 @@
 <table width="900">
 
 <tr>
-<td width ="450" align="center">단순 웹사이트만 제공하는<br/>  체계들과 달리 <b>휴대폰</b>을 활용하여<br/>  창고에 직접 접속하여 <b>물품의 리스트</b>를 확인<br/> <b>QR 코드</b>를 인식하여 조회할 수 있는 <br/> <b>QR코드 검색 기능</b>을 지니고 있음</td>
+<td width ="450" align="center">단순 웹사이트만 제공하는<br/>  체계들과 달리 <b>휴대폰</b>을 활용하여<br/>  창고에 직접 접속하여 <b>물품의 리스트</b>를 확인<br/> <b>QR 코드</b>를 인식하여 조회할 수 있는 <br/> <b>QR코드 검색 기능</b></td>
 <td width ="450" align="center"><img src="docs\gif\app.gif" width=60%"></td>
 </tr>
 
