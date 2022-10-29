@@ -74,41 +74,6 @@
 
 <br/>
 
-- <h4>창고 관리</h4> 
-  <img style="float: right;" src="docs\gif\cabinet.gif" width=50%">
-  <div align="center"><br/><br/><br/>기존 부대의 각 **창고**의<br/> **모양**을 본뜨기 위해서 <br/> 간단한 UI 를 통해 <br/> **창고의 모양**을 본뜰 뿐더러 <br/><br/><br/><br/></div>
-   <img style="float: left;" src="docs\gif\box.gif" width="50%">
-   <div align="center"><br/><br/><br/>
-  창고 속 층과 구역을<br/> 간단히 나눠<br/> 그 누구든 검색한 위치로<br/> 쉽게 찾아갈 수 있도록 하는<br/> **창고 관리** 기능<br/><br/><br/><br/></div>
-
-  <br/><br/>
-
-- <h4>물자 추가</h4>
-  <img style="float: right;" src="docs\gif\save.gif" width="50%">
-  <div align="center"><br/><br/><br/><br/><br/>웹 사이트를 통한 수동 추가 또는<br/> 기존의 델리스 체계와의 호환을 위한<br/> 엑셀 맞춤형 물자 추가<br/><br/><br/><br/><br/><br/><br/><br/></div>
-
-- <h4>강력한 검색과 바코드 기능</h4>
-  <img style="float: left;" src="docs\gif\search.gif" width=50%">
-  <div align="center"><br><br><br><br>사용 가능 기한, 담당자 등을<br> 바탕으로 하여<br> 세부 특성에 맞춘 **검색 기능**<br><br>창고와 창고별 위치를 바탕으로<br> **위치별 물자 검색**<br><br><br><br></div>
-  <img style="float: right;" src="docs\gif\barcode.gif" width=50%">
-  <div align="center"><br><br><br>특정 물품에 가시성 있도록<br> **바코드**를 부착하여 간단한 관리<br><br>물자가 보관된 박스에 이를 조회해<br> 들어있어야 하는 물품을 조회하거나<br> 박스 이름을 **조회** 가능한 기능<br><br><br><br><br></div>
-
-- <h4>히스토리 및 알람</h4>
-  <img style="float: left;" src="docs\gif\history.gif" width=50%">
-  <div align="center"><br><br><br>부대 물품이 **변동된 기록**을 확인하여<br> 사용처와 사용량을 체크할 수 있음<br><br><br></div>
-
-<br/><br/>
-
-- <h4>앱 제공</h4>
-  <img style="float: right;" src="docs\gif\app.gif" width=30%">
-  <div align="center"><br/> <br/> <br/> <br/> <br/> 단순 웹사이트만 제공하는<br/>  체계들과 달리 **휴대폰**을 활용하여<br/>  창고에 직접 접속하여 **물품의 리스트**를 확인<br/> **QR 코드**를 인식하여 조회할 수 있는 <br/> **QR코드 검색 기능**을 지니고 있음<br/> <br/> <br/> <br/> <br/> <br/>   </div>
-
-- <h4>알람과 공지사항 기능</h4>
-  <img style="float: left;" src="docs\gif\post.gif" width=50%">
-  <br/><br/><div align="center">부대에 속한 물품들이<br/> **유통기한**이 임박했을 경우<br/> 이를 확인할 수 있음, <br/>또한 부대 내 **전파사항**이 있을 경우<br/> **공지사항** 게시판을 통해 <br/>서로에게 전파할 수 있음</div>
-
-<br/><br/><br/><br/>
-
 ---
 
 <h2 id="how-to-install"> :wrench: 설치 안내 (Installation Process)</h2>
