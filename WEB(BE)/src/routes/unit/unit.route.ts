@@ -4,6 +4,7 @@ import {
   registerUnitHandler,
   findMyUnitsHandler,
   getUnitsHandler,
+  registerUserOnUnit,
 } from './unit.controller';
 import { $ref } from './unit.schema';
 
@@ -23,7 +24,7 @@ async function unitRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/myUnits',
+    '/my-units',
     {
       schema: {
         response: {
@@ -36,7 +37,7 @@ async function unitRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/',
+    '/all-units',
     {
       schema: {
         response: {
@@ -46,6 +47,19 @@ async function unitRoutes(server: FastifyInstance) {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
     },
     getUnitsHandler
+  );
+
+  server.put(
+    'register-user-to-unit/:unitId',
+    {
+      schema: {
+        response: {
+          201: $ref('unitResponseSchema'),
+        },
+      },
+      onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
+    },
+    registerUserOnUnit
   );
 }
 

@@ -19,12 +19,12 @@ async function boxRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    ':/storedRackId',
+    '/box-in-rack/:rackId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
         response: {
-          201: $ref('boxesResponseSchema'),
+          200: $ref('boxesResponseSchema'),
         },
       },
     },

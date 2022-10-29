@@ -2,41 +2,14 @@ import { z } from 'zod';
 import { buildJsonSchemas } from 'fastify-zod';
 
 const userCore = {
-  email: z
-    .string({
-      required_error: 'Email is required',
-      invalid_type_error: 'Email must be a string',
-    })
-    .email(),
   name: z.string(),
   militarySerialNumber: z.string({
     required_error: 'militarySerialNumber is required',
     invalid_type_error: 'militarySerialNumber must be a string',
   }),
-  rank: z.enum([
-    'RANK_PV2',
-    'RANK_PFC',
-    'RANK_SPC',
-    'RANK_SGT',
-    'RANK_SSG',
-    'RANK_SFC',
-    'RANK_MSG',
-    'RANK_SGM',
-    'RANK_WO1',
-    'RANK_2LT',
-    'RANK_1LT',
-    'RANK_CPT',
-    'RANK_MAJ',
-    'RANK_LTC',
-    'RANK_COL',
-    'RANK_BG',
-    'RANK_MG',
-    'RANK_LTG',
-    'RANK_GEN',
-  ]),
+  rank: z.string(),
   reigment: z.string(),
   position: z.string(),
-  phoneNumber: z.string(),
 };
 
 const createUserSchema = z.object({

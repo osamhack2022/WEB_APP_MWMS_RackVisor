@@ -20,4 +20,10 @@ export async function registerBox(
   }
 }
 
-export async function findBoxesOnRack(request: FastifyRequest) {}
+export async function findBoxesOnRack(request: FastifyRequest<{
+  Params: { rackId: string };
+}>, reply: FastifyReply) {
+  const { rackId } = request.params;
+  const boxes = await findBoxes(+rackId);
+  return reply.code(200).send(boxes);
+}

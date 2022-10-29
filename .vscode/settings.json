@@ -1,0 +1,5 @@
+{
+  "search.useParentIgnoreFiles": false,
+  "cmake.sourceDirectory": "${workspaceFolder}/APP(FE)/myapp/linux",
+  "window.title": "MWMS Root"
+}

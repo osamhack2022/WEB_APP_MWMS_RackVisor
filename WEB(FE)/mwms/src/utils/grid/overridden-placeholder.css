@@ -1,0 +1,4 @@
+.react-grid-item img {
+  pointer-events: auto;
+  user-select: text;  
+}
