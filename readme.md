@@ -15,10 +15,14 @@
 
 ---
 
-<a href=''><img src='https://img.shields.io/badge/VIDEO-red?style=for-the-badge'></a> <a href=''><img src='https://img.shields.io/badge/GIT BOOK-blue?style=for-the-badge'></a> <a href=''><img src='https://img.shields.io/badge/DOCS-gray?style=for-the-badge'></a>
+<a href=''><img src='https://img.shields.io/badge/VIDEO-red?style=for-the-badge'></a> <a href='https://rackvisor.gitbook.io/mwms-git-book/'><img src='https://img.shields.io/badge/GIT BOOK-blue?style=for-the-badge'></a> <a href='https://topaz-echium-20b.notion.site/MWMS-c0ecac5ed3cc489284570ae1606e7a10'><img src='https://img.shields.io/badge/DOCS-gray?style=for-the-badge'></a>
 <br/>
 
 </div>
+
+<img src="docs\image\mwms-logo.PNG" align="center">
+
+<br/><br/>
 
 > 군인**의**, 군인을 **위한**, 군인에 **의한** <br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 창고 관리 시스템, &#160;&#160; **"국방물자관리체계"**
 
@@ -64,7 +68,7 @@
 일괄 추가 일괄 제거, 그리고 세부적인 검색이 가능한 물자 관리<br/><br/>
 검색은 이젠 그만! **`QR 코드`** 를 통한 간편한 인식과 재고 확인<br/><br/>
 이거 벌써 유통기한 지났네? **`알람기능`** 을 통한 유통기한 임박 물품 리스트 확인<br/><br/>
-이걸 언제 다쓴거지? **`히스토리`** 확인과 **`통계`** 확인<br/><br/>
+이걸 언제 다쓴거지? **`히스토리`** 확인<br/><br/>
 
 <br/>
 
@@ -164,17 +168,35 @@
 
 ```bash
 $ git clone git주소
+$ cd WEB(BE)
 $ yarn install
 $ yarn start or yarn dev
 ```
 
+<br/>
+<h4>프론트-웹 설치</h4>
+```bash
+$ git clone git주소
+$ cd WEB(FE)
+$ npm i
+$ npm start
+```
+<br/>
+<h4>프론트-앱 설치</h4>
+```bash
+$ git clone git주소
+$ cd APP(FE)
+$ flutter build apk --release --target-platform=android-arm64   (Android)
+$ ...or
+$ flutter build ipa                                              (ios)
+```
 <br/>
 
 ---
 
 <h2 id="how-to-use"> :mag_right: 프로젝트 사용법 (Getting Started)</h2>
 
-<a href="https://app.gitbook.com/o/Jw07u3aojPWZwNszVDiX/s/sEadZzLRcypJiDENQUQw/undefined-3/undefined"><img src="docs/image/gitbook-how-to-use.png"></a>
+<a href="https://rackvisor.gitbook.io/mwms-git-book/undefined-3/undefined"><img src="docs/image/gitbook-how-to-use.png"></a>
 상단 이미지를 클릭하여 `GIT-BOOK:프로젝트 사용법`으로 이동할 수 있습니다.
 
 ---
