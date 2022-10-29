@@ -77,11 +77,11 @@
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\cabinet.gif" width=100%"></td>
-<td width ="450" align="center">기존 부대의 각 **창고**의<br/> **모양**을 본뜨기 위해서 <br/> 간단한 UI 를 통해 <br/> **창고의 모양**을 본뜰 뿐더러</td>
+<td width ="450" align="center">기존 부대의 각 창고의<br/> <b>모양</b>을 본뜨기 위해서 <br/> 간단한 UI 를 통해 <br/> <b>창고의 모양</b>을 생성하는 기능</td>
 </tr>
 
 <tr>
-<td width ="450" align="center">창고 속 층과 구역을<br/> 간단히 나눠<br/> 그 누구든 검색한 위치로<br/> 쉽게 찾아갈 수 있도록 하는<br/> **창고 관리** 기능</td>
+<td width ="450" align="center">창고 속 층과 구역을<br/> 간단히 나눠<br/> 그 누구든 검색한 위치로<br/> 쉽게 찾아갈 수 있도록 하는<br/> <b>창고 관리</b> 기능</td>
 <td width ="450" align="center"><img src="docs\gif\box.gif" width="100%"></td>
 </tr>
 
@@ -93,7 +93,7 @@
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\save.gif" width=100%"></td>
-<td width ="450" align="center">웹 사이트를 통한 수동 추가 또는<br/> 기존의 델리스 체계와의 호환을 위한<br/> 엑셀 맞춤형 물자 추가</td>
+<td width ="450" align="center">웹 사이트를 통한 <b>수동 추가</b> 또는<br/> 기존의 델리스 체계와의 호환을 위한<br/> <b>엑셀 맞춤형 물자 추가</b></td>
 </tr>
 
 </table>
@@ -103,12 +103,12 @@
 - <table width="900">
 
 <tr>
-<td width ="450" align="center">사용 가능 기한,<br> 담당자 등을 바탕으로 하여<br> 세부 특성에 맞춘 **검색 기능**과<br>창고와 창고별 위치를 바탕으로<br> **위치별 물자 검색**</td>
+<td width ="450" align="center">사용 가능 기한,<br> 담당자 등을 바탕으로 하여<br> 세부 특성에 맞춘 <b>검색 기능</b>과<br>창고와 창고별 위치를 바탕으로<br> <b>위치별 물자 검색</b></td>
 <td width ="450" align="center"><img src="docs\gif\search.gif" width=100%"></td>
 </tr>
 <tr>
 <td width ="450" align="center"><img src="docs\gif\barcode.gif" width="100%"></td>
-<td width ="450" align="center">특정 물품에 가시성 있도록<br> **바코드**를 부착하여 간단한 관리<br><br>물자가 보관된 박스에 이를 조회해<br> 들어있어야 하는 물품을 조회하거나<br> 박스 이름을 **조회** 가능한 기능</td>
+<td width ="450" align="center">특정 물품에 가시성 있도록<br> <b>바코드</b>를 부착하여 간단한 관리<br><br>물자가 보관된 박스에 이를 조회해<br> 들어있어야 하는 물품을 조회하거나<br> 박스 이름을 <b>조회</b> 가능한 기능</td>
 </tr>
 </table>
 <br/>
@@ -118,7 +118,7 @@
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\history.gif" width="100%"></td>
-<td width ="450" align="center">부대 물품이 **변동된 기록**을 확인하여<br> 사용처와 사용량을 체크할 수 있음</td>
+<td width ="450" align="center">부대 물품이 <b>변동된 기록</b>을 확인하여<br> 사용처와 사용량을 체크할 수 있음</td>
 </tr>
 
 </table>
@@ -129,7 +129,7 @@
   <table width="900">
 
 <tr>
-<td width ="450" align="center">단순 웹사이트만 제공하는<br/>  체계들과 달리 **휴대폰**을 활용하여<br/>  창고에 직접 접속하여 **물품의 리스트**를 확인<br/> **QR 코드**를 인식하여 조회할 수 있는 <br/> **QR코드 검색 기능**을 지니고 있음</td>
+<td width ="450" align="center">단순 웹사이트만 제공하는<br/>  체계들과 달리 <b>휴대폰</b>을 활용하여<br/>  창고에 직접 접속하여 <b>물품의 리스트</b>를 확인<br/> <b>QR 코드</b>를 인식하여 조회할 수 있는 <br/> <b>QR코드 검색 기능</b>을 지니고 있음</td>
 <td width ="450" align="center"><img src="docs\gif\app.gif" width=60%"></td>
 </tr>
 
@@ -141,7 +141,7 @@
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\post.gif" width=100%"></td>
-<td width ="450" align="center">부대에 속한 물품들이<br/> **유통기한**이 임박했을 경우<br/> 이를 확인할 수 있음, <br/>또한 부대 내 **전파사항**이 있을 경우<br/> **공지사항** 게시판을 통해 <br/>서로에게 전파할 수 있음</td>
+<td width ="450" align="center">부대에 속한 물품들이<br/> <b>유통기한</b>이 임박했을 경우<br/> 이를 확인할 수 있음, <br/>또한 부대 내 <b>전파사항</b>이 있을 경우<br/> <b>공지사항</b> 게시판을 통해 <br/>서로에게 전파할 수 있음</td>
 </tr>
 
 </table>
