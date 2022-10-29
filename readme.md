@@ -254,17 +254,17 @@ $ flutter build ipa                                              (ios)
 
 ### Server(back-end)
 
-**1. DB, Framework**
+**1. DB, Framework**  
 DB는 RDBMS의 [MySQL](https://www.mysql.com/)을 사용하였고, 서버 프레임워크는 Node.js기반의 [Fastify](https://www.fastify.io/)를 사용하여 개발 편의성을 높였습니다.  
 서비스의 특성상 테이블간 Relation 구성이 매우 중요하기 때문에, 본격적인 개발 시작에 앞서 DB 설계에 많은 시간을 투자했습니다.
 <br/>
 
-**2. ORM**
+**2. ORM**  
 MySQL - Fastify간의 ORM으로 [Prisma](https://github.com/prisma/prisma)를 사용했습니다. Prisma는 다양한 종류의 DB들을 서로 비슷한 문법으로 개발할 수 있도록 해주는 ORM입니다.  
 `npx primsa generate`로 DB Schema에 맞는 Typescript 타입 정의 파일을 생성할 수 있고, `npx prisma migrate` 한번으로 Schema에 맞게 연결된 DB의 테이블을 자동으로 조작해줍니다.
 <br/>
 
-**3. Swagger for API Docs**
+**3. Swagger for API Docs**  
 백엔드는 프론트엔드 개발자들과 협업을 하기 위해 각각의 API에 대한 스펙을 적절한 방법으로 전달해야 합니다.  
 그 중 API Route별로 Response, Request Body의 형태를 상세히 기술한 API Document를 제작하는 경우가 흔한데, 이를 자동으로 생성해주는 `Swagger`을 사용했고, 그 중에서도 서버 프레임워크인 Fastify에 맞는 [Fastify Swagger](https://github.com/fastify/fastify-swagger)을 사용하였습니다.
 <br/>
