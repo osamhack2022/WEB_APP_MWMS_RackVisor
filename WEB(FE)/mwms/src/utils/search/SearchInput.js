@@ -26,7 +26,7 @@ function SearchInput({ setData }) {
     }
 
     console.log(reqBody);
-    let result = await axiosPost(`/stocks/advanced-search/${currUnit}`, reqBody);
+    let result = await axiosPost(`/stocks/advanced-search/${currUnit.id}`, reqBody);
 
     result.map((re) => {
       if (re.expirationDate) {
