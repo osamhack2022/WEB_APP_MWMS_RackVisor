@@ -60,11 +60,11 @@
 
 <h4> :+1: 특징 </h4>
 
-**`단순한 UI`**, 기능적으로 복잡하지 않고, 기존의 창고를 있는 그대로 본뜨기 위한 간단한 **`창고 관리`**<br/>
-일괄 추가 일괄 제거, 그리고 세부적인 검색이 가능한 물자 관리<br/>
-검색은 이젠 그만! **`QR 코드`** 를 통한 간편한 인식과 재고 확인<br/>
-이거 벌써 유통기한 지났네? **`알람기능`** 을 통한 유통기한 임박 물품 리스트 확인<br/>
-이걸 언제 다쓴거지? **`히스토리`** 확인과 **`통계`** 확인<br/>
+**`단순한 UI`**, 기능적으로 복잡하지 않고, 기존의 창고를 있는 그대로 본뜨기 위한 간단한 **`창고 관리`**<br/><br/>
+일괄 추가 일괄 제거, 그리고 세부적인 검색이 가능한 물자 관리<br/><br/>
+검색은 이젠 그만! **`QR 코드`** 를 통한 간편한 인식과 재고 확인<br/><br/>
+이거 벌써 유통기한 지났네? **`알람기능`** 을 통한 유통기한 임박 물품 리스트 확인<br/><br/>
+이걸 언제 다쓴거지? **`히스토리`** 확인과 **`통계`** 확인<br/><br/>
 
 <br/>
 
@@ -72,8 +72,9 @@
 
 <h2 id="introduction-function"> :page_with_curl: 기능 설명</h2>
 
-- <h4>창고 관리</h4> 
-  <table width="900">
+- <h4>창고 관리</h4>
+
+<table width="900">
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\cabinet.gif" width=100%"></td>
@@ -89,7 +90,8 @@
 <br/>
 
 - <h4>물자 추가</h4>
-  <table width="900">
+
+<table width="900">
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\save.gif" width=100%"></td>
@@ -100,7 +102,8 @@
 <br/>
 
 - <h4>강력한 검색과 바코드 기능</h4>
-- <table width="900">
+
+<table width="900">
 
 <tr>
 <td width ="450" align="center">사용 가능 기한,<br> 담당자 등을 바탕으로 하여<br> 세부 특성에 맞춘 <b>검색 기능</b>과<br>창고와 창고별 위치를 바탕으로<br> <b>위치별 물자 검색</b></td>
@@ -114,7 +117,8 @@
 <br/>
 
 - <h4>히스토리 및 알람</h4>
-  <table width="900">
+
+<table width="900">
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\history.gif" width="100%"></td>
@@ -126,7 +130,8 @@
 <br/>
 
 - <h4>앱 제공</h4>
-  <table width="900">
+
+<table width="900">
 
 <tr>
 <td width ="450" align="center">단순 웹사이트만 제공하는<br/>  체계들과 달리 <b>휴대폰</b>을 활용하여<br/>  창고에 직접 접속하여 <b>물품의 리스트</b>를 확인<br/> <b>QR 코드</b>를 인식하여 조회할 수 있는 <br/> <b>QR코드 검색 기능</b>을 지니고 있음</td>
@@ -137,7 +142,8 @@
 <br/>
 
 - <h4>알람과 공지사항 기능</h4>
-  <table width="900">
+
+<table width="900">
 
 <tr>
 <td width ="450" align="center"><img src="docs\gif\post.gif" width=100%"></td>
@@ -154,12 +160,12 @@
 
 <h2 id="how-to-install"> :wrench: 설치 안내 (Installation Process)</h2>
 
-다른 서버쪽 앱쪽 나오는대로 앱 / 웹 만 나누고 나머지는 동시에 해서 보여주도록 하기
+<h4>서버 설치</h4>
 
 ```bash
 $ git clone git주소
 $ yarn install
-$ yarn start or npm run start
+$ yarn start or yarn dev
 ```
 
 <br/>
@@ -239,14 +245,16 @@ MySQL - Fastify간의 ORM으로 [Prisma](https://github.com/prisma/prisma)를 �
 
 ### Front-end
 
-- **`React`**, **`Tailwind`** 를 이용한 웹 프론트엔드 개발
-  - [**React**](https://ko.reactjs.org/) : JS 기반 웹 개발
-  - [**TailWind**](https://tailwindcss.com/) : CSS 프레임워크
+**1. Framework**
+웹 프론트 개발 때 사용한 Framework는 [React](https://ko.reactjs.org/)와 [TailWind](https://tailwindcss.com/)입니다.
+React를 사용하여 JS 기반으로 웹 컴포넌트들을 구성하여 서버와 연동하였고, 창고 관리라는 프로젝트의 방향성에 맞추어 직관적인 UI를 구성하고자 TailWind라는 CSS 프레임워크를 사용하였습니다.
+<br/>
 
 ### App
 
-- **`Flutter`** 를 이용한 앱 개발
-  - [**Flutter**](https://flutter-ko.dev/) : 크로스 플랫폼 개발
+**1. Framwork**
+앱 개발시 사용한 Framework는 [Flutter](https://flutter-ko.dev/)입니다.
+웹 사용시 보조적인 사용 도구로 앱이 필요하기 때문에 android, ios 둘 다 사용이 가능하도록 Flutter를 이용해 크로스 플랫폼 개발을 진행하였습니다. 또한, 웹과 비슷한 목적으로 사용성을 높이기 위해 UI의 직관성을 높이고자 하였습니다.
 
 <br/>
 
