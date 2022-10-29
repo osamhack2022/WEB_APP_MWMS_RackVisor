@@ -31,11 +31,13 @@ export async function registerStock(
 export async function advancedStockSearchController(
   request: FastifyRequest<{
     Body: AdvanedSearchStockInput;
+    Params: { unitId: string };
   }>,
   reply: FastifyReply
 ) {
   const { body } = request;
-  const targetStocks = await advancedStockSearchService(body);
+  const { unitId } = request.params;
+  const targetStocks = await advancedStockSearchService(body, +unitId);
   return reply.code(200).send(targetStocks);
 }
 

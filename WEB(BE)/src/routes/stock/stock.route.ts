@@ -54,7 +54,7 @@ async function stockRoutes(server: FastifyInstance) {
 
   // ? Advanced Search
   server.post(
-    '/advanced-search',
+    '/advanced-search/:unitId',
     {
       onRequest: [(server as DecoratedFastifyInstance).authenticateWithJWT],
       schema: {
