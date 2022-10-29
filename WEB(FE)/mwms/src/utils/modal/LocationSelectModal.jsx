@@ -13,7 +13,7 @@ export default function LocationSelectModal({open, setOpen, setLocation}) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex items-end justify-center overflow-x-auto min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -55,7 +55,7 @@ export default function LocationSelectModal({open, setOpen, setLocation}) {
 
                 <div className="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   {/* {boxSelect && <div>{boxSelect} 선택된 박스</div>} */}
-                  <BoxSelect setBoxSelect={handle} popup={true}/>
+                  <BoxSelect setBoxSelect={handle} modify={""} popup={true} qr={false} addone={true} />
 
                 </div>
               </div>

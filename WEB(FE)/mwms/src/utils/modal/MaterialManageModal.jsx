@@ -56,36 +56,50 @@ export default function MaterialManageModal({open, setOpen}) {
       comment : good,
       expirationDate : (startDate.getFullYear()).toString() + "-" + (startDate.getMonth() + 1).toString() + "-" + (startDate.getDate()).toString(),
       storedBoxId : Number(loc),
+      createdUserId: localStorage.getItem('id')
     }
 
     let itemToHistory = {
       content : name + " " + (minCnt).toString() + " " + "plus",
       unitId : Number(currUnit.id)
     }
+    if (!loc) {
+      alert("위치를 선택해주세요");
 
-    try {
-      let response = await axiosPost("/stocks/", itemToAdd);
-      response.barcode = "m" + (response.id).toString();
-      await axiosPut("/stocks/stock-update", response);
+    } else {
+      try {
+        let response = await axiosPost("/stocks/", itemToAdd);
+        response.barcode = "m" + (response.id).toString();
+        await axiosPut("/stocks/stock-update", response);
 
+        let newHistory = {
+          manager : localStorage.getItem("이름"),
+          name : response.name,
+          id : response.id,
+          oriCount : response.amount,
+          location : "",
+          type : "추가",
+          type1 :  response.type,
+          specipicType : response.specipicType,
+        }
+        itemToHistory.content = JSON.stringify(newHistory);
+        await axiosPost("/historys/", itemToHistory);
 
-      await axiosPost("/historys/", itemToHistory);
+        alert("물품이 추가되었습니다");
 
-      alert("물품이 추가되었습니다");
-
-    } catch(e) {
-      alert("오류가 발생했습니다")
+      } catch(e) {
+        alert("오류가 발생했습니다")
+      }
+      setLoc("");
+      setContent("없음")
+      setType("없음");
+      setMinCnt(0);
+      setName("");
+      setGood("");
+      setStartDate(new Date());
+      setOpen(false);
+      navigate("/materialManage");
     }
-    setLoc("");
-    setContent("없음")
-    setType("없음");
-    setMinCnt(0);
-    setName("");
-    setGood("");
-    setStartDate(new Date());
-    setOpen(false);
-    navigate("/materialManage");
-
   }
   
   return (
@@ -131,35 +145,34 @@ export default function MaterialManageModal({open, setOpen}) {
 
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-white mx-2">
                     물품 추가
                   </Dialog.Title>
                   <div className="mt-2 text-white">
-                    <div class="flex">
-                    <button class="my-1 text-[#5AB0AD] hover:text-white my-1 text-sm " onClick={() => setLocationOpen(true)}>위치 선택하기</button>
-                    {loc && <div class="text-white ml-5 mt-[4px] text-sm ">&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
-                    {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
+                    <div class="flex mt-3">
+                      <button class="my-1 text-[#5AB0AD] hover:text-white text-lg " onClick={() => setLocationOpen(true)}>위치 선택하기</button>
+                      {loc && <div class="text-white ml-5 mt-[4px] text-lg ">&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;위치 선택됨</div>}
+                      {[<LocationSelectModal open={locationOpen} setOpen={setLocationOpen} setLocation={setLoc}/>]}
                     </div>
                     <div>
-                      <div class="flex">
-                        <div>속성 : </div>
-                        <div>
-                          <select class="bg-[#706f6f] mx-2 my-1" onChange={onChangeHanlder} value={Content}>
+                      <div class="flex mt-1 mb-2 ">
+                        <div class="text-white">속성 : </div>
+                        <div class="ml-4 ">
+                          <select class="bg-[#706f6f] mx-2 my-1 text-white " onChange={onChangeHanlder} value={Content}>
                             {Object.keys(detailType).map((type) => (
                               <option key={type}>{type}</option>
                             ))}
                           </select>
-                          <select class="bg-[#706f6f] mx-2 my-1" onChange={onChangeType} value={type}>
+                          <select class="bg-[#706f6f] mx-2 my-1 text-white " onChange={onChangeType} value={type}>
                             {Object.keys(detailType[Content]).map((ty) => (
                               <option key={ty}>{ty}</option>
                             ))}
                           </select>
-                          <div>{detailType[Content][type]}</div>
+                          <div class="text-white my-1 ml-2 mb-1 text-sm ">{detailType[Content][type]}</div>
                         </div>
                       </div>
-                      <div class="flex">
-                        <div class="mr-2">기한 : </div>
+                      <div class="flex mb-2 ">
+                        <div class=" mr-5 mb-1 ">기한 : </div>
                         <DatePicker 
                           locale={ko}
                           dateFormat="yyyy/MM/dd"
@@ -170,19 +183,22 @@ export default function MaterialManageModal({open, setOpen}) {
                           selectsStart
                         />
                       </div>
-                      <div class="flex">
-                        <div>이름 : </div>
-                        <input type="string" class="border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={name} onChange={chgName}/>
+                      <div class="flex mb-2 ">
+                        <div class=" mr-3 ">이름 : </div>
+                        <input type="string" class=" border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={name} onChange={chgName}/>
                       </div>
-                      <div class="flex">
-                        <div>상태 : </div>
-                        <input type="string" class="border rounded-md bg-[#706f6f] mx-2 my-1" value={good} onChange={chgGood}/>
+                      <div class="flex mb-2 ">
+                        <div class="mr-3 ">상태 : </div>
+                        <input type="string" class=" border rounded-md bg-[#706f6f] mx-2 my-1 mt-1" value={good} onChange={chgGood}/>
                       </div>
-                      <div class="flex">
-                        <div class="my-1">담당자 : {people}</div>
+                      <div class="flex mb-2 ">
+                        <div class="flex my-1">
+                          <div>담당자 : </div>
+                          <div class="ml-2">{people}</div>
+                        </div>
                       </div>
-                      <div class="flex">
-                        <div>{'수량 : '}</div>
+                      <div class="flex mb-2 ">
+                        <div class="mr-3 ">{'수량 : '}</div>
                         <input type="number" class="border rounded-md bg-[#706f6f] mx-2 my-1" value={minCnt} onChange={chgMinCnt}/>
                       </div>
                     </div>

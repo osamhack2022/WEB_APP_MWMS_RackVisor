@@ -1,66 +1,58 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import DetailSearch from "./DetailSearch";
 import { SearchIcon } from "@heroicons/react/solid";
-import { axiosPost } from "../../api";
+import { axiosGet, axiosPost } from "../../api";
+import da from "date-fns/esm/locale/da/index.js";
 import { useAuth } from "../../routes/AuthContext";
 
-function SearchInput({ setData }) {
+function SearchInput({ setData, data }) {
   const [name, setName] = useState();
   const [detail, setDetail] = useState(false);
   const [advancedSearchReqBody, setAdvancedSearchReqBody] = useState({});
   const auth = useAuth();
   const currUnit = auth.unitSelected;
+
   const onNameHandle = (e) => {
     setName(e.target.value);
   };
 
   const onSearch = async () => {
     setData([]);
-    let reqBody = {
-      ...advancedSearchReqBody,
-      name,
-    };
-
-    if (reqBody.name == "") {
-      delete reqBody.name;
-    }
-
-    console.log(reqBody);
-    let result = await axiosPost(`/stocks/advanced-search/${currUnit.id}`, reqBody);
-
-    result.map((re) => {
-      if (re.expirationDate) {
-        re.expirationDate = re.expirationDate.substr(0, 10);
-      }
-      if (re.type) {
-        re.type = re.type.substr(5) == "NULL" ? "없음" : re.type.substr(5) + "종";
-      }
-    });
-    setData(result);
-    console.log(result);
+    const serverData = await axiosGet("/historys/" + (currUnit.id).toString());
+    console.log(serverData);
+    const newData = serverData.filter(da => 
+    {
+      return ((!name || (name == JSON.parse(da.content).name)) 
+            && (!advancedSearchReqBody.createdUserName || (advancedSearchReqBody.createdUserName == JSON.parse(da.content).manager))
+            && (!advancedSearchReqBody.maxAmount || (Number(advancedSearchReqBody.maxAmount) >= (JSON.parse(da.content).oriCount)) && Number(advancedSearchReqBody.minAmount) <= (JSON.parse(da.content).oriCount))
+            && (!advancedSearchReqBody.maxExpDate || (advancedSearchReqBody.maxExpDate >= da.createdAt.substr(0, 10) && advancedSearchReqBody.minExpDate <= da.createdAr.substr(0, 10)))
+            && (!advancedSearchReqBody.type || (advancedSearchReqBody.type == JSON.parse(da.content).type1))
+            && (!advancedSearchReqBody.specipicType || (advancedSearchReqBody.specipicType == JSON.parse(da.content).specipicType)))});
+    setData(newData);
   };
 
   const keyPress = (e) => {
     if (e.key === "Enter") {
       onSearch();
-      console.log("rrr1");
+      console.log("rrr1")
       e.preventDefault();
     }
-  };
+  }
 
   const handleOpen = (e) => {
     if (e.clientX != 0) {
       setDetail(true);
-      console.log("rrr2");
+      console.log("rrr2")
     }
-  };
+  }
 
   const handleClose = (e) => {
     if (e.clientX != 0) {
       setDetail(false);
-      console.log("rrr3");
+      console.log("rrr3")
     }
-  };
+  }
+
 
   return (
     <form>
@@ -95,22 +87,19 @@ function SearchInput({ setData }) {
           <SearchIcon
             className="h-9 w-9 px-1 absolute right-2 bottom-2.5 rounded-full text-white hover:bg-[#7A5EA6]"
             onClick={onSearch}
+            onKeyP
           />
         </div>
       </div>
       {!detail && (
-        <button
-          class="ml-4 mt-4 text-[#5AB0AD] font-poppins font-semibold mb-4 hover:text-white"
-          onClick={handleOpen}
-          onKeyDown={keyPress}>
+        <button class="ml-4 mt-4 text-[#5AB0AD] font-poppins font-semibold mb-4 hover:text-white" onClick={handleOpen}>
           상세검색
         </button>
       )}
       {detail && (
         <button
           class="ml-4 mt-4 text-white font-poppins rounded-lg p-1 font-semibold bg-[#5AB0AD] mb-4"
-          onClick={handleClose}
-          onKeyDown={keyPress}>
+          onClick={handleClose}>
           상세검색
         </button>
       )}

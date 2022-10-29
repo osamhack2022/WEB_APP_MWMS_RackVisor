@@ -45,21 +45,21 @@ export default function DetailSearch(props) {
       specipicType: type,
       minExpDate: startDate && getYYYYMMDDFromDate(startDate),
       maxExpDate: endDate && getYYYYMMDDFromDate(endDate),
-      manager: people,
       minAmount: minCnt,
       maxAmount: maxCnt,
-    }
+      createdUserName: people,
+    };
 
     if (!ch1) {
-      delete itemToAdd.type
-      delete itemToAdd.specipicType
+      delete itemToAdd.type;
+      delete itemToAdd.specipicType;
     }
     if (!ch2) {
-      delete itemToAdd.minExpDate; 
+      delete itemToAdd.minExpDate;
       delete itemToAdd.maxExpDate;
     }
     if (!ch3) {
-      delete itemToAdd.manager;
+      delete itemToAdd.createdUserName;
     }
     if (!ch4) {
       delete itemToAdd.minAmount;
@@ -107,113 +107,113 @@ export default function DetailSearch(props) {
 
   return (
     <div class="flex justify-center">
-    <div class="p-2 text-[12px] border rounded-2xl m-2 max-w-[600px]">
-      <div class="flex">
-        <div class="pt-[14px]">
-        <input
-          class="mx-2 bg-[#706F6F] accent-[#7A5EA6]"
-          id="property"
-          type="checkbox"
-          checked={ch1}
-          onChange={onChkBox}
-        />
+      <div class="p-2 text-[12px] border rounded-2xl m-2 max-w-[600px]">
+        <div class="flex">
+          <div class="pt-[14px]">
+            <input
+              class="mx-2 bg-[#706F6F] accent-[#7A5EA6]"
+              id="property"
+              type="checkbox"
+              checked={ch1}
+              onChange={onChkBox}
+            />
+          </div>
+          <div class="text-white font-bold ml-2 mt-3 mr-5">속성 : </div>
+          <div>
+            <select class="bg-[#706F6F] text-white rounded mr-2 mt-3" onChange={onChangeHanlder} value={Content}>
+              {Object.keys(detailType).map((type) => (
+                <option key={type}>{type}</option>
+              ))}
+            </select>
+            <select class="bg-[#706F6F] text-white rounded mt-3" onChange={onChangeType} value={type}>
+              {Object.keys(detailType[Content]).map((ty) => (
+                <option key={ty}>{ty}</option>
+              ))}
+            </select>
+            <div class="text-white mt-1 mb-2">{detailType[Content][type]}</div>
+          </div>
         </div>
-        <div class="text-white font-bold ml-2 mt-3 mr-5">속성 : </div>
-        <div>
-          <select class="bg-[#706F6F] text-white rounded mr-2 mt-3" onChange={onChangeHanlder} value={Content}>
-            {Object.keys(detailType).map((type) => (
-              <option key={type}>{type}</option>
-            ))}
-          </select>
-          <select class="bg-[#706F6F] text-white rounded mt-3" onChange={onChangeType} value={type}>
-            {Object.keys(detailType[Content]).map((ty) => (
-              <option key={ty}>{ty}</option>
-            ))}
-          </select>
-          <div class="text-white mt-1 mb-2">{detailType[Content][type]}</div>
-        </div>
-      </div>
 
-      <div class="flex mb-2">
-        <div class="">
-        <input
-          class="mx-2 my-2 bg-[#706F6F] accent-[#7A5EA6]"
-          id="duration"
-          type="checkbox"
-          checked={ch2}
-          onChange={onChkBox}
-        />
+        <div class="flex mb-2">
+          <div class="">
+            <input
+              class="mx-2 my-2 bg-[#706F6F] accent-[#7A5EA6]"
+              id="duration"
+              type="checkbox"
+              checked={ch2}
+              onChange={onChkBox}
+            />
+          </div>
+          <div class="text-white font-bold ml-2 mr-4 pt-1">기한 : </div>
+          <DatePicker
+            locale={ko}
+            dateFormat="yyyy년 MM월 dd일"
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            selectsStart
+            startDate={startDate}
+            endDate={endDate}
+          />
+          <div class="text-white font-semibold mx-2 pt-1"> 부터 ~ </div>
+          <DatePicker
+            locale={ko}
+            dateFormat="yyyy년 MM월 dd일"
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            selectsEnd
+            startDate={startDate}
+            endDate={endDate}
+            minDate={startDate}
+          />
+          <div class="text-white font-semibold mx-2 pt-1"> 까지 </div>
         </div>
-        <div class="text-white font-bold ml-2 mr-4 pt-1">기한 : </div>
-        <DatePicker
-          locale={ko}
-          dateFormat="yyyy년 MM월 dd일"
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          selectsStart
-          startDate={startDate}
-          endDate={endDate}
-        />
-        <div class="text-white font-semibold mx-2 pt-1"> 부터 ~ </div>
-        <DatePicker
-          locale={ko}
-          dateFormat="yyyy년 MM월 dd일"
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
-          selectsEnd
-          startDate={startDate}
-          endDate={endDate}
-          minDate={startDate}
-        />
-        <div class="text-white font-semibold mx-2 pt-1"> 까지 </div>
-      </div>
 
-      <div class="flex">
-        <div>
-        <input
-          class="mx-2 mt-1 bg-[#706F6F] accent-[#7A5EA6]"
-          id="manager"
-          type="checkbox"
-          checked={ch3}
-          onChange={onChkBox}
-        />
+        <div class="flex">
+          <div>
+            <input
+              class="mx-2 mt-1 bg-[#706F6F] accent-[#7A5EA6]"
+              id="manager"
+              type="checkbox"
+              checked={ch3}
+              onChange={onChkBox}
+            />
+          </div>
+          <div class="text-white font-bold ml-2 mx-2">담당자 : </div>
+          <input
+            type="string"
+            class="bg-[#706F6F] h-[22px] p-2 text-white rounded border"
+            value={people}
+            onChange={chgPeople}
+          />
         </div>
-        <div class="text-white font-bold ml-2 mx-2">담당자 : </div>
-        <input
-          type="string"
-          class="bg-[#706F6F] h-[22px] p-2 text-white rounded border"
-          value={people}
-          onChange={chgPeople}
-        />
-      </div>
 
-      <div class="flex mt-1">
-        <div>
-        <input
-          class="mx-2 mt-3 border bg-[#706F6F] accent-[#7A5EA6]"
-          id="quantity"
-          type="checkbox"
-          checked={ch4}
-          onChange={onChkBox}
-        />
+        <div class="flex mt-1">
+          <div>
+            <input
+              class="mx-2 mt-3 border bg-[#706F6F] accent-[#7A5EA6]"
+              id="quantity"
+              type="checkbox"
+              checked={ch4}
+              onChange={onChkBox}
+            />
+          </div>
+          <div class="text-white font-bold ml-2 mt-2 mr-[10px]">{"수량 : "}</div>
+          <input
+            class="ml-2 my-2 border bg-[#706F6F] text-white rounded h-[22px] p-2"
+            type="number"
+            value={minCnt}
+            onChange={chgMinCnt}
+          />
+          <div class="text-white font-bold ml-2 mt-2">이상 ~ </div>
+          <input
+            class="ml-2 my-2 border bg-[#706F6F] text-white rounded h-[22px] p-2"
+            type="number"
+            value={maxCnt}
+            onChange={chgMaxCnt}
+          />
+          <div class="text-white font-bold mx-2 mt-2">이하</div>
         </div>
-        <div class="text-white font-bold ml-2 mt-2 mr-[10px]">{"수량 : "}</div>
-        <input
-          class="ml-2 my-2 border bg-[#706F6F] text-white rounded h-[22px] p-2"
-          type="number"
-          value={minCnt}
-          onChange={chgMinCnt}
-        />
-        <div class="text-white font-bold ml-2 mt-2">이상 ~ </div>
-        <input
-          class="ml-2 my-2 border bg-[#706F6F] text-white rounded h-[22px] p-2"
-          type="number"
-          value={maxCnt}
-          onChange={chgMaxCnt}
-        />
-        <div class="text-white font-bold mx-2 mt-2">이하</div>
       </div>
-    </div>
     </div>
   );
 }

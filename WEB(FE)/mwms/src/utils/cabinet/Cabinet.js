@@ -29,6 +29,7 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify, qr}) => {
         name : "1-1",
         storedRackId : cabSelec
       }
+      console.log(itemToAdd);
       const response = await axiosPost("/boxes/", itemToAdd);
       console.log(JSON.stringify(response));
 
@@ -60,6 +61,7 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify, qr}) => {
       name : ((floorList.length + 1).toString() + "-1"),
       storedRackId : cabSelec
     }
+    console.log(itemToAdd);
     const response = await axiosPost("/boxes/", itemToAdd);
     console.log(JSON.stringify(response));
     const newListInput = [response];
@@ -79,6 +81,7 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify, qr}) => {
       name : currFloor.toString() + "-" + (cpyFloor.length + 1).toString(),
       storedRackId : cabSelec
     }
+    console.log(itemToAdd);
     const response = await axiosPost("/boxes/", itemToAdd);
     console.log(JSON.stringify(response));
     cpyFloor.push(response);
@@ -94,8 +97,8 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify, qr}) => {
   }
 
   return (
-    <div class="">
-      {modify && (<button className="text-[#5AB0AD] hover:text-white font-semibold ml-3 mb-3 w-30 h-10  rounded p-2" onClick={floorAdd}>
+    <div class="overflow-x-auto">
+      {(<button className="text-[#5AB0AD] hover:text-white font-semibold ml-3 mb-3 w-30 h-10  rounded p-2" onClick={floorAdd}>
         층 추가
       </button>)}
       <div className="hidden">{rend}</div>
@@ -103,7 +106,7 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify, qr}) => {
         <div class="min-w-max min-h-max flex justify-center mt-2 mb-2">
           <div class="flex">
             <div>
-              <div class={"text-center font-lg " + (modify ? "text-white" : " ") + (qr ? " text-white" : " ")}>{floorList.length - idx} 층</div>
+              <div class={"text-center font-lg " + ((modify ) ? "text-white" : " ") + ((qr ) ? " text-white" : " ")}>{floorList.length - idx} 층</div>
               <div class="flex justify-center ">
                 {floor != [] && floor.map((item) => (
                   <button value={item.id} id={item.id} onClick={handleBoxSelec} class="w-24 h-12 border bg-[#706F6F] m-1 rounded-lg text-white ">
@@ -112,7 +115,7 @@ const CreateList = ({boxSelec, setBoxSelec, cabSelec, modify, qr}) => {
                 ))}
               </div>
             </div>
-            {modify && (<button class="text-[#5AB0AD] font-base ml-3 mt-7 mb-3 w-30 h-10  rounded p-2 hover:text-white " value={floorList.length - idx} onClick={addItem}>추가하기</button>)}
+            {(<button class="text-[#5AB0AD] font-base ml-3 mt-7 mb-3 w-30 h-10  rounded p-2 hover:text-white " value={floorList.length - idx} onClick={addItem}>추가하기</button>)}
           </div>
         </div>
       ))}

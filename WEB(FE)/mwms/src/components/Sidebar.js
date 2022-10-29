@@ -8,7 +8,7 @@ const sidebarButtonList = [
   {link : "/history", name : "히스토리", index:3,},
   {link : "/barcode", name : "QR코드 관리", index:4,},
   // {link : "/static", name : "통계", index:5,},
-  {link : "/", name : `<-${' '}돌아가기`, index:5,},
+  {link : "/", name : `돌아가기`, index:5,},
 ]
 
 function Sidebar() {

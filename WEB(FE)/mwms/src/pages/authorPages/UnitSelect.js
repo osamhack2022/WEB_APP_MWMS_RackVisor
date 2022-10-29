@@ -47,7 +47,7 @@ function UnitSelect() {
       const data = await axiosGet("/units/all-units");
       setUnitList(data);
     } catch (error) {
-      // alert("Error on fetching unit");
+      alert("Error on fetching unit");
     }
   }, []);
 

@@ -59,10 +59,11 @@ function SignupPage() {
     }
     try {
       await axiosPost('/users', itemToAdd);
+      alert("회원가입이 되었습니다. 로그인해주세요");
+      
     } catch (e) {
       alert("회원가입 오류");
     }
-    alert("회원가입이 되었습니다. 로그인해주세요");
     navigate("/login");
   };
 
@@ -150,11 +151,11 @@ function SignupPage() {
                     </div>
                   </div>
                   <div>
-                    <label for="id" class="block mb-2 text-sm font-medium text-white">소속</label>
+                    <label for="unit" class="block mb-2 text-sm font-medium text-white">소속</label>
                     <input 
                       type="text" 
-                      name="id" 
-                      id="id" 
+                      name="unit" 
+                      id="unit" 
                       class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
                       placeholder="소속"
                       value={unit} 
@@ -162,27 +163,25 @@ function SignupPage() {
                     />
                   </div>
                   <div>
-                    <label for="id" class="block mb-2 text-sm font-medium text-white">직책</label>
+                    <label for="pos" class="block mb-2 text-sm font-medium text-white">직책</label>
                     <input 
                       type="text" 
-                      name="id" 
-                      id="id" 
+                      name="pos" 
+                      id="pos" 
                       class="bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
                       placeholder="직책"  
                       value={pos} 
                       onChange={onPos}
                     />
                   </div>
-                  <Button 
-                    class="w-full text-primary-900 bg-secondary hover:bg-cyan-600 font-semibold rounded-lg px-5 py-2.5 text-center"
-                    onClick={register}
-                    text={"회원가입"}
-                  />
-                  <Button 
-                    class="w-full text-white bg-gray-600 hover:bg-black font-semibold rounded-lg px-5 py-2.5 text-center"
-                    onClick={cancel}
-                    text={"취소"}
-                  />
+                    <button 
+                      class="w-full text-primary-900 bg-secondary hover:bg-cyan-600 font-semibold rounded-lg px-5 py-2.5 text-center"
+                      onClick={register}
+                    >회원가입 </button>
+                    <button
+                      class="w-full text-white bg-gray-600 hover:bg-black font-semibold rounded-lg px-5 py-2.5 text-center"
+                      onClick={cancel}
+                    >취소 </button>
                 </div>
               </div>
             </div>
