@@ -139,7 +139,7 @@
 
 <tr>
 <td width ="450" align="center">단순 웹사이트만 제공하는<br/>  체계들과 달리 <b>휴대폰</b>을 활용하여<br/>  창고에 직접 접속하여 <b>물품의 리스트</b>를 확인<br/> <b>QR 코드</b>를 인식하여 조회할 수 있는 <br/> <b>QR코드 검색 기능</b></td>
-<td width ="450" align="center"><img src="docs\gif\app.gif" width=60%"></td>
+<td width ="450" align="center"><img src="https://user-images.githubusercontent.com/113528011/198864402-aab675a7-2cb5-451a-b11c-8b095233d569.gif" width=60%"></td>
 </tr>
 
 </table>
